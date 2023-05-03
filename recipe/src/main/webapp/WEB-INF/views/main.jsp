@@ -23,7 +23,7 @@ body{
     font-weight: 400;
     line-height: 1.4;
     font-family: 'Nanum Gothic',sans-serif;
-    background-color:#FFFAFA
+    background-color:#FFF0F5
 }
   img {
        display; block;
@@ -33,8 +33,8 @@ body{
        }
        
   h1{
-  font-size:30px;
-  color:#fff;
+  font-size:20px;
+  color:	#228B22
   margin-bottom:150px;
   }
   .text1{
