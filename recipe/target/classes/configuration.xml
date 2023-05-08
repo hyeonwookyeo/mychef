@@ -8,6 +8,7 @@
 	<typeAlias alias="board" type="board1.model.Board" /> 
 -->
 	<typeAlias alias="test" type="recipe.model.Test" />
+	<typeAlias alias="member" type="recipe.model.MemberBean" />
 	</typeAliases>
 	
 
