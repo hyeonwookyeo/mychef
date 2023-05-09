@@ -8,6 +8,4 @@ import recipe.model.BoardDTO;
 @Controller
 public class BoardController {
 
-	@Autowired
-	public BoardDTO 
 }
