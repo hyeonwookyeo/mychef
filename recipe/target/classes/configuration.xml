@@ -7,6 +7,8 @@
 <!--  예시
 	<typeAlias alias="board" type="board1.model.Board" /> 
 -->
+	<typeAlias alias="board" type="recipe.model.RecipeBoard" />
+	
 	<typeAlias alias="test" type="recipe.model.Test" />
 	</typeAliases>
 	
