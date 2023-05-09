@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-자스
+자
 
 메인페이지 테스트 <br><br>
 
