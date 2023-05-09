@@ -10,7 +10,7 @@
 <body>
 
 <script>
-	location.href="main";
+	location.href="maga";
 </script>
 
 </body>

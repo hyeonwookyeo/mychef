@@ -7,14 +7,13 @@
 <!--  예시
 	<typeAlias alias="board" type="board1.model.Board" /> 
 -->
-	<typeAlias alias="test" type="recipe.model.Test" />
+	<typeAlias alias="Maga" type="recipe.model.MagaBean" />
 	</typeAliases>
 	
 
 	<!-- 
 	<mappers>
-		<mapper resource="Board.xml" />
-		<mapper resource="ReplyBoard.xml" />
+		<mapper resource="Maga.xml"/>
 	</mappers> 
 	-->
 </configuration>
