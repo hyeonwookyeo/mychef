@@ -18,6 +18,9 @@
 	<input type="submit" value="테스트"> <br>
 </form>
 
+<br><br>
+레시피 탭 테스트<br><br>
+<input type="button" value="인기" onClick="location.href='popular' ">
 <input type="button" value="레시피목록" onClick="location.href='categoryForm' ">
 
 </body>
