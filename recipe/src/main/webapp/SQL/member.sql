@@ -29,3 +29,8 @@ insert into member ( id , pwd , name , birth, profile , nickname, zip , addr1 , 
   values( 'master', 'master000', 'master' , '00', '1234','master', '12345', '서울', '레시피', '02', '1234', '5678', 'recipe', 
   'naver.com',sysdate,1);
   
+ insert into member ( id , pwd , name , birth, profile , nickname, zip , addr1 , addr2 , tel1 , tel2 , tel3    
+  , email , domain , joindate  , state) 
+  values( 'ymj2677', '0000', '윤민정' , '1234', '1234','00', '12345', '서울', '레시피', '02', '1234', '5678', 'ymj2677', 
+  'kakao.com',sysdate,1);
+  

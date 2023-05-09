@@ -10,7 +10,7 @@
 <script src="./js/jquery.js"></script>
 <script>
  function check(){
-	 if($.trim($("#id").val())==""){
+	 if($.trim($("#name").val())==""){
 		 alert("성함을 입력하세요");
 		 $("#name").val("").focus();
 		 return false;
@@ -43,7 +43,7 @@
    </table>
    <div id="id_menu">
     <input type="submit" value="찾기" class="input_button" />
-    <input type="reset" value="취소" class="input_button" onclick="$('#id').focus();"/>
+    <input type="reset" value="취소" class="input_button" onclick="$('#name').focus();"/>
    </div>
    <div id="id_close">
     <input type="button" value="닫기" class="input_button" onclick="self.close();" />

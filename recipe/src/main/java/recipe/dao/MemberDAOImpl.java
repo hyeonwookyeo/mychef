@@ -13,7 +13,7 @@ public class MemberDAOImpl {
 	private SqlSession sqlSession;
 
 	// ID 중복 체크
-	public int IdCheck(String id) throws Exception {
+	public int checkMemberId(String id) throws Exception {
 		int re = -1; // 사용가능한 id
 		MemberBean mem = sqlSession.selectOne("login_check", id);
 		if (mem != null)

@@ -37,15 +37,15 @@
 						onclick="id_check()" />
 						<div id="idcheck"></div></td>
 				</tr>
-				
+
 				<tr>
 					<th>회원닉네임</th>
-					<td><input name="nickname" id="nickname" size="14" class="input_box" /> <input
-						type="button" value="닉네임 중복체크" class="input_button"
-						onclick="nickname_check()" />
+					<td><input name="nickname" id="nickname" size="14"
+						class="input_box" /> <input type="button" value="닉네임 중복체크"
+						class="input_button" onclick="nickname_check()" />
 						<div id="nicknamecheck"></div></td>
 				</tr>
-				
+
 
 				<tr>
 					<th>회원 비밀번호</th>
@@ -54,15 +54,21 @@
 				</tr>
 
 				<tr>
+					<th>비밀번호 확인</th>
+					<td><input type="password" name="pwd2" id="pwd2" size="14"
+						class="input_box" /></td>
+				</tr>
+
+				<tr>
 					<th>회원 이름</th>
 					<td><input name="name" id="name" size="14" class="input_box" />
 					</td>
 				</tr>
-				
+
 				<tr>
 					<th>생년월일</th>
-					<td><input name="birth" id="birth" size="6" placeholder = "(6자리)" class="input_box" />
-					</td>
+					<td><input name="birth" id="birth" size="6"
+						placeholder="(6자리)" class="input_box" /></td>
 				</tr>
 
 				<tr>
@@ -120,9 +126,9 @@
 			</table>
 
 			<div id="join_menu">
-			 <input type="submit" value="회원가입" class="input_button" />
-			 <input type="reset" value="가입취소" class="input_button" 
-			 	onclick="$('#id').focus();"/>		 
+				<input type="submit" value="회원가입" class="input_button" /> <input
+					type="reset" value="가입취소" class="input_button"
+					onclick="$('#id').focus();" />
 			</div>
 		</form>
 	</div>

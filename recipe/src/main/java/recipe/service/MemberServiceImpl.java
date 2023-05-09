@@ -12,7 +12,7 @@ public class MemberServiceImpl {
 	private MemberDAOImpl memberDao;
 	
 	public int IdCheck(String id) throws Exception{
-		return memberDao.IdCheck(id);
+		return memberDao.checkMemberId(id);
 	}
 	
 	public MemberBean findid(MemberBean im) throws Exception{
