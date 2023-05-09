@@ -20,6 +20,13 @@ public class RecipeController {
 	@Autowired
 	private RecipeService service;
 	HttpSession session;
+
+// 카테고리 폼
+	@RequestMapping("categoryForm")
+	public String category() {
+		return "categoryForm";
+	}
+	
 	
 // 레시피 목록 폼	
 	@RequestMapping("r_listForm")

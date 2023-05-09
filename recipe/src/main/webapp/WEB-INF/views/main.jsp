@@ -18,7 +18,7 @@
 	<input type="submit" value="테스트"> <br>
 </form>
 
-<input type="button" value="레시피목록" onClick="location.href='r_listForm' ">
+<input type="button" value="레시피목록" onClick="location.href='categoryForm' ">
 
 </body>
 </html>
