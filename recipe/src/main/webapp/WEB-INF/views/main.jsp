@@ -18,5 +18,9 @@
 	<input type="submit" value="테스트"> <br>
 </form>
 
+
+<input type="button" value="임시"  onClick="location.href='member_edit' "/>
+<input type="button" value="임시"  onClick="location.href='member_login' "/>
+<input type="button" value="임시"  onClick="location.href='member_del' "/>
 </body>
 </html>
