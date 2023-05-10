@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import recipe.model.RecipeBoard;
 import recipe.service.PagingPgm;
@@ -74,12 +77,34 @@ public class RecipeController {
 	}
 	
 // 작성	
-	@RequestMapping("r_insert")
-	public String insert(String pageNum, RecipeBoard board,HttpServletRequest request, Model model) {
+	@RequestMapping(value="r_insert",  method = RequestMethod.POST)
+//	public String insert(@RequestParam("rfile1")  MultipartFile mf, RecipeBoard board, String pageNum,
+			public String insert(RecipeBoard board, String pageNum,
+						 HttpServletRequest request, Model model) {
+		System.out.println("진입");
+		
+//		String filename = mf.getOriginalFilename();
+//		int filesize = (int) mf.getSize();
+//		System.out.println("filename:"+filename);
+		
+		String path = request.getRealPath("upload");
+		System.out.println("path:"+path);
+				
+		System.out.println("작성");
 		
 		String ip = request.getRemoteAddr();
 		
 		board.setIp(ip);
+		
+		System.out.println(ip);
+		
+		String ingre = "";
+		String[] ingreEx = request.getParameterValues("ingre1");
+		System.out.println(ingreEx);
+		for(String i : ingreEx) {
+			ingre += i+"-";		// 공부-게임-
+		}		
+		System.out.println(ingre);
 		
 		int result = service.r_insert(board);
 		

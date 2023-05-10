@@ -20,9 +20,8 @@ function btn_add(){
 
 	str += "<tr>";
 	str += "	<td style='text-align:center;' class=\"row_idx\">"+row_idx+"</td>";
-	str += "	<td style='text-align:center;'><input type=\"text\" \"></td>";
-	str += "	<td style='text-align:center;'><input type=\"text\" \"></td>";
-	str += "	<td style='text-align:center;'><input type=\"text\" \"></td>";
+	str += "	<td style='text-align:center;'><input type=\"text\" name='ingre1'></td>";
+	str += "	<td style='text-align:center;'><input type=\"text\" name='capacity1'></td>";
 	str += "	<td style='text-align:center;'>";
 	str += "		<div class=\"btn-group\">";
 	str += "			<button type='button' class='btn btn-primary btn-sm' name='dtl_del'>삭제</button>";
@@ -32,12 +31,24 @@ function btn_add(){
 	
 	$("#tbody_id:last").append(str);
 }
+
+$(function(){
+	$('#submit1').click(function() {
+	    $('form').serialize();
+	    $('form').attr('method', 'POST');
+	    $('form').attr('action', 'r_insert');
+	    $('form').submit();
+	});
+});
+
 </script>
 </head>
 <body>
 	<div class="container" align="center">
-		<h2 class="text-primary">게시판 글쓰기</h2>
-		<form action="r_insert" method="post" enctype="multipart/form-data">
+		<h2 class="text-primary">레시피 글 쓰기</h2>
+		<form>
+<!-- 		<form action="r_insert" method="post" enctype="multipart/form-data"> -->
+			<input type="hidden" name="ingre1">
 			<%--
 			<input type="hidden" name="pageNum" value="${pageNum}"> --%>
 			<table border=1>
@@ -70,9 +81,8 @@ function btn_add(){
 			<thead>
 			<tr>
 				<th style="width:20%; text-align:center;vertical-align:middle;">No</th>
-				<th style="width:20%; text-align:center;vertical-align:middle;">제목</th>
-				<th style="width:20%; text-align:center;vertical-align:middle;">내용</th>
-				<th style="width:20%; text-align:center;vertical-align:middle;">추가내용</th>
+				<th style="width:20%; text-align:center;vertical-align:middle;">재료</th>
+				<th style="width:20%; text-align:center;vertical-align:middle;">용량</th>
 				<th style="width:20%; text-align:center;">
 					<button class="btn btn-default btn-sm" type="button"  onclick='btn_add();'>
 						<strong>추가</strong>
@@ -99,16 +109,15 @@ function btn_add(){
 				<table border=1>
 				<tr>
 					<td>조리사진</td>
-					<td><input type="file" name="rfile"></td>
+					<td><input type="file" name="rfile1"></td>
 				</tr>
 				<tr>
 					<td>내용</td>
 					<td><textarea rows="5" cols="30" name="content"	required="required"></textarea></td>
 				</tr>
-				<tr>
-					<td colspan="2" align="center"><input type="submit" value="확인"></td>
-				</tr>
-			</table>
+
+			</table> <br><br>
+			<input type="button" value="확인" id="submit1">
 		</form>
 	</div>
 </body>

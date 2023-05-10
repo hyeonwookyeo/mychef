@@ -18,7 +18,7 @@ public class MemberBean {
    private String addr2;
    private String joindate;
    private String deldate;
-   private int state;   // 가입대기 0 회원 1 탈퇴대기 2 
+   private int state;   // 가입대기 0 회원 1 탈퇴대기 2
    
    
    public String getId() {
