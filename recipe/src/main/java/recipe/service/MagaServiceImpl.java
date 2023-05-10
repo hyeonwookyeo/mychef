@@ -24,4 +24,18 @@ public class MagaServiceImpl implements MagaService {
 	public List getMagaList(int page) throws Exception {
 		return magaDao.getMagaList(page);
 	}
+
+	public void insert(MagaBean maga) throws Exception {
+		magaDao.insert(maga);
+		
+	}
+
+	public void readcount(int maga_num) throws Exception {
+		magaDao.readcount(maga_num);
+		
+	}
+
+	public MagaBean maga_cont(int maga_num) throws Exception {
+		return	magaDao.maga_cont(maga_num);
+	}
 }

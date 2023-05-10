@@ -7,15 +7,32 @@
 
 	<!-- 게시판 총 게시물 수 -->
 	<select id="maga_count" resultType="int">
-		select count(*) from maga
+		select count(*) from maga where state = '1' 
 	</select>	
 	
 	<!-- 게시판 목록 -->
 	<select id="maga_list" parameterType="int" resultType="maga">
 		<![CDATA[
 		select * from (select rownum rnum, ma.* from
-		(select * from maga order by maga_num desc) ma)
+		(select * from maga where state='1' order by maga_num desc) ma)
 		where rnum >= ((#{page}-1) * 10+1) and rnum <= (#{page} * 10)
 		]]>
 	</select>
+	
+	<!-- 게시글 입력 -->
+	<insert id="maga_insert" parameterType="maga">
+		insert into maga values(maga_seq.nextval,#{subject},'0','0',#{content},#{mfile, jdbcType=VARCHAR},sysdate,'1')
+	</insert>
+	
+	<!-- 조회수 -->
+	<update id="maga_readcount" parameterType="int">
+		update maga set readcount = readcount + 1 where maga_num = #{maga_num}
+	</update>
+	
+	<!-- 게시글 확인 -->
+	<select id="maga_cont" parameterType="int" resultType="maga">
+		select * from maga where maga_num = #{maga_num}
+	</select>
+	
+	
 </mapper>

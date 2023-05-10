@@ -1,9 +1,11 @@
+<%@page import="java.sql.Timestamp"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
 <html>
@@ -16,9 +18,7 @@
 	<h2>매거진 목록</h2>
 	글 개수 : ${listcount}
 
-
-
-	<table border=1>
+	<table border=1 align=center>
 		<tr>
 			<td>게시글 번호</td>
 			<td>게시글 제목</td>
@@ -33,22 +33,24 @@
 			<tr>
 				<td><c:out value="${num}" /> <c:set var="num" value="${num-1}" />
 				</td>
-				<td>${b.subject}</td>
+				<td>
+					<a href="maga_cont?maga_num=${b.maga_num}&page=${page}&state=cont">
+						${b.subject}</a>
+				</td>
 				<td>관리자</td>
-<% 
-	Date now = new Date();
-	SimpleDateFormat sf = new SimpleDateFormat("yyyyMMdd");
-	String today = sf.format(now);
-%>
 
 				<td>
-					<c:out value="${today }"/>
-					<c:if test="">
-						<fn:formatDate value="${b.mdate}" pattern="a hh:mm:ss" />
+				    <c:set var="today" value="<%=new Timestamp(System.currentTimeMillis()) %>" />	
+				    <c:set var="today" value="${fn:substring(today, 0, 10) }"/>
+					
+					<c:set var="dbtoday" value="${fn:substring(b.mdate, 0, 10) }"/>
+				    		
+					<c:if test="${today == dbtoday}">
+						<fmt:formatDate value="${b.mdate}" pattern="HH:mm:ss" />
 					</c:if> 
 					
-					<c:if test="">
-						<fn:formatDate value="${b.mdate}" pattern="yyyy-MM-dd" />
+					<c:if test="${today != dbtoday}">
+						<fmt:formatDate value="${b.mdate}" pattern="yyyy-MM-dd" />
 					</c:if>
 				</td>
 				<td>
@@ -56,9 +58,39 @@
 				</td>
 			</tr>
 		</c:forEach>
-
 		<tr></tr>
 	</table>
+		
+	<div align=center>
+	
+	<c:if test="${page < 11}">
+		[<]&nbsp;
+	</c:if>
+	
+	<c:if test="${page >= 11}">
+		<a href="maga_list?page=${startpage-10}">[<]</a>
+	</c:if>
+	
+	<c:forEach var="a" begin="${startpage}" end="${endpage}">
+		<c:if test="${a == page}">
+			[${a}]
+		</c:if>
+		
+		<c:if test="${a != page}">
+			<a href="maga_list?page=${a}">[${a}]</a>
+		</c:if>
+	</c:forEach>
+	
+	<c:if test="${maxpage < startpage+10}">
+		[>]&nbsp;
+	</c:if>
+	
+	<c:if test="${maxpage >= startpage+10}">
+		<a href="maga_list?page=${endpage+1}">[>]</a>
+	</c:if>
+	</div>
+	
+	<a href="maga_write">글쓰기</a>
 
 </body>
 </html>

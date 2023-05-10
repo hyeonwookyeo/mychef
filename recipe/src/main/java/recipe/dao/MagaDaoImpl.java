@@ -27,4 +27,17 @@ public class MagaDaoImpl implements MagaDao {
 		return list;
 	}
 
+	public void insert(MagaBean maga) throws Exception {
+		session.insert("Maga.maga_insert",maga);
+	}
+
+	public void readcount(int maga_num) throws Exception {
+		session.update("Maga.maga_readcount",maga_num);
+	}
+
+	public MagaBean maga_cont(int maga_num) throws Exception {
+		return (MagaBean) session.selectOne("Maga.maga_cont",maga_num);
+	}
+
+
 }

@@ -10,4 +10,7 @@ public interface MagaService {
 
 	public List<MagaBean> getMagaList(int page) throws Exception;
 
+	public void insert(MagaBean maga) throws Exception;
+	
+	public void readcount(int maga_num) throws Exception;
 }
