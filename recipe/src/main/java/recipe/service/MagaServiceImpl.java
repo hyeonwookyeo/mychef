@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import recipe.dao.MagaDao;
 import recipe.dao.MagaDaoImpl;
 import recipe.model.MagaBean;
+import recipe.model.MagaRecomBean;
 
 @Service
 public class MagaServiceImpl implements MagaService {
@@ -36,6 +37,22 @@ public class MagaServiceImpl implements MagaService {
 	}
 
 	public MagaBean maga_cont(int maga_num) throws Exception {
-		return	magaDao.maga_cont(maga_num);
+		return magaDao.maga_cont(maga_num);
 	}
+
+	public int maga_del(int maga_num) throws Exception {
+		return magaDao.maga_del(maga_num);
+		
+	}
+
+	public void maga_recom(int maga_num) throws Exception {
+		magaDao.maga_recom(maga_num);
+		
+	}
+
+	public int maga_recomcheck(MagaRecomBean magarecom) throws Exception {
+		// TODO Auto-generated method stub
+		return magaDao.maga_recomcheck(magarecom);
+	}
+
 }

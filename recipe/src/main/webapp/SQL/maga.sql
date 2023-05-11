@@ -6,3 +6,5 @@ select count(*) from maga
 delete from MAGA
 
 update MAGA set state='0' where maga_num = '115'
+select * from tab
+select * from MAGA_RE

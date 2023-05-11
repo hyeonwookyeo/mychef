@@ -8,6 +8,8 @@
 	<typeAlias alias="board" type="board1.model.Board" /> 
 -->
 	<typeAlias alias="Maga" type="recipe.model.MagaBean" />
+	<typeAlias alias="MagaRecom" type="recipe.model.MagaRecomBean" />
+	
 	</typeAliases>
 	
 

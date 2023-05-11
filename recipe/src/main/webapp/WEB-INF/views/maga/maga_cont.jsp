@@ -6,9 +6,26 @@
 <head>
 <meta charset="UTF-8">
 <title>매거진</title>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="<%=request.getContextPath()%>/js/recom.js"></script>
 </head>
+<script>
+	
+	function maga_del_config(maga_num,page){
+	 	var result = confirm("정말로 삭제 하시겠습니까?");
+	 	if(result){
+	 		location.href="maga_del_ok?maga_num="+maga_num+"&page="+page;	
+	 	}
+	}
+	
+	function recom(maga_num,page){
+		location.href="maga_recom?maga_num="+maga_num+"&page="+page;
+	}
+	
+	history(0);
+	
+</script>
 <body>
-
 	<table border=1 align=center>
 		<tr>
 			<td>제목</td>
@@ -28,7 +45,19 @@
 			<td><pre>${maga.content}</pre></td>
 		</tr>
 	</table>
+	
+	${id }
+	
+	<input type="button" value="추천" class="recom_button"
+		onclick="recom(${maga.maga_num},${page})"/>
+	<div id="recomm">추천수</div><br>
+	<div>${maga.recom}</div>
 
+	<br><br>
+	<input type="button" value="수정" class="input_button"
+		onclick=""/>
+	<input type="button" value="삭제" class="input_button"
+		onclick="maga_del_config(${maga.maga_num},${page})"/>
 	<input type="button" value="목록" class="input_button"
 		onclick="location='maga_list?page=${page}'" />
 

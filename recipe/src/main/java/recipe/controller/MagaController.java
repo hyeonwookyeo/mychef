@@ -1,12 +1,15 @@
 // 메인 컨트롤러
 package recipe.controller;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import recipe.model.MagaBean;
+import recipe.model.MagaRecomBean;
 import recipe.service.MagaService;
 import recipe.service.MagaServiceImpl;
 
@@ -41,9 +45,12 @@ public class MagaController {
 
 	// 글 목록
 	@RequestMapping("/maga_list")
-	public String maga_list(HttpServletRequest request, Model model) throws Exception {
+	public String maga_list(HttpServletRequest request, HttpSession session, Model model) throws Exception {
 
 		List<MagaBean> magalist = new ArrayList<MagaBean>();
+		
+		String master = "master";
+		String customer = "customer";
 
 		int page = 1;
 		int limit = 10; // 화면 출력 수
@@ -71,10 +78,14 @@ public class MagaController {
 		model.addAttribute("maxpage", maxpage);
 		model.addAttribute("listcount", listcount);
 		model.addAttribute("magalist", magalist);
+		
+		session.setAttribute("id", master);
+		
 
 		return "maga_list";
 	}
 	
+	// 상세 페이지 출력
 	@RequestMapping("/maga_cont")
 	public String maga_cont(@RequestParam("maga_num") int maga_num,
 			 				@RequestParam("page") String page,
@@ -88,17 +99,20 @@ public class MagaController {
 		
 		model.addAttribute("maga",maga);
 		model.addAttribute("page",page);
+		System.out.println("상세");
 		
 		return "maga/maga_cont";
 	}
 	
+	// 글 작성
 	@RequestMapping("/maga_write_ok")
 	public String maga_write_ok(@RequestParam("magafile") MultipartFile mf,
 								HttpServletRequest request, MagaBean maga) throws Exception {
 		
 		String filename = mf.getOriginalFilename();
 		int size = (int) mf.getSize();
-		String path = "images";
+		String path = request.getRealPath("WEB-INF/images");
+		System.out.println("path");
 		String newfilename = "";
 		System.out.println("path : "+path);
 		
@@ -112,9 +126,49 @@ public class MagaController {
 		
 		maga.setMfile(newfilename);
 		magaService.insert(maga);
-		System.out.println(newfilename);
 		
 		return "redirect:/maga_list";
+	}
+	
+	// 글 삭제
+	@RequestMapping("/maga_del_ok")
+	public String maga_del_ok(HttpServletRequest request, int maga_num, String page) throws Exception {
+		
+		MagaBean maga = magaService.maga_cont(maga_num);
+		
+//		String path = request.getRealPath("WEB-INF/images");
+//		String fname = maga.getMfile();
+//		
+//		if (fname != null) {		// 첨부파일이 있으면ㄴ
+//			File file = new File(path +"/"+fname);
+//			file.delete();			// 첨부파일 삭제
+//		}
+		
+		int result = magaService.maga_del(maga_num);
+		System.out.println(result);
+		
+		return "redirect:/maga_list?page="+page;
+	}
+	
+	// 매거진 추천
+	@RequestMapping("/maga_recom")
+	public String maga_recom(HttpSession session, int maga_num, String page) throws Exception {
+		System.out.println("여기는 추천");
+		
+		// 세션id로 추천중복 확인
+		String id = (String)session.getAttribute("id");
+		MagaRecomBean magarecom = new MagaRecomBean();
+		magarecom.setMagarecom_num(maga_num);
+		magarecom.setNickname(id);
+		
+		System.out.println("여기는 추천다음");
+		int result = magaService.maga_recomcheck(magarecom);
+		System.out.println(result);
+		System.out.println("1");
+		
+//		magaService.maga_recom(maga_num);
+		
+		return "maga/recom_result";
 	}
 	
 

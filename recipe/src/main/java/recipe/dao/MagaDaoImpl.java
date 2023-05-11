@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import recipe.model.MagaBean;
+import recipe.model.MagaRecomBean;
 
 @Repository
 public class MagaDaoImpl implements MagaDao {
@@ -39,5 +40,21 @@ public class MagaDaoImpl implements MagaDao {
 		return (MagaBean) session.selectOne("Maga.maga_cont",maga_num);
 	}
 
+	public int maga_del(int maga_num) throws Exception {
+		session.update("Maga.maga_del",maga_num);
+		int result = 1;
+		
+		return result;
+	}
+
+	public void maga_recom(int maga_num) throws Exception {
+		session.update("Maga.maga_recom",maga_num);
+	}
+
+	public int maga_recomcheck(MagaRecomBean magarecom) {
+		int result = session.selectOne("MagaRecom.maga_recomcheck",magarecom);
+		
+		return result;
+	}
 
 }
