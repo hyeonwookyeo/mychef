@@ -24,6 +24,7 @@ public class RecipeDaoImpl implements RecipeDao{
 	public int getTotal(RecipeBoard board) {
 		// TODO Auto-generated method stub
 		return sst.selectOne("boardns.getTotal", board);
+//		return sst.selectOne("boardns.getTotal");
 	}
 
 	@Override

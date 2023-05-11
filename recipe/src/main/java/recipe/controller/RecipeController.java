@@ -33,16 +33,11 @@ public class RecipeController {
 	}
 	
 	
-// 레시피 목록 폼	
+// 레시피 목록 폼		
 	@RequestMapping("r_listForm")
-	public String listform() {
-		
-		return "r_list";
-	}
-
-// 목록	
-	@RequestMapping("r_list")
 	public String Recipelist(String pageNum, RecipeBoard board, Model model) {
+		
+		System.out.println("r_list");
 		
 		final int rowPerPage = 10;
 		if (pageNum == null || pageNum.equals("")) {
@@ -51,14 +46,28 @@ public class RecipeController {
 		int currentPage = Integer.parseInt(pageNum);
 		// int total = bs.getTotal();
 		int total = service.getTotal(board); // 검색
+		System.out.println("total:"+total);
+		
+		System.out.println(total);
+		System.out.println("rowPerPage"+rowPerPage);
+		System.out.println("currentPage"+currentPage);		
+		
 		int startRow = (currentPage - 1) * rowPerPage + 1;
 		int endRow = startRow + rowPerPage - 1;
 		PagingPgm pp = new PagingPgm(total, rowPerPage, currentPage);
+		System.out.println("startRow"+startRow);
+		System.out.println("endRow"+endRow);
+		
 		board.setStartRow(startRow);
 		board.setEndRow(endRow);
 		// List<Board> list = bs.list(startRow, endRow);
 		int number = total - startRow + 1;
+		
 		List<RecipeBoard> list = service.r_list(board);
+		System.out.println("list:"+list);
+		
+		System.out.println(startRow + "+" + endRow);
+		
 		model.addAttribute("list", list);
 		model.addAttribute("number", number);
 		model.addAttribute("pp", pp);

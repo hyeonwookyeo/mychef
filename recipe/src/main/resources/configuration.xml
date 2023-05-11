@@ -9,6 +9,8 @@
 -->
 	<typeAlias alias="board" type="recipe.model.RecipeBoard" />
 	
+	<typeAlias alias="reboard" type="recipe.model.RecipeReBoard" />
+	
 	<typeAlias alias="test" type="recipe.model.Test" />
 	</typeAliases>
 	

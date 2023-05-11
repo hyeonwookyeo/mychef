@@ -5,37 +5,37 @@
 <mapper namespace="boardns">
 
 	<insert id="insert" parameterType="board">
-		insert into Recipe values(recipe_seq.nextval, #{category},
+		insert into recipe values(recipe_seq.nextval, #{category},
 		'aaaa',#{thumbnail},#{subject},#{description},sysdate,#{ip},
 		0,0,#{ingre},#{capacity},#{rfile},#{content},'y'
 		)
 	</insert>
 
 	<select id="getTotal" parameterType="board" resultType="int">
-		select count(*) from Recipe where state = 'y'
+		select count(*) from recipe where state = 'y'
 	</select>
 
 	<select id="list" parameterType="board" resultType="board">
-		select * from (select a.*, rownum row from (
-		select * from Recipe order by rnum) a
-		) where between #{startRow} and #{endRow}
+		SELECT * FROM ( SELECT ROWNUM rn, a.* FROM (
+    	SELECT * FROM recipe ORDER BY rnum asc) a ) 
+    	WHERE rn BETWEEN #{startRow} AND #{endRow}
 	</select>
 
 	<update id="readcountUpdate" parameterType="int">
-		update Recipe set readcount = readcount+1 where rnum=#{rnum}
+		update recipe set readcount = readcount+1 where rnum=#{rnum}
 	</update>
 
 	<select id="select" parameterType="int" resultType="board">
-		select * from Recipe where rnum=#{rnum}
+		select * from recipe where rnum=#{rnum}
 	</select>
 
 	<update id="update" parameterType="board">
-		update Recipe set <!-- 뭐 넣지 -->
+		update recipe set <!-- 뭐 넣지 -->
 		where rnum=#{rnum}
 	</update>
 
 	<update id="delete" parameterType="int">
-		update Recipe set state='n' where rnum=#{rnum}
+		update recipe set state='n' where rnum=#{rnum}
 	</update>
 
 

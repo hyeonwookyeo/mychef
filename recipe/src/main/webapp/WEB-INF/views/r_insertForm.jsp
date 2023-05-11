@@ -48,7 +48,6 @@ $(function(){
 	<div class="container" align="center">
 		<h2 class="text-primary">레시피 글 쓰기</h2>
 		<form enctype="multipart/form-data">
-			<input type="hidden" name="ingre1">
 			<%--
 			<input type="hidden" name="pageNum" value="${pageNum}"> --%>
 			<table border=1>
@@ -94,20 +93,6 @@ $(function(){
 			</tbody>
 			</table><br><br>
 				
-				
-<!-- 				
-				<table border=1>
-				<tr>
-					<td>재료</td>
-					<td><input type="text" name="ingre"></td>
-					<td>용량</td>
-					<td><input type="text" name="capacity"></td>
-					<td><input type="button" value="추가" onClick="tableCreate_ingre()"></td>
-				</table> <br><br> 
--->
-				
-				
-			
 			<table border=1>
 			<tr>
 				<td>조리사진</td>
