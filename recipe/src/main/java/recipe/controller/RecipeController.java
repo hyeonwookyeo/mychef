@@ -79,23 +79,28 @@ public class RecipeController {
 // 작성	
 	@RequestMapping(value="r_insert",  method = RequestMethod.POST)
 //	public String insert(@RequestParam("rfile1")  MultipartFile mf, RecipeBoard board, String pageNum,
-			public String insert(RecipeBoard board, String pageNum,
-						 HttpServletRequest request, Model model) {
+	public String insert(@RequestParam("thumbnail1") MultipartFile mf,
+						RecipeBoard board, String pageNum,
+						HttpServletRequest request, Model model) {
+		
 		System.out.println("진입");
 		
-//		String filename = mf.getOriginalFilename();
-//		int filesize = (int) mf.getSize();
-//		System.out.println("filename:"+filename);
-		
+		String filename = mf.getOriginalFilename();
+		int filesize = (int) mf.getSize();
 		String path = request.getRealPath("upload");
-		System.out.println("path:"+path);
 		
+		// 전달확인
+		System.out.println("mf=" + mf);
+		System.out.println("filename=" + filename); 	// filename="Koala.jpg"
+		System.out.println("filesize=" + filesize);
+		System.out.println("Path=" + path);
+		
+		// ip
 		String ip = request.getRemoteAddr();
-		
 		board.setIp(ip);
-		
 		System.out.println(ip);
 		
+		// 재료, 용량 '-' 접합자 추가해서 저장
 		String ingre = "";
 		String[] ingreEx = request.getParameterValues("ingre");
 
@@ -103,15 +108,14 @@ public class RecipeController {
 			ingre += i+"-";			// 재료1-재료2
 		}		
 		
-		System.out.println("재료:"+ingre);
-		
 		String capacity = "";
-		String[] capacityEx = request.getParameterValues("ingre");
+		String[] capacityEx = request.getParameterValues("capacity");
 
 		for(String i : capacityEx) {
 			capacity += i+"-";		// 용량1-용량2
 		}		
 		
+		System.out.println("재료:"+ingre);
 		System.out.println("용량:"+capacity);
 		
 		

@@ -33,10 +33,11 @@ function btn_add(){
 }
 
 $(function(){
-	$('#submit1').click(function() {
+	$('#sub').click(function() {
 	    $('form').serialize();
 	    $('form').attr('method', 'POST');
 	    $('form').attr('action', 'r_insert');
+//	    $('form').attr('enctype', 'multipart/form-data');
 	    $('form').submit();
 	});
 });
@@ -46,7 +47,7 @@ $(function(){
 <body>
 	<div class="container" align="center">
 		<h2 class="text-primary">레시피 글 쓰기</h2>
-		<form>
+		<form enctype="multipart/form-data">
 <!-- 		<form action="r_insert" method="post" enctype="multipart/form-data"> -->
 			<input type="hidden" name="ingre1">
 			<%--
@@ -69,7 +70,7 @@ $(function(){
 				</tr>
 				<tr>
 					<td>대표사진</td>
-					<td><input type="file" name="thumbnail"></td>
+					<td><input type="file" name="thumbnail1"></td>
 				</tr>
 				<tr>
 					<td>간략한 설명</td>
@@ -106,18 +107,22 @@ $(function(){
 				</table> <br><br> 
 -->
 				
-				<table border=1>
-				<tr>
-					<td>조리사진</td>
-					<td><input type="file" name="rfile1"></td>
-				</tr>
-				<tr>
-					<td>내용</td>
-					<td><textarea rows="5" cols="30" name="content"	required="required"></textarea></td>
-				</tr>
-
-			</table> <br><br>
-			<input type="button" value="확인" id="submit1">
+				
+<!-- 			
+			<table border=1>
+			<tr>
+				<td>조리사진</td>
+				<td><input type="file" name="rfile1"></td>
+			</tr>
+			<tr>
+				<td>내용</td>
+				<td><textarea rows="5" cols="30" name="content"	required="required"></textarea></td>
+			</tr>
+			</table> <br><br> 
+-->
+			
+			<input type="button" value="확인" id="sub">
+			
 		</form>
 	</div>
 </body>
