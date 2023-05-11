@@ -89,8 +89,6 @@ public class RecipeController {
 		
 		String path = request.getRealPath("upload");
 		System.out.println("path:"+path);
-				
-		System.out.println("작성");
 		
 		String ip = request.getRemoteAddr();
 		
@@ -99,12 +97,23 @@ public class RecipeController {
 		System.out.println(ip);
 		
 		String ingre = "";
-		String[] ingreEx = request.getParameterValues("ingre1");
-		System.out.println(ingreEx);
+		String[] ingreEx = request.getParameterValues("ingre");
+
 		for(String i : ingreEx) {
-			ingre += i+"-";		// 공부-게임-
+			ingre += i+"-";			// 재료1-재료2
 		}		
-		System.out.println(ingre);
+		
+		System.out.println("재료:"+ingre);
+		
+		String capacity = "";
+		String[] capacityEx = request.getParameterValues("ingre");
+
+		for(String i : capacityEx) {
+			capacity += i+"-";		// 용량1-용량2
+		}		
+		
+		System.out.println("용량:"+capacity);
+		
 		
 		int result = service.r_insert(board);
 		

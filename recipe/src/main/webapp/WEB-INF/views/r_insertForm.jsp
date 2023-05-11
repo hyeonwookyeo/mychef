@@ -20,8 +20,8 @@ function btn_add(){
 
 	str += "<tr>";
 	str += "	<td style='text-align:center;' class=\"row_idx\">"+row_idx+"</td>";
-	str += "	<td style='text-align:center;'><input type=\"text\" name='ingre1'></td>";
-	str += "	<td style='text-align:center;'><input type=\"text\" name='capacity1'></td>";
+	str += "	<td style='text-align:center;'><input type=\"text\" name='ingre'></td>";
+	str += "	<td style='text-align:center;'><input type=\"text\" name='capacity'></td>";
 	str += "	<td style='text-align:center;'>";
 	str += "		<div class=\"btn-group\">";
 	str += "			<button type='button' class='btn btn-primary btn-sm' name='dtl_del'>삭제</button>";
@@ -59,7 +59,7 @@ $(function(){
 				<tr>
 					<td>분류</td>
 					<td>
-					<select id="category">
+					<select id="category" name="category">
 						<option value="korean">한식</option>
 						<option value="chinese">중식</option>
 						<option value="japanese">일식</option>

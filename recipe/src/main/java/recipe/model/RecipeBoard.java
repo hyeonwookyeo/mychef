@@ -13,6 +13,7 @@ public class RecipeBoard {
 	private int readcount;
 	private int recom;
 	private String ingre;
+	private String capacity;
 	private String rfile;
 	private String content;
 	private String state;
@@ -86,6 +87,12 @@ public class RecipeBoard {
 	public void setIngre(String ingre) {
 		this.ingre = ingre;
 	}
+	public String getCapacity() {
+		return capacity;
+	}
+	public void setCapacity(String capacity) {
+		this.capacity = capacity;
+	}
 	public String getRfile() {
 		return rfile;
 	}
@@ -128,6 +135,5 @@ public class RecipeBoard {
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
 	}
-	
 	
 }
