@@ -1,6 +1,8 @@
 package recipe.controller;
 
+import java.io.File;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -79,21 +81,59 @@ public class RecipeController {
 // 작성	
 	@RequestMapping(value="r_insert",  method = RequestMethod.POST)
 //	public String insert(@RequestParam("rfile1")  MultipartFile mf, RecipeBoard board, String pageNum,
-	public String insert(@RequestParam("thumbnail1") MultipartFile mf,
+	public String insert(@RequestParam("thumbnail1") MultipartFile mf1,
+						@RequestParam("r_file1") MultipartFile mf2,
 						RecipeBoard board, String pageNum,
-						HttpServletRequest request, Model model) {
+						HttpServletRequest request, Model model) throws Exception {
 		
 		System.out.println("진입");
 		
-		String filename = mf.getOriginalFilename();
-		int filesize = (int) mf.getSize();
-		String path = request.getRealPath("upload");
+		
+		
+		// 메인사진
+		String filename = mf1.getOriginalFilename();
+		int filesize = (int) mf1.getSize();
+		String path = request.getRealPath("WEB-INF/r_images");
+		String newfilename1 = "";
 		
 		// 전달확인
-		System.out.println("mf=" + mf);
+		System.out.println("mf=" + mf1);
 		System.out.println("filename=" + filename); 	// filename="Koala.jpg"
 		System.out.println("filesize=" + filesize);
 		System.out.println("Path=" + path);
+		
+		if(filename!="") {
+			String extension = filename.substring(filename.lastIndexOf("."), filename.length());
+			UUID uuid = UUID.randomUUID();
+			newfilename1 = uuid.toString() + extension;
+		}
+		
+		mf1.transferTo(new File(path + "/" + newfilename1));
+		
+		board.setThumbnail(newfilename1);
+		
+		
+		
+		// 조리사진
+		String filename2 = mf2.getOriginalFilename();
+		int filesize2 = (int) mf2.getSize();
+		String newfilename2 = "";
+		
+		// 전달확인
+		System.out.println("mf2=" + mf2);
+		System.out.println("filename2=" + filename2); 	// filename="Koala.jpg"
+		System.out.println("filesize2=" + filesize2);
+		System.out.println("Path=" + path);
+		
+		if(filename2!="") {
+			String extension = filename.substring(filename.lastIndexOf("."), filename.length());
+			UUID uuid = UUID.randomUUID();
+			newfilename2 = uuid.toString() + extension;
+		}
+		
+		mf2.transferTo(new File(path + "/" + newfilename2));
+		
+		board.setRfile(newfilename2);
 		
 		// ip
 		String ip = request.getRemoteAddr();
@@ -118,6 +158,9 @@ public class RecipeController {
 		System.out.println("재료:"+ingre);
 		System.out.println("용량:"+capacity);
 		
+		
+		board.setIngre(ingre);
+		board.setCapacity(capacity);
 		
 		int result = service.r_insert(board);
 		

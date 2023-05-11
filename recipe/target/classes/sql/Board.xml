@@ -6,8 +6,8 @@
 
 	<insert id="insert" parameterType="board">
 		insert into Recipe values(recipe_seq.nextval, #{category},
-		#{id},#{thumbnail},#{subject},#{subject},sysdate,#{ip},
-		0,0,{ingre},{rfile},{content},'y'
+		'aaaa',#{thumbnail},#{subject},#{description},sysdate,#{ip},
+		0,0,#{ingre},#{capacity},#{rfile},#{content},'y'
 		)
 	</insert>
 

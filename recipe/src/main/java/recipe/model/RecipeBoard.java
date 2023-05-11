@@ -8,6 +8,7 @@ public class RecipeBoard {
 	private String id;
 	private String thumbnail;
 	private String subject;
+	private String description;
 	private Date rdate;
 	private String ip;
 	private int readcount;
@@ -56,6 +57,12 @@ public class RecipeBoard {
 	}
 	public void setSubject(String subject) {
 		this.subject = subject;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	public Date getRdate() {
 		return rdate;
@@ -135,5 +142,6 @@ public class RecipeBoard {
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
 	}
+	
 	
 }
