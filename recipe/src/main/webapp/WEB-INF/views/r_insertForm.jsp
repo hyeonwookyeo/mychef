@@ -37,12 +37,13 @@ function btn_add2(){
 
 	str += "<tr>";
 	str += "	<td>조리사진</td>";
-	str += "	<td><input type=\"file\" name='r_file1'></td>";
+	str += "	<td><input multiple=\"multiple\" type=\"file\" name='r_file1'></td>";
 	str += "</tr>";
-	str += "<tr>";
+ 	str += "<tr>";
 	str += "	<td>내용</td>";
-	str += "	<td><textarea rows=\"5\" cols=\"30\" name=\"content\"></textarea></td>";
-	str += "</tr>";
+	str += "	<td><textarea rows=\"5\" cols=\"30\" name='content1'></textarea></td>";
+	str += "</tr>"; 
+
 	
 	$("#tbody_id2:last").append(str);
 }
@@ -116,11 +117,11 @@ $(function(){
 			<table border=1>
 			<tr>
 				<td>조리사진</td>
-				<td><input type="file" name="r_file1"></td>
+				<td><input multiple="multiple" type="file" name="r_file1"></td>
 			</tr>
 			<tr>
 				<td>내용</td>
-				<td><textarea rows="5" cols="30" name="content"></textarea></td>
+				<td><textarea rows="5" cols="30" name="content1"></textarea></td>
 			</tr>
 			
 			<tbody id="tbody_id2"></tbody>

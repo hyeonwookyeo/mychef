@@ -1,6 +1,7 @@
 package recipe.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import recipe.model.RecipeBoard;
 import recipe.service.PagingPgm;
@@ -78,6 +80,8 @@ public class RecipeController {
 		return "r_list";
 	}
 	
+	
+	
 // 레시피 작성폼
 	@RequestMapping("r_insertForm")
 	public String insertform(String pageNum, Model model) {
@@ -87,42 +91,54 @@ public class RecipeController {
 		return "r_insertForm";
 	}
 	
-// 작성	
+	
+	
+// 레시피 작성	
 	@RequestMapping(value="r_insert",  method = RequestMethod.POST)
-//	public String insert(@RequestParam("rfile1")  MultipartFile mf, RecipeBoard board, String pageNum,
 	public String insert(@RequestParam("thumbnail1") MultipartFile mf1,
-						@RequestParam("r_file1") MultipartFile mf2,
+//						@RequestParam("r_file1") MultipartFile mf2,
+						MultipartHttpServletRequest mhr,
 						RecipeBoard board, String pageNum,
 						HttpServletRequest request, Model model) throws Exception {
 		
 		System.out.println("진입");
 		
+		// 조리사진 내용
+		String[] contentList = request.getParameterValues("content1");
+		String content = "";
 		
+		for(String i : contentList) {
+			content += i+"-";			// 내용1-내용2
+		}	
 		
-		// 메인사진
-		String filename = mf1.getOriginalFilename();
-		int filesize = (int) mf1.getSize();
-		String path = request.getRealPath("WEB-INF/r_images");
-		String newfilename1 = "";
+		System.out.println("contentList:" + contentList);
+		System.out.println("content:" + content);
 		
-		// 전달확인
-		System.out.println("mf=" + mf1);
-		System.out.println("filename=" + filename); 	// filename="Koala.jpg"
-		System.out.println("filesize=" + filesize);
-		System.out.println("Path=" + path);
+		board.setContent(content);
 		
-		if(filename!="") {
-			String extension = filename.substring(filename.lastIndexOf("."), filename.length());
+		// 썸네일사진
+		String thumbFileName = mf1.getOriginalFilename();
+		int thumbFileSize = (int) mf1.getSize();
+		String thumbpath = request.getRealPath("WEB-INF/t_images");
+		String thumbNewFileName = "";
+		
+		if(thumbFileName!="") {
+			String extension = thumbFileName.substring(thumbFileName.lastIndexOf("."), thumbFileName.length());
 			UUID uuid = UUID.randomUUID();
-			newfilename1 = uuid.toString() + extension;
+			thumbNewFileName = uuid.toString() + extension;
+			
+			// 전달확인
+			System.out.println("thumbFileName=" + thumbFileName); 	// filename="Koala.jpg"
+			System.out.println("thumbFileSize=" + thumbFileSize);
+			System.out.println("thumbPath=" + thumbpath);
 		}
 		
-		mf1.transferTo(new File(path + "/" + newfilename1));
+		mf1.transferTo(new File(thumbpath + "/" + thumbNewFileName));
 		
-		board.setThumbnail(newfilename1);
+		board.setThumbnail(thumbNewFileName);
 		
 		
-		
+/*
 		// 조리사진
 		String filename2 = mf2.getOriginalFilename();
 		int filesize2 = (int) mf2.getSize();
@@ -135,7 +151,7 @@ public class RecipeController {
 		System.out.println("Path=" + path);
 		
 		if(filename2!="") {
-			String extension = filename.substring(filename.lastIndexOf("."), filename.length());
+			String extension = filename2.substring(filename2.lastIndexOf("."), filename2.length());
 			UUID uuid = UUID.randomUUID();
 			newfilename2 = uuid.toString() + extension;
 		}
@@ -143,6 +159,47 @@ public class RecipeController {
 		mf2.transferTo(new File(path + "/" + newfilename2));
 		
 		board.setRfile(newfilename2);
+		
+*/
+		
+
+		
+		
+		// 멀티 업로드
+		List<MultipartFile> fileList = mhr.getFiles("r_file1");
+		String multipath = request.getRealPath("WEB-INF/r_images");
+		String finalFileName = "";
+		
+		for (MultipartFile mf : fileList) {
+            String multiFileName = mf.getOriginalFilename(); // 원본 파일 명
+            long multiFileSize = mf.getSize(); // 파일 사이즈
+
+            String extension = multiFileName.substring(multiFileName.lastIndexOf("."), multiFileName.length());
+            UUID uuid = UUID.randomUUID();
+            
+            String multiNewFileName = uuid.toString() + extension;
+            
+            System.out.println("multiFileName : " + multiFileName);
+            System.out.println("multiFileSize : " + multiFileSize);
+            
+            finalFileName += mf+"-";
+            
+            try {
+                mf.transferTo(new File(multipath + "/" + multiNewFileName));
+            } catch (IllegalStateException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+		}
+		
+		System.out.println("finalFileName:" + finalFileName);
+		board.setRfile(finalFileName);
+		
+		
+		
 		
 		// ip
 		String ip = request.getRemoteAddr();
