@@ -9,6 +9,7 @@
 -->
 	<typeAlias alias="Maga" type="recipe.model.MagaBean" />
 	<typeAlias alias="MagaRecom" type="recipe.model.MagaRecomBean" />
+	<typeAlias alias="MagaReply" type="recipe.model.ReplyMagaBean"/>
 	
 	</typeAliases>
 	

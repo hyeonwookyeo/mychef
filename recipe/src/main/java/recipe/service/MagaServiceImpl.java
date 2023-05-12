@@ -19,11 +19,12 @@ public class MagaServiceImpl implements MagaService {
 	@Override
 	public int getListCount() throws Exception {
 		return magaDao.getListCount();
+		
 	}
 
-	@Override
 	public List getMagaList(int page) throws Exception {
 		return magaDao.getMagaList(page);
+		
 	}
 
 	public void insert(MagaBean maga) throws Exception {
@@ -38,6 +39,7 @@ public class MagaServiceImpl implements MagaService {
 
 	public MagaBean maga_cont(int maga_num) throws Exception {
 		return magaDao.maga_cont(maga_num);
+		
 	}
 
 	public int maga_del(int maga_num) throws Exception {
@@ -51,8 +53,13 @@ public class MagaServiceImpl implements MagaService {
 	}
 
 	public int maga_recomcheck(MagaRecomBean magarecom) throws Exception {
-		// TODO Auto-generated method stub
 		return magaDao.maga_recomcheck(magarecom);
+		
+	}
+
+	public void maga_recominsert(MagaRecomBean magarecom) throws Exception {
+		magaDao.maga_recominsert(magarecom);
+		
 	}
 
 }

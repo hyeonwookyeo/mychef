@@ -58,7 +58,6 @@
 				</td>
 			</tr>
 		</c:forEach>
-		<tr></tr>
 	</table>
 		
 	<div align=center>

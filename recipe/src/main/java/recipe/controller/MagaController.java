@@ -27,7 +27,7 @@ import recipe.service.MagaServiceImpl;
 @Controller
 public class MagaController {
 	@Autowired
-	private MagaServiceImpl magaService;
+	private MagaService magaService;
 	
 	
 	@RequestMapping("/maga")
@@ -99,7 +99,6 @@ public class MagaController {
 		
 		model.addAttribute("maga",maga);
 		model.addAttribute("page",page);
-		System.out.println("상세");
 		
 		return "maga/maga_cont";
 	}
@@ -111,7 +110,7 @@ public class MagaController {
 		
 		String filename = mf.getOriginalFilename();
 		int size = (int) mf.getSize();
-		String path = request.getRealPath("WEB-INF/images");
+		String path = request.getRealPath("upload");
 		System.out.println("path");
 		String newfilename = "";
 		System.out.println("path : "+path);
@@ -152,8 +151,7 @@ public class MagaController {
 	
 	// 매거진 추천
 	@RequestMapping("/maga_recom")
-	public String maga_recom(HttpSession session, int maga_num, String page) throws Exception {
-		System.out.println("여기는 추천");
+	public String maga_recom(HttpSession session, Model model, int maga_num, String page) throws Exception {
 		
 		// 세션id로 추천중복 확인
 		String id = (String)session.getAttribute("id");
@@ -161,14 +159,24 @@ public class MagaController {
 		magarecom.setMagarecom_num(maga_num);
 		magarecom.setNickname(id);
 		
-		System.out.println("여기는 추천다음");
+		// 중복 확인
 		int result = magaService.maga_recomcheck(magarecom);
-		System.out.println(result);
-		System.out.println("1");
+		String state = "recom";
+		model.addAttribute("result", result);
+		model.addAttribute("page",page);
+		model.addAttribute("maga_num",maga_num);
 		
-//		magaService.maga_recom(maga_num);
-		
-		return "maga/recom_result";
+		if(result == 0) {	// 중복이 없을 때(추천 가능)
+			magaService.maga_recom(maga_num);
+			magaService.maga_recominsert(magarecom);
+			
+			return "maga/recom_result";
+		}
+		else if(result == 1) {	// 중복이 있을 때(추천 불가능)
+			
+			return "maga/recom_result";
+		}
+		return null;
 	}
 	
 

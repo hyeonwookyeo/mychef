@@ -22,24 +22,29 @@ public class MagaDaoImpl implements MagaDao {
 		return count;
 	}
 
+	@Override
 	public List<MagaBean> getMagaList(int page) throws Exception {
 		List<MagaBean> list = session.selectList("Maga.maga_list",page);
 		
 		return list;
 	}
 
+	@Override
 	public void insert(MagaBean maga) throws Exception {
 		session.insert("Maga.maga_insert",maga);
 	}
 
+	@Override
 	public void readcount(int maga_num) throws Exception {
 		session.update("Maga.maga_readcount",maga_num);
 	}
 
+	@Override
 	public MagaBean maga_cont(int maga_num) throws Exception {
 		return (MagaBean) session.selectOne("Maga.maga_cont",maga_num);
 	}
 
+	@Override
 	public int maga_del(int maga_num) throws Exception {
 		session.update("Maga.maga_del",maga_num);
 		int result = 1;
@@ -47,14 +52,22 @@ public class MagaDaoImpl implements MagaDao {
 		return result;
 	}
 
+	@Override
 	public void maga_recom(int maga_num) throws Exception {
 		session.update("Maga.maga_recom",maga_num);
 	}
 
-	public int maga_recomcheck(MagaRecomBean magarecom) {
-		int result = session.selectOne("MagaRecom.maga_recomcheck",magarecom);
+	@Override
+	public int maga_recomcheck(MagaRecomBean magarecom) throws Exception {
+		int result = 0;
+		result = (Integer) session.selectOne("MagaRecom.maga_recomcheck",magarecom);
 		
 		return result;
+	}
+
+	@Override
+	public void maga_recominsert(MagaRecomBean magarecom) throws Exception {
+		session.insert("MagaRecom.maga_recominsert",magarecom);
 	}
 
 }

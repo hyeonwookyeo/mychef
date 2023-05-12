@@ -7,4 +7,7 @@ delete from MAGA
 
 update MAGA set state='0' where maga_num = '115'
 select * from tab
-select * from MAGA_RE
+select * from maga_recom
+select * from maga_re
+
+alter table maga_re drop column re_write
