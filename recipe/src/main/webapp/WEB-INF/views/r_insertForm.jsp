@@ -32,6 +32,21 @@ function btn_add(){
 	$("#tbody_id:last").append(str);
 }
 
+function btn_add2(){
+	var str = "";
+
+	str += "<tr>";
+	str += "	<td>조리사진</td>";
+	str += "	<td><input type=\"file\" name='r_file1'></td>";
+	str += "</tr>";
+	str += "<tr>";
+	str += "	<td>내용</td>";
+	str += "	<td><textarea rows=\"5\" cols=\"30\" name=\"content\"></textarea></td>";
+	str += "</tr>";
+	
+	$("#tbody_id2:last").append(str);
+}
+
 $(function(){
 	$('#sub').click(function() {
 	    $('form').serialize();
@@ -82,16 +97,21 @@ $(function(){
 				<th style="width:20%; text-align:center;vertical-align:middle;">No</th>
 				<th style="width:20%; text-align:center;vertical-align:middle;">재료</th>
 				<th style="width:20%; text-align:center;vertical-align:middle;">용량</th>
-				<th style="width:20%; text-align:center;">
-					<button class="btn btn-default btn-sm" type="button"  onclick='btn_add();'>
-						<strong>추가</strong>
-					</button>
-				</th>
+				<th style="width:20%; text-align:center;vertical-align:middle;">추가/삭제</th>
 			</tr>
 			</thead>
 			<tbody id="tbody_id">
 			</tbody>
-			</table><br><br>
+			<tr>
+				<td colspan=3>
+				</td>
+				<td style="width:20%; text-align:center;vertical-align:middle;">
+				<button class="btn btn-default btn-sm" type="button"  onclick='btn_add();'>
+						<strong>재료 추가</strong>
+				</button>
+				</td>
+			</tr>
+			</table> <br><br>
 				
 			<table border=1>
 			<tr>
@@ -100,9 +120,19 @@ $(function(){
 			</tr>
 			<tr>
 				<td>내용</td>
-				<td><textarea rows="5" cols="30" name="content"	required="required"></textarea></td>
+				<td><textarea rows="5" cols="30" name="content"></textarea></td>
 			</tr>
-			</table> <br><br> 
+			
+			<tbody id="tbody_id2"></tbody>
+			</table>
+			
+			<table>
+			<tr>
+					<button class="btn btn-default btn-sm" type="button"  onclick='btn_add2();'>
+						<strong>추가</strong>
+					</button>
+			</tr>
+			</table><br><br>
 
 			
 			<input type="button" value="확인" id="sub">

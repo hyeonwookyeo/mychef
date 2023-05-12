@@ -23,7 +23,7 @@ public class TestController {
 		
 		model.addAttribute("result", result);	// result : 1
 		
-		return "main_test";
+		return "result/main_test";
 	}
 	
 	
