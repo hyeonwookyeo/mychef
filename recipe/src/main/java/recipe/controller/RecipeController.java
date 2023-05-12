@@ -119,7 +119,7 @@ public class RecipeController {
 		// 썸네일사진
 		String thumbFileName = mf1.getOriginalFilename();
 		int thumbFileSize = (int) mf1.getSize();
-		String thumbpath = request.getRealPath("WEB-INF/t_images");
+		String thumbpath = request.getRealPath("t_images");
 		String thumbNewFileName = "";
 		
 		if(thumbFileName!="") {
@@ -167,7 +167,7 @@ public class RecipeController {
 		
 		// 멀티 업로드
 		List<MultipartFile> fileList = mhr.getFiles("r_file1");
-		String multipath = request.getRealPath("WEB-INF/r_images");
+		String multipath = request.getRealPath("r_images");
 		String finalFileName = "";
 		
 		for (MultipartFile mf : fileList) {
