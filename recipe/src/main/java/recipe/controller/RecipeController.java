@@ -12,9 +12,11 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import recipe.model.RecipeBoard;
@@ -185,6 +187,12 @@ public class RecipeController {
 	@RequestMapping("r_view")
 	public String rview(String pageNum, int rnum, Model model) {
 		
+//		String id = "aaaa";
+//		session.setAttribute("id", id);  
+//		String sId = session.getId();
+//		System.out.println(sId);
+
+		
 		service.r_readcountUpdate(rnum);
 		
 		RecipeBoard board = service.r_select(rnum);
@@ -240,22 +248,11 @@ public class RecipeController {
 		return "result/r_updateResult";
 	}
 	
-// 레시피 삭제폼 
-	@RequestMapping("r_deleteForm")
-	public String rselect(String pageNum, int rnum, Model model) {
-		
-		RecipeBoard board = service.r_select(rnum);
-		
-		model.addAttribute("pageNum", pageNum);
-		model.addAttribute("board", board);
-		
-		return "r_delete";
-	}
 // 삭제
-	@RequestMapping("r_delete")
-	public String r_delete(String pageNum, RecipeBoard board, Model model) {
+	@RequestMapping("/r_delete/rnum/{rnum}")
+	public String r_delete(@RequestBody int rnum, String pageNum, Model model) {
 		
-		int result = service.r_delete(board.getRnum());
+		int result = service.r_delete(rnum);
 		
 		model.addAttribute("pageNum", pageNum);
 		model.addAttribute("result", result);

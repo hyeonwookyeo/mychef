@@ -32,7 +32,7 @@
 						<div>
 							<div class="card" style="width: 400px">
 								<a href="r_view?rnum=${board.rnum }&pageNum=${pp.currentPage}">
-								<img class="card-img-top" src="${board.thumbnail }"></a>
+								<img class="card-img-top" src="./t_images/${board.thumbnail }"></a>
 								<div class="card-body">
 									<h4 class="card-title">${board.subject }</h4>
 									<p class="card-text">${board.id }</p>

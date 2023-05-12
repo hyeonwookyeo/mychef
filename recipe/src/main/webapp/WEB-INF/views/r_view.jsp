@@ -17,8 +17,29 @@
 <script>
 
 $(function(){
-	$('#listRe').load("r_listRe?rnum='${rnum}'")
+	$('#listRe').load("r_listRe?rnum=${rnum}")
 });
+
+function check(){
+	var text = "정말로 삭제하시겠습니까?";
+	  if (confirm(text) == true) {
+		  $ajax({
+			  type: 'post',
+			  datatype: 'json',
+			  url: '/delete/rnum/${rnum}',
+			  success: function(data){
+				  if(data == 1){
+					  alert("글이 삭제되었습니다");
+				  }else{
+					  alert("비밀번호가 틀립니다")
+				  } 
+			  }
+			  
+		  })
+		  
+	    locaion.href="delete?rnum=${rnum}"
+	  }
+}
 
 
 </script>
@@ -53,16 +74,24 @@ $(function(){
 	</table>
 	
 	<div>추천수${board.recom }</div>
+	<c:if test="${!empty id and session.id == board.id}">
+		<div align="center">
+			<a href="r_updateForm?rnum=${board.rnum }">수정</a>
+			<button type="button" onclick="check()">삭제</button>
+		</div>
+	</c:if>
 	
-	<a href=>수정</a>
-	<a href=>삭제</a>
 	
-	<div><form name="frm">
-		댓글 : <textarea row=3 cols=30 name="repl_content"></textarea>
-		<button type="button" id="repl_insert">확인</button>
+	<c:if test="${!empty id}">
+	<div><form name="frm" method="post" enctype="multipart/form-data">
+		<input type="hidden" name=rnum value="${board.rnum }">
+		<input type="hidden" name=id value="${id }">
+		<input type="file" name="re_rfile1" multiple>
+		댓글 : <textarea rows=3 cols=30 name="re_content"></textarea>
+		<input type="submit" id="repl_insert">
 	</form></div>
 	<div id="listRe"></div>
-	
+	</c:if>
 </div>
 
 
