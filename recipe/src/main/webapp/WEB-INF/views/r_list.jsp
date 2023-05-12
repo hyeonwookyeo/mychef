@@ -32,12 +32,12 @@
 						<div>
 							<div class="card" style="width: 400px">
 								<a href="r_view?rnum=${board.rnum }&pageNum=${pp.currentPage}">
-								<img class="card-img-top" src="${board.subject }"></a>
+								<img class="card-img-top" src="${board.thumbnail }"></a>
 								<div class="card-body">
 									<h4 class="card-title">${board.subject }</h4>
 									<p class="card-text">${board.id }</p>
-									<p class="card-text">${board.readcount }</p>
-									<p class="card-text">${board.recom }</p>
+									<span class="card-text">조회수${board.readcount }</span>
+									<span class="card-text">추천수${board.recom }</span>
 									<p class="card-text">${board.rdate }</p>
 								</div>
 							</div>

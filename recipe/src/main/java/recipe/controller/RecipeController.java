@@ -1,7 +1,9 @@
 package recipe.controller;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -187,8 +189,29 @@ public class RecipeController {
 		
 		RecipeBoard board = service.r_select(rnum);
 		
+		String ingre[] = (board.getIngre()).split("-");
+		String capacity[] = (board.getCapacity()).split("-");
+		String rfile[] = (board.getRfile()).split("-");
+		String content[] = (board.getContent()).split("-");
+		
+		for(int i =0; i<ingre.length; i++){
+			System.out.println(ingre[i]);
+			}
+		Map<String, String> map1= new HashMap<>();
+		Map<String, String> map2= new HashMap<>();
+		
+		for(int i=0; i<ingre.length; i++) {
+			map1.put(ingre[i], capacity[i]);
+		}
+		System.out.println("ingre값 출력: " + map1);
+		for(int i=0; i<rfile.length; i++) {
+			map2.put(rfile[i], content[i]);
+		}
+		
 		model.addAttribute("pageNum", pageNum);
 		model.addAttribute("board", board);
+		model.addAttribute("map1", map1);
+		model.addAttribute("map2", map2);
 		
 		return "r_view";
 	}
