@@ -4,5 +4,13 @@
 
 <mapper namespace="reboardns">
 
+<select id="getTotal" parameterType="int" resultType="int">
+	select count(*) from reboard where rnum = #{rnum}
+</select>
+
+<select id="list" parameterType="int" resultType="reboard">
+	select * from reboard where rnum = #{rnum}
+</select>
+
 	
 </mapper>

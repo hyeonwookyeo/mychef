@@ -14,6 +14,9 @@ public class RecipeReBoard {
 	private int ref_seq;
 	private int ref_lev;
 	
+	// page
+	private int startRow;
+	private int endRow;
 	
 	public int getRre_num() {
 		return rre_num;
@@ -69,6 +72,19 @@ public class RecipeReBoard {
 	public void setRef_lev(int ref_lev) {
 		this.ref_lev = ref_lev;
 	}
+	public int getStartRow() {
+		return startRow;
+	}
+	public void setStartRow(int startRow) {
+		this.startRow = startRow;
+	}
+	public int getEndRow() {
+		return endRow;
+	}
+	public void setEndRow(int endRow) {
+		this.endRow = endRow;
+	}
+	
 	
 	
 }

@@ -16,15 +16,15 @@ public class RecipeReServiceImpl implements RecipeReService{
 	private RecipeReDao redao;
 
 	@Override
-	public int getTotalRe(RecipeBoard board) {
+	public int getTotalRe(int rnum) {
 		// TODO Auto-generated method stub
-		return redao.getTotalRe(board);
+		return redao.getTotalRe(rnum);
 	}
 
 	@Override
-	public List<RecipeReBoard> listRe(RecipeReBoard reboard) {
+	public List<RecipeReBoard> listRe(int rnum) {
 		// TODO Auto-generated method stub
-		return redao.listRe(reboard);
+		return redao.listRe(rnum);
 	}
 
 	@Override

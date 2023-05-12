@@ -16,15 +16,15 @@ public class RecipeReDaoImpl implements RecipeReDao{
 	private SqlSessionTemplate sst;
 
 	@Override
-	public int getTotalRe(RecipeBoard board) {
+	public int getTotalRe(int rnum) {
 		// TODO Auto-generated method stub
-		return sst.selectOne("reboardns.getTotal", board);
+		return sst.selectOne("reboardns.getTotal", rnum);
 	}
 
 	@Override
-	public List<RecipeReBoard> listRe(RecipeReBoard reboard) {
+	public List<RecipeReBoard> listRe(int rnum) {
 		// TODO Auto-generated method stub
-		return sst.selectList("reboardns.list", reboard);
+		return sst.selectList("reboardns.list", rnum);
 	}
 
 	@Override
