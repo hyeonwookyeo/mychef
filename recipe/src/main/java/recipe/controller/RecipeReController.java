@@ -14,9 +14,9 @@ public class RecipeReController {
 	private RecipeReService reService;
 
 	@RequestMapping("r_listRe")
-	public String r_listRe(String rnum) {
+	public String r_listRe(int rnum) {
 
-		return "";
+		return "r_listRe";
 	}
 
 	@RequestMapping("r_insertRe")
