@@ -8,9 +8,9 @@ import recipe.model.RecipeReBoard;
 
 public interface RecipeReService {
 	
-	int getTotalRe(RecipeBoard board);
+	int getTotalRe(int rnum);
 	
-	List<RecipeReBoard> listRe(RecipeReBoard reboard);
+	List<RecipeReBoard> listRe(int rnum);
 	
 	int r_insertRe(RecipeReBoard reboard);
 	

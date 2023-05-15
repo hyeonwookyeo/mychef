@@ -7,9 +7,9 @@ import recipe.model.RecipeReBoard;
 
 public interface RecipeReDao {
 
-int getTotalRe(RecipeBoard board);
+	int getTotalRe(int rnum);
 	
-	List<RecipeReBoard> listRe(RecipeReBoard reboard);
+	List<RecipeReBoard> listRe(int rnum);
 	
 	int r_insertRe(RecipeReBoard reboard);
 	

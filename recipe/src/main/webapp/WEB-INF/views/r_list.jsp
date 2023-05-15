@@ -28,61 +28,30 @@
 			</c:if>
 			<c:if test="${not empty list}">
 				<c:forEach var="board" items="${list }">
-					<div class="col-sm-3">
-						<div>
-							<div class="card" style="width: 400px">
-								<a href="r_view?rnum=${board.rnum }&pageNum=${pp.currentPage}">
-								<img class="card-img-top" src="./t_images/${board.thumbnail}"></a>
-								<div class="card-body">
-									<h4 class="card-title">${board.subject }</h4>
-									<p class="card-text">${board.id }</p>
-									<p class="card-text">${board.readcount }</p>
-									<p class="card-text">${board.recom }</p>
-									<p class="card-text">${board.rdate }</p>
+					<c:if test="${board.state != 'n' }">
+						<div class="col-sm-3">
+							<div>
+								<div class="card" style="width: 400px">
+									<a href="r_view?rnum=${board.rnum }&pageNum=${pp.currentPage}">
+										<img class="card-img-top" src="./t_images/${board.thumbnail }">
+									</a>
+									<div class="card-body">
+										<h4 class="card-title">${board.subject }</h4>
+										<p class="card-text">${board.id }</p>
+										<span class="card-text">조회수${board.readcount }</span> <span
+											class="card-text">추천수${board.recom }</span>
+										<p class="card-text">${board.rdate }</p>
+									</div>
 								</div>
 							</div>
 						</div>
-
-					</div>
+					</c:if>
 				</c:forEach>
 			</c:if>
 
 
 		</div>
-		<table class="table table-striped" border=1>
-			<!-- 			<tr>
-				<td>번호</td>
-				<td>제목</td>
-				<td>작성자</td>
-				<td>작성일</td>
-				<td>조회수</td>
-			</tr> -->
-			<c:if test="${empty list}">
-				<tr align="center">
-					<td colspan="5">데이터가 없습니다</td>
-				</tr>
-			</c:if>
-			<c:if test="${not empty list}">
-				<c:set var="no" value="${number }"></c:set>
-				<c:forEach var="board" items="${list }">
-					<tr>
-						<td>${no}</td>
-						<c:if test="${board.state =='n' }">
-							<td colspan="4">삭제된 데이터 입니다</td>
-						</c:if>
-						<c:if test="${board.state !='n' }">
-							<td><a
-								href="r_view?rnum=${board.rnum }&pageNum=${pp.currentPage}"
-								class="btn btn-default"> ${board.subject}</a></td>
-						<%-- 	<td>${board.writer}</td>
-							<td>${board.reg_date}</td>
-							<td>${board.readcount}</td> --%>
-						</c:if>
-					</tr>
-					<c:set var="no" value="${no - 1}"></c:set>
-				</c:forEach>
-			</c:if>
-		</table>
+		
 		<form action="list?pageNum=1">
 			<select name="search">
 				<option value="subject"
@@ -96,7 +65,7 @@
 			</select> <input type="text" name="keyword"> <input type="submit"
 				value="확인">
 		</form>
-		<ul class="pagination">
+		<ul>
 			<c:if test="${not empty keyword}">
 				<c:if test="${pp.startPage > pp.pagePerBlk }">
 					<li><a
@@ -125,7 +94,7 @@
 			</c:if>
 		</ul>
 
-		<c:if test="${empty sessionScope.id }">
+		<c:if test="${!empty id }">
 			<div align="center">
 				<a href="r_insertForm" class="btn btn-info">글 입력</a>
 			</div>
