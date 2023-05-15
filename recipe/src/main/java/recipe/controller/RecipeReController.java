@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import recipe.model.RecipeReBoard;
 import recipe.service.PagingPgm;
 import recipe.service.RecipeReService;
-import recipe.service.RecipeService;
 
 @Controller
 public class RecipeReController {
@@ -22,6 +21,8 @@ public class RecipeReController {
 // 댓글목록	
 	@RequestMapping("r_listRe")
 	public String r_listRe(String pageNum, int rnum, Model model) {
+		
+		System.out.println("r_listRe 도착");
 		
 		final int rowPerPage = 5;
 		if (pageNum == null || pageNum.equals("")) {
@@ -53,9 +54,11 @@ public class RecipeReController {
 
 // 댓글 등록	
 	@RequestMapping("r_insertRe")
-	public String r_insertRe() {
+	public String r_insertRe(String pageNum, RecipeReBoard reboard) {
+		
+		reService.r_insertRe(reboard);
 
-		return "redirect:rlistRe?rnum=";
+		return "redirect:rlistRe?pageNum="+pageNum+"&rnum=" + reboard.getRnum();
 	} //
 
 // 댓글수정	

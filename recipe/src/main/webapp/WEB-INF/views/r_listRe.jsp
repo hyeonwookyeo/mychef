@@ -30,7 +30,7 @@
 				<c:forEach var="reboard" items="${rlist }">
 					<div>
 						<span>섬네일</span>닉네임
-						<div>사진</div>
+						<div>${reboard.re_rfile }</div>
 						<div>${reboard.content }</div>
 						<div>${reboard.re_date }</div>
 					</div>
@@ -40,18 +40,17 @@
 
 		</div>
 		<ul class="pagination">
-				<c:if test="${pp.startPage > pp.pagePerBlk }">
-					<li><a href="r_listRe?pageNum=${pp.startPage - 1}">이전</a></li>
-				</c:if>
-				<c:forEach var="i" begin="${pp.startPage}" end="${pp.endPage}">
-					<li> <c:if test="${pp.currentPage==i}">class="active"</c:if>
-					<a href="r_listRe?pageNum=${i}">${i}</a></li>
-				</c:forEach>
-				<c:if test="${pp.endPage < pp.totalPage}">
-					<li><a href="r_listRe?pageNum=${pp.endPage + 1}">다음</a></li>
-				</c:if>
+			<c:if test="${pp.startPage > pp.pagePerBlk }">
+				<li><a href="r_listRe?pageNum=${pp.startPage - 1}">이전</a></li>
+			</c:if>
+			<c:forEach var="i" begin="${pp.startPage}" end="${pp.endPage}">
+				<li><c:if test="${pp.currentPage==i}">class="active"</c:if> <a
+					href="r_listRe?pageNum=${i}">${i}</a></li>
+			</c:forEach>
+			<c:if test="${pp.endPage < pp.totalPage}">
+				<li><a href="r_listRe?pageNum=${pp.endPage + 1}">다음</a></li>
+			</c:if>
 		</ul>
-
 	</div>
 </body>
 </html>

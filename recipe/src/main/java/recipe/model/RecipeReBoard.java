@@ -10,13 +10,12 @@ public class RecipeReBoard {
 	private String re_content;
 	private Date re_date;
 	private String state;
-	private int ref;
-	private int ref_seq;
-	private int ref_lev;
+	private String re_rfile;
 	
 	// page
 	private int startRow;
 	private int endRow;
+	
 	
 	public int getRre_num() {
 		return rre_num;
@@ -54,23 +53,11 @@ public class RecipeReBoard {
 	public void setState(String state) {
 		this.state = state;
 	}
-	public int getRef() {
-		return ref;
+	public String getRe_rfile() {
+		return re_rfile;
 	}
-	public void setRef(int ref) {
-		this.ref = ref;
-	}
-	public int getRef_seq() {
-		return ref_seq;
-	}
-	public void setRef_seq(int ref_seq) {
-		this.ref_seq = ref_seq;
-	}
-	public int getRef_lev() {
-		return ref_lev;
-	}
-	public void setRef_lev(int ref_lev) {
-		this.ref_lev = ref_lev;
+	public void setRe_rfile(String re_rfile) {
+		this.re_rfile = re_rfile;
 	}
 	public int getStartRow() {
 		return startRow;
@@ -84,6 +71,9 @@ public class RecipeReBoard {
 	public void setEndRow(int endRow) {
 		this.endRow = endRow;
 	}
+	
+	
+	
 	
 	
 	

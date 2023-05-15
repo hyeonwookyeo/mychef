@@ -53,7 +53,7 @@ $(function(){
 			<table border=1>
 				<tr>
 					<td>제목</td>
-					<td><input type="text" name="subject"></td>
+					<td><input type="text" name="subject" value="${board.subject }"></td>
 				</tr>
 				<tr>
 					<td>분류</td>
@@ -72,7 +72,7 @@ $(function(){
 				</tr>
 				<tr>
 					<td>간략한 설명</td>
-					<td><input type="text" name="description""></td>
+					<td><input type="text" name="description" value="${board.description }"></td>
 				</tr>
 				</table> <br><br>
 				

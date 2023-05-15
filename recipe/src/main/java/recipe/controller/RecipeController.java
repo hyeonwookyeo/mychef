@@ -12,11 +12,11 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import recipe.model.RecipeBoard;
@@ -32,8 +32,15 @@ public class RecipeController {
 
 // 카테고리 폼
 	@RequestMapping("categoryForm")
-	public String category() {
-		return "categoryForm";
+	public String category(Model model, HttpServletRequest request) {
+		
+		// 임시 세션값 설정
+		HttpSession session = request.getSession();
+		String id = "aaaa";
+		session.setAttribute("id", id);
+		
+	    return "categoryForm";
+	    
 	}
 	
 	
@@ -59,8 +66,8 @@ public class RecipeController {
 		int startRow = (currentPage - 1) * rowPerPage + 1;
 		int endRow = startRow + rowPerPage - 1;
 		PagingPgm pp = new PagingPgm(total, rowPerPage, currentPage);
-		System.out.println("startRow"+startRow);
-		System.out.println("endRow"+endRow);
+		System.out.println("startRow:"+startRow);
+		System.out.println("endRow:"+endRow);
 		
 		board.setStartRow(startRow);
 		board.setEndRow(endRow);
@@ -71,6 +78,7 @@ public class RecipeController {
 		System.out.println("list:"+list);
 		
 		System.out.println(startRow + "+" + endRow);
+		System.out.println(pp.getStartPage());
 		
 		model.addAttribute("list", list);
 		model.addAttribute("number", number);
@@ -187,12 +195,6 @@ public class RecipeController {
 	@RequestMapping("r_view")
 	public String rview(String pageNum, int rnum, Model model) {
 		
-//		String id = "aaaa";
-//		session.setAttribute("id", id);  
-//		String sId = session.getId();
-//		System.out.println(sId);
-
-		
 		service.r_readcountUpdate(rnum);
 		
 		RecipeBoard board = service.r_select(rnum);
@@ -249,15 +251,12 @@ public class RecipeController {
 	}
 	
 // 삭제
-	@RequestMapping("/r_delete/rnum/{rnum}")
-	public String r_delete(@RequestBody int rnum, String pageNum, Model model) {
+	@RequestMapping("/r_delete/pageNum/{pageNum}rnum/{rnum}")
+	public int r_delete(@PathVariable String pageNum,@PathVariable int rnum) {
 		
 		int result = service.r_delete(rnum);
 		
-		model.addAttribute("pageNum", pageNum);
-		model.addAttribute("result", result);
-		
-		return "result/r_deleteResult";
+		return result;
 	}
 
 }
