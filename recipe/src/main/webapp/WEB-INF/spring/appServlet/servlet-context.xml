@@ -19,6 +19,7 @@
 	<resources mapping="/upload/**" location="/upload/" />
 	<resources mapping="/r_images/**" location="/r_images/" />
 	<resources mapping="/t_images/**" location="/t_images/" />
+	<resources mapping="/reply_images/**" location="/reply_images/" />
 	
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->

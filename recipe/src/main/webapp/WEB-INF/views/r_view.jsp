@@ -6,19 +6,54 @@
 <html>
 <head>
 <!-- Latest compiled and minified CSS -->
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
-	rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Latest compiled JavaScript -->
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script>
+$(document).ready(function() {
+    $('#listRe').load('r_listRe?pageNum=1&rnum=${board.rnum}');
+    
+    $('#repl_insert').click(function() {
+		if (!frm.re_content.value) {
+			alert('리뷰를 먼저 작성해주세요');
+			frm.re_content.focus();
+			return false;
+		}
+		var frmData = $("form[name=frm]").serialize();
+		
+		$.post("r_insertRe", frmData, function(data) {
+			alert(data);
+			$('#listRe').html(data);
+			frm.re_content.value = '';
+		});
+	});
+});
+
+$(function() {
+	$('#listRe').load('r_listRe?pageNum=1&rnum=${board.rnum}');
+	
+	$('##repl_insert').click(function() {
+		if (!frm.re_content.value) {
+			alert('리뷰를 먼저 작성해주세요');
+			frm.re_content.focus();
+			return false;
+		}
+		var frmData = $("form[name=frm]").serialize();
+		
+		$.post("r_insertRe", frmData, function(data) {
+			alert(data);
+			$('#listRe').html(data);
+			frm.re_content.value = '';
+		});
+	});
+});
+
 function delete_check(){
 	var text="삭제하시겠습니까?";
 	if(confirm(text)){
@@ -79,9 +114,9 @@ function delete_check(){
 		<c:if test="${!empty id}">
 			<div>
 				<form name="frm" method="post" enctype="multipart/form-data" action="r_insertRe">
-					<input type="hidden" name=rnum value="${board.rnum }"> <input
-						type="hidden" name=id value="${id }"> <input type="file"
-						name="re_rfile1" multiple> 댓글 :
+					<input type="hidden" name=rnum value="${board.rnum }"> 
+					<input type="hidden" name=id value="${id }"> 
+					<input type="file" name="re_rfile1" multiple> 댓글 :
 					<textarea rows=3 cols=30 name="re_content"></textarea>
 					<input type="submit" id="repl_insert">
 				</form>
