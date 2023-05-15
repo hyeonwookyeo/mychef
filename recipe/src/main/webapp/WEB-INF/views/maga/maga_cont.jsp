@@ -9,20 +9,31 @@
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript">
 	$(function() {
-		$('#slist').load('${path}/slist/num/${maga_num}')
-//		$('#list').load('${path}/list/pageNum/${pageNum}');
+		$('#slist').load('slist?maga_num=${maga.maga_num}');
 		$('#repInsert').click(function() {
-			if (!frm.replytext.value) {
-				alert('댓글 입력후에 클릭하시오');
-				frm.replytext.focus();
+			if (!frm.re_content.value) {
+				alert('댓글 입력 후에 클릭하시오');
+				frm.re_content.focus();
 				return false;
+			}			  
+			var frmData = $('#frm').serialize();
+//			var id = session.getAttribute("id");
+//			var maga_num = $("#maga_num").val();
+//			var re_content = $("#re_content").val();
+			var ffData = {
+					"maga_num" : $("#maga_num").val(),
+					"id" : $("#id").val(),
+					"re_content" : $("#re_content").val()
 			}
-			var frmData = $('form').serialize();
-			// var frmData = 'replyer='+frm.replyer.value+'&bno='+
-			//				  frm.bno.value+'&replytext='+frm.replytext.value;				  
-			$.post('${path}/sInsert', frmData, function(data) {
-				$('#slist').html(data);
-				frm.replytext.value = '';
+			
+			$.ajax({
+				type : 'post',
+				url : 'sInsert',
+				data : frmData,
+				success : function(data){
+					$('#slist').html(data);
+					$("#re_content").val("");
+				}
 			});
 		});
 	});
@@ -41,8 +52,6 @@
 	function recom(maga_num,page){
 		location.href="maga_recom?maga_num="+maga_num+"&page="+page;
 	}
-	
-	
 </script>
 <body>
 	<table border=1 align=center>
@@ -63,7 +72,6 @@
 			<td><pre>${maga.content}</pre></td>
 		</tr>
 	</table>
-	
 	${id }
 	
 	<input type="button" value="추천" class="recom_button"
@@ -77,18 +85,16 @@
 	<input type="button" value="삭제" class="input_button"
 		onclick="maga_del_config(${maga.maga_num},${page})"/>
 	<input type="button" value="목록" class="input_button"
-		onclick="location='maga_list?page=${page}'" />
+		onclick="location='maga_list?page=${page}'" /><br>
 		
 		
-	<form name="frm" id="frm">
-		<input type="hidden" name="replyer" value="${board.writer}">
-		<input type="hidden" name="bno" value="${board.num}"> 댓글 :
-		<textarea rows="3" cols="50" name="replytext"></textarea>
+	<form name="frm" id="frm" align="center">
+		<input type="hidden" name="id" id="id" value="${sessionScope.id}">
+		<input type="hidden" name="maga_num" id="maga_num" value="${maga.maga_num}"> 댓글 :
+		<textarea rows="3" cols="50" name="re_content" id="re_content"></textarea>
 		<input type="button" value="확인" id="repInsert">
 	</form>
-		<div id="slist"></div>
-
-
+	<div id="slist"></div>
 
 </body>
 </html>

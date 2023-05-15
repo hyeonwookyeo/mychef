@@ -50,7 +50,7 @@ public class MagaController {
 		List<MagaBean> magalist = new ArrayList<MagaBean>();
 		
 		String master = "master";
-		String customer = "customer";
+		String customer = "aaaa";
 
 		int page = 1;
 		int limit = 10; // 화면 출력 수
@@ -79,7 +79,7 @@ public class MagaController {
 		model.addAttribute("listcount", listcount);
 		model.addAttribute("magalist", magalist);
 		
-		session.setAttribute("id", master);
+		session.setAttribute("id", customer);
 		
 
 		return "maga_list";
