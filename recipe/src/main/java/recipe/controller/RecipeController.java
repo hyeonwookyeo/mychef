@@ -290,8 +290,25 @@ public class RecipeController {
 		
 		RecipeBoard board = service.r_select(rnum);
 		
+		String ingre[] = (board.getIngre()).split("-");
+		String capacity[] = (board.getCapacity()).split("-");
+		String rfile[] = (board.getRfile()).split("]");
+		String content[] = (board.getContent()).split("-");
+		
+		Map<String, String> map1= new HashMap<>();
+		Map<String, String> map2= new HashMap<>();
+		
+		for(int i=0; i<ingre.length; i++) {
+			map1.put(ingre[i], capacity[i]);
+		}
+		for(int i=0; i<rfile.length; i++) {
+			map2.put(rfile[i], content[i]);
+		}
+		
 		model.addAttribute("pageNum", pageNum);
 		model.addAttribute("board", board);
+		model.addAttribute("map1", map1);
+		model.addAttribute("map2", map2);
 		
 		return "r_updateForm";
 	}
@@ -303,22 +320,10 @@ public class RecipeController {
 		service.r_update(board);
 		
 		model.addAttribute("pageNum", pageNum);
-		model.addAttribute("board", board);
 		
 		return "result/r_updateResult";
 	}
 	
-// 레시피 삭제폼 
-	@RequestMapping("r_deleteForm")
-	public String rselect(String pageNum, int rnum, Model model) {
-		
-		RecipeBoard board = service.r_select(rnum);
-		
-		model.addAttribute("pageNum", pageNum);
-		model.addAttribute("board", board);
-		
-		return "r_delete";
-	}
 // 삭제
 	@RequestMapping("r_delete")
 	public String r_delete(String pageNum, RecipeBoard board, Model model) {

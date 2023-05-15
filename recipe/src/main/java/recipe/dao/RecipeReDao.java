@@ -9,7 +9,7 @@ public interface RecipeReDao {
 
 	int getTotalRe(int rnum);
 	
-	List<RecipeReBoard> listRe(int rnum);
+	List<RecipeReBoard> listRe(RecipeReBoard reboard);
 	
 	int r_insertRe(RecipeReBoard reboard);
 	

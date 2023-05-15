@@ -10,7 +10,7 @@ public interface RecipeReService {
 	
 	int getTotalRe(int rnum);
 	
-	List<RecipeReBoard> listRe(int rnum);
+	List<RecipeReBoard> listRe(RecipeReBoard reboard);
 	
 	int r_insertRe(RecipeReBoard reboard);
 	

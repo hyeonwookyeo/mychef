@@ -5,28 +5,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8"> 
 <title>Insert title here</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
 <script type="text/javascript">
-
-function row_idx_increase(){
-	var number = parseInt($(".row_idx").text()) + 1;
-	if(!row_idx){row_idx=1;}
-}
-
-$(document).ready(function(){
-	$(".row_idx").load(row_idx_increase());
-});
-
 $(document).on('click', "[name='dtl_del']", function(){
 	var tr = $(this).parent().parent().parent();
 	tr.remove();
 });
-function btn_add(){
+
+function row_idx_increase(){
 	var row_idx = parseInt($(".row_idx:last").text()) + 1;
 	if(!row_idx){row_idx=1;}
+}
+
+$(document).ready(function(){
+	$(".row_idx").load().row_idx_increase();
+});
+
+function btn_add(){
+	function row_idx_increase()
 	var str = "";
 
 	str += "<tr>";
@@ -63,7 +62,7 @@ $(function(){
 	$('#sub').click(function() {
 	    $('form').serialize();
 	    $('form').attr('method', 'POST');
-	    $('form').attr('action', 'r_insert');
+	    $('form').attr('action', 'r_update');
 //	    $('form').attr('enctype', 'multipart/form-data');
 	    $('form').submit();
 	});
@@ -148,7 +147,6 @@ $(function(){
 				<td><textarea rows="5" cols="30" name='content1'>${item2.value }</textarea></td>
 			</tr>
 			</c:forEach>
-			<tbody id="tbody_id2"></tbody>
 			</table>
 			
 			<table>

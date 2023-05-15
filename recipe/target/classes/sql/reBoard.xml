@@ -4,5 +4,23 @@
 
 <mapper namespace="reboardns">
 
+	<select id="getTotal" parameterType="int" resultType="int">
+		select count(*) from recipe_re where rnum=#{rnum}
+	</select>
+	
+	<select id="list" parameterType="reboard" resultType="reboard">
+		select * from (select rownum rn, a.* from (
+		  select * from recipe_re where rnum=#{rnum} order by rnum desc	) a	)
+		where rn between #{startRow} and #{endRow}
+	</select>
+	
+	<insert id="insert" parameterType="reboard">
+		insert into recipe_re values(recipe_re_seq.nextval,#{rnum},
+		#{id},#{re_content},sysdate,'y',#{re_rfiile})
+	</insert>
+	
+	
+	
+	
 	
 </mapper>

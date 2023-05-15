@@ -22,9 +22,9 @@ public class RecipeReServiceImpl implements RecipeReService{
 	}
 
 	@Override
-	public List<RecipeReBoard> listRe(int rnum) {
+	public List<RecipeReBoard> listRe(RecipeReBoard reboard) {
 		// TODO Auto-generated method stub
-		return redao.listRe(rnum);
+		return redao.listRe(reboard);
 	}
 
 	@Override

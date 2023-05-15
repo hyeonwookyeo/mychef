@@ -21,7 +21,7 @@
 <script>
 
 $(document).ready(function() {
-    $('#listRe').load('r_listRe?pageNum='1'&rnum=${board.rnum}');
+    $('#listRe').load('r_listRe?pageNum=1&rnum=${board.rnum}');
 });
 
 function check(){
@@ -50,7 +50,7 @@ function check(){
 	<div class="container" align="center">
 		<h1>${board.subject }</h1>
 		<div>
-			<image src="./t_images/${board.thumbnail}"></image>${board.thumbnail }
+			<img src="./t_images/${board.thumbnail}" width=500/>
 		</div>
 		<div>카테고리 ${board.category }</div>
 		<div>${board.id }닉사진 조회수 ${board.readcount }</div>
@@ -59,12 +59,12 @@ function check(){
 		<table>
 			<c:forEach var="item1" items="${map1 }">
 				<tr>
-					<td>${item1.key }- ${item1.value }</td>
+					<td>${item1.key } ${item1.value }</td>
 				</tr>
 			</c:forEach>
 			<c:forEach var="item2" items="${map2 }">
 				<tr>
-					<td><image src="./r_images/${item2.key }"></image>- ${item2.value }</td>
+					<td><img src="./r_images/${item2.key }" width=300 /> ${item2.value }</td>
 				</tr>
 			</c:forEach>
 

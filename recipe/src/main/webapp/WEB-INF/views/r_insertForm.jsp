@@ -129,7 +129,7 @@ $(function(){
 			
 			<table>
 			<tr>
-					<button class="btn btn-default btn-sm" type="button"  onclick='btn_add2();'>
+					<button type="button" class="btn btn-default btn-sm"   onclick='btn_add2();'>
 						<strong>추가</strong>
 					</button>
 			</tr>

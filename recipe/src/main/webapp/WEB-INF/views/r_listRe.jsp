@@ -21,9 +21,12 @@
 	<div class="container" align="center">
 		<h2 class="text-primary">게시판 목록</h2>
 		<div class="row">
+			<div>
+				${total }개의 리뷰가 있습니다
+			</div>
 			<c:if test="${empty rlist}">
 				<div>
-					<b>데이터가 없습니다</b>
+					<b>리뷰를 새로 달아주세요</b>
 				</div>
 			</c:if>
 			<c:if test="${not empty rlist}">
