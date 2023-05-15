@@ -16,7 +16,7 @@
 	<input type="text" name="name"> <br>
 	<input type="text" name="age"> <br>
 	<input type="submit" value="테스트"> <br>
-</form>
+</form> <br>
 
 <br><br>
 레시피 탭 테스트<br><br>
