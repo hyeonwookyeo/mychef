@@ -144,6 +144,7 @@ public class RecipeController {
 		
 		mf1.transferTo(new File(thumbpath + "/" + thumbNewFileName));
 		
+		System.out.println("thumbNewFileName:" + thumbNewFileName);
 		board.setThumbnail(thumbNewFileName);
 		
 		
@@ -179,6 +180,8 @@ public class RecipeController {
 		String multipath = request.getRealPath("r_images");
 		String finalFileName = "";
 		
+		System.out.println("path:"+multipath);
+		
 		for (MultipartFile mf : fileList) {
             String multiFileName = mf.getOriginalFilename(); // 원본 파일 명
             long multiFileSize = mf.getSize(); // 파일 사이즈
@@ -189,9 +192,10 @@ public class RecipeController {
             String multiNewFileName = uuid.toString() + extension;
             
             System.out.println("multiFileName : " + multiFileName);
+            System.out.println("multiNewFileName : " + multiNewFileName);
             System.out.println("multiFileSize : " + multiFileSize);
             
-            finalFileName += mf+"-";
+            finalFileName += multiNewFileName+"]";
             
             try {
                 mf.transferTo(new File(multipath + "/" + multiNewFileName));
@@ -255,7 +259,7 @@ public class RecipeController {
 		
 		String ingre[] = (board.getIngre()).split("-");
 		String capacity[] = (board.getCapacity()).split("-");
-		String rfile[] = (board.getRfile()).split("-");
+		String rfile[] = (board.getRfile()).split("]");
 		String content[] = (board.getContent()).split("-");
 		
 		for(int i =0; i<ingre.length; i++){

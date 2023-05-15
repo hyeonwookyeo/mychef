@@ -50,7 +50,7 @@ function check(){
 	<div class="container" align="center">
 		<h1>${board.subject }</h1>
 		<div>
-			<image src=""></image>${board.thumbnail }
+			<image src="./t_images/${board.thumbnail}"></image>${board.thumbnail }
 		</div>
 		<div>카테고리 ${board.category }</div>
 		<div>${board.id }닉사진 조회수 ${board.readcount }</div>
@@ -64,7 +64,7 @@ function check(){
 			</c:forEach>
 			<c:forEach var="item2" items="${map2 }">
 				<tr>
-					<td>${item2.key }- ${item2.value }</td>
+					<td><image src="./r_images/${item2.key }"></image>- ${item2.value }</td>
 				</tr>
 			</c:forEach>
 
