@@ -19,31 +19,24 @@
 
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script>
-
-$(document).ready(function() {
-    $('#listRe').load('r_listRe?pageNum=1&rnum=${board.rnum}');
-});
-
-function check(){
-	var text = "정말로 삭제하시겠습니까?";
+function delete_check(){
+	var text="삭제하시겠습니까?";
 	if(confirm(text)){
 		$.ajax({
-		    type: 'POST',
-		    url: '${path }/r_delete/pageNum/${pageNum}/rnum/${board.rnum}',
-		    success: function(response) {
-		    	if(response == 1){
+		    type : "post",
+		    url : "r_delete",
+		    data : {"rnum":${board.rnum}},
+		    success : function(data){
+		    	if(data == 1){
 					  alert("글이 삭제되었습니다");
 					  location.href="r_listForm?pageNum=${pageNum}"
 				  }else{
-					  alert("비밀번호가 틀립니다")
+					  alert("비밀번호가 틀립니다");
 				  } 
-		    }, 
+		    }
 		});
 	}
 }
-
-
-
 </script>
 </head>
 <body>
@@ -78,7 +71,7 @@ function check(){
 		<c:if test="${!empty id and id == board.id}">
 			<div align="center">
 				<a href="r_updateForm?pageNum=${pageNum }&rnum=${board.rnum }">수정</a>
-				<button type="button" onClick="check()">삭제</button>
+				<button type="button" onClick="delete_check()">삭제</button>
 			</div>
 		</c:if>
 

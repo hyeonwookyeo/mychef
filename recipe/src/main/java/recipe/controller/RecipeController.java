@@ -2,12 +2,14 @@ package recipe.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -324,16 +326,22 @@ public class RecipeController {
 		return "result/r_updateResult";
 	}
 	
+	
 // 삭제
 	@RequestMapping("r_delete")
-	public String r_delete(String pageNum, RecipeBoard board, Model model) {
-		
-		int result = service.r_delete(board.getRnum());
-		
-		model.addAttribute("pageNum", pageNum);
+	public String r_delete(int rnum, Model model,
+								HttpServletResponse response) throws IOException {
+			
+		System.out.println("r_delete 진입");
+			
+		int result = service.r_delete(rnum);
+			
 		model.addAttribute("result", result);
-		
-		return "result/r_deleteResult";
+			
+		PrintWriter out = response.getWriter();
+		out.print(result);
+			
+		return null;
 	}
 
 }
