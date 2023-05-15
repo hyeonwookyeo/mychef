@@ -23,8 +23,8 @@
 		$.ajax({
 		    type : "post",
 		    url : "r_updateRe",
-		    data : {"reboard":${"#frm}"},
-		    success : function(data){
+		    data : {"reboard":${"#frm}"},   
+		    success : function(data){   
 		    	alert(data);
 		    }
 		});
