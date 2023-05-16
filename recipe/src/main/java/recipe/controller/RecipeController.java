@@ -52,7 +52,7 @@ public class RecipeController {
 		
 		System.out.println("r_list");
 		
-		final int rowPerPage = 10;
+		final int rowPerPage = 12;
 		if (pageNum == null || pageNum.equals("")) {
 			pageNum = "1";
 		}
@@ -81,6 +81,7 @@ public class RecipeController {
 		
 		System.out.println(startRow + "+" + endRow);
 		
+		model.addAttribute("pageNum", pageNum);
 		model.addAttribute("list", list);
 		model.addAttribute("number", number);
 		model.addAttribute("pp", pp);
@@ -108,8 +109,7 @@ public class RecipeController {
 	@RequestMapping(value="r_insert",  method = RequestMethod.POST)
 	public String insert(@RequestParam("thumbnail1") MultipartFile mf1,
 //						@RequestParam("r_file1") MultipartFile mf2,
-						MultipartHttpServletRequest mhr,
-						RecipeBoard board, String pageNum,
+						MultipartHttpServletRequest mhr, RecipeBoard board,
 						HttpServletRequest request, Model model) throws Exception {
 		
 		System.out.println("진입");
@@ -245,7 +245,6 @@ public class RecipeController {
 		
 		int result = service.r_insert(board);
 		
-		model.addAttribute("pageNum", pageNum);
 		model.addAttribute("result", result);
 		
 		return "result/r_insertResult";
@@ -253,7 +252,11 @@ public class RecipeController {
 	
 // 레시피 상세페이지 
 	@RequestMapping("r_view")
-	public String rview(String pageNum, int rnum, Model model) {
+	public String rview(int rnum,String rpageNum,String pageNum, Model model) {
+		
+		if (rpageNum == null || rpageNum.equals("")) {
+			rpageNum = "1";
+		}
 		
 		service.r_readcountUpdate(rnum);
 		
@@ -279,6 +282,7 @@ public class RecipeController {
 		}
 		
 		model.addAttribute("pageNum", pageNum);
+		model.addAttribute("rpageNum", rpageNum);
 		model.addAttribute("board", board);
 		model.addAttribute("map1", map1);
 		model.addAttribute("map2", map2);
@@ -317,11 +321,9 @@ public class RecipeController {
 	
 //	수정
 	@RequestMapping("r_update")
-	public String r_update(String pageNum, RecipeBoard board, Model model) {
+	public String r_update(RecipeBoard board, Model model) {
 		
 		service.r_update(board);
-		
-		model.addAttribute("pageNum", pageNum);
 		
 		return "result/r_updateResult";
 	}

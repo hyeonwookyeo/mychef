@@ -31,15 +31,15 @@ public class RecipeReController {
 
 // 댓글목록	
 	@RequestMapping("r_listRe")
-	public String r_listRe(String pageNum, int rnum, Model model) {
+	public String r_listRe(String rpageNum, int rnum, Model model) {
 		
 		System.out.println("r_listRe 도착");
 		
 		final int rowPerPage = 5;
-		if (pageNum == null || pageNum.equals("")) {
-			pageNum = "1";
+		if (rpageNum == null || rpageNum.equals("")) {
+			rpageNum = "1";
 		}
-		int currentPage = Integer.parseInt(pageNum);
+		int currentPage = Integer.parseInt(rpageNum);
 
 		int total = reService.getTotalRe(rnum);
 		
@@ -52,6 +52,7 @@ public class RecipeReController {
 		PagingPgm pp = new PagingPgm(total, rowPerPage, currentPage);
 		System.out.println("startRow"+startRow);
 		System.out.println("endRow"+endRow);
+		System.out.println("pp는 "+pp);
 		
 		RecipeReBoard reboard = new RecipeReBoard();
 		reboard.setStartRow(startRow);
@@ -63,6 +64,7 @@ public class RecipeReController {
 		
 		model.addAttribute("total", total);
 		model.addAttribute("rlist", rlist);
+		model.addAttribute("rnum", rnum);
 		model.addAttribute("pp", pp);
 
 		return "rlist";
@@ -70,9 +72,11 @@ public class RecipeReController {
 
 // 댓글 등록	
 	@RequestMapping("r_insertRe")
-	public String r_insertRe(RecipeReBoard reboard, int rnum,
+	public String r_insertRe(RecipeReBoard reboard,String pageNum,
 								MultipartHttpServletRequest mtfRequest,Model model,
 								HttpServletRequest request, HttpServletResponse response) throws IOException  {
+		
+		System.out.println("r_insertRe에 도착했습니다");
 		
 		List<MultipartFile> fileList = mtfRequest.getFiles("re_rfile1");
 		if(fileList.isEmpty()) {
@@ -121,8 +125,9 @@ public class RecipeReController {
 //		
 //		PrintWriter out = response.getWriter();
 //		out.print(result);
+		int rnum = reboard.getRnum();
 
-		return "redirect:r_listRe?rnum="+rnum+"&pageNum="+1;
+		return "redirect:r_listRe?rnum="+rnum+"&pageNum="+pageNum;
 	}
 
 // 댓글수정	

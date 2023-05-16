@@ -31,8 +31,8 @@
 					<c:if test="${board.state != 'n' }">
 						<div class="col-sm-3">
 							<div>
-								<div class="card" style="width: 400px">
-									<a href="r_view?rnum=${board.rnum }&pageNum=${pp.currentPage}">
+								<div class="card" style="width: 400px height: 300px">
+									<a href="r_view?rnum=${board.rnum }&pageNum=${pageNum}">
 										<img class="card-img-top" src="./t_images/${board.thumbnail }">
 									</a>
 									<div class="card-body">
@@ -82,14 +82,14 @@
 			</c:if>
 			<c:if test="${empty keyword}">
 				<c:if test="${pp.startPage > pp.pagePerBlk }">
-					<li><a href="${path }/list/pageNum/${pp.startPage - 1}">이전</a></li>
+					<li><a href="r_listFor?pageNum=${pp.startPage - 1}">이전</a></li>
 				</c:if>
 				<c:forEach var="i" begin="${pp.startPage}" end="${pp.endPage}">
 					<li <c:if test="${pp.currentPage==i}">class="active"</c:if>><a
-						href="${path }/list/pageNum/${i}">${i}</a></li>
+						href="r_listFor?pageNum=${i}">${i}</a></li>
 				</c:forEach>
 				<c:if test="${pp.endPage < pp.totalPage}">
-					<li><a href="${path }/list/pageNum/${pp.endPage + 1}">다음</a></li>
+					<li><a href="r_listFor?pageNum=${pp.endPage + 1}">다음</a></li>
 				</c:if>
 			</c:if>
 		</ul>

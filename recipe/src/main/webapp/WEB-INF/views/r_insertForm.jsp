@@ -6,59 +6,97 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
 <script type="text/javascript">
-$(document).on('click', "[name='dtl_del']", function(){
-	var tr = $(this).parent().parent().parent();
-	tr.remove();
-});
-function btn_add(){
-	var row_idx = parseInt($(".row_idx:last").text()) + 1;
-	if(!row_idx){row_idx=1;}
-	var str = "";
-
-	str += "<tr>";
-	str += "	<td style='text-align:center;' class=\"row_idx\">"+row_idx+"</td>";
-	str += "	<td style='text-align:center;'><input type=\"text\" name='ingre'></td>";
-	str += "	<td style='text-align:center;'><input type=\"text\" name='capacity'></td>";
-	str += "	<td style='text-align:center;'>";
-	str += "		<div class=\"btn-group\">";
-	str += "			<button type='button' class='btn btn-primary btn-sm' name='dtl_del'>삭제</button>";
-	str += "		</div>";
-	str += "	</td>";
-	str += "</tr>";
-	
-	$("#tbody_id:last").append(str);
-}
-
-function btn_add2(){
-	var str = "";
-
-	str += "<tr>";
-	str += "	<td>조리사진</td>";
-	str += "	<td><input multiple=\"multiple\" type=\"file\" name='r_file1'></td>";
-	str += "</tr>";
- 	str += "<tr>";
-	str += "	<td>내용</td>";
-	str += "	<td><textarea rows=\"5\" cols=\"30\" name='content1'></textarea></td>";
-	str += "</tr>"; 
-
-	
-	$("#tbody_id2:last").append(str);
-}
-
-$(function(){
-	$('#sub').click(function() {
-	    $('form').serialize();
-	    $('form').attr('method', 'POST');
-	    $('form').attr('action', 'r_insert');
-//	    $('form').attr('enctype', 'multipart/form-data');
-	    $('form').submit();
+	$(document).on('click', "[name='dtl_del']", function() {
+		var tr = $(this).parent().parent().parent();
+		tr.remove();
 	});
-});
+	function btn_add() {
+		var row_idx = parseInt($(".row_idx:last").text()) + 1;
+		if (!row_idx) {
+			row_idx = 1;
+		}
+		var str = "";
 
+		str += "<tr>";
+		str += "	<td style='text-align:center;' class=\"row_idx\">" + row_idx
+				+ "</td>";
+		str += "	<td style='text-align:center;'><input type=\"text\" name='ingre'></td>";
+		str += "	<td style='text-align:center;'><input type=\"text\" name='capacity'></td>";
+		str += "	<td style='text-align:center;'>";
+		str += "		<div class=\"btn-group\">";
+		str += "			<button type='button' class='btn btn-primary btn-sm' name='dtl_del'>삭제</button>";
+		str += "		</div>";
+		str += "	</td>";
+		str += "</tr>";
+
+		$("#tbody_id:last").append(str);
+	}
+
+	function btn_add2() {
+		var str = "";
+
+		str += "<tr>";
+		str += "	<td>조리사진</td>";
+		str += "	<td><input multiple=\"multiple\" type=\"file\" name='r_file1'></td>";
+		str += "</tr>";
+		str += "<tr>";
+		str += "	<td>내용</td>";
+		str += "	<td><textarea rows=\"5\" cols=\"30\" name='content1'></textarea></td>";
+		str += "</tr>";
+
+		$("#tbody_id2:last").append(str);
+	}
+
+	$(function() {
+		$('#sub').click(function() {
+			$('form').serialize();
+			$('form').attr('method', 'POST');
+			$('form').attr('action', 'r_insert');
+			//	    $('form').attr('enctype', 'multipart/form-data');
+			$('form').submit();
+		});
+	});
 </script>
+
+
+<script type="text/javascript">
+	$(function() {
+
+		$('#preview').click(function(e) {
+
+			e.preventDefault();
+
+			$('#file').click();
+
+		});
+
+	});
+	function readURL(input) {
+		  if (input.files && input.files[0]) {
+		    var reader = new FileReader();
+		    reader.onload = function(e) {
+		      document.getElementById('preview').src = e.target.result;
+		    };
+		    reader.readAsDataURL(input.files[0]);
+		  } else {
+		    document.getElementById('preview').src = "";
+		  }
+		}
+</script>
+
+
+
+
+<style type="text/css">
+#file {
+	display: none;
+}
+</style>
 </head>
 <body>
 	<div class="container" align="center">
@@ -73,14 +111,12 @@ $(function(){
 				</tr>
 				<tr>
 					<td>분류</td>
-					<td>
-					<select id="category" name="category">
-						<option value="korean">한식</option>
-						<option value="chinese">중식</option>
-						<option value="japanese">일식</option>
-						<option value="western">양식</option>
-					</select>
-					</td>
+					<td><select id="category" name="category">
+							<option value="korean">한식</option>
+							<option value="chinese">중식</option>
+							<option value="japanese">일식</option>
+							<option value="western">양식</option>
+					</select></td>
 				</tr>
 				<tr>
 					<td>대표사진</td>
@@ -90,54 +126,76 @@ $(function(){
 					<td>간략한 설명</td>
 					<td><input type="text" name="description"></td>
 				</tr>
-				</table> <br><br>
-				
-			<table border=1>
-			<thead>
-			<tr>
-				<th style="width:20%; text-align:center;vertical-align:middle;">No</th>
-				<th style="width:20%; text-align:center;vertical-align:middle;">재료</th>
-				<th style="width:20%; text-align:center;vertical-align:middle;">용량</th>
-				<th style="width:20%; text-align:center;vertical-align:middle;">추가/삭제</th>
-			</tr>
-			</thead>
-			<tbody id="tbody_id">
-			</tbody>
-			<tr>
-				<td colspan=3>
-				</td>
-				<td style="width:20%; text-align:center;vertical-align:middle;">
-				<button class="btn btn-default btn-sm" type="button"  onclick='btn_add();'>
-						<strong>재료 추가</strong>
-				</button>
-				</td>
-			</tr>
-			</table> <br><br>
-				
-			<table border=1>
-			<tr>
-				<td>조리사진</td>
-				<td><input multiple="multiple" type="file" name="r_file1"></td>
-			</tr>
-			<tr>
-				<td>내용</td>
-				<td><textarea rows="5" cols="30" name="content1"></textarea></td>
-			</tr>
-			
-			<tbody id="tbody_id2"></tbody>
 			</table>
-			
+			<br>
+			<br>
+
+			<table border=1>
+				<thead>
+					<tr>
+						<th
+							style="width: 20%; text-align: center; vertical-align: middle;">No</th>
+						<th
+							style="width: 20%; text-align: center; vertical-align: middle;">재료</th>
+						<th
+							style="width: 20%; text-align: center; vertical-align: middle;">용량</th>
+						<th
+							style="width: 20%; text-align: center; vertical-align: middle;">추가/삭제</th>
+					</tr>
+				</thead>
+				<tbody id="tbody_id">
+				</tbody>
+				<tr>
+					<td colspan=3></td>
+					<td style="width: 20%; text-align: center; vertical-align: middle;">
+						<button class="btn btn-default btn-sm" type="button"
+							onclick='btn_add();'>
+							<strong>재료 추가</strong>
+						</button>
+					</td>
+				</tr>
+			</table>
+			<br>
+			<br>
+
+			<table border=1>
+				<tr>
+					<td>조리사진</td>
+					<td>
+						<!-- <button type="button" id="btn-upload">Image</button></td> -->
+				
+				<td>
+				<input type="file" id="file" name="file" onchange="readURL(this);"> 
+<img src="" id="preview" width=400 />
+				
+				
+				
+				
+				
+				
+				
+				
+				</td>
+				</tr>
+				<tr>
+					<td>내용</td>
+					<td><textarea rows="5" cols="30" name="content1"></textarea></td>
+				</tr>
+
+				<tbody id="tbody_id2"></tbody>
+			</table>
+
 			<table>
-			<tr>
-					<button type="button" class="btn btn-default btn-sm"   onclick='btn_add2();'>
+				<tr>
+					<button type="button" class="btn btn-default btn-sm"
+						onclick='btn_add2();'>
 						<strong>추가</strong>
 					</button>
-			</tr>
-			</table><br><br>
+				</tr>
+			</table>
+			<br>
+			<br> <input type="button" value="확인" id="sub">
 
-			
-			<input type="button" value="확인" id="sub">
-			
 		</form>
 	</div>
 </body>

@@ -16,11 +16,11 @@
 	
 	<insert id="insert" parameterType="reboard">
 		insert into recipe_re values(recipe_re_seq.nextval,#{rnum},
-		#{id},#{re_content},sysdate,#{re_rfile,jdbcType=VARCHAR})
+		#{id},#{re_content},sysdate,#{re_rfile, jdbcType=VARCHAR})
 	</insert>
 	
 	<update id="update" parameterType="reboard">
-		update recipe_re set re_content=#{re_content},re_rfile=#{re_rfile,jdbcType=VARCHAR}
+		update recipe_re set re_content=#{re_content},re_rfile=#{re_rfile, jdbcType=VARCHAR}
 		where rre_num=#{rre_num}
 	</update>
 	

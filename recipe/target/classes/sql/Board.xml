@@ -17,7 +17,7 @@
 
 	<select id="list" parameterType="board" resultType="board">
 		SELECT * FROM ( SELECT ROWNUM rn, a.* FROM (
-    	SELECT * FROM recipe ORDER BY rnum asc) a ) 
+    	SELECT * FROM recipe WHERE state = 'y' ORDER BY rnum asc) a ) 
     	WHERE rn BETWEEN #{startRow} AND #{endRow}
 	</select>
 
