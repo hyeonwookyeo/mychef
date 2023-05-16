@@ -30,7 +30,7 @@
  
  <c:if test="${empty pwdok}">
   <h2 class="id_title">비밀번호 찾기</h2>
-  <form method="post" action= "pwd_find_ok" onsubmit="return check()">
+  <form method="post" action= "m_pwdfindokForm" onsubmit="return check()">
    <table id="pwd_t">
     <tr>
      <th>아이디</th>
@@ -47,7 +47,7 @@
     <input type="reset" value="취소" class="input_button" onclick="$('#id').focus();"/>
    </div>
    <div id="pwd_close">
-    <input type="button" value="닫기" class="input_button" onclick="self.close();" />
+    <input type="button" value="닫기" class="input_button" onclick="location='m_loginForm'" />
    </div>
   </form>
   </c:if> 
@@ -60,7 +60,7 @@
     </tr>
    </table>
    <div id="id_close2">
-   		<input type="button" value="닫기" class="input_button" onclick="self.close();" />		
+   		<input type="button" value="닫기" class="input_button" onclick="location='m_loginForm'" />		
    </div>
   </c:if>
  

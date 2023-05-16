@@ -190,7 +190,7 @@ public class MemberController {
 	}
 	
 	// ID 찾기 완료
-	@RequestMapping(value = "/m_idfindOk", method = RequestMethod.POST)
+	@RequestMapping(value = "/m_idfindokForm", method = RequestMethod.POST)
 	public String id_find_ok(@ModelAttribute MemberBean mem, Model model) throws Exception{
 		MemberBean member = service.findid(mem);
 		if (member == null) { // 해당 id가 없는 경우 
@@ -210,7 +210,7 @@ public class MemberController {
 		
 
 	// 비번찾기 완료 
-		@RequestMapping(value = "/m_pwdfindOk", method = RequestMethod.POST)
+		@RequestMapping(value = "/m_pwdfindokForm", method = RequestMethod.POST)
 		public String pwd_find_ok(@ModelAttribute MemberBean mem, Model model)
 				throws Exception {
 

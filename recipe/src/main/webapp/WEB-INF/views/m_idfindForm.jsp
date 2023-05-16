@@ -46,7 +46,7 @@
     <input type="reset" value="취소" class="input_button" onclick="$('#name').focus();"/>
    </div>
    <div id="id_close">
-    <input type="button" value="닫기" class="input_button" onclick="self.close();" />
+    <input type="button" value="닫기" class="input_button" onclick="location='m_loginForm'" />
    </div>
   </form>
   </c:if> 
@@ -59,7 +59,7 @@
     </tr>
    </table>
    <div id="id_close2">
-   		<input type="button" value="닫기" class="input_button" onclick="self.close();" />		
+   		<input type="button" value="닫기" class="input_button" onclick="location='m_loginForm'" />		
    </div>
   </c:if>
  
