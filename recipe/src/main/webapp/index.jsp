@@ -10,7 +10,7 @@
 <body>
 
 <script>
-	location.href="member_login";
+	location.href="m_loginForm";
 </script>
 
 </body>

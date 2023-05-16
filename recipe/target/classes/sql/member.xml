@@ -17,8 +17,8 @@
 	
 	<!-- 회원저장 -->
     <insert id="member_join" parameterType="member">
-     insert into member ( pwd, name, birth, profile, nickname, 
-     zip, addr1,addr2, mailid, domian, phone1, phone2, phone3  joindate, state) 
+     insert into member ( id, pwd, name, birth, profile, nickname, 
+     zip, addr1,addr2, mailid, domain, phone1, phone2, phone3, joindate, state) 
      values(#{id},#{pwd},#{name},#{birth},#{profile,jdbcType=VARCHAR},
      #{nickname},#{zip},#{addr1},#{addr2},#{mailid},#{domain},#{phone1},#{phone2},#{phone3},sysdate,1)
     </insert>

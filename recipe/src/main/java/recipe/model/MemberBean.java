@@ -34,9 +34,6 @@ public class MemberBean {
 	public String getPwd2() {
 		return pwd2;
 	}
-	public String getChangepwd() {
-		return changepwd;
-	}
 	public String getName() {
 		return name;
 	}
@@ -91,9 +88,6 @@ public class MemberBean {
 	public void setPwd2(String pwd2) {
 		this.pwd2 = pwd2;
 	}
-	public void setChangepwd(String changepwd) {
-		this.changepwd = changepwd;
-	}
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -103,19 +97,19 @@ public class MemberBean {
 	public void setProfile(String profile) {
 		this.profile = profile;
 	}
-	public void setMailid(String email) {
+	public void setMailid(String mailid) {
 		this.mailid = mailid;
 	}
-	public void setDomain(String email) {
+	public void setDomain(String domain) {
 		this.domain = domain;
 	}
-	public void setPhone1(String phone) {
+	public void setPhone1(String phone1) {
 		this.phone1 = phone1;
 	}
-	public void setPhone2(String phone) {
+	public void setPhone2(String phone2) {
 		this.phone2 = phone2;
 	}
-	public void setPhone3(String phone) {
+	public void setPhone3(String phone3) {
 		this.phone3 = phone3;
 	}
 	public void setZip(String zip) {
