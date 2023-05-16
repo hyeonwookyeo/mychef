@@ -17,17 +17,24 @@
 	
 	<!-- 회원저장 -->
     <insert id="member_join" parameterType="member">
-     insert into member ( id, pwd, name, birth, profile, nickname, 
-     zip, addr1, addr2, tel1, tel2, tel3, email, domain, joindate,
-     state) 
+     insert into member ( pwd, name, birth, profile, nickname, 
+     zip, addr1,addr2, mailid, domian, phone1, phone2, phone3  joindate, state) 
      values(#{id},#{pwd},#{name},#{birth},#{profile,jdbcType=VARCHAR},
-     #{nickname},#{zip},#{addr1},#{addr2},#{tel},#{tel2},#{tel3},
-     #{email},#{domain},sysdate,1)
+     #{nickname},#{zip},#{addr1},#{addr2},#{mailid},#{domain},#{phone1},#{phone2},#{phone3},sysdate,1)
     </insert>
     
+    <update id="change_pwd" parameterType="member">
+     update member set  pwd=#{pwd} where id=#{id}
+    </update>
+    
     <!-- 로그인 인증 -->
-    <select id="login_check" parameterType="String" resultType="test">
+    <select id="login_check" parameterType="String" resultType="member">
      select * from member where id=#{id} and state=1
+    </select>
+    
+    <!-- 중복 닉네임 확인 -->
+    <select id="nickname_check" parameterType="String" resultType="member">
+     select * from member where nickname=#{nickname} and state=1
     </select>
 	
 </mapper>

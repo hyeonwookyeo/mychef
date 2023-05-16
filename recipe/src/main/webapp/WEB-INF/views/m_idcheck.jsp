@@ -4,8 +4,8 @@
 <%
  request.setCharacterEncoding("utf-8");
  
-String id = request.getParameter("id");
-String pwd = request.getParameter("pwd");
+String id = request.getParameter("memid");
+String pwd = request.getParameter("mempwd");
 System.out.println("id="+id);
 System.out.println("password="+pwd);
 

@@ -29,7 +29,7 @@
  
  <c:if test="${empty member}">
   <h2 class="id_title">아이디 찾기</h2>
-  <form method="post" action= "id_find_ok" onsubmit="return check()">
+  <form method="post" action= "m_idfindokForm" onsubmit="return check()">
    <table id="id_t">
     <tr>
      <th>성함</th>

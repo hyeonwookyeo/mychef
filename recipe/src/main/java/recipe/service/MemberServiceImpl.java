@@ -15,6 +15,10 @@ public class MemberServiceImpl {
 		return memberDao.checkMemberId(id);
 	}
 	
+	public int NicknameCheck(String nickname) throws Exception {
+		return memberDao.checkMemberNickname(nickname);
+	}
+	
 	public MemberBean findid(MemberBean im) throws Exception{
 		return memberDao.findid(im);
 	}
@@ -23,12 +27,17 @@ public class MemberServiceImpl {
 		return memberDao.findpwd(pm);
 	}
 
-	public void insertMember(MemberBean member) throws Exception{
-		memberDao.insertMember(member);
+	public int insertMember(MemberBean member) throws Exception{
+		return memberDao.insertMember(member);
+	}
+	public int updateNewpwd(MemberBean member) throws Exception{
+		return memberDao.updateNewpwd(member);
 	}
 	
 	public MemberBean userCheck(String id) throws Exception{
 		return memberDao.userCheck(id);		
 	}
+
+
 }
 

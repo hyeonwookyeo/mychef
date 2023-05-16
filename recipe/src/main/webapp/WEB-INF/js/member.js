@@ -1,12 +1,28 @@
-﻿function check() {
+﻿var idcheckbutton = false;
+var nickcheckbutton = false;
+
+function check() {
 	if ($.trim($("#id").val()) == "") {
 		alert("회원아이디를 입력하세요!");
 		$("#id").val("").focus();
 		return false;
 	}
-	if ($.trim($("#pwd1").val()) == "") {
+	if(idcheckbutton == false){
+		alert("아이디 중복 검사를 해주세요.");
+		return false;
+	}
+	if ($.trim($("#nickname").val()) == "") {
+		alert("회원닉네임을 입력하세요!");
+		$("#nickname").val("").focus();
+		return false;
+	}
+	if(nickcheckbutton == false){
+		alert("닉네임 중복 검사를 해주세요.");
+		return false;
+	}
+	if ($.trim($("#pwd").val()) == "") {
 		alert("회원비번을 입력하세요!");
-		$("#join_pwd1").val("").focus();
+		$("#pwd").val("").focus();
 		return false;
 	}
 	if ($.trim($("#pwd2").val()) == "") {
@@ -14,12 +30,12 @@
 		$("#pwd2").val("").focus();
 		return false;
 	}
-	if ($.trim($("#pwd1").val()) != $.trim($("#pwd2").val())) {
+	if ($.trim($("#pwd").val()) != $.trim($("#pwd2").val())) {
 		// !=같지않다 연산. 비번이 다를 경우
 		alert("비번이 다릅니다!");
-		$("#pwd1").val("");
+		$("#pwd").val("");
 		$("#pwd2").val("");
-		$("#pwd1").focus();
+		$("#pwd").focus();
 		return false;
 	}
 	if ($.trim($("#name").val()) == "") {
@@ -27,12 +43,18 @@
 		$("#name").val("").focus();
 		return false;
 	}
-	if ($.trim($("#zip").val()) == "") {
+	
+	if ($.trim($("#birth").val()).length !=6){
+		alert("생년월일 6자리를 입력하세요!");
+		$("#birth").val("").focus();
+		return false;
+	}
+	if ($.trim($("#join_zip").val()) == "") {
 		alert("우편번호를 입력하세요!");
 		$("#zip").val("").focus();
 		return false;
 	}
-	if ($.trim($("#addr1").val()) == "") {
+	if ($.trim($("#join_addr1").val()) == "") {
 		alert("주소를 입력하세요!");
 		$("#addr1").val("").focus();
 		return false;
@@ -42,19 +64,19 @@
 		$("#addr2").val("").focus();
 		return false;
 	}
-	if ($.trim($("tel2").val()) == "") {
-		alert("휴대전화번호를 입력하세요!");
-		$("#tel2").val("").focus();
+	if ($.trim($("#phone2").val()).length != 4) {
+		alert("휴대전화번호 가운데 4자리를 입력하세요");
+		$("#phone2").val("").focus();
 		return false;
 	}
-	if ($.trim($("#tel3").val()) == "") {
-		alert("휴대전화번호를 입력하세요!");
-		$("#tel3").val("").focus();
+	if ($.trim($("#phone3").val()).length != 4) {
+		alert("휴대전화번호 마지막 4자리를 입력하세요");
+		$("#phone3").val("").focus();
 		return false;
 	}
-	if ($.trim($("#email").val()) == "") {
+	if ($.trim($("#mailid").val()) == "") {
 		alert("메일 아이디를 입력하세요!");
-		$("#email").val("").focus();
+		$("#mailid").val("").focus();
 		return false;
 	}
 	if ($.trim($("#domain").val()) == "") {
@@ -62,19 +84,20 @@
 		$("#domain").val("").focus();
 		return false;
 	}
+	if ($.trim($("#profile").val()) == "") {
+		alert("프로필사진를 넣어주세요!");
+		$("#profile").val("").focus();
+		return false;
+	}
+	
+	
+	
+	
 }
-
-function post_search() {
-	alert("우편번호 검색 버튼을 클릭하세요!");
-}
-
-function post_check() {
-	window.open("zipcode_find.nhn", "우편번호검색",
-			"width=420,height=200,scrollbars=yes");
-}
-
 /* 아이디 중복 체크 */
 function id_check() {
+	
+	console.log("in");
 	$("#idcheck").hide();
 	var memid = $("#id").val();
 
@@ -112,12 +135,12 @@ function id_check() {
 	// 아이디 중복확인
 	$.ajax({
 		type : "POST",
-		url : "member_idcheck.do",
+		url : "m_idCheck",
 		data : {
-			"id" : id
+			"memid" : memid
 		},
 		success : function(data) {
-			alert("return success=" + data);
+//			alert("return success=" + data);
 			if (data == 1) { // 중복 ID
 				var newtext = '<font color="red">중복 아이디입니다.</font>';
 				$("#idcheck").text('');
@@ -131,7 +154,9 @@ function id_check() {
 				$("#idcheck").text('');
 				$("#idcheck").show();
 				$("#idcheck").append(newtext);
-				$("#pwd").focus();
+				$("#nickname").focus();
+				
+				idcheckbutton = true;
 			}
 		},
 		error : function(e) {
@@ -141,11 +166,89 @@ function id_check() {
 };
 /* 아이디 중복 체크 끝 */
 
-function validate_userid(id) {
+/* 닉네임 중복 체크 */
+function nickname_check() {
+	
+	console.log("in");
+	$("#nickncheck").hide();
+	var memnick = $("#nickname").val();
+
+	// 1.입력글자 길이 체크
+	if ($.trim($("#nickname").val()).length < 2) {
+		var newtext2 = '<font color="red">닉네임는 2자 이상이어야 합니다.</font>';
+		$("#nickncheck").text('');
+		$("#nickncheck").show();
+		$("#nickncheck").append(newtext2);// span 닉네임 영역에 경고문자 추가
+		$("#nickname").val("").focus();
+		return false;
+	}
+	;
+	if ($.trim($("#nickname").val()).length > 10) {
+		var newtext2 = '<font color="red">닉네임은 10자 이하이어야 합니다.</font>';
+		$("#nickncheck").text('');
+		$("#nickncheck").show();
+		$("#nickncheck").append(newtext2);// span 닉네임 영역에 경고문자 추가
+		$("#nickname").val("").focus();
+		return false;
+	}
+	;
+
+	// 입력닉네임 유효성 검사
+	if (!(validate_usernick(memnick))) {
+		var newtext2 = '<font color="red">닉네임은 영문소문자,숫자,_ 조합만 가능합니다.</font>';
+		$("#nickncheck").text('');// 문자 초기화
+		$("#nickncheck").show();// span 닉네임 영역을 보이게 한다.
+		$("#nickncheck").append(newtext2);
+		$("#nickname").val("").focus();
+		return false;
+	}
+	;
+
+	// 닉네임 중복확인
+	$.ajax({
+		type : "POST",
+		url : "m_nicknCheck",
+		data : {
+			"memnick" : memnick
+		},
+		success : function(data) {
+//			alert("return success=" + data);
+			if (data == 1) { // 중복 닉네임
+				var newtext2 = '<font color="red">중복 닉네임입니다.</font>';
+				$("#nickncheck").text('');
+				$("#nickncheck").show();
+				$("#nickncheck").append(newtext2);
+				$("#nickname").val('').focus();
+				return false;
+
+			} else { // 사용 가능한 닉네임
+				var newtext2 = '<font color="blue">사용가능한 닉네임입니다.</font>';
+				$("#nickncheck").text('');
+				$("#nickncheck").show();
+				$("#nickncheck").append(newtext2);
+				$("#pwd").focus();
+				
+				nickcheckbutton = true;
+			}
+		},
+		error : function(e) {
+			alert("data error" + e);
+		}
+	});// $.ajax
+};
+/* 닉네임 중복 체크 끝 */
+
+function validate_userid(memid) {
 	var pattern = new RegExp(/^[a-z0-9_]+$/); // 영문 소문자,숫자 ,_가능,정규표현식
-	return pattern.test(id);
+	return pattern.test(memid);
 };
 
+function validate_usernick(memnick) {
+	var pattern = new RegExp(/^[a-z0-9_]+$/); // 영문 소문자,숫자 ,_가능,정규표현식
+	return pattern.test(memnick);
+};
+
+//메일 선택창
 function domain_list() {
 	var num = f.mail_list.selectedIndex;
 	/*
@@ -155,14 +258,14 @@ function domain_list() {
 
 		return true;
 	}
-	// 안되면 이부분 보기!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 	if (f.mail_list.value == "0") { // 직접입력
-		f.join_maildomain.value = "";
-		f.join_maildomain.readOnly = false;
-		f.join_maildomain.focus();
+		f.domain.value = "";
+		f.domain.readOnly = false;
+		f.domain.focus();
 	} else { // 리스트목록을 선택했을때
-		f.join_maildomain.value = f.mail_list.options[num].value;
-		f.join_maildomain.readOnly = true;
+		f.domain.value = f.mail_list.options[num].value;
+		f.domain.readOnly = true;
 	}
 }
 
@@ -187,53 +290,48 @@ function edit_check() {
 		return false;
 	}
 	if ($.trim($("#name").val()) == "") {
-		alert("회원이름을 입력하세요");
+		alert("회원이름을 입력하세요!");
 		$("#name").val("").focus();
 		return false;
 	}
-	if ($.trim($("#zip").val()) == "") {
-		alert("우편번호를 입력하세요");
+	if ($.trim($("#join_zip").val()) == "") {
+		alert("우편번호를 입력하세요!");
 		$("#zip").val("").focus();
 		return false;
 	}
-	if ($.trim($("#addr1").val()) == "") {
-		alert("주소를 입력하세요");
+	if ($.trim($("#join_addr1").val()) == "") {
+		alert("주소를 입력하세요!");
 		$("#addr1").val("").focus();
 		return false;
 	}
 	if ($.trim($("#addr2").val()) == "") {
-		alert("나머지 주소를 입력하세요");
+		alert("나머지 주소를 입력하세요!");
 		$("#addr2").val("").focus();
 		return false;
 	}
-	if ($.trim($("#tel2").val()) == "") {
-		alert("휴대전화번호를 입력하세요");
-		$("#tel2").val("").focus();
-		return false;
-	}
-	if ($.trim($("#tel2").val()).length < 4) {
+	if ($.trim($("#phone2").val()).length != 4) {
 		alert("휴대전화번호 가운데 4자리를 입력하세요");
-		$("#tel2").val("").focus();
+		$("#phone2").val("").focus();
 		return false;
 	}
-	if ($.trim($("#join_tel3").val()) == "") {
-		alert("휴대전화 번호를 입력하세요!");
-		$("#tel3").val("").focus();
-		return false;
-	}
-	if ($.trim($("#tel3").val()).length < 4) {
+	if ($.trim($("#phone3").val()).length != 4) {
 		alert("휴대전화번호 마지막 4자리를 입력하세요");
-		$("#tel3").val("").focus();
+		$("#phone3").val("").focus();
 		return false;
 	}
-	if ($.trim($("#email").val()) == "") {
+	if ($.trim($("#mailid").val()) == "") {
 		alert("메일 아이디를 입력하세요!");
-		$("#email").val("").focus();
+		$("#mailid").val("").focus();
 		return false;
 	}
 	if ($.trim($("#domain").val()) == "") {
 		alert("메일 주소를 입력하세요!");
 		$("#domain").val("").focus();
+		return false;
+	}
+	if ($.trim($("#profile").val()) == "") {
+		alert("프로필사진를 넣어주세요!");
+		$("#profile").val("").focus();
 		return false;
 	}
 }

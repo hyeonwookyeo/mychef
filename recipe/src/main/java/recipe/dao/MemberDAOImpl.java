@@ -22,7 +22,7 @@ public class MemberDAOImpl {
 	}
 
 	// 닉네임 중복 체크
-	public int NicknameCheck(String nickname) throws Exception {
+	public int checkMemberNickname(String nickname) throws Exception {
 		int re = -1; // 사용가능한 닉네임
 		MemberBean mem = sqlSession.selectOne("nickname_check", nickname);
 		if (mem != null)
@@ -41,13 +41,18 @@ public class MemberDAOImpl {
 	}
 
 	// 회원 저장(가입)
-	public void insertMember(MemberBean m) throws Exception {
-		sqlSession.insert("member_join", m);
+	public int insertMember(MemberBean m) throws Exception {
+		return sqlSession.insert("member_join", m);
 	}
 
 	// 로그인 인증 체크
 	public MemberBean userCheck(String id) throws Exception {
 		return sqlSession.selectOne("login_check", id);
 	}
+
+	public int updateNewpwd(MemberBean member) {
+		return sqlSession.update("change_pwd", member);
+	}
+
 
 }
