@@ -15,16 +15,16 @@ public class MagaDaoImpl implements MagaDao {
 	@Autowired
 	private SqlSession session;
 
-	public int getListCount() throws Exception {
+	public int getListCount(MagaBean maga) throws Exception {
 		int count = 0;
-		count = ((Integer)session.selectOne("Maga.maga_count")).intValue();
+		count = ((Integer)session.selectOne("Maga.maga_count",maga)).intValue();
 		
 		return count;
 	}
 
 	@Override
-	public List<MagaBean> getMagaList(int page) throws Exception {
-		List<MagaBean> list = session.selectList("Maga.maga_list",page);
+	public List<MagaBean> getMagaList(MagaBean maga) throws Exception {
+		List<MagaBean> list = session.selectList("Maga.maga_list",maga);
 		
 		return list;
 	}

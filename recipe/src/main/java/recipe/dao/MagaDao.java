@@ -6,9 +6,9 @@ import recipe.model.MagaBean;
 import recipe.model.MagaRecomBean;
 
 public interface MagaDao {
-	public int getListCount() throws Exception;
+	public int getListCount(MagaBean maga) throws Exception;
 
-	public List<MagaBean> getMagaList(int page) throws Exception;
+	public List<MagaBean> getMagaList(MagaBean maga) throws Exception;
 
 	public void insert(MagaBean maga) throws Exception;
 	

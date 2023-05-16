@@ -6,18 +6,35 @@
 
 
 	<!-- 매거진 총 게시물 수 -->
-	<select id="maga_count" resultType="int">
-		select count(*) from maga where state = '1' 
+	<select id="maga_count" parameterType="maga" resultType="int">
+		select count(*) from maga 
+		<where>
+			<if test="keyword != null and search != 'subcon'">
+				${search} like '%'||#{keyword}||'%'
+			</if>
+			<if test="keyword != null and search == 'subcon'">
+				subject like '%'||#{keyword}||'%' or
+				content like '%'||#{keyword}||'%'
+			</if>
+		</where>
 	</select>	
 	
 	
 	<!-- 매거진 목록 -->
-	<select id="maga_list" parameterType="int" resultType="maga">
-		<![CDATA[
-		select * from (select rownum rnum, ma.* from
-		(select * from maga where state='1' order by maga_num desc) ma)
-		where rnum >= ((#{page}-1) * 10+1) and rnum <= (#{page} * 10)
-		]]>
+	<select id="maga_list" parameterType="maga" resultType="maga">
+		select * from (select rownum rnum, ma.* from(
+			select * from maga 
+		<where>
+			<if test="keyword != null and search != 'subcon'">
+				${search} like '%'||#{keyword}||'%'
+			</if>
+			<if test="keyword != null and search == 'subcon'">
+				subject like '%'||#{keyword}||'%' or
+				content like '%'||#{keyword}||'%'
+			</if>
+		</where>
+			 order by maga_num desc) ma)
+		where rnum between #{startRow} and #{endRow}
 	</select>
 	
 	

@@ -2,7 +2,6 @@
 package recipe.controller;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -19,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import recipe.model.MagaBean;
 import recipe.model.MagaRecomBean;
 import recipe.service.MagaService;
+import recipe.service.PagingPgm;
 
 @Controller
 public class MagaController {
@@ -41,44 +41,44 @@ public class MagaController {
 
 	// 글 목록
 	@RequestMapping("/maga_list")
-	public String maga_list(HttpServletRequest request, HttpSession session, String pageNum, MagaBean maga, Model model) throws Exception {
-
-		List<MagaBean> magalist = new ArrayList<MagaBean>();
-		
+	public String maga_list(HttpServletRequest request, HttpSession session, String page, MagaBean maga, Model model) throws Exception {
+		// 임의의 세션공유
 		String master = "master";
 		String customer = "aaaa";
+		session.setAttribute("id", master);
 
-		int page = 1;
-		int limit = 10; // 화면 출력 수
-
-		if (request.getParameter("page") != null) {
-			page = Integer.parseInt(request.getParameter("page"));
-		}
+		final int rowPerPage = 10;	// 화면에 출력할 데이터 갯수
+		if (page == null || page.equals("")) {
+			page = "1";}
+		int currentPage = Integer.parseInt(page); // 현재 페이지 번호
 
 		// 데이터 개수
-		int listcount = magaService.getListCount();
+		int total = magaService.getListCount(maga);
 
-		magalist = magaService.getMagaList(page);
+		int startRow = (currentPage - 1) * rowPerPage + 1;
+		int endRow = startRow + rowPerPage - 1;
+		
+		PagingPgm pp = new PagingPgm(total, rowPerPage, currentPage);
+		maga.setStartRow(startRow);
+		maga.setEndRow(endRow);
 
-		int maxpage = listcount / limit + ((listcount % limit == 0) ? 0 : 1);
+		// 목록 구하기
+		int no = total - startRow + 1;		// 화면 출력 번호
+		List<MagaBean> magalist = magaService.getMagaList(maga);
 
-		int startpage = ((page - 1) / 10) * limit + 1;
-		int endpage = startpage + 10 - 1;
-
-		if (endpage > maxpage)
-			endpage = maxpage;
-		System.out.println(maga.getKeyword());
-		System.out.println(maga.getSearch());
-
-		model.addAttribute("page", page);
-		model.addAttribute("startpage", startpage);
-		model.addAttribute("endpage", endpage);
-		model.addAttribute("maxpage", maxpage);
-		model.addAttribute("listcount", listcount);
 		model.addAttribute("magalist", magalist);
+		model.addAttribute("no",no);
+		model.addAttribute("pp",pp);
+
+		model.addAttribute("search",maga.getSearch());
+		model.addAttribute("keyword",maga.getKeyword());
 		
-		session.setAttribute("id", master);
-		
+		System.out.println("magalist:"+magalist);
+		System.out.println("no:"+no);
+		System.out.println("pp:"+pp);
+		System.out.println("search:"+maga.getSearch());
+		System.out.println("keyword:"+maga.getKeyword());
+		System.out.println(total);
 
 		return "maga_list";
 	}

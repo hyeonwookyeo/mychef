@@ -16,13 +16,13 @@ public class MagaServiceImpl implements MagaService {
 	private MagaDaoImpl magaDao;
 
 	@Override
-	public int getListCount() throws Exception {
-		return magaDao.getListCount();
+	public int getListCount(MagaBean maga) throws Exception {
+		return magaDao.getListCount(maga);
 		
 	}
 
-	public List getMagaList(int page) throws Exception {
-		return magaDao.getMagaList(page);
+	public List getMagaList(MagaBean maga) throws Exception {
+		return magaDao.getMagaList(maga);
 		
 	}
 

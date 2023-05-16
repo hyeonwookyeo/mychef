@@ -13,9 +13,13 @@ public class MagaBean {
 	private Timestamp mdate;
 	private String state; // 0 삭제, 1 존재
 
-	//검색
+	// 검색
 	private String search;
 	private String keyword;
+
+	// 페이지
+	private int startRow;
+	private int endRow;
 
 	public int getMaga_num() {
 		return maga_num;
@@ -95,6 +99,22 @@ public class MagaBean {
 
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
+	}
+
+	public int getStartRow() {
+		return startRow;
+	}
+
+	public void setStartRow(int startRow) {
+		this.startRow = startRow;
+	}
+
+	public int getEndRow() {
+		return endRow;
+	}
+
+	public void setEndRow(int endRow) {
+		this.endRow = endRow;
 	}
 
 }
