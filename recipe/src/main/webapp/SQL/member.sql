@@ -2,7 +2,7 @@ select * from tab;
 select * from seq;
 select * from member;
 drop table member purge;
-
+select * from boardcook;
 
 create table member(           
   id varchar2(30) primary key       
@@ -24,11 +24,34 @@ create table member(
   , state number(10)    
 );
 
+select * from tab;
+select * from boardcook; 
+
+create sequence boardcook_num_seq
+increment by 1 start with 1 nocache;
+
+create table boardcook(
+    board_num number(38) primary key
+  , board_name varchar2(50) not null
+  , board_pass varchar2(30) not null
+  , board_subject varchar2(100) not null
+  , board_content varchar2(4000) not null
+  , board_re_ref number 
+  , board_re_lev number 
+  , board_re_seq number 
+  , board_readcount number 
+  , board_date date 
+);
+
+
+
 insert into member ( id , pwd , name , bitrh, profile , nickname, zip , addr1 , addr2 , tel1 , tel2 , tel3    
   , email , domain , joindate  , state) 
   values( 'master', 'master000', 'master' , '00', '1234','master', '12345', '서울', '레시피', '02', '1234', '5678', 'recipe', 
   'naver.com',sysdate,1);
   
+  
+
   
   select * from seq;
 

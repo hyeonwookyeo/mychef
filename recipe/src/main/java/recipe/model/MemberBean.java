@@ -3,27 +3,33 @@ package recipe.model;
 public class MemberBean {
 	
 	private String id;
+	private String nickname;
 	private String pwd;
 	private String name;
 	private String bitrh;
 	private String profile;
-	private String nickname;
+	private String mailid;
+	private String domain;
 	private String zip;
 	private String addr1;
 	private String addr2;
-	private String tel1;
-	private String tel2;
-	private String tel3;
-	private String email;
-	private String domain;
 	private String joindate_date;
 	private String deldate_date;
 	private int state;
+	private String phone1;
+	private String phone2;
+	private String phone3;
 	public String getId() {
 		return id;
 	}
 	public void setId(String id) {
 		this.id = id;
+	}
+	public String getNickname() {
+		return nickname;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 	public String getPwd() {
 		return pwd;
@@ -49,11 +55,17 @@ public class MemberBean {
 	public void setProfile(String profile) {
 		this.profile = profile;
 	}
-	public String getNickname() {
-		return nickname;
+	public String getMailid() {
+		return mailid;
 	}
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
+	public void setMailid(String mailid) {
+		this.mailid = mailid;
+	}
+	public String getDomain() {
+		return domain;
+	}
+	public void setDomain(String domain) {
+		this.domain = domain;
 	}
 	public String getZip() {
 		return zip;
@@ -73,36 +85,6 @@ public class MemberBean {
 	public void setAddr2(String addr2) {
 		this.addr2 = addr2;
 	}
-	public String getTel1() {
-		return tel1;
-	}
-	public void setTel1(String tel1) {
-		this.tel1 = tel1;
-	}
-	public String getTel2() {
-		return tel2;
-	}
-	public void setTel2(String tel2) {
-		this.tel2 = tel2;
-	}
-	public String getTel3() {
-		return tel3;
-	}
-	public void setTel3(String tel3) {
-		this.tel3 = tel3;
-	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	public String getDomain() {
-		return domain;
-	}
-	public void setDomain(String domain) {
-		this.domain = domain;
-	}
 	public String getJoindate_date() {
 		return joindate_date;
 	}
@@ -121,4 +103,23 @@ public class MemberBean {
 	public void setState(int state) {
 		this.state = state;
 	}
+	public String getPhone1() {
+		return phone1;
+	}
+	public void setPhone1(String phone1) {
+		this.phone1 = phone1;
+	}
+	public String getPhone2() {
+		return phone2;
+	}
+	public void setPhone2(String phone2) {
+		this.phone2 = phone2;
+	}
+	public String getPhone3() {
+		return phone3;
+	}
+	public void setPhone3(String phone3) {
+		this.phone3 = phone3;
+	}
+
 }

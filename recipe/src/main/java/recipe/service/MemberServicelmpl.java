@@ -5,15 +5,16 @@ import org.springframework.stereotype.Service;
 import recipe.dao.MemberDAOImpl;
 import recipe.model.MemberBean;
 
+
 @Service
 public class MemberServicelmpl {
-
 	@Autowired
 	private MemberDAOImpl memberDao;
 	
-	public int checkMemberId(String id)throws Exception {
+	public int checkMemberId(String id) throws Exception{
 		return memberDao.checkMemberId(id);
 	}
+	
 	public MemberBean findpwd(MemberBean m)throws Exception {
 		return memberDao.findpwd(m);
 	}
@@ -33,5 +34,4 @@ public class MemberServicelmpl {
 	public void deleteMember(MemberBean member) throws Exception{
 		memberDao.deleteMember(member);
 	}
-
 }

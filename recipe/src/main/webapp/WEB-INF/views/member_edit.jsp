@@ -4,54 +4,56 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<style>
+    body {
+      min-height: 100vh;
+
+      background: -webkit-gradient(linear, left bottom, right top, from(#008000), to(#2ca38f));
+      background: -webkit-linear-gradient(bottom left, #008000 0%, #2ca38f 100%);
+      background: -moz-linear-gradient(bottom left, #008000 0%, #2ca38f 100%);
+      background: -o-linear-gradient(bottom left, #008000 0%,#2ca38f 100%);
+      background: linear-gradient(to top right, #008000 0%, #2ca38f 100%);
+    }
+
+    .input-form {
+      max-width: 680px;
+
+      margin-top: 80px;
+      padding: 32px;
+
+      background: #fff;
+      -webkit-border-radius: 10px;
+      -moz-border-radius: 10px;
+      border-radius: 10px;
+      -webkit-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
+      -moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
+      box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
+    }
+  </style>
 <title>회원정보 수정 폼</title>
 </head>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="./js/jquery.js"></script>
+<script src="./js/member.js"></script>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
+
 function openDaumPostcode() {
 	new daum.Postcode({
 		oncomplete : function(data) {				
-			document.getElementById('join_zip').value = data.zonecode;
-			document.getElementById('join_addr1').value = data.address;				
+			document.getElementById('zip').value = data.zonecode;
+			document.getElementById('addr1').value = data.address;				
 		}
 	}).open();
 }
 </script>
 <body>
-<style type="text/css">
-
-html {
-     background-color: #F8F8FF;
-}
-
-#join_wrap {
-    background-color: 	#FFFFE0;
-    display: table;
-    width: 850px;
-    height: 750px;
-    margin: 0 auto;
-    top: 500px;
-    bottom: 500px;
-    border: solid 2px #D8D8D8;
-    
-    display: flex;
-    flex-direction: colum;
-    justify-content: center;
-    align-items: center;
-}
-header{height: 75px; background-color: #008000; border: 1px solid #253342;
-                position: fixed; width: 100%; z-index; 9999; top:0; left:0;}
-                h1{color: white; line-height: 75px; float; left;}
-
-
-</style>
+   <div class="input-form col-md-12 mx-auto">
 <header>
 <h1>회원정보 수정페이지</h1>
 <nav>
-
 </nav>
 </header>
-</head>
-<body>
   <div id="join_wrap">
   <h2 class="join_title">회원수정</h2>
   <form name="f" method="post" action="member_edit_ok.do"
@@ -70,11 +72,28 @@ header{height: 75px; background-color: #008000; border: 1px solid #253342;
      </td>
     </tr>
     
+    
+    <tr>
+     <th>회원비번</th>
+     <td>
+      <input type="password" name="join_pwd" id="join_pwd1" size="14"
+      		class="input_box" />
+     </td>
+    </tr>
+    
+    <tr>
+     <th>회원비번확인</th>
+     <td>
+      <input type="password" name="join_pwd2" id="join_pwd2" size="14"
+      		class="input_box" />
+     </td>
+    </tr>
+    
     <tr>
      <th>우편번호</th>
      <td>
       <input name="zip" id="zip" size="5" class="input_box"
-      		readonly onclick="post_search()" value="${editm.join_zip}"/>
+      		readonly onclick="post_search()" value="${editm.zip}"/>
       <input type="button" value="우편번호검색" class="input_button"
       		onclick="openDaumPostcode()" />
      </td>
@@ -87,7 +106,6 @@ header{height: 75px; background-color: #008000; border: 1px solid #253342;
       		readonly value="${editm.addr1}" onclick="post_search()" />
      </td>
     </tr>
-    
     <tr>
      <th>상세 주소</th>
      <td>
@@ -95,25 +113,31 @@ header{height: 75px; background-color: #008000; border: 1px solid #253342;
       		value="${editm.addr2}" class="input_box" />
      </td>
     </tr>
-<tr>
-<th>휴대전화번호</th>
-<td>
-<select name="tel1">
-<c:forEach var="t" items=${tel } begin="0" end="5">
-<option value=${t } <c:if test="${tel1==t }">
-</c:if>>${t }
-</c:forEach>
-</select>-
-<input name="tel2" id="tel2" size="4" maxlength="4" class="input_box" value="${tel2 }"/>-
-<input name="tel3" id="tel3" size="4" maxlength="4" class="input_box" value="${tel3 }"/>
-</td>
-<tr>
-   <th>Email</th>
+    <tr>
+     <th>휴대전화번호</th>
      <td>
-  <input name="email" id="email" size="10" 
-      class="input_box" value="${email}"/>@<input name="domain" 
+     <%@ include file="../include/phone_number.jsp" %>
+     <select name="phone1">
+      <c:forEach var="p" items="${phone}" begin="0" end="5">
+       <option value="${p}" <c:if test="${phone1 == p}">${'selected'}
+          </c:if>>${p}
+        </option>
+      </c:forEach>
+     </select>-
+     <input name="phone2" id="phone2" size="4" maxlength="4" class="input_box" value="${phone2}"/>-
+     <input name="phone3" id="phone3" size="4" maxlength="4" class="input_box" value="${phone3}"/>
+     </td>
+    </tr>
+
+<tr>
+     <th>이메일</th>
+     <td>
+      <input name="join_mailid" id="join_mailid" size="10" 
+      class="input_box" value="${join_mailid}"/>@<input name="domain" 
       id="domain" size="20" class="input_box" readonly value="${domain}" />
-  <select name="email_list" onchange="domain_list()">
+      
+      <!--readonly는 단지 쓰기,수정이 불가능하고 읽기만 가능하다 -->
+      <select name="mail_list" onchange="domain_list()">
       <option value="">=이메일선택=</option>
       <option value="daum.net" 
       		<c:if test="${domain == 'daum.net'}">${'selected'}
@@ -131,9 +155,11 @@ header{height: 75px; background-color: #008000; border: 1px solid #253342;
             <c:if test="${domain == 'gmail.com'}">${'selected'}
             </c:if>>gmail.com</option>
       <option value="0">직접입력</option>
-</select>
-  </td>
+     </select> 
+     </td>
     </tr>
+  
+
     <tr>
      <th>프로필사진 첨부</th>
      <td>
@@ -148,8 +174,7 @@ header{height: 75px; background-color: #008000; border: 1px solid #253342;
    </div>
   </form>
  </div>
-
-
+</div>
 
 </body>
 </html>
