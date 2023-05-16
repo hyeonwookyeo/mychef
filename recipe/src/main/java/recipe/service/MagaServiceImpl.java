@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import recipe.dao.MagaDao;
 import recipe.dao.MagaDaoImpl;
 import recipe.model.MagaBean;
 import recipe.model.MagaRecomBean;

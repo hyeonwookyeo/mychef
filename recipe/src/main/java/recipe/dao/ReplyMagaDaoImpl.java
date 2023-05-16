@@ -29,4 +29,10 @@ public class ReplyMagaDaoImpl implements ReplyMagaDao {
 
 		session.delete("MagaReply.delete", magare_num);
 	}
+
+	@Override
+	public void update(ReplyMagaBean rmaga) {
+
+		session.update("MagaReply.update",rmaga);
+	}
 }

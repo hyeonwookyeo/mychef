@@ -28,4 +28,9 @@ public class ReplyMagaServiceImpl implements ReplyMagaService {
 	public void delete(int magare_num) throws Exception {
 		R_magaDao.delete(magare_num);
 	}
+
+	@Override
+	public void update(ReplyMagaBean rmaga) {
+		R_magaDao.update(rmaga);
+	}
 }

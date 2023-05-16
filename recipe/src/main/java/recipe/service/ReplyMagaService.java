@@ -12,4 +12,6 @@ public interface ReplyMagaService {
 
 	public void delete(int magare_num) throws Exception;
 
+	public void update(ReplyMagaBean rmaga);
+
 }

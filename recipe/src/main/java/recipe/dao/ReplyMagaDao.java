@@ -12,4 +12,6 @@ public interface ReplyMagaDao {
 
 	public void delete(int magare_num);
 
+	public void update(ReplyMagaBean rmaga);
+
 }

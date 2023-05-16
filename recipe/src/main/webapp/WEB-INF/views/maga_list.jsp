@@ -27,6 +27,13 @@
 			<td>조회수</td>
 		</tr>
 
+		<c:if test="${empty magalist}">
+			<tr>
+				<td colspan="5">데이터가 없습니다</td>
+			</tr>
+		</c:if>
+			
+		<c:if test="${not empty magalist}">
 		<c:set var="num" value="${listcount-(page-1)*10}" />
 
 		<c:forEach var="b" items="${magalist}">
@@ -58,7 +65,20 @@
 				</td>
 			</tr>
 		</c:forEach>
+		</c:if>
 	</table>
+	
+	<!-- 검색창 -->
+	<form action="maga_list" align=center>
+			<input type="hidden" name="pageNum" value="1"> 
+			<select	name="search">
+				<option value="subject"	<c:if test="${search=='subject'}">selected="selected" </c:if>>제목</option>
+				<option value="content"	<c:if test="${search=='content'}">selected="selected" </c:if>>내용</option>
+				<option value="subcon"	<c:if test="${search=='subcon'}">selected="selected" </c:if>>제목+내용</option>
+			</select> 
+			<input type="text" name="keyword"> 
+			<input type="submit" value="확인">
+		</form>
 		
 	<div align=center>
 	

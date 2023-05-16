@@ -8,27 +8,34 @@
 <title>댓글</title>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script>
-	// 댓글 삭제
-	/* $(function() {
-		$('#del_re').click(function() {
-			var result = confirm("정말로 댓글을 삭제 하시겠습니까?");
-			if (result) {
-				var magare_num = $("#magare_num").val();
-				$.ajax({
-					type : 'post',
-					url : 'repDelete',
-					data : magare_num,
-					success : function(data) {
-						$('#slist').html(data);
-						alert('댓글이 삭제 되었습니다.');
-					}
-				});
-			}
+	// 수정 버튼
+	$(function() {
+		$('.edit1').click(function() {
+			var id = $(this).attr('id');	// magare_num
+			var txt = $('#td_'+id).text();
+			$('#td_'+id).html("<textarea row='3' cols='30' id='tt_"+id+"'>"+txt+"</textarea>");
+			$('#btn_'+id).html(
+				"<input type='button' value='확인' onclick='up("+id+")'>"+
+				"<input type='button' value='취소' onclick='lst()'>");
 		});
-	}); */
-	
-	function del(rno) {
-		$.post("repDelete",rno, function(data) {
+	});
+	// 수정 -> 확인
+	function up(id){
+		var re_content = $('#tt_'+id).val();
+		var formData = "magare_num="+id+'&re_content='+re_content+"&maga_num=${maga.maga_num}";
+		$.post('repUpdate',formData,function(data){
+			$('#slist').html(data);
+		});
+	}
+
+	// 수정 -> 취소
+	function lst(){
+		$('#slist').load('slist?maga_num=${maga.maga_num}');
+	}
+	// 댓글 삭제
+ 	function del(maga_num,magare_num) {
+		var formData="maga_num="+maga_num+"&magare_num="+magare_num;
+		$.post("repDelete",formData, function(data) {
 			alert('댓글이 삭제 되었습니다.');
 			$('#slist').html(data);
 		});
@@ -37,19 +44,20 @@
 </head>
 <body>
 	<div align=center>
-		<input type="hidden" name="magare_num" id="magare_num"
-			value="${magare_num}">
 		<table border=1>
 			<c:forEach var="rb" items="${slist}">
 				<tr>
 					<td>${rb.id}${rb.re_date}</td>
-					<c:if test="${rb.id == sessionScope.id}">
-					<td><input type="button" value="삭제" id="del_re"
-						onclick="del(${rb.magare_num})"></td>
+ 					<c:if test="${rb.id == sessionScope.id}">			
+ 						<td id="btn_${rb.magare_num}">
+ 						<input type="button" value="수정" class="edit1" id="${rb.magare_num}">
+						<input type="button" value="삭제" id="del_re"
+								onclick="del(${rb.maga_num},${rb.magare_num})"></td>
 					</c:if>
+					
 				</tr>
 				<tr>
-					<td colspan=2>${rb.re_content}</td>
+					<td colspan=2 id="td_${rb.magare_num}">${rb.re_content}</td>
 				</tr>
 			</c:forEach>
 		</table>

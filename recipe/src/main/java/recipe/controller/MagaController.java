@@ -1,8 +1,6 @@
 // 메인 컨트롤러
 package recipe.controller;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +12,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -22,7 +19,6 @@ import org.springframework.web.multipart.MultipartFile;
 import recipe.model.MagaBean;
 import recipe.model.MagaRecomBean;
 import recipe.service.MagaService;
-import recipe.service.MagaServiceImpl;
 
 @Controller
 public class MagaController {
@@ -45,7 +41,7 @@ public class MagaController {
 
 	// 글 목록
 	@RequestMapping("/maga_list")
-	public String maga_list(HttpServletRequest request, HttpSession session, Model model) throws Exception {
+	public String maga_list(HttpServletRequest request, HttpSession session, String pageNum, MagaBean maga, Model model) throws Exception {
 
 		List<MagaBean> magalist = new ArrayList<MagaBean>();
 		
@@ -71,6 +67,8 @@ public class MagaController {
 
 		if (endpage > maxpage)
 			endpage = maxpage;
+		System.out.println(maga.getKeyword());
+		System.out.println(maga.getSearch());
 
 		model.addAttribute("page", page);
 		model.addAttribute("startpage", startpage);
@@ -79,7 +77,7 @@ public class MagaController {
 		model.addAttribute("listcount", listcount);
 		model.addAttribute("magalist", magalist);
 		
-		session.setAttribute("id", customer);
+		session.setAttribute("id", master);
 		
 
 		return "maga_list";
@@ -158,14 +156,16 @@ public class MagaController {
 		MagaRecomBean magarecom = new MagaRecomBean();
 		magarecom.setMagarecom_num(maga_num);
 		magarecom.setNickname(id);
+		System.out.println("id :"+id);
+		System.out.println("maga_num :"+maga_num);
 		
 		// 중복 확인
 		int result = magaService.maga_recomcheck(magarecom);
+		System.out.println("result :"+result);
 		String state = "recom";
 		model.addAttribute("result", result);
 		model.addAttribute("page",page);
 		model.addAttribute("maga_num",maga_num);
-		
 		if(result == 0) {	// 중복이 없을 때(추천 가능)
 			magaService.maga_recom(maga_num);
 			magaService.maga_recominsert(magarecom);
