@@ -202,13 +202,10 @@ public class RecipeController {
             
             try {
                 mf.transferTo(new File(multipath + "/" + multiNewFileName));
-            } catch (IllegalStateException e) {
+            } catch (Exception e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
+            } 
 		}
 		
 		System.out.println("finalFileName:" + finalFileName);

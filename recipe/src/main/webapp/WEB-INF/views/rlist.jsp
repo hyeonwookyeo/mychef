@@ -23,7 +23,7 @@
 		$.ajax({
 		    type : "post",
 		    url : "r_updateRe",
-		    data : {"reboard":${"#frm}"},   
+		    data : {"reboard":${"#frm}"},
 		    success : function(data){   
 		    	alert(data);
 		    }
@@ -64,7 +64,7 @@ function delete_check(){
 					<input type="hidden" name="rre_num" value="${reboard.rre_num }">
 					<input type="hidden" name="rnum" value="${reboard.rnum }">
 						<span><img src=""/></span>닉네임${reboard.id }
-						<div><img src="./reply_images/${reboard.re_rfile }" width=500/></div>
+						<div><img src="reply_images/${reboard.re_rfile}" width=500/></div>
 						<div>${reboard.re_content }</div>
 						<div>${reboard.re_date }</div>
 						<c:if test="${!empty id and id == reboard.id}">

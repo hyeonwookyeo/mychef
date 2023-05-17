@@ -74,12 +74,51 @@ $(document).ready(function() {
 			});
 		}
 	});
+    
+});
+</script>
+<script>
+$(function(){
+	$('#reple_insert').click(function(){
+		var id = $("#id").val();
+		var rnum = $("#rnum").val();
+		var re_content = $("#re_content").val();
+		var formData = new FormData();
+		var inputFile = $("input[name='re_rfile1']")
+		var files = inputFile[0].files;
+		
+		for(var i=0; i<files.length; i++) {
+			formData.append("uploadFile", files[i]);
+			formData.append("id", id);
+			formData.append("rnum", rnum);
+			formData.append("re_content", re_content);
+		}
+		
+		if(re_content==""){
+			alert("리플을 입력하세요.");
+			$("#re_content").focus();
+		}else{
+			$.ajax({
+				type:"post",
+				url:"r_insertRe",
+				data:formData,
+				processData: false,
+				contentType: false,
+				enctype : 'multipart/form-data',
+				success:function(result){
+					$('#listRe').load('r_listRe?pageNum=1&rnum=${board.rnum}');
+				}
+			});
+		}
+	});
 });
 </script>
 </head>
 <body>
+					
 	<div class="container" align="center">
-	<input type="hidden" id="rnum" name="rnum" value="${board.rnum}">
+	<input type="hidden" id="rnum" name=rnum value="${board.rnum }"> 
+	<input type="hidden" id="id" name=id value="${id}"> 
 	
 		<h1>${board.subject }</h1>
 		<div>
@@ -121,19 +160,18 @@ $(document).ready(function() {
 
 		<c:if test="${!empty id}">
 			<div>
-				<form name="frm" method="post" enctype="multipart/form-data" action="r_insertRe">
+				<form id="frm" name="frm" enctype="multipart/form-data">
+				 <!-- method="post" enctype="multipart/form-data" action="r_insertRe" -->
 					<input type="hidden" id="rnum" name=rnum value="${board.rnum }"> 
 					<input type="hidden" id="id" name=id value="${id}"> 
 					<input type="hidden" id="pageNum" name="pageNum" value="${pageNum}"> 
-					<input type="file" name="re_rfile1" multiple> 댓글 :
-					<textarea rows=3 cols=30 name="re_content"></textarea>
-					<input type="submit" id="repl_insert">
+					<input type="file" id="re_rfile1" name="re_rfile1" multiple="multiple"> 댓글 :
+					<textarea rows=3 cols=30 id="re_content" name="re_content"></textarea>
+					<input type="button" value="댓글입력" id="reple_insert">
 				</form>
 			</div>
 		</c:if>
 			<div id="listRe"></div>
-			
-			
 	</div>
 
 </body>
