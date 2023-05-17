@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import recipe.dao.RecipeDao;
+import recipe.model.R_recomm;
 import recipe.model.RecipeBoard;
 
 @Service
@@ -55,6 +56,30 @@ public class RecipeServiceImpl implements RecipeService{
 		// TODO Auto-generated method stub
 		return dao.r_delete(rnum);
 	}
+	
+	@Override
+	public int r_recomm(R_recomm recomm) {
+		// TODO Auto-generated method stub
+		return dao.r_recomm(recomm);
+	}
+
+	@Override
+	public void r_recomm_add(R_recomm recomm) {
+		// TODO Auto-generated method stub
+		dao.r_recomm_add(recomm);
+	}
+
+	@Override
+	public int r_recomm_count(R_recomm recomm) {
+		// TODO Auto-generated method stub
+		return dao.r_recomm_count(recomm);
+	}
+
+	@Override
+	public void r_recomm_delete(R_recomm recomm) {
+		// TODO Auto-generated method stub
+		dao.r_recomm_delete(recomm);
+	}	
 	
 
 

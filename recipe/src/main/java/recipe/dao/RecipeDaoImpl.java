@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import recipe.model.R_recomm;
 import recipe.model.RecipeBoard;
 
 @Repository
@@ -56,6 +57,30 @@ public class RecipeDaoImpl implements RecipeDao{
 		// TODO Auto-generated method stub
 		return sst.update("boardns.delete", rnum);
 	}
+	
+	@Override
+	public int r_recomm(R_recomm recomm) {
+		// TODO Auto-generated method stub
+		return sst.selectOne("r_recommns.select", recomm);
+	}
+
+	@Override
+	public void r_recomm_add(R_recomm recomm) {
+		// TODO Auto-generated method stub
+		sst.insert("r_recommns.insert", recomm);
+	}
+
+	@Override
+	public int r_recomm_count(R_recomm recomm) {
+		// TODO Auto-generated method stub
+		return sst.selectOne("r_recommns.count", recomm);
+	}
+
+	@Override
+	public void r_recomm_delete(R_recomm recomm) {
+		// TODO Auto-generated method stub
+		sst.delete("r_recommns.delete", recomm);
+	}	
 	
 	
 }

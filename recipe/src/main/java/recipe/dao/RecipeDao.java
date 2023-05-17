@@ -2,6 +2,7 @@ package recipe.dao;
 
 import java.util.List;
 
+import recipe.model.R_recomm;
 import recipe.model.RecipeBoard;
 
 public interface RecipeDao {
@@ -24,5 +25,18 @@ public interface RecipeDao {
 
 // 글삭제
 	int r_delete(int rnum);
+	
+// 추천
+	int r_recomm(R_recomm recomm);
+
+// 추천 증가
+	void r_recomm_add(R_recomm recomm);
+
+// 추천 갯수
+	int r_recomm_count(R_recomm recomm);
+
+// 추천 감소
+	void r_recomm_delete(R_recomm recomm);
+	
 
 }

@@ -1,80 +1,86 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ include file="header.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
 <!-- Latest compiled and minified CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+	rel="stylesheet">
 
 <!-- Latest compiled JavaScript -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script>
-$(document).ready(function() {
-    $('#listRe').load('r_listRe?rpageNum=${rpageNum}&rnum=${board.rnum}');
-});   
-
-$(document).ready(function() {
-    $('#repl_insert').click(function() {
-		if (!frm.re_content.value) {
-			alert('리뷰를 먼저 작성해주세요');
-			frm.re_content.focus();
-			return false;
-		}
-		
-		var frmData = $("form").serialize();
-		alert(frmData);
-		$.post('r_insertRe', frmData, function(data) {
-			alert(data);
-			$('#listRe').html(data);
-			frm.replytext.value = '';		
-		}); 
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-/* 		$.post("r_insertRe", frmData, function(data) {
-			alert(data);
-			$('#listRe').html(data);
-			frm.re_content.value = '';
-		}); */
-   
-	});
-});
-
 function delete_check(){
 	var text="삭제하시겠습니까?";
 	if(confirm(text)){
+		var rnum = $("#rnum").val();
 		$.ajax({
 		    type : "post",
 		    url : "r_delete",
-		    data : {"rnum":${board.rnum}},
+		    data : {"rnum":rnum},
 		    success : function(data){
 		    	if(data == 1){
-					  alert("글이 삭제되었습니다");
-					  location.href="r_listForm"
+					  alert("글이 삭제되었습니다.");
+					  location.href="r_listForm?pageNum=${pageNum}"
 				  }else{
-					  alert("비밀번호가 틀립니다");
+					  alert("글 삭제를 실패했습니다.");
 				  } 
 		    }
 		});
 	}
 }
+
+/* function re_comm(id, rnum){
+	var id = $("#id").val();
+	if(sessionScop.id=""){
+		alert("로그인이 필요합니다.");
+	}else{
+		var comfrm = "id="+id+"&rnum="+rnum;
+		$.post("r_recomm",comfrm, function(data) {
+			$('#r_recomm').html(data);
+		});
+	}
+} */
+
+</script>
+<script>
+$(document).ready(function() {
+    $('#listRe').load('r_listRe?pageNum=1&rnum=${board.rnum}');
+    
+    $('#r_recomm_img').click(function(){
+    	var id = $("#id").val();
+    	var rnum = $("#rnum").val();
+    	
+		if(id==""){
+			alert("로그인이 필요합니다.");
+		}else{
+			var commfrm = "id="+id+"&rnum="+rnum;
+			$.ajax({
+				type:"post",
+				url:"r_recomm",
+				data:commfrm,
+				success:function(data){
+					$('#r_recomm').html(data);
+				}
+			});
+		}
+	});
+});
 </script>
 </head>
 <body>
 	<div class="container" align="center">
+	<input type="hidden" id="rnum" name="rnum" value="${board.rnum}">
+	
 		<h1>${board.subject }</h1>
 		<div>
 			<img src="./t_images/${board.thumbnail}" width=500/>
@@ -98,13 +104,15 @@ function delete_check(){
 
 		</table>
 
-		<div>추천수${board.recom }</div>
-		<br>
+		<div>
+		<image id="r_recomm_img" src="images/comm.jpg" width="50" height="50"></image>
+		<div id="r_recomm"></div>
+		</div><br>
 
 
 		<c:if test="${!empty id and id == board.id}">
 			<div align="center">
-				<a href="r_updateForm?&rnum=${board.rnum }">수정</a>
+				<a href="r_updateForm?pageNum=${pageNum }&rnum=${board.rnum }">수정</a>
 				<button type="button" onClick="delete_check()">삭제</button>
 			</div>
 		</c:if>
@@ -113,13 +121,13 @@ function delete_check(){
 
 		<c:if test="${!empty id}">
 			<div>
-				<form name="frm" id="frm" enctype="multipart/form-data">
-					<input type="hidden" name=rnum value="${board.rnum }"> 
-					<input type="hidden" name=id value="${id }"> 
-					<input type="hidden" name="pageNum" value="${pageNum }">
-					<input type="file" name="re_rfile1" multiple="multiple"> 댓글 :
+				<form name="frm" method="post" enctype="multipart/form-data" action="r_insertRe">
+					<input type="hidden" id="rnum" name=rnum value="${board.rnum }"> 
+					<input type="hidden" id="id" name=id value="${id}"> 
+					<input type="hidden" id="pageNum" name="pageNum" value="${pageNum}"> 
+					<input type="file" name="re_rfile1" multiple> 댓글 :
 					<textarea rows=3 cols=30 name="re_content"></textarea>
-					<input type="button" id="repl_insert" value="작성하기" >
+					<input type="submit" id="repl_insert">
 				</form>
 			</div>
 		</c:if>

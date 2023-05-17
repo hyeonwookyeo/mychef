@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>		
 
 <!DOCTYPE html>
 <html>
@@ -122,74 +123,79 @@ input[type=file] {
 			<table border=1>
 				<tr>
 					<td>제목</td>
-					<td><input type="text" name="subject"></td>
+					<td><input type="text" name="subject" value="${board.subject }"></td>
 				</tr>
 				<tr>
 					<td>분류</td>
-					<td><select id="category" name="category">
-							<option value="korean">한식</option>
-							<option value="chinese">중식</option>
-							<option value="japanese">일식</option>
-							<option value="western">양식</option>
-					</select></td>
+					<td>
+					<select id="category" name="category">
+						<option value="korean">한식</option>
+						<option value="chinese">중식</option>
+						<option value="japanese">일식</option>
+						<option value="western">양식</option>
+					</select>
+					</td>
 				</tr>
 				<tr>
 					<td>대표사진</td>
-					<td><input type="file" id="thumbnail1" name="thumbnail1"
-						onchange="readURL(this);" class="file">
-						<img id="preview" src="images/chinese.jpg" width=300 height=350/></td>
+					<td><input type="file" name="thumbnail1">
+					<img src="./t_images/${board.thumbnail }" width=300 /></td>
 				</tr>
 				<tr>
 					<td>간략한 설명</td>
-					<td><input type="text" name="description"></td>
+					<td><input type="text" name="description" value="${board.description }"></td>
 				</tr>
-			</table>
-			<br>
-			<br>
-
+				</table> <br><br>
+				
 			<table border=1>
-				<thead>
-					<tr>
-						<th
-							style="width: 20%; text-align: center; vertical-align: middle;">No</th>
-						<th
-							style="width: 20%; text-align: center; vertical-align: middle;">재료</th>
-						<th
-							style="width: 20%; text-align: center; vertical-align: middle;">용량</th>
-						<th
-							style="width: 20%; text-align: center; vertical-align: middle;">추가/삭제</th>
-					</tr>
-				</thead>
-				<tbody id="tbody_id">
-				</tbody>
-				<tr>
-					<td colspan=3></td>
-					<td style="width: 20%; text-align: center; vertical-align: middle;">
-						<button class="btn btn-default btn-sm" type="button"
-							onclick='ingre_add();'>
-							<strong>재료 추가</strong>
-						</button>
-					</td>
-				</tr>
-			</table>
-			<br>
-			<br>
-
+			<thead>
+			<tr>
+				<th style="width:20%; text-align:center;vertical-align:middle;">No</th>
+				<th style="width:20%; text-align:center;vertical-align:middle;">재료</th>
+				<th style="width:20%; text-align:center;vertical-align:middle;">용량</th>
+				<th style="width:20%; text-align:center;">
+					<button class="btn btn-default btn-sm" type="button"  onclick='btn_add();'>
+						<strong>추가</strong>
+					</button>
+				</th>
+			</tr>
+			</thead>
+			<tbody id="tbody_id">
+			<c:forEach var="item1" items="${map1 }">
+			<c:set var="i" value="${i+1}"/>
+			<tr>
+				<td style='text-align:center;' class="row_idx">${i }</td>
+				<td style='text-align:center;'><input type="text" name='ingre' value="${item1.key }"></td>
+				<td style='text-align:center;'><input type="text" name='capacity' value="${item1.value }"></td>
+				<td style='text-align:center;'>
+				<div class="btn-group">
+					<button type='button' class='btn btn-primary btn-sm' name='dtl_del'>삭제</button>
+				</div>
+				</td>
+			</tr>
+			</c:forEach> 	
+			</tbody>
+			</table><br><br>
+			
+			
+				
 			<table border=1>
-				<tr>
-					<td>조리사진</td>
-					<td><input type="file" multiple="multiple" id="r_file1" name="r_file1"
-						onchange="readURL(this);">
-						<img id="cook1" src="images/western.jpg" width=300 height=350/></td>
-				</tr>
-				<tr>
-					<td>내용</td>
-					<td><textarea rows="5" cols="30" name="content1"></textarea></td>
-				</tr>
-				<tbody id="tbody_id2"></tbody>
+			<c:forEach var="item2" items="${map2 }">
+			<tr>
+				<td>조리사진</td>
+				<td><input multiple type="file" name='r_file1'>
+				<img src="./r_images/${item2.key }" width=300 />
+				</td>
+			</tr>
+ 			<tr>
+				<td>내용</td>
+				<td><textarea rows="5" cols="30" name='content1'>${item2.value }</textarea></td>
+			</tr>
+			</c:forEach>
+			<tbody id="tbody_id2"></tbody>
 			</table>
 			<br>
-
+			
 			<table>
 				<tr>
 					<td>
@@ -207,6 +213,9 @@ input[type=file] {
 			<br>
 			<br> <input type="button" value="확인" id="sub">
 
+			
+			<input type="button" value="확인" id="sub">
+			
 		</form>
 	</div>
 </body>

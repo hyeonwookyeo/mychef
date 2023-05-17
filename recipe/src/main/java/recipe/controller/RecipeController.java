@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import recipe.model.R_recomm;
 import recipe.model.RecipeBoard;
 import recipe.service.PagingPgm;
 import recipe.service.RecipeService;
@@ -290,6 +291,65 @@ public class RecipeController {
 		return "r_view";
 	}
 	
+
+	// 상세페이지 - 추천
+		@RequestMapping("r_recomm")
+		public String r_recomm(R_recomm recomm) {
+			
+			System.out.println("r_recomm 진입");
+			
+			int result;
+			String id = recomm.getId();
+			int rnum = recomm.getRnum();
+			
+			System.out.println(id);
+			System.out.println(rnum);
+			
+			result = service.r_recomm(recomm);
+			
+			System.out.println(result);
+			
+			if(result==0) {
+				System.out.println("추천누른 아이디가 존재하지않음.");
+			return "redirect:r_recomm_add?id="+id+"&rnum="+rnum;
+			}else {
+				System.out.println("추천누른 아이디가 존재함.");
+				return "redirect:r_recomm_remove?id="+id+"&rnum="+rnum;
+			}
+		}
+		
+	// 상세페이지 - 추천 증가
+		@RequestMapping("r_recomm_add")
+		public String r_recomm_add(R_recomm recomm, Model model) {
+			
+			System.out.println("r_recomm_add 진입");
+			
+			
+			service.r_recomm_add(recomm);
+			int result = service.r_recomm_count(recomm);		// 추천갯수
+			
+			System.out.println("추천갯수:"+result);
+			model.addAttribute("result", result);
+			
+			return "result/r_recomm_result";
+		}
+		
+	// 상세페이지 - 추천 감소
+		@RequestMapping("r_recomm_remove")
+		public String r_recomm_remove(R_recomm recomm, Model model) {
+			
+			System.out.println("r_recomm_remove 진입");
+			
+			service.r_recomm_delete(recomm);
+			int result = service.r_recomm_count(recomm);
+			
+			System.out.println("추천갯수:"+result);
+			model.addAttribute("result", result);
+			
+			return "result/r_recomm_result";
+		}
+		
+			
 // 레시피 수정폼	
 	@RequestMapping("r_updateForm")
 	public String rupdate(String pageNum, int rnum, Model model) {

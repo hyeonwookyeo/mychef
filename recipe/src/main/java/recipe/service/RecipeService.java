@@ -2,6 +2,7 @@ package recipe.service;
 
 import java.util.List;
 
+import recipe.model.R_recomm;
 import recipe.model.RecipeBoard;
 
 public interface RecipeService {
@@ -20,5 +21,16 @@ public interface RecipeService {
 	int r_update(RecipeBoard board);
 // 글삭제
 	int r_delete(int rnum);
-	
+
+// 추천
+	int r_recomm(R_recomm recomm);
+		
+// 추천수 증가
+	void r_recomm_add(R_recomm recomm);
+		
+// 추천 갯수 리턴	
+	int r_recomm_count(R_recomm recomm);
+
+// 추천수 감소
+	void r_recomm_delete(R_recomm recomm);	
 }

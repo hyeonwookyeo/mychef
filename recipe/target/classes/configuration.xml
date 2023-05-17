@@ -12,6 +12,8 @@
 	<typeAlias alias="reboard" type="recipe.model.RecipeReBoard" />
 	
 	<typeAlias alias="test" type="recipe.model.Test" />
+	
+	<typeAlias alias="recomm" type="recipe.model.R_recomm"/>
 	</typeAliases>
 	
 
