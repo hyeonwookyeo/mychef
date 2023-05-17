@@ -106,7 +106,7 @@ $(document).ready(function() {
 
 		<div>
 		<image id="r_recomm_img" src="images/comm.jpg" width="50" height="50"></image>
-		<div id="r_recomm"></div>
+		<div id="r_recomm">추천수 : ${recomm_state }</div>
 		</div><br>
 
 

@@ -253,13 +253,14 @@ public class RecipeController {
 	
 // 레시피 상세페이지 
 	@RequestMapping("r_view")
-	public String rview(int rnum,String rpageNum,String pageNum, Model model) {
+	public String rview(int rnum,String rpageNum,String pageNum, Model model, R_recomm recomm) {
 		
 		if (rpageNum == null || rpageNum.equals("")) {
 			rpageNum = "1";
 		}
 		
 		service.r_readcountUpdate(rnum);
+		int recomm_state = service.r_recomm_count(recomm);
 		
 		RecipeBoard board = service.r_select(rnum);
 		
@@ -282,6 +283,7 @@ public class RecipeController {
 			map2.put(rfile[i], content[i]);
 		}
 		
+		model.addAttribute("recomm_state", recomm_state);
 		model.addAttribute("pageNum", pageNum);
 		model.addAttribute("rpageNum", rpageNum);
 		model.addAttribute("board", board);
