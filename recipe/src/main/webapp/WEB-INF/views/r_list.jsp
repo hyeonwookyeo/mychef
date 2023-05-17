@@ -52,7 +52,8 @@
 
 		</div>
 		
-		<form action="list?pageNum=1">
+		<form action="r_listForm?pageNum=1">
+			<input type="hidden" name="category" value="${category}">
 			<select name="search">
 				<option value="subject"
 					<c:if test="${search=='subject'}">selected="selected" </c:if>>제목</option>
@@ -62,34 +63,33 @@
 					<c:if test="${search=='writer'}">selected="selected" </c:if>>작성자</option>
 				<option value="subcon"
 					<c:if test="${search=='subcon'}">selected="selected" </c:if>>제목+내용</option>
-			</select> <input type="text" name="keyword"> <input type="submit"
-				value="확인">
+			</select> <input type="text" name="keyword"> <input type="submit" value="확인">
 		</form>
 		<ul>
 			<c:if test="${not empty keyword}">
 				<c:if test="${pp.startPage > pp.pagePerBlk }">
-					<li><a
-						href="${path }/list/pageNum/${pp.startPage - 1}?search=${search}&keyword=${keyword}">이전</a></li>
+					<li><a href="r_listForm?category=${category }&pageNum=${pp.startPage - 1}&search=${search}&keyword=${keyword}">이전</a></li>
+					
 				</c:if>
 				<c:forEach var="i" begin="${pp.startPage}" end="${pp.endPage}">
-					<li <c:if test="${pp.currentPage==i}">class="active"</c:if>><a
-						href="${path }/list/pageNum/${i}?search=${search}&keyword=${keyword}">${i}</a></li>
+					<li <c:if test="${pp.currentPage==i}">class="active"</c:if>>
+					<a href="r_listForm?category=${category }&pageNum=${i}&search=${search}&keyword=${keyword}">${i}</a></li>					
 				</c:forEach>
 				<c:if test="${pp.endPage < pp.totalPage}">
-					<li><a
-						href="${path }/list/pageNum/${pp.endPage + 1}?search=${search}&keyword=${keyword}">다음</a></li>
+					<li><a href="r_listForm?category=${category }&pageNum=${pp.endPage + 1}&search=${search}&keyword=${keyword}">다음</a></li>
 				</c:if>
 			</c:if>
+			
 			<c:if test="${empty keyword}">
 				<c:if test="${pp.startPage > pp.pagePerBlk }">
-					<li><a href="r_listForm?pageNum=${pp.startPage - 1}">이전</a></li>
+					<li><a href="r_listForm?category=${category }&pageNum=${pp.startPage - 1}">이전</a></li>
 				</c:if>
 				<c:forEach var="i" begin="${pp.startPage}" end="${pp.endPage}">
 					<li <c:if test="${pp.currentPage==i}">class="active"</c:if>><a
-						href="r_listForm?pageNum=${i}">${i}</a></li>
+						href="r_listForm?category=${category }&pageNum=${i}">${i}</a></li>
 				</c:forEach>
 				<c:if test="${pp.endPage < pp.totalPage}">
-					<li><a href="r_listForm?pageNum=${pp.endPage + 1}">다음</a></li>
+					<li><a href="r_listForm?category=${category }&pageNum=${pp.endPage + 1}">다음</a></li>
 				</c:if>
 			</c:if>
 		</ul>

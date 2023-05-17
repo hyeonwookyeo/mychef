@@ -86,9 +86,11 @@ public class RecipeController {
 		model.addAttribute("list", list);
 		model.addAttribute("number", number);
 		model.addAttribute("pp", pp);
+		model.addAttribute("category", board.getCategory());
+		
 		// 검색
-//		model.addAttribute("search", board.getSearch());
-//		model.addAttribute("keyword", board.getKeyword());
+		model.addAttribute("search", board.getSearch());
+		model.addAttribute("keyword", board.getKeyword());
 		
 		return "r_list";
 	}

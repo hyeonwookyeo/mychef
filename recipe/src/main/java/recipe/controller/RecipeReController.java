@@ -72,19 +72,21 @@ public class RecipeReController {
 
 // 댓글 등록	
 	@RequestMapping("r_insertRe")
-	public String r_insertRe(RecipeReBoard reboard,String pageNum,
+	public String r_insertRe(RecipeReBoard reboard,String pageNum, @RequestParam("re_rfile1") MultipartFile mf1,
 								MultipartHttpServletRequest mtfRequest,Model model,
 								HttpServletRequest request, HttpServletResponse response) throws IOException  {
 		
 		System.out.println("r_insertRe에 도착했습니다");
 		
 		List<MultipartFile> fileList = mtfRequest.getFiles("re_rfile1");
-		if(fileList.isEmpty()) {
+		
+		
+//		if(fileList.isEmpty() || fileList==null || fileList.equals(null)) {
+		if(mf1.isEmpty()) {
 			System.out.println("업로드할 사진이 없습니다");
-		}else {
-			
+		}
 		
-		
+		if(!fileList.isEmpty()) {
 		String path = request.getRealPath("reply_images");
 		String finalFileName = "";
 		
@@ -117,8 +119,9 @@ public class RecipeReController {
 		
 		System.out.println("finalFileName:" + finalFileName);
 		reboard.setRe_rfile(finalFileName);
-		}
+   } // if end
 		
+		reboard.setRe_rfile("");
 		int result = reService.r_insertRe(reboard);
 		if(result == 1) System.out.println("댓글 작성 성공");		
 //		model.addAttribute("result", result);
