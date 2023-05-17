@@ -160,8 +160,7 @@ input[type=file] {
 					</tr>
 				</thead>
 				<tbody id="tbody_id">
-				</tbody>
-				<c:forEach var="item1" items="${map1 }">
+					<c:forEach var="item1" items="${map1 }">
 					<c:set var="i" value="${i+1}" />
 					<tr>
 						<td style='text-align: center;' class="row_idx">${i }</td>
@@ -172,11 +171,13 @@ input[type=file] {
 						<td style='text-align: center;'>
 							<div class="btn-group">
 								<button type='button' 
-								class='btn btn-primary btn-sm'name='dtl_del'>삭제</button>
+								class='btn btn-primary btn-sm'name='ingre_del'>삭제</button>
 							</div>
 						</td>
 					</tr>
 				</c:forEach>
+				</tbody>
+
 				<tr>
 					<td colspan=3></td>
 					<td style="width: 20%; text-align: center; vertical-align: middle;">
@@ -197,7 +198,7 @@ input[type=file] {
 						src="images/western.jpg" width=300 height=350 /></td>
 				</tr>
 				<tr>
-					<td>내용</td>
+					<td>조리설명</td>
 					<td><textarea rows="5" cols="30" name="content1"></textarea></td>
 				</tr>
 				<tbody id="tbody_id2"></tbody>
