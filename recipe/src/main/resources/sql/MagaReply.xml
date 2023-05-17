@@ -5,14 +5,25 @@
 <mapper namespace="MagaReply">
 
 	<select id="slist" parameterType="int" resultType="magareply">
-		select * from maga_re where maga_num=#{maga_num} order by magare_num desc
+		select * from maga_re where maga_num=#{maga_num} order by ref asc, magare_num asc
 	</select>
 	
 	<insert id="insert" parameterType="magareply">
-		<selectKey keyProperty="magare_num" order="BEFORE" resultType="int">
-			select nvl(max(magare_num),0) + 1 from maga_re
-		</selectKey>
-		insert into maga_re values (#{magare_num},#{maga_num},#{id},#{re_content},sysdate,'y',#{magare_num},0,0)	
+	
+		<!-- <selectKey keyProperty="magare_num" order="BEFORE" resultType="int">
+			<if test="ref_lef == '0'">
+				select nvl(max(magare_num),0) + 1 from maga_re
+			</if>
+		</selectKey> -->
+			
+			insert into maga_re values (maga_re_seq.nextval,#{maga_num},#{id},#{re_content},sysdate,'y',
+			<if test="ref_lev == 0">
+				maga_re_seq.nextval,
+			</if>
+			<if test="ref_lev != 0">
+				#{magare_num},
+			</if>
+				0,#{ref_lev})	
 	</insert>
 	
 	<delete id="delete" parameterType="int">

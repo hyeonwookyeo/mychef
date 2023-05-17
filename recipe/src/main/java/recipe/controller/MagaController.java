@@ -69,16 +69,10 @@ public class MagaController {
 		model.addAttribute("magalist", magalist);
 		model.addAttribute("no",no);
 		model.addAttribute("pp",pp);
+		model.addAttribute("page",page);
 
 		model.addAttribute("search",maga.getSearch());
 		model.addAttribute("keyword",maga.getKeyword());
-		
-		System.out.println("magalist:"+magalist);
-		System.out.println("no:"+no);
-		System.out.println("pp:"+pp);
-		System.out.println("search:"+maga.getSearch());
-		System.out.println("keyword:"+maga.getKeyword());
-		System.out.println(total);
 
 		return "maga_list";
 	}
@@ -154,8 +148,8 @@ public class MagaController {
 		// 세션id로 추천중복 확인
 		String id = (String)session.getAttribute("id");
 		MagaRecomBean magarecom = new MagaRecomBean();
-		magarecom.setMagarecom_num(maga_num);
-		magarecom.setNickname(id);
+		magarecom.setMaga_num(maga_num);
+		magarecom.setId(id);
 		System.out.println("id :"+id);
 		System.out.println("maga_num :"+maga_num);
 		

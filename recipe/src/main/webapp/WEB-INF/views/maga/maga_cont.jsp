@@ -23,9 +23,9 @@
 			var ffData = {
 					"maga_num" : $("#maga_num").val(),
 					"id" : $("#id").val(),
-					"re_content" : $("#re_content").val()
+					"re_content" : $("#re_content").val(),
+					"ref_lev" : $("#ref_lev").val()
 			}
-			
 			$.ajax({
 				type : 'post',
 				url : 'sInsert',
@@ -53,6 +53,7 @@
 		location.href="maga_recom?maga_num="+maga_num+"&page="+page;
 	}
 </script>
+
 <body>
 	<table border=1 align=center>
 		<tr>
@@ -72,7 +73,6 @@
 			<td><pre>${maga.content}</pre></td>
 		</tr>
 	</table>
-	${id }
 	
 	<input type="button" value="추천" class="recom_button"
 		onclick="recom(${maga.maga_num},${page})"/>
@@ -90,6 +90,7 @@
 		
 	<form name="frm" id="frm" align="center">
 		<input type="hidden" name="id" id="id" value="${sessionScope.id}">
+		<input type="hidden" name="ref_lev" id="ref_lev" value="0">
 		<input type="hidden" name="maga_num" id="maga_num" value="${maga.maga_num}"> 댓글 :
 		<textarea rows="3" cols="50" name="re_content" id="re_content"></textarea>
 		<input type="button" value="확인" id="repInsert">

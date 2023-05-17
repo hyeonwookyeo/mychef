@@ -6,12 +6,12 @@
 
 	<!-- 추천 중복 확인 -->
 	<select id="maga_recomcheck" parameterType="magarecom" resultType="int">
-		select count(*) from maga_recom where magarecom_num = #{magarecom_num} and nickname = #{nickname}
+		select count(*) from maga_recom where maga_num = #{maga_num} and id = #{id}
 	</select>
 	
 	<!-- 추천인 입력 -->
 	<insert id="maga_recominsert" parameterType="magarecom">
-		insert into maga_recom values (#{magarecom_num},#{nickname})
+		insert into maga_recom values (#{maga_num},#{id})
 	</insert>
 	
 </mapper>

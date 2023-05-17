@@ -5,7 +5,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <!DOCTYPE html>
 <html>
@@ -27,88 +27,93 @@
 			<td>조회수</td>
 		</tr>
 
+		<!-- 리스트 출력 -->
 		<c:if test="${empty magalist}">
 			<tr>
 				<td colspan="5">데이터가 없습니다</td>
 			</tr>
 		</c:if>
-			
+
 		<c:if test="${not empty magalist}">
-		<c:set var="num" value="${listcount-(page-1)*10}" />
+			<c:set var="num" value="${no}" />
 
-		<c:forEach var="b" items="${magalist}">
-			<tr>
-				<td><c:out value="${num}" /> <c:set var="num" value="${num-1}" />
-				</td>
-				<td>
-					<a href="maga_cont?maga_num=${b.maga_num}&page=${page}&state=cont">
-						${b.subject}</a>
-				</td>
-				<td>관리자</td>
+			<c:forEach var="b" items="${magalist}">
+				<tr>
+					<td><c:out value="${num}" /> <c:set var="num"
+							value="${num-1}" /></td>
+					<td><a
+						href="maga_cont?maga_num=${b.maga_num}&page=${page}&state=cont">
+							${b.subject}</a></td>
+					<td>관리자</td>
 
-				<td>
-				    <c:set var="today" value="<%=new Timestamp(System.currentTimeMillis()) %>" />	
-				    <c:set var="today" value="${fn:substring(today, 0, 10) }"/>
-					
-					<c:set var="dbtoday" value="${fn:substring(b.mdate, 0, 10) }"/>
-				    		
-					<c:if test="${today == dbtoday}">
-						<fmt:formatDate value="${b.mdate}" pattern="HH:mm:ss" />
-					</c:if> 
-					
-					<c:if test="${today != dbtoday}">
-						<fmt:formatDate value="${b.mdate}" pattern="yyyy-MM-dd" />
-					</c:if>
-				</td>
-				<td>
-					${b.readcount}
-				</td>
-			</tr>
-		</c:forEach>
+					<td><c:set var="today"
+							value="<%=new Timestamp(System.currentTimeMillis())%>" /> <c:set
+							var="today" value="${fn:substring(today, 0, 10) }" /> <c:set
+							var="dbtoday" value="${fn:substring(b.mdate, 0, 10) }" /> <c:if
+							test="${today == dbtoday}">
+							<fmt:formatDate value="${b.mdate}" pattern="HH:mm:ss" />
+						</c:if> <c:if test="${today != dbtoday}">
+							<fmt:formatDate value="${b.mdate}" pattern="yyyy-MM-dd" />
+						</c:if></td>
+					<td>${b.readcount}</td>
+				</tr>
+			</c:forEach>
 		</c:if>
 	</table>
-	
+
+
 	<!-- 검색창 -->
 	<form action="maga_list" align=center>
-			<input type="hidden" name="pageNum" value="1"> 
-			<select	name="search">
-				<option value="subject"	<c:if test="${search=='subject'}">selected="selected" </c:if>>제목</option>
-				<option value="content"	<c:if test="${search=='content'}">selected="selected" </c:if>>내용</option>
-				<option value="subcon"	<c:if test="${search=='subcon'}">selected="selected" </c:if>>제목+내용</option>
-			</select> 
-			<input type="text" name="keyword"> 
-			<input type="submit" value="확인">
-		</form>
-		
+		<input type="hidden" name="pageNum" value="1"> <select
+			name="search">
+			<option value="subject"
+				<c:if test="${search=='subject'}">selected="selected" </c:if>>제목</option>
+			<option value="content"
+				<c:if test="${search=='content'}">selected="selected" </c:if>>내용</option>
+			<option value="subcon"
+				<c:if test="${search=='subcon'}">selected="selected" </c:if>>제목+내용</option>
+		</select> <input type="text" name="keyword"> <input type="submit"
+			value="확인">
+	</form>
+	
+	
+	<!-- 페이징 번호 -->
 	<div align=center>
-	
-	<c:if test="${page < 11}">
-		[<]&nbsp;
-	</c:if>
-	
-	<c:if test="${page >= 11}">
-		<a href="maga_list?page=${startpage-10}">[<]</a>
-	</c:if>
-	
-	<c:forEach var="a" begin="${startpage}" end="${endpage}">
-		<c:if test="${a == page}">
-			[${a}]
+		<!-- 검색 했을때 -->
+		<c:if test="${not empty keyword}">
+			<c:if test="${pp.startPage > pagePerBlk}">
+				<a
+					href="maga_list?page=${startPage-1}&search=${search}&keyword=${keyword}">이전</a>
+			</c:if>
+
+			<c:forEach var="i" begin="${pp.startPage}" end="${pp.endPage}">
+				<c:if test="${pp.currentPage==i}">[${i}]</c:if>
+				<c:if test="${pp.currentPage!=i}">
+					<a href="maga_list?page=${i}&search=${search}&keyword=${keyword}">[${i}]</a></c:if>
+			</c:forEach>
+			<c:if test="${pp.endPage < pp.totalPage }">
+				<a
+					href="maga_list?page=${startPage+1}&search=${search}&keyword=${keyword}">다음</a>
+			</c:if>
 		</c:if>
-		
-		<c:if test="${a != page}">
-			<a href="maga_list?page=${a}">[${a}]</a>
+
+		<!-- 검색 안할때 -->
+		<c:if test="${empty keyword}">
+			<c:if test="${pp.startPage > pp.pagePerBlk}">
+				<a href="maga_list?page=${pp.startPage-1}">이전</a>
+			</c:if>
+			<c:forEach var="i" begin="${pp.startPage}" end="${pp.endPage}">
+				<c:if test="${pp.currentPage==i}">[${i}]</c:if>
+				<c:if test="${pp.currentPage!=i}">
+					<a href="maga_list?page=${i}">[${i}]</a></c:if>
+			</c:forEach>
+			<c:if test="${pp.endPage < pp.totalPage}">
+				<a href="maga_list?page=${pp.endPage+1}">다음</a>
+			</c:if>
 		</c:if>
-	</c:forEach>
-	
-	<c:if test="${maxpage < startpage+10}">
-		[>]&nbsp;
-	</c:if>
-	
-	<c:if test="${maxpage >= startpage+10}">
-		<a href="maga_list?page=${endpage+1}">[>]</a>
-	</c:if>
 	</div>
-	
+
+
 	<a href="maga_write">글쓰기</a>
 
 </body>
