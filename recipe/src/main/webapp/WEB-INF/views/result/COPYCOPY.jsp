@@ -89,22 +89,11 @@
 			e.preventDefault();
 			$('#thumbnail1').click();
 		});
-/* 		function(){
-			for(int i=1; i<10; i++){
-				$("#cook"+i).click(function(e) {
-					e.preventDefault();
-					$("#r_file"+i).click();
-				});	
-			}
-		} */
  		$("#cook1").click(function(e) {
 			e.preventDefault();
 			$("#r_file1").click();
 		}); 
 	});
-	function changeValue(obj) {
-		alert(obj.value);
-	}
 	
 </script>
 <style type="text/css">
@@ -145,7 +134,9 @@ input[type=file] {
 					<td>간략한 설명</td>
 					<td><input type="text" name="description" value="${board.description }"></td>
 				</tr>
-				</table> <br><br>
+				</table> 
+				<br>
+				<br>
 				
 			<table border=1>
 			<thead>

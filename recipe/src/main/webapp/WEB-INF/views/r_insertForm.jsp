@@ -11,6 +11,8 @@
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
 <script type="text/javascript">
+	var i = 2;
+
 	$(document).on('click', "[name='ingre_del']", function() {
 		var tr = $(this).parent().parent().parent();
 		$("#tbody_id:last > tr:last").remove();
@@ -19,7 +21,7 @@
 	function cook_del() {
 		$("#tbody_id2:last > tr:last").remove();
 		$("#tbody_id2:last > tr:last").remove();
-	};
+	}
 
 	function ingre_add() {
 		var row_idx = parseInt($(".row_idx:last").text()) + 1;
@@ -29,8 +31,7 @@
 		var str = "";
 
 		str += "<tr>";
-		str += "	<td style='text-align:center;' class=\"row_idx\">" + row_idx
-				+ "</td>";
+		str += "	<td style='text-align:center;' class=\"row_idx\">" + row_idx + "</td>";
 		str += "	<td style='text-align:center;'><input type=\"text\" name='ingre'></td>";
 		str += "	<td style='text-align:center;'><input type=\"text\" name='capacity'></td>";
 		str += "	<td style='text-align:center;'>";
@@ -44,13 +45,12 @@
 	}
 
 	function cook_add() {
-		var cook_increase = parseInt($(".cook_increase:last").text()) + 1;
-		var r_file_increase = parseInt($(".r_file_increase:last").text()) + 1;
 		var str = "";
 
 		str += "<tr>";
 		str += "	<td>조리사진</td>";
-		str += "	<td><input multiple=\"multiple\" type=\"file\" name='r_file1'></td>";
+		str += "	<td><input multiple=\"multiple\" type=\"file\" name='r_file1' onchange=\"readURL(this, 'cook" + i + "');\" id=\"r_file" + i + "\">";
+		str += "		<img id=\"cook" + i + "\" src=\"images/western.jpg\" width=300 height=350 class=\"preview\"/></td>";
 		str += "</tr>";
 		str += "<tr>";
 		str += "	<td>내용</td>";
@@ -58,53 +58,41 @@
 		str += "</tr>";
 
 		$("#tbody_id2:last").append(str);
+		i++;
 	}
+
+	$(document).on('click', '.preview', function(e) {
+		var id = $(this).attr('id');
+		e.preventDefault();
+		if (id == 'cookmain') {
+			$('#thumbnail1').click();
+		} else if (id.startsWith('cook')) {
+			var num = id.substring(4);
+			$("#r_file" + num).click();
+		}
+	});
 
 	$(function() {
 		$('#sub').click(function() {
 			$('form').serialize();
 			$('form').attr('method', 'POST');
 			$('form').attr('action', 'r_insert');
-			//	    $('form').attr('enctype', 'multipart/form-data');
 			$('form').submit();
 		});
 	});
 
-	function readURL(input) {
+	function readURL(input, imgId) {
 		if (input.files && input.files[0]) {
 			var reader = new FileReader();
 			reader.onload = function(e) {
-				document.getElementById('preview').src = e.target.result;
+				document.getElementById(imgId).src = e.target.result;
 			};
 			reader.readAsDataURL(input.files[0]);
-		} else {
-			document.getElementById('preview').src = "";
+		}else {
+			document.getElementById(imgId).src = "";
 		}
 	}
-
-	$(function() {
-
-		$('#preview').click(function(e) {
-			e.preventDefault();
-			$('#thumbnail1').click();
-		});
-/* 		function(){
-			for(int i=1; i<10; i++){
-				$("#cook"+i).click(function(e) {
-					e.preventDefault();
-					$("#r_file"+i).click();
-				});	
-			}
-		} */
- 		$("#cook1").click(function(e) {
-			e.preventDefault();
-			$("#r_file1").click();
-		}); 
-	});
-	function changeValue(obj) {
-		alert(obj.value);
-	}
-	
+		
 </script>
 <style type="text/css">
 input[type=file] {
@@ -136,8 +124,8 @@ input[type=file] {
 				<tr>
 					<td>대표사진</td>
 					<td><input type="file" id="thumbnail1" name="thumbnail1"
-						onchange="readURL(this);" class="file">
-						<img id="preview" src="images/chinese.jpg" width=300 height=350/></td>
+						onchange="readURL(this,'cookmain');">
+						<img id="cookmain" src="images/chinese.jpg" width=300 height=350 class="preview"/></td>
 				</tr>
 				<tr>
 					<td>간략한 설명</td>
@@ -179,9 +167,10 @@ input[type=file] {
 				<tr>
 					<td>조리사진</td>
 					<td><input type="file" multiple="multiple" id="r_file1" name="r_file1"
-						onchange="readURL(this);">
-						<img id="cook1" src="images/western.jpg" width=300 height=350/></td>
+						onchange="readURL(this,'cook1');">
+						<img id="cook1" src="images/western.jpg" width=300 height=250 class="preview"/></td>
 				</tr>
+				
 				<tr>
 					<td>내용</td>
 					<td><textarea rows="5" cols="30" name="content1"></textarea></td>

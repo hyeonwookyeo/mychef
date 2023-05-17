@@ -82,14 +82,14 @@
 			</c:if>
 			<c:if test="${empty keyword}">
 				<c:if test="${pp.startPage > pp.pagePerBlk }">
-					<li><a href="r_listFor?pageNum=${pp.startPage - 1}">이전</a></li>
+					<li><a href="r_listForm?pageNum=${pp.startPage - 1}">이전</a></li>
 				</c:if>
 				<c:forEach var="i" begin="${pp.startPage}" end="${pp.endPage}">
 					<li <c:if test="${pp.currentPage==i}">class="active"</c:if>><a
-						href="r_listFor?pageNum=${i}">${i}</a></li>
+						href="r_listForm?pageNum=${i}">${i}</a></li>
 				</c:forEach>
 				<c:if test="${pp.endPage < pp.totalPage}">
-					<li><a href="r_listFor?pageNum=${pp.endPage + 1}">다음</a></li>
+					<li><a href="r_listForm?pageNum=${pp.endPage + 1}">다음</a></li>
 				</c:if>
 			</c:if>
 		</ul>
