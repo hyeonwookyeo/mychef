@@ -40,6 +40,10 @@
 	<update id="readcountUpdate" parameterType="int">
 		update recipe set readcount = readcount+1 where rnum=#{rnum}
 	</update>
+	
+	<update id="recomm_update" parameterType="int">
+		update recipe set recom = #{recom}
+	</update>
 
 	<select id="select" parameterType="int" resultType="board">
 		select * from recipe where rnum=#{rnum}

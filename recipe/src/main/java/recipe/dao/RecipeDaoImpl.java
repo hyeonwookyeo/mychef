@@ -80,7 +80,20 @@ public class RecipeDaoImpl implements RecipeDao{
 	public void r_recomm_delete(R_recomm recomm) {
 		// TODO Auto-generated method stub
 		sst.delete("r_recommns.delete", recomm);
-	}	
+	}
+
+	@Override
+	public int r_recomm_plus(int rnum) {
+		// TODO Auto-generated method stub
+		return sst.update("r_recommns.plus", rnum);
+	}
+
+	@Override
+	public void r_recomm_minus(int rnum) {
+		// TODO Auto-generated method stub
+		sst.update("r_recommns.minus", rnum);
+	}
+
 	
 	
 }

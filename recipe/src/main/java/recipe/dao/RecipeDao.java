@@ -37,6 +37,12 @@ public interface RecipeDao {
 
 // 추천 감소
 	void r_recomm_delete(R_recomm recomm);
+
+// 추천수 증가 상태
+	int r_recomm_plus(int rnum);
 	
+// 추천수 감소 상태
+	void r_recomm_minus(int rnum);
+
 
 }

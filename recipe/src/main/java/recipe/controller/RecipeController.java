@@ -48,7 +48,7 @@ public class RecipeController {
 
 // 레시피 목록 폼		
 	@RequestMapping("r_listForm")
-	public String Recipelist(String pageNum, RecipeBoard board, Model model) {
+	public String Recipelist(String pageNum, RecipeBoard board, Model model, R_recomm recomm) {
 
 		System.out.println("r_list");
 
@@ -70,7 +70,7 @@ public class RecipeController {
 		PagingPgm pp = new PagingPgm(total, rowPerPage, currentPage);
 		System.out.println("startRow" + startRow);
 		System.out.println("endRow" + endRow);
-
+		
 		board.setStartRow(startRow);
 		board.setEndRow(endRow);
 		// List<Board> list = bs.list(startRow, endRow);
@@ -302,12 +302,13 @@ public class RecipeController {
 
 	// 상세페이지 - 추천 증가
 	@RequestMapping("r_recomm_add")
-	public String r_recomm_add(R_recomm recomm, Model model) {
+	public String r_recomm_add(R_recomm recomm, RecipeBoard board, Model model) {
 
 		System.out.println("r_recomm_add 진입");
 
 		service.r_recomm_add(recomm);
 		int result = service.r_recomm_count(recomm); // 추천갯수
+		int number = service.r_recomm_plus(board.getRnum());
 
 		System.out.println("추천갯수:" + result);
 		model.addAttribute("result", result);
@@ -317,11 +318,12 @@ public class RecipeController {
 
 	// 상세페이지 - 추천 감소
 	@RequestMapping("r_recomm_remove")
-	public String r_recomm_remove(R_recomm recomm, Model model) {
+	public String r_recomm_remove(R_recomm recomm, RecipeBoard board, Model model) {
 
 		System.out.println("r_recomm_remove 진입");
 
 		service.r_recomm_delete(recomm);
+		service.r_recomm_minus(board.getRnum());
 		int result = service.r_recomm_count(recomm);
 
 		System.out.println("추천갯수:" + result);
@@ -483,12 +485,13 @@ public class RecipeController {
 
 // 삭제
 	@RequestMapping("r_delete")
-	public String r_delete(int rnum, Model model, HttpServletResponse response) throws IOException {
+	public String r_delete(RecipeBoard board, Model model, HttpServletResponse response) throws IOException {
 
 		System.out.println("r_delete 진입");
 
-		int result = service.r_delete(rnum);
+		int result = service.r_delete(board.getRnum());
 
+		model.addAttribute("category", board.getCategory());
 		model.addAttribute("result", result);
 
 		PrintWriter out = response.getWriter();

@@ -79,8 +79,19 @@ public class RecipeServiceImpl implements RecipeService{
 	public void r_recomm_delete(R_recomm recomm) {
 		// TODO Auto-generated method stub
 		dao.r_recomm_delete(recomm);
-	}	
-	
+	}
+
+	@Override
+	public int r_recomm_plus(int rnum) {
+		// TODO Auto-generated method stub
+		return dao.r_recomm_plus(rnum);
+	}
+
+	@Override
+	public void r_recomm_minus(int rnum) {
+		// TODO Auto-generated method stub
+		dao.r_recomm_minus(rnum);
+	}
 
 
 

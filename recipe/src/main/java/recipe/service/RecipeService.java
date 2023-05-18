@@ -32,5 +32,12 @@ public interface RecipeService {
 	int r_recomm_count(R_recomm recomm);
 
 // 추천수 감소
-	void r_recomm_delete(R_recomm recomm);	
+	void r_recomm_delete(R_recomm recomm);
+	
+// 추천수 상승 상태
+	int r_recomm_plus(int rnum);
+	
+// 추천수 감소 상태
+	void r_recomm_minus(int rnum);
+	
 }

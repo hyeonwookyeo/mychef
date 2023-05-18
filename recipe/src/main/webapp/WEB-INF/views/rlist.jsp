@@ -18,10 +18,69 @@
 
 <script>
 
-function delete_check(){
+function r_update_check(){
+	var text="리뷰를 수정하시겠습니까?";
+	if(confirm(text)){
+		
+		var id = $(this).attr('id');
+		
+		var rnum = $('#rre_num'+id);	
+		var content = $('#content'+id);
+		var formData = new FormData();
+		var inputFile = $("#file"+id)
+		var files = inputFile[0].files;
+		for(var i=0; i<files.length; i++) {
+			formData.append("uploadFile", files[i]);
+		}
+		
+		formData.append("rre_num", rre_num);	
+		formData.append("re_content", re_content);	
+		
+		if(content==""){
+			alert("리플을 입력하세요.");
+			$("#re_content").focus();
+		}else{
+			$.ajax({
+				type:"post",
+				url:"r_updateRe",
+				data:formData,
+				processData: false,
+				contentType: false,
+				enctype : 'multipart/form-data',
+				success:function(result){
+					$('#listRe').load('r_listRe?pageNum=1&rnum=${board.rnum}');
+					alert("리뷰가 수정되었습니다");
+					frm.re_content.value = '';
+					frm.re_rfile1.value = '';	
+				}
+			});
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+			
+		}
+		
+		
+	
+	
+} // function 종료
+
+
+/* function r_delete_check(){
 	var text="리뷰를 삭제하시겠습니까?";
 	if(confirm(text)){
 		$.ajax({
+			var data = "리뷰가 삭제되었습니다.";
+			
+			
+			var id = $(this).attr('id');
+			
 		    type : "post",
 		    url : "r_deleteRe",
 		    data : {"rre_num":${rre_num}},
@@ -30,7 +89,7 @@ function delete_check(){
 		    }
 		});
 	}
-}	
+}	 */
     /* var str = "";
 function r_image_add() {
     var r_image_grp = "<c:out value='${test}'/>"; 
@@ -66,28 +125,30 @@ $(document).ready(function() {
 			</c:if>
 			<c:if test="${not empty rlist}">
 				<c:forEach var="reboard" items="${rlist }">
+				<form id="frm${reboard.rre_num }" name="frm" enctype="multipart/form-data">
 					<div>
-					<input type="hidden" name="rre_num" value="${reboard.rre_num }">
+					<input type="hidden" id="rre_num${reboard.rre_num }" name="rre_num" value="${reboard.rre_num }">
 					<input type="hidden" name="rnum" value="${reboard.rnum }">
-						<span><img src=""/></span>닉네임${reboard.id }
+						<span><img src=""/></span>닉네임${reboard.id }<br>
 						<!-- 이미지 뿌려주기 작업 -->
-						<%-- <c:set var="test" value="${reboard.re_rfile }"></c:set> --%>
+						<div id="file${reboard.rre_num }">
 						<c:forTokens items="${reboard.re_rfile }" delims="]" var="test">
-						${test } <br>
-						<img src="./reply_images/${test }" width="200px"><br>
-						</c:forTokens>
-						<!-- <div id="r_image_add"></div> -->						
 						
-						<div>${reboard.re_content }</div>
+						<img src="./reply_images/${test }" width="200px">
+						</c:forTokens>
+						</div>
+						
+						<div id="content${reboard.rre_num }">${reboard.re_content }</div>
 						<div><fmt:formatDate value="${reboard.re_date }" pattern="yyyy년 MM월 dd일"/></div>
 						<c:if test="${!empty id and id == reboard.id}">
 							<div>
-								<button type="button" onClick="update_check()">수정</button>
-								<button type="button" onClick="delete_check()">삭제</button>
+								<button type="button" id="${reboard.rre_num } " onClick="r_update_check()">리뷰 수정</button>
+								<button type="button" id="dsdfsdfsdfsdfssdfsdfsdfsdf${reboard.rre_num } " onClick="r_delete_check()">리뷰 삭제</button>
 							</div>
 						</c:if>
 						<br>
 					</div>
+				</form>
 				</c:forEach>
 			</c:if>   
 		</div>

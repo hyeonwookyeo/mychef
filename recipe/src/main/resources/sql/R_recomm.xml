@@ -20,10 +20,18 @@
 		insert into R_recomm values(#{rnum}, #{id})
 	</insert>
 	
+	<!-- 목록/추천수 증가 -->
+	<update id="plus" parameterType="int">
+		update recipe set recom = recom+1 where rnum=#{rnum}
+	</update>
+	
 	<!-- 추천 감소 -->
 	<delete id="delete" parameterType="recomm">
 		delete from R_recomm where id=#{id} and rnum=#{rnum}
 	</delete>
 	
-	
+	<!-- 목록/추천수 감소 -->
+	<update id="minus" parameterType="int">
+		update recipe set recom = recom-1 where rnum=#{rnum}
+	</update>
 </mapper>

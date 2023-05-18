@@ -30,7 +30,7 @@ function delete_check(){
 		    success : function(data){
 		    	if(data == 1){
 					  alert("글이 삭제되었습니다.");
-					  location.href="r_listForm?pageNum=${pageNum}"
+					  location.href="r_listForm?category=${board.category}&pageNum=${pageNum}"
 				  }else{
 					  alert("글 삭제를 실패했습니다.");
 				  } 
@@ -108,13 +108,15 @@ $(function(){
 				enctype : 'multipart/form-data',
 				success:function(result){
 					$('#listRe').load('r_listRe?pageNum=1&rnum=${board.rnum}');
+					alert("리뷰가 작성되었습니다");
 					frm.re_content.value = '';
+					frm.re_rfile1.value = '';	
 				}
 			});
 		}
 	});
 });
-</script>
+</script>	
 </head>
 <body>
 					
@@ -153,8 +155,8 @@ $(function(){
 
 		<c:if test="${!empty id and id == board.id}">
 			<div align="center">
-				<a href="r_updateForm?pageNum=${pageNum }&rnum=${board.rnum }">수정</a>
-				<button type="button" onClick="delete_check()">삭제</button>
+				<a href="r_updateForm?pageNum=${pageNum }&rnum=${board.rnum }">글 수정</a>
+				<button type="button" onClick="delete_check()">글 삭제</button>
 			</div>
 		</c:if>
 		<div><a href="r_listForm?&pageNum=${pageNum }&category=${board.category}">목록</a></div>

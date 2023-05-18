@@ -108,64 +108,65 @@ public class RecipeReController {
 		reboard.setRe_rfile(finalFileName);
 		System.out.println("finalFileName:" + finalFileName);
 
-		/*
-		 * List<MultipartFile> fileList = mhr.getFiles("re_rfile1");
-		 * 
-		 * String re_multipath = request.getRealPath("reply_images"); String
-		 * finalFileName = "";
-		 * 
-		 * System.out.println("re_multipath:" + re_multipath);
-		 * 
-		 * for (MultipartFile mf : fileList) { String re_multiFileName =
-		 * mf.getOriginalFilename(); // 원본 파일 명 int re_multiFileSize =
-		 * (int)mf.getSize(); // 파일 사이즈
-		 * 
-		 * String extension =
-		 * re_multiFileName.substring(re_multiFileName.lastIndexOf("."),
-		 * re_multiFileName.length()); UUID uuid = UUID.randomUUID();
-		 * 
-		 * String re_multiNewFileName = uuid.toString() + extension;
-		 * 
-		 * System.out.println("multiFileName : " + re_multiFileName);
-		 * System.out.println("multiNewFileName : " + re_multiNewFileName);
-		 * System.out.println("multiFileSize : " + re_multiFileSize);
-		 * 
-		 * finalFileName += re_multiNewFileName+"]";
-		 * 
-		 * try { mf.transferTo(new File(re_multipath + "/" + re_multiNewFileName)); }
-		 * catch (IllegalStateException e) { // TODO Auto-generated catch block
-		 * e.printStackTrace(); } catch (IOException e) { // TODO Auto-generated catch
-		 * block e.printStackTrace(); } }
-		 * 
-		 * System.out.println("finalFileName:" + finalFileName);
-		 * reboard.setRe_rfile(finalFileName);
-		 * 
-		 */
 
 		int result = reService.r_insertRe(reboard);
 		if (result == 1)
 			System.out.println("댓글 작성 성공");
-//			model.addAttribute("result", result);
-//			
-//			PrintWriter out = response.getWriter();
-//			out.print(result);
+		
 		int rnum = reboard.getRnum();
 
-		return "redirect:r_listRe?rnum=" + rnum + "&pageNum=" + pageNum;
+		return "redirect:r_listRe?rnum=" + rnum;
 	}
 
 // 댓글수정	
 	@RequestMapping("r_updateRe")
-	public String r_updateRe(RecipeReBoard reboard, int rnum, Model model, HttpServletResponse response)
-			throws IOException {
-
+	public String r_updateRe(RecipeReBoard reboard, String pageNum, MultipartHttpServletRequest mhr,
+			HttpServletRequest request, HttpServletResponse response, MultipartFile[] uploadFile, Model model)
+			throws Exception {
+		
 		System.out.println("r_updateRe 진입");
+		
+		String re_multipath = request.getRealPath("reply_images");
+		String finalFileName = "";
+		
+		System.out.println("path:"+re_multipath);
 
-		reService.r_updateRe(reboard);
+		for (MultipartFile multipartFile : uploadFile) {
+			String re_multiFileName = multipartFile.getOriginalFilename();
+			int re_multiFileSize = (int) multipartFile.getSize();
 
-		return "redirect:r_listRe?rnum=" + rnum + "&pageNum=" + 1;
+			String extension = re_multiFileName.substring(re_multiFileName.lastIndexOf("."), re_multiFileName.length());
+			UUID uuid = UUID.randomUUID();
+
+			String re_multiNewFileName = uuid.toString() + extension;
+
+			System.out.println("multiFileName : " + re_multiFileName);
+			System.out.println("multiNewFileName : " + re_multiNewFileName);
+			System.out.println("multiFileSize : " + re_multiFileSize);
+
+			finalFileName += re_multiNewFileName + "]";
+
+			try {
+				multipartFile.transferTo(new File(re_multipath + "/" + re_multiNewFileName));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
+		reboard.setRe_rfile(finalFileName);
+		System.out.println("finalFileName:" + finalFileName);
+
+
+		int result = reService.r_updateRe(reboard);
+		if (result == 1)
+			System.out.println("댓글 작성 성공");
+		
+		int rnum = reboard.getRnum();
+
+		return "redirect:r_listRe?rnum=" + rnum;
 	}
 
+	
 // 댓글삭제	
 	@RequestMapping("r_deleteRe")
 	public String r_deleteRe(int rre_num, int rnum, Model model, HttpServletResponse response) throws IOException {
@@ -174,7 +175,7 @@ public class RecipeReController {
 
 		reService.r_deleteRe(rre_num);
 
-		return "redirect:r_listRe?rnum=" + rnum + "&pageNum=" + 1;
+		return "redirect:r_listRe?rnum=" + rnum;
 	}
 
 } // class end
