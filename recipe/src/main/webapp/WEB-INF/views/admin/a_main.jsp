@@ -19,7 +19,7 @@
 	
 	<script>
 	$(function(){
-		 $("#adminmain").load("boardlist");
+		 $("#adminmain").load("n_boardlist");
 	});
     </script>	
 	

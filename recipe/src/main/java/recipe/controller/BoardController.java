@@ -24,9 +24,9 @@ public class BoardController {
 	private BoardService service;
 	
 // 글작성폼
-	@RequestMapping("boardform")
-	public String boardform() {
-		return"board/boardform";
+	@RequestMapping("n_boardform")
+	public String n_boardform() {
+		return"board/n_boardform";
 	}
 	
 	
@@ -68,13 +68,13 @@ public class BoardController {
 		int result = service.insert(board);
 		if(result == 1) System.out.println("글작성 성공");
 		
-		return "admin/admin_view";
+		return "admin/a_main";
 	}
 	
 	
 	// 글목록
-	@RequestMapping("boardlist")
-	public String boardlist(@RequestParam(value="page",defaultValue = "1" ) int page,
+	@RequestMapping("n_boardlist")
+	public String n_boardlist(@RequestParam(value="page",defaultValue = "1" ) int page,
 			                Model model) {
 		
 		int limit = 10;  // 한 페이지에 출력한 데이터 갯수
@@ -85,8 +85,8 @@ public class BoardController {
 		int listcount = service.getCount();  // 총데이터 수 
 		System.out.println("listcount:"+listcount);
 		
-		List<Board> boardlist = service.getBoardList(page);
-		System.out.println("boardlist:"+boardlist);
+		List<Board> n_boardlist = service.getn_boardlist(page);
+		System.out.println("n_boardlist:"+n_boardlist);
 		
 		// 총페이지 수 
 		int pageCount = listcount/limit + ((listcount % limit ==0)?0:1);
@@ -98,18 +98,18 @@ public class BoardController {
 		
 		model.addAttribute("page", page);
 		model.addAttribute("listcount", listcount);
-		model.addAttribute("boardlist", boardlist);
+		model.addAttribute("n_boardlist", n_boardlist);
 		model.addAttribute("pageCount", pageCount);
 		model.addAttribute("startPage", startPage);
 		model.addAttribute("endPage", endPage);
 		
 		
-		return "board/boardlist";
+		return "board/n_boardlist";
 	}
 	
 	// 상세 페이지 : 조회수 1증가 + 상세정보 구하기
-	@RequestMapping("boardcontent")
-	public String boardcontent(@RequestParam("ann_Num") int ann_Num,
+	@RequestMapping("n_boardcontent")
+	public String n_boardcontent(@RequestParam("ann_Num") int ann_Num,
 			@RequestParam("page") String page,
 			Model model) {
 		
@@ -121,21 +121,21 @@ public class BoardController {
 		model.addAttribute("content", content);
 		model.addAttribute("page", page);
 		
-		return "board/boardcontent";
+		return "board/n_boardcontent";
 	}
 	
 	// 수정 폼
 	
 	
-	  @RequestMapping("boardupdateform") 
-	  public String boardupdateform(int ann_Num,
+	  @RequestMapping("n_boardupdateform") 
+	  public String n_boardupdateform(int ann_Num,
 	  String page, Model model ) {
 	  
 	  Board board = service.getBoard(ann_Num); // 상세정보 구하기
 	  model.addAttribute("board", board); 
 	  model.addAttribute("page", page);
 	  
-	  return"board/boardupdateform";
+	  return"board/n_boardupdateform";
 	  
 	  }
 	 
@@ -153,7 +153,7 @@ public class BoardController {
 //		model.addAttribute("board", board);
 		model.addAttribute("page", page);
 	
-	return "board/updateresult"; 
+	return "board/n_updateresult"; 
 	
 	}
 	
@@ -174,7 +174,7 @@ public class BoardController {
 		model.addAttribute("result", result);
 		model.addAttribute("page", page);
 		
-		return "board/deleteresult";
+		return "board/n_deleteresult";
 		
 	}
 	

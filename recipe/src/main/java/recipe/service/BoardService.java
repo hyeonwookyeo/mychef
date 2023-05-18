@@ -24,10 +24,10 @@ public class BoardService {
 		return dao.getCount();
 	}
 
-	public List<Board> getBoardList(int page) {
-		// TODO Auto-generated method stub
-		return dao.getBoardList(page);
-	}
+	/*
+	 * public List<Board> getBoards(int page) { // TODO Auto-generated method stub
+	 * return dao.getn_BoardList(page); }
+	 */
 
 	public void updatecount(int ann_Num) {
 		// TODO Auto-generated method stub
@@ -48,6 +48,13 @@ public class BoardService {
 		// TODO Auto-generated method stub
 		return dao.delete(ann_Num);
 	}
+
+	public List<Board> getn_boardlist(int page) {
+		// TODO Auto-generated method stub
+		return dao.getn_BoardList(page);
+	}
+
+	
 
 }
 

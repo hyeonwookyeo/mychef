@@ -7,7 +7,7 @@
 <title>글작성</title>
 </head>
 
-<%@include file="../include/header.jsp"%>
+<%@include file="../include/a_header.jsp"%>
 
 
 <body>
@@ -55,4 +55,4 @@
 </html>
 
 
-<%@include file="../include/footer.jsp"%>
+<%@include file="../include/a_footer.jsp"%>

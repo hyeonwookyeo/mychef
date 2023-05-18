@@ -12,7 +12,7 @@
 <c:if test="${result == 1 }">
   <script>
     alert("글삭제 성공");
-    location.href="boardlist?page=${page}";
+    location.href="n_boardlist?page=${page}";
   </script>
 </c:if>
 

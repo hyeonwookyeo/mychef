@@ -3,8 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -52,8 +50,7 @@ body {
 
 </head>
 
-
-<%@include file="../include/header.jsp"%>
+<%@include file="../include/a_header.jsp"%>
 <br>
 
 
@@ -84,17 +81,15 @@ body {
 				</tr>
 				<tr>
 					<td>첨부파일</td>
-					<td>
-						<c:if test="${!empty board.aFile }">
+					<td><c:if test="${!empty board.aFile }">
 							<img src="./upload/${board.aFile }" width="200" height="100">
-						</c:if>
-					</td>
+						</c:if></td>
 				</tr>
 				<tr>
 					<td colspan=2 align=center><input type="button" value="목록"
-						onclick="location.href='boardlist?page=${page}'"> <input
+						onclick="location.href='n_boardlist?page=${page}'"> <input
 						type="button" value="수정"
-						onclick="location.href='boardupdateform?ann_Num=${board.ann_Num }&page=${page}'">
+						onclick="location.href='n_boardupdateform?ann_Num=${board.ann_Num }&page=${page}'">
 
 						<input type="button" value="삭제"
 						onclick="del(${board.ann_Num}, ${page})"></td>
@@ -103,5 +98,5 @@ body {
 </body>
 </html>
 
-<%@include file="../include/footer.jsp"%>
+<%@include file="../include/a_footer.jsp"%>
 

@@ -24,7 +24,7 @@ public class BoardDao {
 		return session.selectOne("boardns.count");
 	}
 
-	public List<Board> getBoardList(int page) {
+	public List<Board> getn_BoardList(int page) {
 		// TODO Auto-generated method stub
 		return session.selectList("boardns.list", page);
 	}
@@ -48,7 +48,7 @@ public class BoardDao {
 		// TODO Auto-generated method stub
 		return session.delete("delete", ann_Num);
 	}
-	
+
 
 }
 

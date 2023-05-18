@@ -1,16 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="../include/header.jsp"%>
+<%@ include file="../include/a_header.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <body>
 	<form action="admin_insert" method="post">
 		<table border=1 align=center>
-			<caption><h2>관리자 등록</h2></caption>
+			<caption>
+				<h2>관리자 등록</h2>
+			</caption>
 			<tr>
 				<th>아이디</th>
-				<td><input type="text" size=30 id="admin_id"
-					name="admin_id"></td>
+				<td><input type="text" size=30 id="admin_id" name="admin_id"></td>
 			</tr>
 			<tr>
 				<th>비밀번호</th>
@@ -24,5 +25,5 @@
 		</table>
 	</form>
 	</div>
-<%@ include file="../include/footer.jsp" %>
+	<%@ include file="../include/a_footer.jsp"%>
 </body>

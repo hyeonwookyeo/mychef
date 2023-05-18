@@ -12,7 +12,7 @@
 <c:if test="${result == 1 }">
   <script>
     alert("글수정 성공");
-    location.href="boardlist?page=${page}";
+    location.href="n_boardlist?page=${page}";
   </script>
 </c:if>
 

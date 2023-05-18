@@ -36,5 +36,7 @@
     <select id="nickname_check" parameterType="String" resultType="member">
      select * from member where nickname=#{nickname} and state=1
     </select>
+    
+   
 	
 </mapper>

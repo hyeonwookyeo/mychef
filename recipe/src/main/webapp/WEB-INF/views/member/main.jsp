@@ -11,8 +11,13 @@
 
 메인페이지 테스트 <br><br>
 
+
+
 테이블 전달테스트bbbb<br>
 <form action="main_test">
+
+
+
 	<input type="text" name="name"> <br>
 	<input type="text" name="age"> <br>
 	<input type="submit" value="테스트"> <br>
