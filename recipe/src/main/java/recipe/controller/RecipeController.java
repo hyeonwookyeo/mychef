@@ -225,7 +225,7 @@ public class RecipeController {
 		board.setCapacity(capacity);
 
 		int result = service.r_insert(board);
-		
+
 		model.addAttribute("category", board.getCategory());
 		model.addAttribute("result", result);
 
@@ -234,13 +234,14 @@ public class RecipeController {
 
 // 레시피 상세페이지 
 	@RequestMapping("r_view")
-	public String rview(int rnum, String rpageNum, String pageNum, Model model) {
+	public String rview(int rnum, String rpageNum, String pageNum, Model model, R_recomm recomm) {
 
 		if (rpageNum == null || rpageNum.equals("")) {
 			rpageNum = "1";
 		}
 
 		service.r_readcountUpdate(rnum);
+		int recomm_state = service.r_recomm_count(recomm);
 
 		RecipeBoard board = service.r_select(rnum);
 
@@ -263,6 +264,7 @@ public class RecipeController {
 			map2.put(rfile[i], content[i]);
 		}
 
+		model.addAttribute("recomm_state", recomm_state);
 		model.addAttribute("pageNum", pageNum);
 		model.addAttribute("rpageNum", rpageNum);
 		model.addAttribute("board", board);
@@ -360,10 +362,10 @@ public class RecipeController {
 //	수정
 	@RequestMapping("r_update")
 	public String r_update(@RequestParam("thumbnail1") MultipartFile mf1, MultipartHttpServletRequest mhr,
-							RecipeBoard board, HttpServletRequest request, Model model) throws Exception {
-		
+			RecipeBoard board, HttpServletRequest request, Model model) throws Exception {
+
 		System.out.println("update 진입");
-		
+
 // 조리사진 내용
 		String[] contentList = request.getParameterValues("content1");
 		String content = "";

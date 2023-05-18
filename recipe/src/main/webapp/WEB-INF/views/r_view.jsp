@@ -89,10 +89,11 @@ $(function(){
 		
 		for(var i=0; i<files.length; i++) {
 			formData.append("uploadFile", files[i]);
-			formData.append("id", id);
-			formData.append("rnum", rnum);
-			formData.append("re_content", re_content);
 		}
+		
+		formData.append("id", id);
+		formData.append("rnum", rnum);
+		formData.append("re_content", re_content);	
 		
 		if(re_content==""){
 			alert("리플을 입력하세요.");

@@ -46,7 +46,9 @@
 	</select>
 
 	<update id="update" parameterType="board">
-		update recipe set subject = #{subject} where rnum=#{rnum}
+		update recipe set category=#{category},thumbnail=#{thumbnail},subject=#{subject},
+		description=#{description},ingre=#{ingre},capacity=#{capacity},rfile=#{rfile},content=#{content}
+		where rnum=#{rnum}
 	</update>
 
 	<update id="delete" parameterType="int">

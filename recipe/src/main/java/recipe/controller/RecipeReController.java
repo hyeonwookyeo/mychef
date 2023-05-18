@@ -32,9 +32,9 @@ public class RecipeReController {
 // 댓글목록	
 	@RequestMapping("r_listRe")
 	public String r_listRe(String rpageNum, int rnum, Model model) {
-		
+
 		System.out.println("r_listRe 도착");
-		
+
 		final int rowPerPage = 5;
 		if (rpageNum == null || rpageNum.equals("")) {
 			rpageNum = "1";
@@ -42,26 +42,26 @@ public class RecipeReController {
 		int currentPage = Integer.parseInt(rpageNum);
 
 		int total = reService.getTotalRe(rnum);
-		
-		System.out.println("total:"+total);
-		System.out.println("rowPerPage"+rowPerPage);
-		System.out.println("currentPage"+currentPage);		
-		
+
+		System.out.println("total:" + total);
+		System.out.println("rowPerPage" + rowPerPage);
+		System.out.println("currentPage" + currentPage);
+
 		int startRow = (currentPage - 1) * rowPerPage + 1;
 		int endRow = startRow + rowPerPage - 1;
 		PagingPgm pp = new PagingPgm(total, rowPerPage, currentPage);
-		System.out.println("startRow"+startRow);
-		System.out.println("endRow"+endRow);
-		System.out.println("pp는 "+pp);
-		
+		System.out.println("startRow" + startRow);
+		System.out.println("endRow" + endRow);
+		System.out.println("pp는 " + pp);
+
 		RecipeReBoard reboard = new RecipeReBoard();
 		reboard.setStartRow(startRow);
 		reboard.setEndRow(endRow);
-		reboard.setRnum(rnum);		
-		
+		reboard.setRnum(rnum);
+
 		List<RecipeReBoard> rlist = reService.listRe(reboard);
-		System.out.println("rlist:"+rlist);
-		
+		System.out.println("rlist:" + rlist);
+
 		model.addAttribute("total", total);
 		model.addAttribute("rlist", rlist);
 		model.addAttribute("rnum", rnum);
@@ -70,116 +70,111 @@ public class RecipeReController {
 		return "rlist";
 	}
 
-	// 댓글 등록	
-		@RequestMapping("r_insertRe")
-		public String r_insertRe(RecipeReBoard reboard, String pageNum,
-								MultipartHttpServletRequest mhr,
-								HttpServletRequest request, HttpServletResponse response,
-								MultipartFile[] uploadFile,
-								Model model) throws Exception  {
-			
-			System.out.println("r_insertRe에 도착했습니다");
-			
-			String re_multipath = request.getRealPath("reply_images");
-			String finalFileName = "";
-			
-			for(MultipartFile multipartFile : uploadFile) {
-				String re_multiFileName = multipartFile.getOriginalFilename();
-				int re_multiFileSize = (int)multipartFile.getSize();
-				
-				String extension = re_multiFileName.substring(re_multiFileName.lastIndexOf("."), re_multiFileName.length());
-				UUID uuid = UUID.randomUUID();
-				
-				String re_multiNewFileName = uuid.toString() + extension;
-				
-	            System.out.println("multiFileName : " + re_multiFileName);
-	            System.out.println("multiNewFileName : " + re_multiNewFileName);
-	            System.out.println("multiFileSize : " + re_multiFileSize);
-				
-	            finalFileName += re_multiNewFileName + "]";
-	            
-				try {
-					multipartFile.transferTo(new File(re_multipath + "/" + re_multiNewFileName));
-				}catch(Exception e) {
-					e.printStackTrace();
-				}
-			}
-			
-			reboard.setRe_rfile(finalFileName);
-			System.out.println("finalFileName:" + finalFileName);
-			
-	/*
-			List<MultipartFile> fileList = mhr.getFiles("re_rfile1");
-			
-			String re_multipath = request.getRealPath("reply_images");
-			String finalFileName = "";
-			
-			System.out.println("re_multipath:" + re_multipath);
-			
-			for (MultipartFile mf : fileList) {
-	            String re_multiFileName = mf.getOriginalFilename(); // 원본 파일 명
-	            int re_multiFileSize = (int)mf.getSize(); // 파일 사이즈
+	// 댓글 등록
+	@RequestMapping("r_insertRe")
+	public String r_insertRe(RecipeReBoard reboard, String pageNum, MultipartHttpServletRequest mhr,
+			HttpServletRequest request, HttpServletResponse response, MultipartFile[] uploadFile, Model model)
+			throws Exception {
 
-	            String extension = re_multiFileName.substring(re_multiFileName.lastIndexOf("."), re_multiFileName.length());
-	            UUID uuid = UUID.randomUUID();
-	            
-	            String re_multiNewFileName = uuid.toString() + extension;
-	            
-	            System.out.println("multiFileName : " + re_multiFileName);
-	            System.out.println("multiNewFileName : " + re_multiNewFileName);
-	            System.out.println("multiFileSize : " + re_multiFileSize);
-	            
-	            finalFileName += re_multiNewFileName+"]";
-	            
-	            try {
-	                mf.transferTo(new File(re_multipath + "/" + re_multiNewFileName));
-	            } catch (IllegalStateException e) {
-	                // TODO Auto-generated catch block
-	                e.printStackTrace();
-	            } catch (IOException e) {
-	                // TODO Auto-generated catch block
-	                e.printStackTrace();
-	            }
+		System.out.println("r_insertRe에 도착했습니다");
+
+		String re_multipath = request.getRealPath("reply_images");
+		String finalFileName = "";
+		
+		System.out.println("path:"+re_multipath);
+
+		for (MultipartFile multipartFile : uploadFile) {
+			String re_multiFileName = multipartFile.getOriginalFilename();
+			int re_multiFileSize = (int) multipartFile.getSize();
+
+			String extension = re_multiFileName.substring(re_multiFileName.lastIndexOf("."), re_multiFileName.length());
+			UUID uuid = UUID.randomUUID();
+
+			String re_multiNewFileName = uuid.toString() + extension;
+
+			System.out.println("multiFileName : " + re_multiFileName);
+			System.out.println("multiNewFileName : " + re_multiNewFileName);
+			System.out.println("multiFileSize : " + re_multiFileSize);
+
+			finalFileName += re_multiNewFileName + "]";
+
+			try {
+				multipartFile.transferTo(new File(re_multipath + "/" + re_multiNewFileName));
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-			
-			System.out.println("finalFileName:" + finalFileName);
-			reboard.setRe_rfile(finalFileName);
-			
-	*/
-			
-			int result = reService.r_insertRe(reboard);
-			if(result == 1) System.out.println("댓글 작성 성공");		
+		}
+
+		reboard.setRe_rfile(finalFileName);
+		System.out.println("finalFileName:" + finalFileName);
+
+		/*
+		 * List<MultipartFile> fileList = mhr.getFiles("re_rfile1");
+		 * 
+		 * String re_multipath = request.getRealPath("reply_images"); String
+		 * finalFileName = "";
+		 * 
+		 * System.out.println("re_multipath:" + re_multipath);
+		 * 
+		 * for (MultipartFile mf : fileList) { String re_multiFileName =
+		 * mf.getOriginalFilename(); // 원본 파일 명 int re_multiFileSize =
+		 * (int)mf.getSize(); // 파일 사이즈
+		 * 
+		 * String extension =
+		 * re_multiFileName.substring(re_multiFileName.lastIndexOf("."),
+		 * re_multiFileName.length()); UUID uuid = UUID.randomUUID();
+		 * 
+		 * String re_multiNewFileName = uuid.toString() + extension;
+		 * 
+		 * System.out.println("multiFileName : " + re_multiFileName);
+		 * System.out.println("multiNewFileName : " + re_multiNewFileName);
+		 * System.out.println("multiFileSize : " + re_multiFileSize);
+		 * 
+		 * finalFileName += re_multiNewFileName+"]";
+		 * 
+		 * try { mf.transferTo(new File(re_multipath + "/" + re_multiNewFileName)); }
+		 * catch (IllegalStateException e) { // TODO Auto-generated catch block
+		 * e.printStackTrace(); } catch (IOException e) { // TODO Auto-generated catch
+		 * block e.printStackTrace(); } }
+		 * 
+		 * System.out.println("finalFileName:" + finalFileName);
+		 * reboard.setRe_rfile(finalFileName);
+		 * 
+		 */
+
+		int result = reService.r_insertRe(reboard);
+		if (result == 1)
+			System.out.println("댓글 작성 성공");
 //			model.addAttribute("result", result);
 //			
 //			PrintWriter out = response.getWriter();
 //			out.print(result);
-			int rnum = reboard.getRnum();
+		int rnum = reboard.getRnum();
 
-			return "redirect:r_listRe?rnum="+rnum+"&pageNum="+pageNum;
-		}
+		return "redirect:r_listRe?rnum=" + rnum + "&pageNum=" + pageNum;
+	}
 
 // 댓글수정	
 	@RequestMapping("r_updateRe")
-	public String r_updateRe(RecipeReBoard reboard,int rnum, Model model,
-							HttpServletResponse response) throws IOException {
-		
+	public String r_updateRe(RecipeReBoard reboard, int rnum, Model model, HttpServletResponse response)
+			throws IOException {
+
 		System.out.println("r_updateRe 진입");
-		
+
 		reService.r_updateRe(reboard);
-		
-		return "redirect:r_listRe?rnum="+rnum+"&pageNum="+1;
-	} 
+
+		return "redirect:r_listRe?rnum=" + rnum + "&pageNum=" + 1;
+	}
 
 // 댓글삭제	
-	@RequestMapping("r_deleteRe") 
-	public String r_deleteRe(int rre_num,int rnum, Model model,
-							HttpServletResponse response) throws IOException {
-								
-		System.out.println("r_deleteRe 진입");					
-		
+	@RequestMapping("r_deleteRe")
+	public String r_deleteRe(int rre_num, int rnum, Model model, HttpServletResponse response) throws IOException {
+
+		System.out.println("r_deleteRe 진입");
+
 		reService.r_deleteRe(rre_num);
- 
-		return "redirect:r_listRe?rnum="+rnum+"&pageNum="+1;
+
+		return "redirect:r_listRe?rnum=" + rnum + "&pageNum=" + 1;
 	}
- 
- } // class end
+
+} // class end
