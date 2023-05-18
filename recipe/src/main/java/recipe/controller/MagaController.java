@@ -2,6 +2,7 @@
 package recipe.controller;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -65,7 +66,7 @@ public class MagaController {
 		// 목록 구하기
 		int no = total - startRow + 1;		// 화면 출력 번호
 		List<MagaBean> magalist = magaService.getMagaList(maga);
-
+		
 		model.addAttribute("magalist", magalist);
 		model.addAttribute("no",no);
 		model.addAttribute("pp",pp);
@@ -127,13 +128,13 @@ public class MagaController {
 		
 		MagaBean maga = magaService.maga_cont(maga_num);
 		
-//		String path = request.getRealPath("WEB-INF/images");
-//		String fname = maga.getMfile();
-//		
-//		if (fname != null) {		// 첨부파일이 있으면ㄴ
-//			File file = new File(path +"/"+fname);
-//			file.delete();			// 첨부파일 삭제
-//		}
+		String path = request.getRealPath("upload");
+		String fname = maga.getMfile();
+		
+		if (fname != null) {		// 첨부파일이 있으면
+			File file = new File(path +"/"+fname);
+			file.delete();			// 첨부파일 삭제
+		}
 		
 		int result = magaService.maga_del(maga_num);
 		System.out.println(result);

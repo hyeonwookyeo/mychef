@@ -24,4 +24,7 @@ public interface MagaService {
 	public int maga_recomcheck(MagaRecomBean magarecom) throws Exception;
 	
 	public void maga_recominsert(MagaRecomBean magarecom) throws Exception;
+
+	public void re_cnt(int maga_num);
+
 }

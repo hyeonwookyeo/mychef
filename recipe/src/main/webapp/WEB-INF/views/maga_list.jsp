@@ -16,7 +16,7 @@
 <body>
 	<!-- 매거진 리스트 -->
 	<h2>매거진 목록</h2>
-	글 개수 : ${listcount}
+	글 개수 : ${pp.total}
 
 	<table border=1 align=center>
 		<tr>
@@ -39,11 +39,11 @@
 
 			<c:forEach var="b" items="${magalist}">
 				<tr>
-					<td><c:out value="${num}" /> <c:set var="num"
+					<td><c:out value="${num}" /> <c:set var="num"	
 							value="${num-1}" /></td>
 					<td><a
 						href="maga_cont?maga_num=${b.maga_num}&page=${page}&state=cont">
-							${b.subject}</a></td>
+							${b.subject}</a> [${b.re_cnt}]</td>
 					<td>관리자</td>
 
 					<td><c:set var="today"
@@ -51,9 +51,9 @@
 							var="today" value="${fn:substring(today, 0, 10) }" /> <c:set
 							var="dbtoday" value="${fn:substring(b.mdate, 0, 10) }" /> <c:if
 							test="${today == dbtoday}">
-							<fmt:formatDate value="${b.mdate}" pattern="HH:mm:ss" />
+							<fmt:formatDate value="${b.mdate}" pattern="HH:mm" />
 						</c:if> <c:if test="${today != dbtoday}">
-							<fmt:formatDate value="${b.mdate}" pattern="yyyy-MM-dd" />
+							<fmt:formatDate value="${b.mdate}" pattern="yyyy.MM.dd" />
 						</c:if></td>
 					<td>${b.readcount}</td>
 				</tr>
@@ -83,7 +83,7 @@
 		<c:if test="${not empty keyword}">
 			<c:if test="${pp.startPage > pagePerBlk}">
 				<a
-					href="maga_list?page=${startPage-1}&search=${search}&keyword=${keyword}">이전</a>
+					href="maga_list?page=${startPage-10}&search=${search}&keyword=${keyword}">이전</a>
 			</c:if>
 
 			<c:forEach var="i" begin="${pp.startPage}" end="${pp.endPage}">
@@ -100,7 +100,7 @@
 		<!-- 검색 안할때 -->
 		<c:if test="${empty keyword}">
 			<c:if test="${pp.startPage > pp.pagePerBlk}">
-				<a href="maga_list?page=${pp.startPage-1}">이전</a>
+				<a href="maga_list?page=${pp.startPage-10}">이전</a>
 			</c:if>
 			<c:forEach var="i" begin="${pp.startPage}" end="${pp.endPage}">
 				<c:if test="${pp.currentPage==i}">[${i}]</c:if>

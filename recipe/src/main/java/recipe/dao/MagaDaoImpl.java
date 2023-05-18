@@ -70,4 +70,9 @@ public class MagaDaoImpl implements MagaDao {
 		session.insert("MagaRecom.maga_recominsert",magarecom);
 	}
 
+	public void re_cnt(int maga_num) {
+		session.update("Maga.maga_re_cnt",maga_num);
+		
+	}
+
 }

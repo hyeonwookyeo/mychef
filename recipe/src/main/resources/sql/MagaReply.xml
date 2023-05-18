@@ -27,7 +27,7 @@
 	</insert>
 	
 	<delete id="delete" parameterType="int">
-		delete from maga_re where magare_num=#{magare_num}
+		delete from maga_re where ref=#{magare_num}
 	</delete>
 	
 	<update id="update" parameterType="magareply">

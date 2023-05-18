@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -55,38 +56,50 @@
 </script>
 
 <body>
+	<form>
 	<table border=1 align=center>
 		<tr>
-			<td>제목</td>
 			<td>${maga.subject}</td>
+			<td><fmt:formatDate value="${maga.mdate}" pattern="YYYY.MM.dd HH:mm	"/> </td>
 		</tr>
 
-		<tr>
+		<%-- <tr>
 			<th>프로필사진</th>
 			<td><c:if test="${empty maga.mfile}">&nbsp;</c:if> 
 			<c:if test="${!empty maga.mfile}">
 					<img src="./upload/${maga.mfile}" height="100" width="100" />
 			</c:if></td>
-		</tr>
+		</tr> --%>	
 		<tr>
-			<td>내용</td>
-			<td><pre>${maga.content}</pre></td>
+			<td>관리자</td><td>조회 : ${maga.readcount}&nbsp;&nbsp;&nbsp;&nbsp;추천 : ${maga.recom}</td>
+		</tr>
+		<%-- <tr>
+			<td colspan=2><img src="./upload/${maga.mfile}" height="200px" width="200px"/><br>
+							<textarea rows=20 cols=80 >${maga.content}</textarea></td>
+		</tr> --%>
+		<tr>
+			<td><div contentEditable="true">
+			<img src="./upload/${maga.mfile}" height="200px" width="200px"/><br>
+				${maga.content }
+			</div></td>
 		</tr>
 	</table>
-	
-	<input type="button" value="추천" class="recom_button"
-		onclick="recom(${maga.maga_num},${page})"/>
-	<div id="recomm">추천수</div><br>
-	<div>${maga.recom}</div>
+	</form>
 
-	<br><br>
+	<div align=right>
 	<input type="button" value="수정" class="input_button"
 		onclick=""/>
 	<input type="button" value="삭제" class="input_button"
 		onclick="maga_del_config(${maga.maga_num},${page})"/>
 	<input type="button" value="목록" class="input_button"
 		onclick="location='maga_list?page=${page}'" /><br>
+	</div>
 		
+	<div align=center>
+	<input type="button" value="추천" class="recom_button"
+		onclick="recom(${maga.maga_num},${page})"/>
+		추천수 : ${maga.recom}
+	</div><br>
 		
 	<form name="frm" id="frm" align="center">
 		<input type="hidden" name="id" id="id" value="${sessionScope.id}">

@@ -61,4 +61,9 @@ public class MagaServiceImpl implements MagaService {
 		
 	}
 
+	@Override
+	public void re_cnt(int maga_num) {
+		magaDao.re_cnt(maga_num);
+	}
+
 }

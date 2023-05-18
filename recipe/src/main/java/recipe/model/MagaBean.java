@@ -12,6 +12,7 @@ public class MagaBean {
 	private String mfile;
 	private Timestamp mdate;
 	private String state; // 0 삭제, 1 존재
+	private int re_cnt;
 
 	// 검색
 	private String search;
@@ -115,6 +116,14 @@ public class MagaBean {
 
 	public void setEndRow(int endRow) {
 		this.endRow = endRow;
+	}
+
+	public int getRe_cnt() {
+		return re_cnt;
+	}
+
+	public void setRe_cnt(int re_cnt) {
+		this.re_cnt = re_cnt;
 	}
 
 }

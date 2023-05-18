@@ -32,6 +32,8 @@ public class ReplyMagaController {
 	@RequestMapping("/sInsert")
 	public String sInsert(ReplyMagaBean rmaga, Model model) throws Exception {
 		rms.insert(rmaga);
+		if(rmaga.getRef_lev().equals("0"))
+		ms.re_cnt(rmaga.getMaga_num());
 
 		return "redirect:slist?maga_num=" + rmaga.getMaga_num();
 	}
