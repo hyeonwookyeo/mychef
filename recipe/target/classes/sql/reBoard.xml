@@ -8,6 +8,10 @@
 		select count(*) from recipe_re where rnum=#{rnum}
 	</select>
 	
+	<select id="getList" parameterType="int" resultType="String">
+		select re_rfile from recipe_re where rnum=#{rnum}
+	</select>
+	
 	<select id="list" parameterType="reboard" resultType="reboard">
 		select * from (select rownum rn, a.* from (
 		  select * from recipe_re where rnum=#{rnum} order by rre_num desc	) a	)

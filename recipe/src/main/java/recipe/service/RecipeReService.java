@@ -18,4 +18,6 @@ public interface RecipeReService {
 	
 	int r_deleteRe(int rre_num);
 
+	List<String> getList(int rnum);
+
 }

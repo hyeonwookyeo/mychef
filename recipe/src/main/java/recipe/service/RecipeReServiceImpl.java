@@ -45,4 +45,10 @@ public class RecipeReServiceImpl implements RecipeReService{
 		return redao.r_deleteRe(rre_num);
 	}
 
+	@Override
+	public List<String> getList(int rnum) {
+		// TODO Auto-generated method stub
+		return redao.getList(rnum);
+	}
+
 }

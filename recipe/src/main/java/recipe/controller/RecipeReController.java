@@ -4,7 +4,11 @@ package recipe.controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.UUID;
 
@@ -61,12 +65,35 @@ public class RecipeReController {
 		reboard.setRnum(rnum);		
 		
 		List<RecipeReBoard> rlist = reService.listRe(reboard);
+	
+		RecipeReBoard getOne = new RecipeReBoard();
+		List<String> img = new ArrayList<String>();
+		img = reService.getList(rnum);
+//		List<String> reply_img = new ArrayList<String>();
+//		Map<Integer, String[]> map = new HashMap<Integer, String[]>();
+		List<String[]> reply_imgList = new ArrayList<>();
+		
+		for(int i=0; i<img.size(); i++) {
+			System.out.println("imgname:"+img.get(i));
+//			String[] reply_img = img.get(i).split("]");
+			String[] reply_imgArr = img.get(i).split("\\+");
+			System.out.println("reply_imgArr[0]:"+reply_imgArr[0]);
+			System.out.println("reply_imgArr[1]:"+reply_imgArr[1]);
+			reply_imgList.add(reply_imgArr);
+//			map.put(i, reply_imgArr);
+		}
+		
+		
 		System.out.println("rlist:"+rlist);
 		
+//		model.addAttribute("map",map);
+		model.addAttribute("reply_img", reply_imgList);
 		model.addAttribute("total", total);
 		model.addAttribute("rlist", rlist);
 		model.addAttribute("rnum", rnum);
 		model.addAttribute("pp", pp);
+		
+		
 
 		return "rlist";
 	}
@@ -97,7 +124,7 @@ public class RecipeReController {
             System.out.println("multiNewFileName : " + re_multiNewFileName);
             System.out.println("multiFileSize : " + re_multiFileSize);
 			
-            finalFileName += re_multiNewFileName + "]";
+            finalFileName += re_multiNewFileName + "+";
             
 			try {
 				multipartFile.transferTo(new File(re_multipath + "/" + re_multiNewFileName));

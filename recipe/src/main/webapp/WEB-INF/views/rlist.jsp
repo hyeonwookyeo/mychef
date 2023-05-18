@@ -64,7 +64,16 @@ function delete_check(){
 					<input type="hidden" name="rre_num" value="${reboard.rre_num }">
 					<input type="hidden" name="rnum" value="${reboard.rnum }">
 						<span><img src=""/></span>닉네임${reboard.id }
-						<div><img src="reply_images/${reboard.re_rfile}" width=500/></div>
+						
+ 						<%-- <c:forEach var="reply_images" items="${reply_imgList }"> --%>
+ 						<c:forTokens items="${reboard.re_rfile }" delims="+" var="test">
+ 						<img src="./reply_images/${test}" >
+ 						<br>
+ 						
+ 						</c:forTokens>
+						<div>${reply_images }</div>
+						</c:forEach> 
+
 						<div>${reboard.re_content }</div>
 						<div>${reboard.re_date }</div>
 						<c:if test="${!empty id and id == reboard.id}">
@@ -75,7 +84,7 @@ function delete_check(){
 						</c:if>
 						<br>
 					</div>
-				</c:forEach>
+				<%-- </c:forEach> --%>
 				
 			</c:if>   
 
