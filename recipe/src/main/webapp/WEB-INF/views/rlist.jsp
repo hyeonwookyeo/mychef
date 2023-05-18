@@ -17,7 +17,15 @@
 
 
 <script>
+$(function() {
+	$('.r_update_check').click(function() {
+		var id = $(this).attr('id');
+		var content = $('#content_'+id).text();	// replytext / id:td_태그의 내용을 추출
+		$('#content_'+id).html("<textarea id=\"content"+id+"\">"+content+"</textarea>");
+	});
+});
 
+/*
 function r_update_check(){
 	var text="리뷰를 수정하시겠습니까?";
 	if(confirm(text)){
@@ -70,7 +78,7 @@ function r_update_check(){
 	
 	
 } // function 종료
-
+*/
 
 /* function r_delete_check(){
 	var text="리뷰를 삭제하시겠습니까?";
@@ -138,11 +146,11 @@ $(document).ready(function() {
 						</c:forTokens>
 						</div>
 						
-						<div id="content${reboard.rre_num }">${reboard.re_content }</div>
+						<div id="content_${reboard.rre_num }">${reboard.re_content }</div>
 						<div><fmt:formatDate value="${reboard.re_date }" pattern="yyyy년 MM월 dd일"/></div>
 						<c:if test="${!empty id and id == reboard.id}">
 							<div>
-								<button type="button" id="${reboard.rre_num } " onClick="r_update_check()">리뷰 수정</button>
+								<input type="button" id="${reboard.rre_num } " value="리뷰 수정" class="r_update_check">
 								<button type="button" id="dsdfsdfsdfsdfssdfsdfsdfsdf${reboard.rre_num } " onClick="r_delete_check()">리뷰 삭제</button>
 							</div>
 						</c:if>
