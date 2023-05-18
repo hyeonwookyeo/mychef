@@ -77,10 +77,17 @@
 		$('#sub').click(function() {
 			$('form').serialize();
 			$('form').attr('method', 'POST');
-			$('form').attr('action', 'r_insert');
+			$('form').attr('action', 'r_update');
 			$('form').submit();
 		});
+		$("#cancel").click(function(){
+			if(confirm("수정을 취소하고 글로 돌아가시겠습니까?")){
+				history.go(-1);
+			}
+		})
 	});
+	
+	
 
 	function readURL(input, imgId) {
 		if (input.files && input.files[0]) {
@@ -106,6 +113,7 @@ input[type=file] {
 	<div class="container" align="center">
 		<h2 class="text-primary">레시피 수정하기</h2>
 		<form enctype="multipart/form-data">
+		<input type="hidden" name="rnum" value=${board.rnum }>
 			<table border=1>
 				<tr>
 					<td>제목</td>
@@ -114,10 +122,10 @@ input[type=file] {
 				<tr>
 					<td>분류</td>
 					<td><select id="category" name="category">
-							<option value="korean"<c:if test="${board.category == korean}">"selected"</c:if>>한식</option>
-							<option value="chinese"<c:if test="${board.category == chinese}">"selected"</c:if>>중식</option>
-							<option value="japanese"<c:if test="${board.category == japanese}">"selected"</c:if>>일식</option>
-							<option value="western"<c:if test="${board.category == western}">"selected"</c:if>>양식</option>
+							<option value="korean"<c:if test="${board.category == 'korean'}">selected</c:if>>한식</option>
+							<option value="chinese"<c:if test="${board.category == 'chinese'}">selected</c:if>>중식</option>
+							<option value="japanese"<c:if test="${board.category == 'japanese'}">selected</c:if>>일식</option>
+							<option value="western"<c:if test="${board.category == 'western'}">selected</c:if>>양식</option>
 					</select></td>
 				</tr>
 				<tr>
@@ -212,7 +220,10 @@ input[type=file] {
 				</tr>
 			</table>
 			<br>
-			<br> <input type="button" value="확인" id="sub">
+			<br> 
+			<input type="button" value="확인" id="sub">
+			<input type="reset" value="취소">
+			<button type="button" id="cancel">돌아가기</button>
 
 		</form>
 	</div>

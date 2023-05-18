@@ -46,8 +46,7 @@
 	</select>
 
 	<update id="update" parameterType="board">
-		update recipe set <!-- 뭐 넣지 -->
-		where rnum=#{rnum}
+		update recipe set subject = #{subject} where rnum=#{rnum}
 	</update>
 
 	<update id="delete" parameterType="int">

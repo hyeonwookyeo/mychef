@@ -70,68 +70,93 @@ public class RecipeReController {
 		return "rlist";
 	}
 
-// 댓글 등록	
-	@RequestMapping("r_insertRe")
-	public String r_insertRe(RecipeReBoard reboard,String pageNum, @RequestParam("re_rfile1") MultipartFile mf1,
-								MultipartHttpServletRequest mtfRequest,Model model,
-								HttpServletRequest request, HttpServletResponse response) throws IOException  {
-		
-		System.out.println("r_insertRe에 도착했습니다");
-		
-		List<MultipartFile> fileList = mtfRequest.getFiles("re_rfile1");
-		
-		
-//		if(fileList.isEmpty() || fileList==null || fileList.equals(null)) {
-		if(mf1.isEmpty()) {
-			System.out.println("업로드할 사진이 없습니다");
-		}
-		
-		if(!fileList.isEmpty()) {
-		String path = request.getRealPath("reply_images");
-		String finalFileName = "";
-		
-		System.out.println("path:"+path);
-		for (MultipartFile mf : fileList) {
-            String fileName = mf.getOriginalFilename(); // 원본 파일 명
-            int multiFileSize = (int)mf.getSize(); // 파일 사이즈
+	// 댓글 등록	
+		@RequestMapping("r_insertRe")
+		public String r_insertRe(RecipeReBoard reboard, String pageNum,
+								MultipartHttpServletRequest mhr,
+								HttpServletRequest request, HttpServletResponse response,
+								MultipartFile[] uploadFile,
+								Model model) throws Exception  {
+			
+			System.out.println("r_insertRe에 도착했습니다");
+			
+			String re_multipath = request.getRealPath("reply_images");
+			String finalFileName = "";
+			
+			for(MultipartFile multipartFile : uploadFile) {
+				String re_multiFileName = multipartFile.getOriginalFilename();
+				int re_multiFileSize = (int)multipartFile.getSize();
+				
+				String extension = re_multiFileName.substring(re_multiFileName.lastIndexOf("."), re_multiFileName.length());
+				UUID uuid = UUID.randomUUID();
+				
+				String re_multiNewFileName = uuid.toString() + extension;
+				
+	            System.out.println("multiFileName : " + re_multiFileName);
+	            System.out.println("multiNewFileName : " + re_multiNewFileName);
+	            System.out.println("multiFileSize : " + re_multiFileSize);
+				
+	            finalFileName += re_multiNewFileName + "]";
+	            
+				try {
+					multipartFile.transferTo(new File(re_multipath + "/" + re_multiNewFileName));
+				}catch(Exception e) {
+					e.printStackTrace();
+				}
+			}
+			
+			reboard.setRe_rfile(finalFileName);
+			System.out.println("finalFileName:" + finalFileName);
+			
+	/*
+			List<MultipartFile> fileList = mhr.getFiles("re_rfile1");
+			
+			String re_multipath = request.getRealPath("reply_images");
+			String finalFileName = "";
+			
+			System.out.println("re_multipath:" + re_multipath);
+			
+			for (MultipartFile mf : fileList) {
+	            String re_multiFileName = mf.getOriginalFilename(); // 원본 파일 명
+	            int re_multiFileSize = (int)mf.getSize(); // 파일 사이즈
 
-            String extension = fileName.substring(fileName.lastIndexOf("."), fileName.length());
-            UUID uuid = UUID.randomUUID();
-            
-            String multiNewFileName = uuid.toString() + extension;
-            
-            System.out.println("multiFileName : " + fileName);
-            System.out.println("multiNewFileName : " + multiNewFileName);
-            System.out.println("multiFileSize : " + multiFileSize);
-            
-            finalFileName += multiNewFileName+"]";
-            
-            try {
-                mf.transferTo(new File(path + "/" + multiNewFileName));
-            } catch (IllegalStateException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-		}
-		
-		System.out.println("finalFileName:" + finalFileName);
-		reboard.setRe_rfile(finalFileName);
-   } // if end
-		
-		reboard.setRe_rfile("");
-		int result = reService.r_insertRe(reboard);
-		if(result == 1) System.out.println("댓글 작성 성공");		
-//		model.addAttribute("result", result);
-//		
-//		PrintWriter out = response.getWriter();
-//		out.print(result);
-		int rnum = reboard.getRnum();
+	            String extension = re_multiFileName.substring(re_multiFileName.lastIndexOf("."), re_multiFileName.length());
+	            UUID uuid = UUID.randomUUID();
+	            
+	            String re_multiNewFileName = uuid.toString() + extension;
+	            
+	            System.out.println("multiFileName : " + re_multiFileName);
+	            System.out.println("multiNewFileName : " + re_multiNewFileName);
+	            System.out.println("multiFileSize : " + re_multiFileSize);
+	            
+	            finalFileName += re_multiNewFileName+"]";
+	            
+	            try {
+	                mf.transferTo(new File(re_multipath + "/" + re_multiNewFileName));
+	            } catch (IllegalStateException e) {
+	                // TODO Auto-generated catch block
+	                e.printStackTrace();
+	            } catch (IOException e) {
+	                // TODO Auto-generated catch block
+	                e.printStackTrace();
+	            }
+			}
+			
+			System.out.println("finalFileName:" + finalFileName);
+			reboard.setRe_rfile(finalFileName);
+			
+	*/
+			
+			int result = reService.r_insertRe(reboard);
+			if(result == 1) System.out.println("댓글 작성 성공");		
+//			model.addAttribute("result", result);
+//			
+//			PrintWriter out = response.getWriter();
+//			out.print(result);
+			int rnum = reboard.getRnum();
 
-		return "redirect:r_listRe?rnum="+rnum+"&pageNum="+pageNum;
-	}
+			return "redirect:r_listRe?rnum="+rnum+"&pageNum="+pageNum;
+		}
 
 // 댓글수정	
 	@RequestMapping("r_updateRe")

@@ -13,7 +13,7 @@
 <c:if test="${result == 1}">
 	<script>
 		alert("DB 입력 완료.");
-		location.href="r_listForm?pageNum=${pageNum}";
+		location.href="r_listForm?category=${category}";
 	</script>
 </c:if>
 

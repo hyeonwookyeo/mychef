@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ include file="header.jsp"%>
 
 <!DOCTYPE html>
 <html>
@@ -40,7 +40,9 @@
 										<p class="card-text">${board.id }</p>
 										<span class="card-text">조회수${board.readcount }</span> <span
 											class="card-text">추천수${board.recom }</span>
-										<p class="card-text">${board.rdate }</p>
+										<p class="card-text"><fmt:formatDate value="${board.rdate }"
+										pattern="yyyy년 MM월 dd일"/>
+										</p>
 									</div>
 								</div>
 							</div>
@@ -59,8 +61,9 @@
 					<c:if test="${search=='subject'}">selected="selected" </c:if>>제목</option>
 				<option value="content"
 					<c:if test="${search=='content'}">selected="selected" </c:if>>내용</option>
-				<option value="writer"
-					<c:if test="${search=='writer'}">selected="selected" </c:if>>작성자</option>
+					<!-- id 닉네임으로 변경할 것!!!!!!!!!!!! -->
+				<option value="id" 
+					<c:if test="${search=='id'}">selected="selected" </c:if>>아이디</option>
 				<option value="subcon"
 					<c:if test="${search=='subcon'}">selected="selected" </c:if>>제목+내용</option>
 			</select> <input type="text" name="keyword"> <input type="submit" value="확인">
