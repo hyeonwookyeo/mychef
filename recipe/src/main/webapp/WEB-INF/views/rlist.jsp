@@ -63,19 +63,18 @@ function delete_check(){
 					<div>
 					<input type="hidden" name="rre_num" value="${reboard.rre_num }">
 					<input type="hidden" name="rnum" value="${reboard.rnum }">
-						<span><img src=""/></span>닉네임${reboard.id }
+						<span><img src=""/></span>닉네임: ${reboard.id } <div>${reboard.re_date }</div>
 						
  						<%-- <c:forEach var="reply_images" items="${reply_imgList }"> --%>
- 						<c:forTokens items="${reboard.re_rfile }" delims="+" var="test">
- 						<img src="./reply_images/${test}" >
- 						<br>
- 						
+ 						<c:forTokens items="${reboard.re_rfile }" delims="+" var="reply_images">
+ 						<img src="./reply_images/${reply_images}" width=200 height=200>
  						</c:forTokens>
-						<div>${reply_images }</div>
-						</c:forEach> 
+ 						<div>글 내용: ${reboard.re_content }</div> <br>
+						</c:forEach>  
 
-						<div>${reboard.re_content }</div>
-						<div>${reboard.re_date }</div>
+						
+						
+						
 						<c:if test="${!empty id and id == reboard.id}">
 							<div>
 								<button type="button" onClick="update_check()">수정</button>
