@@ -19,5 +19,5 @@ create sequence board_num_seq
 increment by 1 start with 1 nocache;
                 
 
-      
-      insert into board values ('1','게시판','1234','게시판1','게시판내용','1','1','1','0',sysdate);
+
+

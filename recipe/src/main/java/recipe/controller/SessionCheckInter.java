@@ -3,6 +3,9 @@ package recipe.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 public class SessionCheckInter extends HandlerInterceptorAdapter {
@@ -15,7 +18,7 @@ public class SessionCheckInter extends HandlerInterceptorAdapter {
 		HttpSession session = request.getSession();
 		String id = (String)session.getAttribute("id");
 		if (id == null || id.equals(""))  {		
-			response.sendRedirect("member_login.do");	// 세션이 없으면 로그인 폼으로 이동
+			response.sendRedirect("m_loginForm.do");	// 세션이 없으면 로그인 폼으로 이동
 			return false;
 		}
 		return true;

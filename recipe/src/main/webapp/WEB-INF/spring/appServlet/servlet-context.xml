@@ -3,9 +3,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
-		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
@@ -18,6 +16,7 @@
 	<resources mapping="/js/**" location="/WEB-INF/js/" />
 	<resources mapping="/fonts/**" location="/WEB-INF/fonts/" />
 	<resources mapping="/images/**" location="/WEB-INF/images/" />
+	<resources mapping="/upload/**" location="/upload/" />
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -28,5 +27,23 @@
 	<context:component-scan base-package="recipe" />
 	
 	
+	<!-- 인터셉터 설정 -->	
+	<beans:bean id="sessionChk" class="recipe.controller.SessionCheckInter"/>	
+	 <interceptors>
+		<interceptor>
+			<mapping path="/m_editForm"/>
+			<mapping path="/m_editForm_ok.do"/>			
+			<mapping path="/m_delForm"/>
+			<mapping path="/m_delForm_ok.do"/>
+			<mapping path="/m_logout.do"/>
+			<beans:ref bean="sessionChk"/>
+		</interceptor>
+	</interceptors>	 
+	
+	
+	<!-- 파일 업로드  설정 -->
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<beans:property name="maxUploadSize" value="10000000"/>	
+	</beans:bean>	
 	
 </beans:beans>

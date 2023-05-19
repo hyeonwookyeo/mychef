@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
 import recipe.model.BoardBean;
 import recipe.service.BoardServiceImpl;
 
@@ -17,18 +18,20 @@ import recipe.service.BoardServiceImpl;
 public class BoardController {
 
 	@Autowired
+//	@Inject
 	private BoardServiceImpl boardService;
 	
 	@RequestMapping("test.do")
-	public String test() {
+	public String test(){
 		System.out.println("컨트롤러 들어옴");
 		
-		return "test";
+		return "board/test";
 	}
+	
 	/* 게시판 글쓰기 폼 */
 	@RequestMapping(value = "/board_write")
 	public String board_write() {
-		return "board_write";
+		return "board/board_write";
 	}
 
 	/* 게시판 저장 */
@@ -38,11 +41,12 @@ public class BoardController {
 	
 		boardService.insert(board);// 저장 메서드 호출	
 
-		return "board_list";
+		return "redirect:/board_list";
 	}
 
+	
 	/* 게시판 목록 */
-	@RequestMapping(value = "/board_list.do")
+	@RequestMapping(value = "/board_list")
 	public String list(HttpServletRequest request, Model model) throws Exception {
 
 		List<BoardBean> boardlist = new ArrayList<BoardBean>();
@@ -58,7 +62,7 @@ public class BoardController {
 		int listcount = boardService.getListCount();
 
 		// 페이지 번호(page)를 DAO클래스에게 전달한다.
-		boardlist = boardService.getBoardList(page);
+		boardlist = boardService.getBoardList(page); 
 
 		// 총 페이지
 		int maxpage = listcount / limit + ((listcount % limit == 0) ? 0 : 1);
@@ -76,11 +80,12 @@ public class BoardController {
 		model.addAttribute("listcount", listcount);
 		model.addAttribute("boardlist", boardlist);
 		
-		return "board_list";
+		return "board/board_list";
 	}
+
 	
 	/* 게시판 내용보기,삭제폼,수정폼,답변글폼 */
-	@RequestMapping(value = "/board_cont.do")
+	@RequestMapping(value = "/board_cont")
 	public String board_cont(@RequestParam("board_num") int board_num,
 							 @RequestParam("page") String page,
 							 @RequestParam("state") String state, 
@@ -100,19 +105,20 @@ public class BoardController {
 			// 글내용중 엔터키 친부분을 웹상에 보이게 할때 다음줄로 개행
 			// model.addAttribute("board_cont", board_cont);
 			
-			return "board_cont";					
+			return "board/board_cont";					
 		} else if (state.equals("edit")) {		// 수정폼
-			return "board_edit";
+			return "board/board_edit";
 		} else if (state.equals("del")) {		// 삭제폼
-			return "board_del";
+			return "board/board_del";
 		} else if (state.equals("reply")) {		// 답변달기 폼
-			return "board_reply";
+			return "board/board_reply";
 		}
 		return null;
 	}
 
+	
 	/* 게시판 수정 */
-	@RequestMapping(value = "/board_edit_ok.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/board_edit_ok", method = RequestMethod.POST)
 	public String board_edit_ok(@ModelAttribute BoardBean b,
 								@RequestParam("page") String page,
 								Model model) throws Exception {
@@ -125,7 +131,7 @@ public class BoardController {
 			result = 1;
 			model.addAttribute("result", result);
 			
-			return "updateResult";
+			return "board/updateResult";
 
 		} else {
 			
@@ -136,8 +142,9 @@ public class BoardController {
 					+ "&page=" + page + "&state=cont";
 	}
 
+	
 	/* 게시판 삭제 */
-	@RequestMapping(value = "/board_del_ok.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/board_del_ok", method = RequestMethod.POST)
 	public String board_del_ok(@RequestParam("board_num") int board_num,
 							   @RequestParam("page") int page,
 							   @RequestParam("pwd") String board_pass,
@@ -150,7 +157,7 @@ public class BoardController {
 			result = 1;
 			model.addAttribute("result", result);
 
-			return "deleteResult";
+			return "board/deleteResult";
 
 		} else {
 			boardService.del_ok(board_num);		
@@ -159,8 +166,9 @@ public class BoardController {
 		return "redirect:/board_list.do?page=" + page;
 	}
 
+	
 	/* 게시판 답변달기 저장 */
-	@RequestMapping(value = "/board_reply_ok.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/board_reply_ok", method = RequestMethod.POST)
 	public String board_reply_ok(@ModelAttribute BoardBean b,
 								 @RequestParam("page") String page) throws Exception {
 
@@ -168,29 +176,6 @@ public class BoardController {
 
 		return "redirect:/board_list.do?page=" + page;
 	}
-	/* 게시판 삭제 폼 */
-	@RequestMapping("/board_del")
-	public String board_del() {
-		return "board_del";
-	}
-
-	@RequestMapping("/board_cont")
-	public String board_cont() {
-		return "board_cont";
-	}
-
-	@RequestMapping("/board_list")
-	public String board_list() {
-		return "board_list";
-	}
-
-	@RequestMapping("/board_reply")
-	public String board_reply() {
-		return "board_reply";
-	}
 	
-	@RequestMapping("/board_edit")
-	public String board_edit() {
-		return "board_edit";
-	}
+	
 }

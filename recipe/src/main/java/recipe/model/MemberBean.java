@@ -1,24 +1,28 @@
 package recipe.model;
 
+import java.util.Date;
+
 public class MemberBean {
-	
+
 	private String id;
 	private String nickname;
 	private String pwd;
 	private String name;
-	private String bitrh;
+	private String birth;
 	private String profile;
 	private String mailid;
 	private String domain;
 	private String zip;
 	private String addr1;
 	private String addr2;
-	private String joindate_date;
-	private String deldate_date;
-	private int state;
+	private Date joindate;
+	private Date deldate;
+	private int state; 					// 회원 1, 탈퇴 2
 	private String phone1;
 	private String phone2;
 	private String phone3;
+	private String delcontent;
+	
 	public String getId() {
 		return id;
 	}
@@ -43,11 +47,11 @@ public class MemberBean {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getBitrh() {
-		return bitrh;
+	public String getBirth() {
+		return birth;
 	}
-	public void setBitrh(String bitrh) {
-		this.bitrh = bitrh;
+	public void setBirth(String birth) {
+		this.birth = birth;
 	}
 	public String getProfile() {
 		return profile;
@@ -85,17 +89,17 @@ public class MemberBean {
 	public void setAddr2(String addr2) {
 		this.addr2 = addr2;
 	}
-	public String getJoindate_date() {
-		return joindate_date;
+	public Date getJoindate() {
+		return joindate;
 	}
-	public void setJoindate_date(String joindate_date) {
-		this.joindate_date = joindate_date;
+	public void setJoindate(Date joindate) {
+		this.joindate = joindate;
 	}
-	public String getDeldate_date() {
-		return deldate_date;
+	public Date getDeldate() {
+		return deldate;
 	}
-	public void setDeldate_date(String deldate_date) {
-		this.deldate_date = deldate_date;
+	public void setDeldate(Date deldate) {
+		this.deldate = deldate;
 	}
 	public int getState() {
 		return state;
@@ -120,6 +124,12 @@ public class MemberBean {
 	}
 	public void setPhone3(String phone3) {
 		this.phone3 = phone3;
+	}
+	public String getDelcontent() {
+		return delcontent;
+	}
+	public void setDelcontent(String delcontent) {
+		this.delcontent = delcontent;
 	}
 
 }

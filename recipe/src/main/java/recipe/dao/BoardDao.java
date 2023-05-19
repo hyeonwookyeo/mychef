@@ -1,10 +1,11 @@
 package recipe.dao;
 
 import java.util.List;
+
 import recipe.model.BoardBean;
 
 public interface BoardDao {
-	
+
 	public void insertBoard(BoardBean b) throws Exception;
 
 	public List<BoardBean> getBoardList(int page) throws Exception;
@@ -22,5 +23,4 @@ public interface BoardDao {
 	public void refEdit(BoardBean b) throws Exception;
 
 	public void boardReplyOk(BoardBean b) throws Exception;
-
 }

@@ -7,9 +7,9 @@
 <!--  예시
 	<typeAlias alias="board" type="board1.model.Board" /> 
 -->
-	<typeAlias alias="test" type="recipe.model.Test" />
-	<typeAlias alias="member" type="recipe.model.MemberBean" />
-    <typeAlias alias="board" type="recipe.model.BoardBean" />
+    <typeAlias alias="test" type="recipe.model.Test" />
+	<typeAlias alias="board" type="recipe.model.BoardBean" />
+		<typeAlias alias="member" type="recipe.model.MemberBean" />
 	</typeAliases>
 	
 

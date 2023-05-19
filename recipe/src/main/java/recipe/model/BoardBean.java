@@ -3,7 +3,7 @@ package recipe.model;
 import java.util.Date;
 
 public class BoardBean {
-	
+
 	private int board_num;
 	private String board_name;
 	private String board_pass;

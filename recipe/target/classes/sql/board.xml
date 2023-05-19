@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
  <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="boardns">
+<mapper namespace="Test">
 
-<!-- 게시판 저장 -->
+	<!-- 게시판 저장 -->
 	<insert id="board_insert" parameterType="board">
 		insert into board
 		(board_num,board_name,board_pass,board_subject,
@@ -13,7 +13,7 @@
 		#{board_content},board_num_seq.nextval,0,0,0,SYSDATE)
 	</insert>
 
-<!-- 게시판 총게시물 수 -->
+	<!-- 게시판 총게시물 수 -->
 	<select id="board_count" resultType="int">
 		select count(*) from board
 	</select>
@@ -66,7 +66,6 @@
 		values(board_num_seq.nextval,#{board_name},#{board_subject},#{board_content},
 		#{board_pass},#{board_re_ref},#{board_re_lev},#{board_re_seq},0,SYSDATE)
 	</insert>
-
 
 </mapper>
 

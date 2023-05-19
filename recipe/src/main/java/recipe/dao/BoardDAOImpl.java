@@ -1,9 +1,11 @@
 package recipe.dao;
 
 import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
 import recipe.model.BoardBean;
 
 @Repository
@@ -17,6 +19,7 @@ public class BoardDAOImpl implements BoardDao{
 	public void insertBoard(BoardBean b) throws Exception {
 		session.insert("Test.board_insert", b);
 	}
+
 	
 	/* 게시물 목록  */
 	public List<BoardBean> getBoardList(int page) throws Exception {
@@ -24,6 +27,7 @@ public class BoardDAOImpl implements BoardDao{
 
 		return list;
 	}
+
 	
 	/* 게시판 총 갯수  */
 	public int getListCount() throws Exception {
@@ -32,6 +36,7 @@ public class BoardDAOImpl implements BoardDao{
 
 		return count;
 	}
+
 	
 	/* 게시판 글내용보기  */
 	public BoardBean getBoardCont(int board_num) throws Exception {
