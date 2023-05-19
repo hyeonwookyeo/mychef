@@ -5,7 +5,7 @@
 <mapper namespace="MagaReply">
 
 	<select id="slist" parameterType="int" resultType="magareply">
-		select * from maga_re where maga_num=#{maga_num} order by ref asc, magare_num asc
+		select * from member, maga_re where member.id=maga_re.id and maga_num=#{maga_num} order by ref asc, magare_num asc
 	</select>
 	
 	<insert id="insert" parameterType="magareply">

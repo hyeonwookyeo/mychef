@@ -26,6 +26,7 @@ public class ReplyMagaController {
 
 		model.addAttribute("slist", slist);
 		model.addAttribute("maga", maga);
+		System.out.println(slist.get(maga_num).getProfile());
 		return "maga/slist";
 	}
 

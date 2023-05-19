@@ -12,6 +12,7 @@ public class ReplyMagaBean {
 	private String ref;
 	private String ref_seq;
 	private String ref_lev;
+	private String profile;
 
 	public int getMagare_num() {
 		return magare_num;
@@ -83,5 +84,13 @@ public class ReplyMagaBean {
 
 	public void setRef_lev(String ref_lev) {
 		this.ref_lev = ref_lev;
+	}
+
+	public String getProfile() {
+		return profile;
+	}
+
+	public void setProfile(String profile) {
+		this.profile = profile;
 	}
 }

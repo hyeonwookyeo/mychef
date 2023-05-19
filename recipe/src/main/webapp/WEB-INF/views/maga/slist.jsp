@@ -78,7 +78,8 @@
 					</c:if>
 				</tr>
 				<tr>
-					<td colspan=2 align=center id="td_${rb.magare_num}">${rb.re_content}</td>
+					<td colspan=2 align=center id="td_${rb.magare_num}">
+						<img src="./upload/${maga.mfile}" height="100" width="100" />${rb.re_content}</td>
 				</tr>
 				<tr>
 					<td><div id="div_${rb.magare_num}" style="display:none">
