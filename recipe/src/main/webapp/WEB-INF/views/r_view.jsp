@@ -54,7 +54,7 @@ function delete_check(){
 </script>
 <script>
 $(document).ready(function() {
-    $('#listRe').load('r_listRe?pageNum=1&rnum=${board.rnum}');
+    $('#listRe').load('r_listRe?rnum=${board.rnum}');
     
     $('#r_recomm_img').click(function(){
     	var id = $("#id").val();

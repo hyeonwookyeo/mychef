@@ -2,6 +2,7 @@
 <%@ include file="header.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>	
+<c:set var="path" value="${pageContext.request.contextPath }" />
 
 <!DOCTYPE html>
 <html>
@@ -21,22 +22,38 @@ $(function() {
 	$('.r_update_check').click(function() {
 		var id = $(this).attr('id');
 		var content = $('#content_'+id).text();	// replytext / id:td_태그의 내용을 추출
-		$('#content_'+id).html("<textarea id=\"content"+id+"\">"+content+"</textarea>");
+		$('#content_'+id).html(
+					"<textarea id=\"content_"+id+"\">"+content+"</textarea>");
+		$('#btn_'+id).html(
+				   "<input type='button' value='수정하기' onclick='update("+id+")'> "
+				  +"<input type='button' value='취소' onclick='lst("+id+")'>");
 	});
+	
+	
 });
+function lst(id) {
+	$('#listRe').load("r_listRe?rnum=${rnum}");
+	}
 
-/*
-function r_update_check(){
+
+function update(id){
 	var text="리뷰를 수정하시겠습니까?";
 	if(confirm(text)){
 		
-		var id = $(this).attr('id');
 		
-		var rnum = $('#rre_num'+id);	
-		var content = $('#content'+id);
+		alert(id);
+		var rnum = $('#rre_num'+id).val();	
+		var content = $('#content_'+id).text();
+		
 		var formData = new FormData();
-		var inputFile = $("#file"+id)
+		alert(content);
+		var inputFile = $("#file_"+id);
 		var files = inputFile[0].files;
+		alert(files);
+		
+		var inputFile = $("input[name='re_rfile1']")
+		var files = inputFile[0].files;
+		
 		for(var i=0; i<files.length; i++) {
 			formData.append("uploadFile", files[i]);
 		}
@@ -64,21 +81,10 @@ function r_update_check(){
 			});
 		}
 		
-		
-		
-		
-		
-		
-		
-		
-			
 		}
-		
-		
-	
 	
 } // function 종료
-*/
+
 
 /* function r_delete_check(){
 	var text="리뷰를 삭제하시겠습니까?";
@@ -139,7 +145,7 @@ $(document).ready(function() {
 					<input type="hidden" name="rnum" value="${reboard.rnum }">
 						<span><img src=""/></span>닉네임${reboard.id }<br>
 						<!-- 이미지 뿌려주기 작업 -->
-						<div id="file${reboard.rre_num }">
+						<div id="file_${reboard.rre_num }">
 						<c:forTokens items="${reboard.re_rfile }" delims="]" var="test">
 						
 						<img src="./reply_images/${test }" width="200px">
@@ -149,7 +155,7 @@ $(document).ready(function() {
 						<div id="content_${reboard.rre_num }">${reboard.re_content }</div>
 						<div><fmt:formatDate value="${reboard.re_date }" pattern="yyyy년 MM월 dd일"/></div>
 						<c:if test="${!empty id and id == reboard.id}">
-							<div>
+							<div id="btn_${reboard.rre_num }">
 								<input type="button" id="${reboard.rre_num } " value="리뷰 수정" class="r_update_check">
 								<button type="button" id="dsdfsdfsdfsdfssdfsdfsdfsdf${reboard.rre_num } " onClick="r_delete_check()">리뷰 삭제</button>
 							</div>

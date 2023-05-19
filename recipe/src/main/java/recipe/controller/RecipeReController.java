@@ -62,6 +62,7 @@ public class RecipeReController {
 		List<RecipeReBoard> rlist = reService.listRe(reboard);
 		System.out.println("rlist:" + rlist);
 
+		model.addAttribute("rpageNum", rpageNum);
 		model.addAttribute("total", total);
 		model.addAttribute("rlist", rlist);
 		model.addAttribute("rnum", rnum);
