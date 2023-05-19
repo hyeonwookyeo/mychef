@@ -2,13 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="MagaReply">
+<mapper namespace="boardreply">
 
-	<select id="slist" parameterType="int" resultType="magareply">
-		select * from maga_re where maga_num=#{maga_num} order by ref asc, magare_num asc
+	<select id="slist" parameterType="int" resultType="boardreply">
+		select * from comm_re where comm_num=#{comm_num} order by ref asc, commre_num asc
 	</select>
 	
-	<insert id="insert" parameterType="magareply">
+	<insert id="insert" parameterType="boardreply">
 	
 		<!-- <selectKey keyProperty="magare_num" order="BEFORE" resultType="int">
 			<if test="ref_lef == '0'">
@@ -16,9 +16,9 @@
 			</if>
 		</selectKey> -->
 			
-			insert into maga_re values (maga_re_seq.nextval,#{maga_num},#{id},#{re_content},sysdate,'y',
+			insert into comm_re values (comm_re_seq.nextval,#{comm_num},#{id},#{re_content},sysdate,'y',
 			<if test="ref_lev == 0">
-				maga_re_seq.nextval,
+				comm_re_seq.nextval,
 			</if>
 			<if test="ref_lev != 0">
 				#{magare_num},
@@ -27,10 +27,10 @@
 	</insert>
 	
 	<delete id="delete" parameterType="int">
-		delete from maga_re where ref=#{magare_num}
+		delete from comm_re where ref=#{commre_num}
 	</delete>
 	
-	<update id="update" parameterType="magareply">
-		update maga_re set re_content=#{re_content}, re_date=sysdate where magare_num=#{magare_num}
+	<update id="update" parameterType="boardreply">
+		update comm_re set re_content=#{re_content}, re_date=sysdate where commre_num=#{commre_num}
 	</update>
 </mapper>

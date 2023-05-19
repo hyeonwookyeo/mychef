@@ -10,7 +10,7 @@
 <body>
 
 <script>
-	location.href="maga";
+	location.href="board_list";
 </script>
 
 </body>

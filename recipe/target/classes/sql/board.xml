@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="boardns">
+
+
+	<!-- 매거진 총 게시물 수 -->
+	<select id="board_count" parameterType="board" resultType="int">
+		select count(*) from comm 
+		<!-- <where>
+			<if test="keyword != null and search != 'subcon'">
+				${search} like '%'||#{keyword}||'%'
+			</if>
+			<if test="keyword != null and search == 'subcon'">
+				subject like '%'||#{keyword}||'%' or
+				content like '%'||#{keyword}||'%'
+			</if>
+			and state = '1'
+		</where> -->
+		<!-- where state = '1' -->
+	</select>	
+	
+	
+	<!-- 매거진 목록 -->
+	<select id="board_list" parameterType="board" resultType="board">
+		select * from (select rownum rnum, board.* from(
+			select * from comm order by comm_num desc ) board) 
+			where rnum between #{startpage} and #{endpage}
+		<!-- <where>
+			<if test="keyword != null and search != 'subcon'">
+				${search} like '%'||#{keyword}||'%'
+			</if>
+			<if test="keyword != null and search == 'subcon'">
+				subject like '%'||#{keyword}||'%' or
+				content like '%'||#{keyword}||'%'
+			</if>
+			and state = '1'
+		</where> -->
+			
+		
+	</select>
+	
+	
+	<!-- 매거진 입력 -->
+	<insert id="board_insert" parameterType="board">
+		insert into comm values(comm_seq.nextval,#{id},#{subject},'0',#{content},#{comfile, jdbcType=VARCHAR},sysdate,'1')
+	</insert>
+	
+	<!-- 조회수 -->
+	<update id="board_readcount" parameterType="int">
+		update comm set readcount = readcount + 1 where comm_num = #{comm_num}
+	</update>
+	
+	
+	<!-- 매거진 확인 -->
+	<select id="maga_cont" parameterType="int" resultType="board">
+		select * from comm where comm_num = #{comm_num}
+	</select>
+	
+	
+	<!-- 매거진 삭제 -->
+	<update id="maga_del" parameterType="int">
+		update comm set state = '0' where comm_num = #{comm_num}
+	</update>
+	
+	
+
+</mapper>
