@@ -121,7 +121,7 @@ public class RecipeReController {
 
 // 댓글수정	
 	@RequestMapping("r_updateRe")
-	public String r_updateRe(RecipeReBoard reboard, String pageNum, MultipartHttpServletRequest mhr,
+	public String r_updateRe(RecipeReBoard reboard, MultipartHttpServletRequest mhr,
 			HttpServletRequest request, HttpServletResponse response, MultipartFile[] uploadFile, Model model)
 			throws Exception {
 		
@@ -132,26 +132,47 @@ public class RecipeReController {
 		
 		System.out.println("path:"+re_multipath);
 
+		RecipeReBoard old = reService.r_selectRe(reboard.getRre_num());
+		int rnum = old.getRnum();
+		
 		for (MultipartFile multipartFile : uploadFile) {
 			String re_multiFileName = multipartFile.getOriginalFilename();
 			int re_multiFileSize = (int) multipartFile.getSize();
+			
+			
+			if(re_multiFileSize > 0) {
 
-			String extension = re_multiFileName.substring(re_multiFileName.lastIndexOf("."), re_multiFileName.length());
-			UUID uuid = UUID.randomUUID();
-
-			String re_multiNewFileName = uuid.toString() + extension;
-
-			System.out.println("multiFileName : " + re_multiFileName);
-			System.out.println("multiNewFileName : " + re_multiNewFileName);
-			System.out.println("multiFileSize : " + re_multiFileSize);
-
-			finalFileName += re_multiNewFileName + "]";
-
-			try {
-				multipartFile.transferTo(new File(re_multipath + "/" + re_multiNewFileName));
-			} catch (Exception e) {
-				e.printStackTrace();
+				String fname = old.getRe_rfile();
+				
+				if(fname != null) {
+					
+					String[] r_fname = fname.split("]");
+					for(int i=0; i<r_fname.length; i++) {
+						File real_fname = new File(re_multipath+"/"+r_fname[i]);
+						real_fname.delete();
+					}
+				
+				
+				String extension = re_multiFileName.substring(re_multiFileName.lastIndexOf("."), re_multiFileName.length());
+				UUID uuid = UUID.randomUUID();
+				
+				String re_multiNewFileName = uuid.toString() + extension;
+				
+				System.out.println("multiFileName : " + re_multiFileName);
+				System.out.println("multiNewFileName : " + re_multiNewFileName);
+				System.out.println("multiFileSize : " + re_multiFileSize);
+				
+				finalFileName += re_multiNewFileName + "]";
+				
+				
+				try {
+					multipartFile.transferTo(new File(re_multipath + "/" + re_multiNewFileName));
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
+
+
 		}
 
 		reboard.setRe_rfile(finalFileName);
@@ -159,21 +180,35 @@ public class RecipeReController {
 
 
 		int result = reService.r_updateRe(reboard);
-		if (result == 1)
-			System.out.println("댓글 작성 성공");
+		if (result == 1) System.out.println("댓글 수정 성공");
 		
-		int rnum = reboard.getRnum();
-
+		}
 		return "redirect:r_listRe?rnum=" + rnum;
 	}
 
 	
 // 댓글삭제	
 	@RequestMapping("r_deleteRe")
-	public String r_deleteRe(int rre_num, int rnum, Model model, HttpServletResponse response) throws IOException {
+	public String r_deleteRe(int rre_num,HttpServletRequest request, Model model) throws IOException {
 
 		System.out.println("r_deleteRe 진입");
+		
+		RecipeReBoard reboard = reService.r_selectRe(rre_num);
+		int rnum = reboard.getRnum();
 
+		String path = request.getRealPath("reply_images");
+		System.out.println("path: "+path);
+		String fname = reboard.getRe_rfile();
+		
+		if(fname != null) {
+			
+			String[] r_fname = fname.split("]");
+			for(int i=0; i<r_fname.length; i++) {
+				File real_fname = new File(path+"/"+r_fname[i]);
+				real_fname.delete();
+			}
+		}
+		
 		reService.r_deleteRe(rre_num);
 
 		return "redirect:r_listRe?rnum=" + rnum;

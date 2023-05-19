@@ -14,114 +14,64 @@
 
 <!-- Latest compiled JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://code.jquery.com/jquery-latest.js"></script>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
 
 
 <script>
+// 리뷰 수정버튼 클릭시
 $(function() {
 	$('.r_update_check').click(function() {
 		var id = $(this).attr('id');
 		var content = $('#content_'+id).text();	// replytext / id:td_태그의 내용을 추출
 		$('#content_'+id).html(
-					"<textarea id=\"content_"+id+"\">"+content+"</textarea>");
+					"<textarea rows='3' cols='30' name='nnn"+id+"' id='content_"+id+"'>"+content+"</textarea>");
+		
+		
 		$('#btn_'+id).html(
-				   "<input type='button' value='수정하기' onclick='update("+id+")'> "
-				  +"<input type='button' value='취소' onclick='lst("+id+")'>");
+					"<div id='updatediv_"+id+"'>"
+				  +"<input type='file' id='r_file_"+id+"'name='re_rfile1' multiple> "
+				  +"<input type='button' value='수정하기' onclick='update("+id+")'>"
+				  +"<input type='button' value='취소' onclick='lst("+id+")'>"
+				  +"</div>");
 	});
 	
-	
 });
+
+// 취소 버튼 클릭시
 function lst(id) {
 	$('#listRe').load("r_listRe?rnum=${rnum}");
-	}
+}
 
+ 
 
-function update(id){
-	var text="리뷰를 수정하시겠습니까?";
-	if(confirm(text)){
-		
-		
-		alert(id);
-		var rnum = $('#rre_num'+id).val();	
-		var content = $('#content_'+id).text();
-		
-		var formData = new FormData();
-		alert(content);
-		var inputFile = $("#file_"+id);
-		var files = inputFile[0].files;
-		alert(files);
-		
-		var inputFile = $("input[name='re_rfile1']")
-		var files = inputFile[0].files;
-		
-		for(var i=0; i<files.length; i++) {
-			formData.append("uploadFile", files[i]);
-		}
-		
-		formData.append("rre_num", rre_num);	
-		formData.append("re_content", re_content);	
-		
-		if(content==""){
-			alert("리플을 입력하세요.");
-			$("#re_content").focus();
-		}else{
-			$.ajax({
-				type:"post",
-				url:"r_updateRe",
-				data:formData,
-				processData: false,
-				contentType: false,
-				enctype : 'multipart/form-data',
-				success:function(result){
-					$('#listRe').load('r_listRe?pageNum=1&rnum=${board.rnum}');
-					alert("리뷰가 수정되었습니다");
-					frm.re_content.value = '';
-					frm.re_rfile1.value = '';	
-				}
-			});
-		}
-		
-		}
-	
-} // function 종료
-
-
-/* function r_delete_check(){
+//리뷰 삭제
+function r_delete_check(rre_num){
 	var text="리뷰를 삭제하시겠습니까?";
 	if(confirm(text)){
 		$.ajax({
-			var data = "리뷰가 삭제되었습니다.";
+			type:'post',
+			url:'r_deleteRe',
+			data:{"rre_num":rre_num},
+			success:function(result){
+				alert("리뷰가 삭제되었습니다.");
+				$('#listRe').html(result);
+			}
 			
-			
-			var id = $(this).attr('id');
-			
-		    type : "post",
-		    url : "r_deleteRe",
-		    data : {"rre_num":${rre_num}},
-		    success : function(data){
-		    	alert(data);
-		    }
 		});
 	}
-}	 */
-    /* var str = "";
-function r_image_add() {
-    var r_image_grp = "<c:out value='${test}'/>"; 
-    var r_image = r_image_grp.split("]");
-
-    for (var i = 0; i < r_image.length; i++) {
-        str += "<div>";
-        str += "    <img src='reply_images/" + r_image[i] + "' width='500'/>"; //
-        str += "</div>";
-    }
-    $("#r_image_add").append(str);
+} 
+// 리뷰 수정
+function update(id){
+	var text = "리뷰를 수정하시겠습니까?";
+	if(confirm(text)){
+		alert("id는 "+id);
+		
+		var re_content = $("#content_"+id).val();
+		var nnn = $("[name='nnn'"+id+"]").val();
+		alert("re_content는 "+re_content)
+	}
 }
 
-// 테스트용
-$(document).ready(function() {
-	$('#r_image_add').load(r_image_add());
-});
- */
 
 </script>	
 </head>
@@ -157,7 +107,7 @@ $(document).ready(function() {
 						<c:if test="${!empty id and id == reboard.id}">
 							<div id="btn_${reboard.rre_num }">
 								<input type="button" id="${reboard.rre_num } " value="리뷰 수정" class="r_update_check">
-								<button type="button" id="dsdfsdfsdfsdfssdfsdfsdfsdf${reboard.rre_num } " onClick="r_delete_check()">리뷰 삭제</button>
+								<input type="button" value="리뷰 삭제" onClick="r_delete_check(${reboard.rre_num})">
 							</div>
 						</c:if>
 						<br>

@@ -107,10 +107,10 @@ $(function(){
 				contentType: false,
 				enctype : 'multipart/form-data',
 				success:function(result){
-					$('#listRe').load('r_listRe?pageNum=1&rnum=${board.rnum}');
 					alert("리뷰가 작성되었습니다");
-					frm.re_content.value = '';
-					frm.re_rfile1.value = '';	
+					$('#listRe').load('r_listRe?pageNum=1&rnum=${board.rnum}');
+					document.getElementById("re_content").value='';
+					document.getElementById("re_rfile1").value='';
 				}
 			});
 		}

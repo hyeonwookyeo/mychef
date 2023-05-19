@@ -28,4 +28,8 @@
 		delete from recipe_re where rre_num=#{rre_num}
 	</delete>
 	
+	<select id="select" parameterType="int" resultType="reboard">
+		select * from recipe_re where rre_num=#{rre_num}
+	</select>
+	
 </mapper>

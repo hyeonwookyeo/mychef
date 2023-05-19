@@ -16,4 +16,6 @@ public interface RecipeReDao {
 	int r_updateRe(RecipeReBoard reboard);
 	
 	int r_deleteRe(int rre_num);
+
+	RecipeReBoard r_selectRe(int rre_num);
 }

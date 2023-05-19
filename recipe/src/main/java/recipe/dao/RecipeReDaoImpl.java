@@ -45,4 +45,10 @@ public class RecipeReDaoImpl implements RecipeReDao{
 		return sst.delete("reboardns.delete", rre_num);
 	}
 
+	@Override
+	public RecipeReBoard r_selectRe(int rre_num) {
+		// TODO Auto-generated method stub
+		return sst.selectOne("reboardns.select", rre_num);
+	}
+
 }
