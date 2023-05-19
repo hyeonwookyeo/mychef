@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import recipe.model.Board;
 
 @Repository
-public class BoardDao {
+public class NoticeDao {
 	
 	@Autowired
 	private SqlSession session;

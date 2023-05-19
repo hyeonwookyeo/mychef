@@ -15,13 +15,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import recipe.model.Board;
-import recipe.service.BoardService;
+import recipe.service.NoticeService;
 
 @Controller
 public class NoticeController {
 
 	@Autowired
-	private BoardService service;
+	private NoticeService service;
 	
 // 글작성폼
 	@RequestMapping("n_boardform")

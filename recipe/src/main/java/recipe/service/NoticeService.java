@@ -5,14 +5,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import recipe.dao.BoardDao;
+import recipe.dao.NoticeDao;
 import recipe.model.Board;
 
 @Service
-public class BoardService {
+public class NoticeService {
 	
 	@Autowired
-	private BoardDao dao;
+	private NoticeDao dao;
 
 	public int insert(Board board) {
 		// TODO Auto-generated method stub
