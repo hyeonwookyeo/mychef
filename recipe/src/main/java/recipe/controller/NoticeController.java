@@ -26,7 +26,7 @@ public class NoticeController {
 // 글작성폼
 	@RequestMapping("n_boardform")
 	public String n_boardform() {
-		return"board/n_boardform";
+		return"n_boardform";
 	}
 	
 	
@@ -68,7 +68,7 @@ public class NoticeController {
 		int result = service.insert(board);
 		if(result == 1) System.out.println("글작성 성공");
 		
-		return "admin/a_main";
+		return "a_main";
 	}
 	
 	
@@ -104,7 +104,7 @@ public class NoticeController {
 		model.addAttribute("endPage", endPage);
 		
 		
-		return "board/n_boardlist";
+		return "n_boardlist";
 	}
 	
 	// 상세 페이지 : 조회수 1증가 + 상세정보 구하기
@@ -121,7 +121,7 @@ public class NoticeController {
 		model.addAttribute("content", content);
 		model.addAttribute("page", page);
 		
-		return "board/n_boardcontent";
+		return "n_boardcontent";
 	}
 	
 	// 수정 폼
@@ -135,7 +135,7 @@ public class NoticeController {
 	  model.addAttribute("board", board); 
 	  model.addAttribute("page", page);
 	  
-	  return"board/n_boardupdateform";
+	  return"n_boardupdateform";
 	  
 	  }
 	 
@@ -153,7 +153,7 @@ public class NoticeController {
 //		model.addAttribute("board", board);
 		model.addAttribute("page", page);
 	
-	return "board/n_updateresult"; 
+	return "n_updateresult"; 
 	
 	}
 	
@@ -174,7 +174,7 @@ public class NoticeController {
 		model.addAttribute("result", result);
 		model.addAttribute("page", page);
 		
-		return "board/n_deleteresult";
+		return "n_deleteresult";
 		
 	}
 	

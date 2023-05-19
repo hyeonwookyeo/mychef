@@ -20,7 +20,7 @@ public class AdminController {
 	// 관리자 등록폼
 	@RequestMapping("a_insertForm")
 	public String insertForm() {
-		return "admin/a_insertForm";
+		return "a_insertForm";
 	}
 	
 	// 관리자 등록
@@ -30,13 +30,13 @@ public class AdminController {
 		int insertResult = as.insert(admin);
 		model.addAttribute("insertResult", insertResult);
 		
-		return "admin/result";
+		return "result";
 	}
 	
 	// 관리자 로그인
 	@RequestMapping("a_loginform")
 	public String a_loginform() {
-		return "admin/a_loginForm";
+		return "a_loginForm";
 	}
 	
 	// 관리자 정보 구해오기
@@ -51,21 +51,26 @@ public class AdminController {
 	}
 	model.addAttribute("result", result);
 	  
-	return "admin/a_loginResult";
+	return "a_loginResult";
 	}
 	
 	// 관리자 메인
-	@RequestMapping("a_main")
-	public String a_main() {
-		return "admin/a_main";
-	}
+	
 	
 	// 로그아웃
 	@RequestMapping("a_Logout")
 	public String Logout() {
-		return "admin/a_Logout";
+		return "a_Logout";
 	}	
-
+	
+	
+	@RequestMapping("a_main")
+	public String a_main() {
+		return "a_main";
+	}
+	
+	
+	
 }
 
 
