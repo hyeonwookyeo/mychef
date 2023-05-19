@@ -15,8 +15,8 @@
 	function openDaumPostcode() {
 		new daum.Postcode({
 			oncomplete : function(data) {
-				document.getElementById('join_zip').value = data.zonecode;
-				document.getElementById('join_addr1').value = data.address;
+				document.getElementById('zip').value = data.zonecode;
+				document.getElementById('addr1').value = data.address;
 			}
 		}).open();
 	}
@@ -72,7 +72,7 @@
 
 				<tr>
 					<th>우편번호</th>
-					<td><input name="zip" id="join_zip" size="5" class="input_box"
+					<td><input name="zip" id="zip" size="5" class="input_box"
 						readonly onclick="post_search()" /> 
 						<input type="button" value="우편번호 검색" class="input_box" onclick="openDaumPostcode()" />
 					</td>
@@ -80,7 +80,7 @@
 
 				<tr>
 					<th>주소</th>
-					<td><input name="addr1" id="join_addr1" size="50"
+					<td><input name="addr1" id="addr1" size="50"
 						class="input_box" readonly onclick="post_search()" /></td>
 				</tr>
 

@@ -10,7 +10,7 @@
 <body>
 
 MyPage <br><br>
-${sessionScope.id }  님 환영 합니다. <br> <br> <br> <br><br>
+${sessionScope.id }  님 환영 합니다. <br> <br> <br> <br>
 
 테이블 전달테스트 <br>
 <form action="main_test">
