@@ -18,7 +18,7 @@ import recipe.model.Board;
 import recipe.service.BoardService;
 
 @Controller
-public class BoardController {
+public class NoticeController {
 
 	@Autowired
 	private BoardService service;
