@@ -9,8 +9,9 @@
 -->
 		<typeAlias alias="test" type="recipe.model.Test" />
 		<typeAlias alias="admin" type="recipe.model.Admin" />	
-		<typeAlias  alias="board" type="recipe.model.Board"/>
+		<typeAlias  alias="notice" type="recipe.model.Board"/>
 		<typeAlias  alias="member" type="recipe.model.MemberBean"/>
+		<typeAlias alias="board" type="recipe.model.BoardBean" />
 	</typeAliases>
 	
 

@@ -14,9 +14,9 @@ public class NoticeService {
 	@Autowired
 	private NoticeDao dao;
 
-	public int insert(Board board) {
+	public int insert(Board notice) {
 		// TODO Auto-generated method stub
-		return dao.insert(board);
+		return dao.insert(notice);
 	}
 
 	public int getCount() {
@@ -40,8 +40,8 @@ public class NoticeService {
 		return dao.getBoard(ann_Num);
 	}
 	
-	public int update(Board board) {
-		return dao.update(board);
+	public int update(Board notice) {
+		return dao.update(notice);
 	}
 
 	public int delete(int ann_Num) {

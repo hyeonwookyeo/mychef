@@ -3,7 +3,7 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="memberns">
-	
+
 	<!-- 아이디 검색 -->
     <select id="id_find" resultType="member" parameterType="member">
      select *  from member where name=#{name} and birth=#{birth}
@@ -13,8 +13,7 @@
     <select id="pwd_find" resultType="member" parameterType="member">
      select *  from member where id=#{id} and name=#{name}
     </select>
-    
-	
+
 	<!-- 회원저장 -->
     <insert id="member_join" parameterType="member">
      insert into member ( id, pwd, name, birth, profile, nickname, 
@@ -22,12 +21,12 @@
      values(#{id},#{pwd},#{name},#{birth},#{profile,jdbcType=VARCHAR},
      #{nickname},#{zip},#{addr1},#{addr2},#{mailid},#{domain},#{phone1},#{phone2},#{phone3},sysdate,1)
     </insert>
-    
+
     <update id="change_pwd" parameterType="member">
      update member set  pwd=#{pwd} where id=#{id}
     </update>
     
-    <!-- 로그인 인증 -->
+     <!-- 로그인 인증 -->
     <select id="login_check" parameterType="String" resultType="member">
      select * from member where id=#{id} and state=1
     </select>
@@ -37,6 +36,18 @@
      select * from member where nickname=#{nickname} and state=1
     </select>
     
-   
-	
+       <!-- 회원수정 -->
+    <update id="member_edit" parameterType="member">
+     update member set name=#{name},
+     profile=#{profile,jdbcType=VARCHAR},nickname=#{nickname},zip=#{zip},addr1=#{addr1},
+     addr2=#{addr2},mailid=#{mailid},domain=#{domain},phone1=#{phone1},phone2=#{phone2},
+     phone3=#{phone3} where id=#{id}
+    </update>    
+    
+    
+     <!-- 회원삭제 -->
+    <update id="member_del" parameterType="member">
+      update member set delcontent=#{delcontent}, state=2,  joindate=sysdate where id=#{id}
+    </update>
+    
 </mapper>

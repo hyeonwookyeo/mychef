@@ -33,7 +33,7 @@ public class NoticeController {
 	// 글작성
 	@RequestMapping("boardwrite")
 	public String boardwrite(@RequestParam("aFile1") MultipartFile mf ,
-							 @ModelAttribute Board board, 
+							 @ModelAttribute Board notice, 
 							 HttpServletRequest request,
 							 Model model ) throws Exception{
 		System.out.println("boardwrite in");		
@@ -63,9 +63,9 @@ public class NoticeController {
 			
 		}
 			
-		board.setaFile(newfilename);
+		notice.setaFile(newfilename);
 		
-		int result = service.insert(board);
+		int result = service.insert(notice);
 		if(result == 1) System.out.println("글작성 성공");
 		
 		return "a_main";
@@ -114,10 +114,10 @@ public class NoticeController {
 			Model model) {
 		
 		service.updatecount(ann_Num);  // 조회수 1증가
-		Board board = service.getBoard(ann_Num);  // 상세정보 구하기
-		String content = board.getContent().replace("\n", "<br>");
+		Board notice = service.getBoard(ann_Num);  // 상세정보 구하기
+		String content = notice.getContent().replace("\n", "<br>");
 		
-		model.addAttribute("board", board);
+		model.addAttribute("notice", notice);
 		model.addAttribute("content", content);
 		model.addAttribute("page", page);
 		
@@ -131,8 +131,8 @@ public class NoticeController {
 	  public String n_boardupdateform(int ann_Num,
 	  String page, Model model ) {
 	  
-	  Board board = service.getBoard(ann_Num); // 상세정보 구하기
-	  model.addAttribute("board", board); 
+	  Board notice = service.getBoard(ann_Num); // 상세정보 구하기
+	  model.addAttribute("notice", notice); 
 	  model.addAttribute("page", page);
 	  
 	  return"n_boardupdateform";
@@ -142,10 +142,10 @@ public class NoticeController {
 	
 	// 글수정
 	@RequestMapping("boardupdate")
-	public String boardupdate(@ModelAttribute Board board,
+	public String boardupdate(@ModelAttribute Board notice,
 							  @RequestParam("page") String page,
 							  Model model) {
-		int result = service.update(board);
+		int result = service.update(notice);
 //		Board old = service.getBoard(board.getAnn_Num());
 //		Board old = service.getBoard(board.getAnn_Num());  // 상세정보구하기(비번)
 		
@@ -165,11 +165,11 @@ public class NoticeController {
 	
 	// 글삭제 
 	@RequestMapping("boarddelete")
-	public String boarddelete(@ModelAttribute Board board,
+	public String boarddelete(@ModelAttribute Board notice,
 						      @RequestParam("page") String page,
 							  Model model) {
 		
-		int result = service.delete(board.getAnn_Num());
+		int result = service.delete(notice.getAnn_Num());
 		
 		model.addAttribute("result", result);
 		model.addAttribute("page", page);

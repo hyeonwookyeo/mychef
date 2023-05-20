@@ -92,7 +92,7 @@
 
 				<tr>
 					<th>휴대전화번호</th>
-					<td><%@ include file="/WEB-INF/views/phone_number.jsp"%>
+					<td><%@ include file="../../WEB-INF/views/include/phone_number.jsp"%>
 						<select name="phone1">
 							<c:forEach var="p" items="${phone}" begin="0" end="5">
 								<option value="${p}">${p}</option>

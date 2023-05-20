@@ -81,7 +81,7 @@
 					
 						<h6 class="collapse-header">게시판</h6>
 						<a class="collapse-item" href="a_main">공지사항</a> 
-						<a class="collapse-item" href="">이벤트</a> 
+						<a class="collapse-item" href="board_list">이벤트</a> 
 						<a class="collapse-item" href="">회원관리</a>
 							
 						<div class="collapse-divider"></div>

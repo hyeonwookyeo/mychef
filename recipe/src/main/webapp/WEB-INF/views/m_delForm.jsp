@@ -16,9 +16,9 @@
 		 $("#pwd").val("").focus();
 		 return false;
 	 }
-	 if($.trim($("#del_cont").val())==""){
+	 if($.trim($("#delcontent").val())==""){
 		 alert("탈퇴사유를 입력하세요!");
-		 $("#del_cont").val("").focus();
+		 $("#delcontent").val("").focus();
 		 return false;
 	 }
  }
@@ -27,7 +27,8 @@
 <body>
  <div id="del_wrap">
   <h2 class="del_title">회원탈퇴</h2>
-  <form method="post" action="m_delForm_ok.do" onsubmit="return check()">
+  <form method="post" action="m_delForm_ok" onsubmit="return check()"> 
+  <input type="hidden" name="id" value="${sessionScope.id}">
     <table id="del_t">
      <tr>
       <th>회원아이디</th>
@@ -35,12 +36,6 @@
       ${d_id}
       </td>
      </tr>
-     
-     <tr>
-      <th>회원이름</th>
-      <td>${d_name}</td>
-     </tr>
-     
      <tr>
       <th>비밀번호</th>
       <td>
@@ -51,7 +46,7 @@
      <tr>
       <th>탈퇴사유</th>
       <td>
-      <textarea name="del_cont" id="del_cont" rows="7" cols="30" class="input_box"></textarea>
+      <textarea name="delcontent" id="delcontent" rows="7" cols="30" class="input_box"></textarea>
       </td>
      </tr>
     </table>

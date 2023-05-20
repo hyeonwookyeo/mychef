@@ -26,12 +26,12 @@ admin_id : ${param.admin_id }
   <td>      
   
   <td>
-<a href="n_boarddeleteform?ann_Num=${board.ann_Num }}" class="btn btn-danger"
+<a href="n_boarddeleteform?ann_Num=${notice.ann_Num }}" class="btn btn-danger"
   onclick="event.preventDefault(); 
-           document.getElementById(n_boarddeleteform?ann_Num=${board.ann_Num }').submit();">
+           document.getElementById(n_boarddeleteform?ann_Num=${notice.ann_Num }').submit();">
   Delete
 </a>
-<form id="n_boarddeleteform?ann_Num=${board.ann_Num }" method="post" 
+<form id="n_boarddeleteform?ann_Num=${notice.ann_Num }" method="post" 
   action="/board/n_deleteresult"> />
 </form>
 

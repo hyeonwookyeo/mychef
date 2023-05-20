@@ -9,7 +9,7 @@ System.out.println("nickname="+nickname);
 
 MemberDAOImpl md=new MemberDAOImpl();
 
-int re=md.checkMemberNickname(nickname); //중복 1 ,사용가능 -1
+int re = md.checkMemberNickname(nickname);//중복 1 ,사용가능 -1
 
 out.println(re);
  

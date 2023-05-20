@@ -17,6 +17,8 @@
 	<input type="text" name="age"> <br>
 	<input type="submit" value="테스트"> <br>
 </form>
-
+<input type="button" value="게시판 목록" onClick="location.href='list'"/>
+<input type="button" value="찜목록" onClick="location.href='m_Jjim'"/>
+<input type="button" value="마이페이지" onClick="location.href='m_mypage'"/>
 </body>
 </html>
