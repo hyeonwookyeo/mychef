@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="header.jsp"%>
+<%@ include file="/resources/header/header.jsp"%>
 
 
 <!DOCTYPE html>
@@ -57,7 +57,7 @@
 		</div>
 	</nav>
 --%>
-<%@ include file="/resources/header/header.jsp" %>
+<%@ include file="/resources/header/topview.jsp" %>
 
 	<div class="container" align="center">
 		<h2 class="text-primary">게시판 목록</h2>
