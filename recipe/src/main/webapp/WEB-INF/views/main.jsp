@@ -22,6 +22,7 @@
 레시피 탭 테스트<br><br>
 <input type="button" value="인기" onClick="location.href='popular' ">
 <input type="button" value="레시피목록" onClick="location.href='categoryForm' ">
+<input type="button" value="매거진" onClick="location.href='maga' ">
 
 </body>
 </html>

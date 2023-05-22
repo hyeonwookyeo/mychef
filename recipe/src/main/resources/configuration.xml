@@ -16,13 +16,16 @@
 	<typeAlias alias="recomm" type="recipe.model.R_recomm"/>
 	
 	<typeAlias alias="member" type="recipe.model.MemberBean"/>
+	<typeAlias alias="Maga" type="recipe.model.MagaBean" />
+	<typeAlias alias="MagaRecom" type="recipe.model.MagaRecomBean" />
+	<typeAlias alias="MagaReply" type="recipe.model.ReplyMagaBean"/>
+	
 	</typeAliases>
 	
 
 	<!-- 
 	<mappers>
-		<mapper resource="Board.xml" />
-		<mapper resource="ReplyBoard.xml" />
+		<mapper resource="Maga.xml"/>
 	</mappers> 
 	-->
 </configuration>
