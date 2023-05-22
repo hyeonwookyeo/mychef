@@ -4,6 +4,7 @@ import java.util.List;
 
 import recipe.model.MemberBean;
 import recipe.model.R_recomm;
+import recipe.model.R_zzim;
 import recipe.model.RecipeBoard;
 
 public interface RecipeService {
@@ -41,6 +42,13 @@ public interface RecipeService {
 // 추천수 감소 상태
 	void r_recomm_minus(int rnum);
 	
+// 닉네임,프로필 구하기
 	MemberBean m_select(String id);
+	
+// 찜
+	int r_zzim(R_zzim zzim);
+	
+// 찜하기
+	int r_zzim_add(R_zzim zzim);
 	
 }

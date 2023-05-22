@@ -4,6 +4,7 @@ import java.util.List;
 
 import recipe.model.MemberBean;
 import recipe.model.R_recomm;
+import recipe.model.R_zzim;
 import recipe.model.RecipeBoard;
 
 public interface RecipeDao {
@@ -46,6 +47,10 @@ public interface RecipeDao {
 	void r_recomm_minus(int rnum);
 
 	MemberBean m_select(String id);
+
+	int r_zzim_add(R_zzim zzim);
+
+	int r_zzim(R_zzim zzim);
 
 
 }

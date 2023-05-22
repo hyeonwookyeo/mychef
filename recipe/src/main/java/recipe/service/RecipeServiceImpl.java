@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import recipe.dao.RecipeDao;
 import recipe.model.MemberBean;
 import recipe.model.R_recomm;
+import recipe.model.R_zzim;
 import recipe.model.RecipeBoard;
 
 @Service
@@ -99,6 +100,19 @@ public class RecipeServiceImpl implements RecipeService{
 		// TODO Auto-generated method stub
 		return dao.m_select(id);
 	}
+
+	@Override
+	public int r_zzim(R_zzim zzim) {
+		// TODO Auto-generated method stub
+		return dao.r_zzim(zzim);
+	}
+	
+	@Override
+	public int r_zzim_add(R_zzim zzim) {
+		// TODO Auto-generated method stub
+		return dao.r_zzim_add(zzim);
+	}
+
 
 
 

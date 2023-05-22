@@ -26,6 +26,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import recipe.model.MemberBean;
 import recipe.model.R_recomm;
+import recipe.model.R_zzim;
 import recipe.model.RecipeBoard;
 import recipe.service.PagingPgm;
 import recipe.service.RecipeService;
@@ -339,6 +340,56 @@ public class RecipeController {
 		model.addAttribute("result", result);
 
 		return "result/r_recomm_result";
+	}
+// 찜확인
+	@RequestMapping("r_zzim")
+	public String r_zzim(R_zzim zzim, Model model) {
+		
+		System.out.println("r_zzim 진입");
+		
+		String id = zzim.getId();
+		int  rnum = zzim.getRnum();
+		
+		System.out.println(id);
+		System.out.println(rnum);
+		
+		int result = service.r_zzim(zzim);
+		
+		System.out.println("result는 "+result);
+		
+//		if(result == 1) {
+//			
+//			return "redirect:r_zzim_remove?id="+id+"&rnum="+rnum;
+//		}else {
+//			
+//			return "redirect:r_zzim_add?id="+id+"&rnum="+rnum;
+//		}
+		model.addAttribute("id", id);
+		model.addAttribute("rnum", rnum);
+//		model.addAttribute("result", result);
+		
+		return "result/r_zzim_result";
+		
+	}
+	
+// 찜하기
+	@RequestMapping("r_zzim_add")
+	public int r_zzim_add(R_zzim zzim) {
+		
+		System.out.println("r_zzim_add 진입");
+		
+		int result = service.r_zzim_add(zzim);
+		
+		System.out.println(result);
+		
+		return result;
+	}
+	
+// 찜취소
+	@RequestMapping("r_zzim_remove")
+	public String r_zzim_remove() {
+		
+		return "";
 	}
 
 // 레시피 수정폼	

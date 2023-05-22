@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 추천테이블 -->
+<mapper namespace="r_zzim">
+	
+	<select id="select" parameterType="r_zzim" resultType="int">
+		select count(*) from recipe_jjim where id=#{id} and rnum=#{rnum}
+	</select>
+	
+	<insert id="insert" parameterType="r_zzim">
+		insert into recipe_jjim values (#{id}, #{rnum})
+	</insert>
+	
+</mapper>

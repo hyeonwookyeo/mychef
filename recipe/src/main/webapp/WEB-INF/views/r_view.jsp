@@ -74,7 +74,29 @@ $(document).ready(function() {
 			});
 		}
 	});
-    
+    $("#r_zzim_img").click(function(){
+    	alert("메세지");
+    	var id = $("#id").val();
+    	var rnum = $("#rnum").val();
+    	
+    	if(id==""){
+    		alert("로그인이 필요합니다.");
+    	}else{
+    		var zzimfrm = "id="+id+"&rnum="+rnum;
+    		$.ajax({
+    			type:"post",
+    			url:"r_zzim",
+    			data:zzimfrm,
+    			succes:function(data){
+    				if(data == 1){
+    					alert("찜하셨습니다.");
+    				}else{
+    					alert("실패!!");
+    				}
+    			}
+    	});
+    	}	
+    }); 		
 });
 </script>
 <script>
@@ -154,8 +176,11 @@ $(function(){
 		</table>
 
 		<div>
-		<image id="r_recomm_img" src="images/comm.jpg" width="50" height="50"></image>
-		<div id="r_recomm">추천수 : ${recomm_state }</div>
+		<image id="r_recomm_img" src="images/good.png" width="50" height="50"></image>
+		<img id="r_zzim_img" src="images/zzim.jpg" width="50" height="50"/>
+		<div id="r_recomm">추천수 : ${recomm_state }
+		
+		</div>
 		</div><br>
 
 

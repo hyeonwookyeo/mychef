@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import recipe.model.MemberBean;
 import recipe.model.R_recomm;
+import recipe.model.R_zzim;
 import recipe.model.RecipeBoard;
 
 @Repository
@@ -100,6 +101,19 @@ public class RecipeDaoImpl implements RecipeDao{
 		// TODO Auto-generated method stub
 		return sst.selectOne("rboardns.m_select", id);
 	}
+
+	@Override
+	public int r_zzim(R_zzim zzim) {
+		// TODO Auto-generated method stub
+		return sst.selectOne("r_zzim.select", zzim);
+	}
+	
+	@Override
+	public int r_zzim_add(R_zzim zzim) {
+		// TODO Auto-generated method stub
+		return sst.insert("r_zzim.insert", zzim);
+	}
+
 
 	
 	
