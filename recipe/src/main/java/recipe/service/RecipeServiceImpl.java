@@ -113,6 +113,12 @@ public class RecipeServiceImpl implements RecipeService{
 		return dao.r_zzim_add(zzim);
 	}
 
+	@Override
+	public int r_zzim_remove(R_zzim zzim) {
+		// TODO Auto-generated method stub
+		return dao.r_zzim_remove(zzim);
+	}
+
 
 
 

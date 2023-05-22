@@ -45,10 +45,13 @@ public interface RecipeService {
 // 닉네임,프로필 구하기
 	MemberBean m_select(String id);
 	
-// 찜
+// 찜 상태 검색
 	int r_zzim(R_zzim zzim);
 	
-// 찜하기
+// 찜 추가
 	int r_zzim_add(R_zzim zzim);
+	
+// 찜 취소
+	int r_zzim_remove(R_zzim zzim);
 	
 }

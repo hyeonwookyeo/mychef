@@ -8,3 +8,5 @@ create table Test(
 );
 
 select * from test;
+
+select * from recipe_jjim;

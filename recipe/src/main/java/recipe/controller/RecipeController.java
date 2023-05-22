@@ -341,7 +341,8 @@ public class RecipeController {
 
 		return "result/r_recomm_result";
 	}
-// 찜확인
+	
+	// 찜 확인
 	@RequestMapping("r_zzim")
 	public String r_zzim(R_zzim zzim, Model model) {
 		
@@ -357,16 +358,9 @@ public class RecipeController {
 		
 		System.out.println("result는 "+result);
 		
-//		if(result == 1) {
-//			
-//			return "redirect:r_zzim_remove?id="+id+"&rnum="+rnum;
-//		}else {
-//			
-//			return "redirect:r_zzim_add?id="+id+"&rnum="+rnum;
-//		}
 		model.addAttribute("id", id);
 		model.addAttribute("rnum", rnum);
-//		model.addAttribute("result", result);
+		model.addAttribute("result", result);
 		
 		return "result/r_zzim_result";
 		
@@ -374,22 +368,35 @@ public class RecipeController {
 	
 // 찜하기
 	@RequestMapping("r_zzim_add")
-	public int r_zzim_add(R_zzim zzim) {
+	public String r_zzim_add(R_zzim zzim, Model model) {
 		
 		System.out.println("r_zzim_add 진입");
 		
+		int rnum = zzim.getRnum();
 		int result = service.r_zzim_add(zzim);
+		System.out.println("zzim_insert문 실행결과:"+result);
 		
-		System.out.println(result);
+		model.addAttribute("rnum", rnum);
+		model.addAttribute("result", result);
 		
-		return result;
+		return "result/r_zzim_result_add";
 	}
 	
 // 찜취소
 	@RequestMapping("r_zzim_remove")
-	public String r_zzim_remove() {
+	public String r_zzim_remove(R_zzim zzim, Model model) {
 		
-		return "";
+		System.out.println("r_zzim_remove 진입");
+		
+		int rnum = zzim.getRnum();
+		int result = service.r_zzim_remove(zzim);
+		
+		System.out.println("zzim_delete문 실행결과:"+result);
+		
+		model.addAttribute("renum", rnum);
+		model.addAttribute("result", result);
+		
+		return "result/r_zzim_result_delete";
 	}
 
 // 레시피 수정폼	

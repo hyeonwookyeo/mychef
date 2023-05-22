@@ -48,9 +48,14 @@ public interface RecipeDao {
 
 	MemberBean m_select(String id);
 
+// 찜 상태
 	int r_zzim_add(R_zzim zzim);
 
+// 찜 추가
 	int r_zzim(R_zzim zzim);
+
+// 찜 취소
+	int r_zzim_remove(R_zzim zzim);
 
 
 }

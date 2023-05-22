@@ -13,4 +13,8 @@
 		insert into recipe_jjim values (#{id}, #{rnum})
 	</insert>
 	
+	<delete id="delete" parameterType="r_zzim">
+		delete from recipe_jjim where id=#{id} and rnum=#{rnum}
+	</delete>
+	
 </mapper>
