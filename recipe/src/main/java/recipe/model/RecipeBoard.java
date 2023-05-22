@@ -2,6 +2,10 @@ package recipe.model;
 
 import java.util.Date;
 
+/**
+ * @author admin
+ *
+ */
 public class RecipeBoard {
 	private int rnum;
 	private String category;
@@ -18,6 +22,8 @@ public class RecipeBoard {
 	private String rfile;
 	private String content;
 	private String state;
+	private String nickname;
+	private String profile;
 	
 
 	// page
@@ -141,6 +147,18 @@ public class RecipeBoard {
 	}
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
+	}
+	public String getNickname() {
+		return nickname;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+	public String getProfile() {
+		return profile;
+	}
+	public void setProfile(String profile) {
+		this.profile = profile;
 	}
 	
 	

@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="header.jsp"%>
 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,7 +29,7 @@
 </head>
 <body>
 
-	<!-- Responsive navbar-->
+<%--	<!-- Responsive navbar-->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<div class="container px-5">
 			<a class="navbar-brand" href="testMain">NEXT LE시피</a>
@@ -55,6 +56,8 @@
 			</div>
 		</div>
 	</nav>
+--%>
+<%@ include file="/resources/header/header.jsp" %>
 
 	<div class="container" align="center">
 		<h2 class="text-primary">게시판 목록</h2>
@@ -75,7 +78,13 @@
 									</a>
 									<div class="card-body">
 										<h4 class="card-title">${board.subject }</h4>
-										<p class="card-text">${board.id }</p>
+										<c:if test="${not empty board.profile }">
+										<img src ="./upload/${board.profile }" width=30 height=30>
+										</c:if>
+										<c:if test="${empty board.profile }">
+										<img src ="./upload/pepe.jpg" width=30 height=30>
+										</c:if>
+										<span class="card-text">${board.nickname }</span>
 										<span class="card-text">조회수${board.readcount }</span> <span
 											class="card-text">추천수${board.recom }</span>
 										<p class="card-text"><fmt:formatDate value="${board.rdate }"

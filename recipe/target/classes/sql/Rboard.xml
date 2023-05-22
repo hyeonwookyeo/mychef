@@ -25,7 +25,9 @@
 
 	<select id="list" parameterType="rboard" resultType="rboard">
 		SELECT * FROM ( SELECT ROWNUM rn, a.* FROM (
-    	SELECT * FROM recipe WHERE state = 'y' and category = #{category} 
+    	SELECT member.id, nickname, profile, thumbnail, subject, readcount, recom, rdate, recipe.state FROM recipe, member 
+    	WHERE recipe.id=member.id
+    	and recipe.state = 'y' and category = #{category} 
     	<if test="keyword != null and search!='subcon'">
 		and	${search} like '%'||#{keyword}||'%'
 		</if>
