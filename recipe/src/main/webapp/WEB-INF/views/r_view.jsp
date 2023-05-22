@@ -119,6 +119,9 @@ $(function(){
 </script>	
 </head>
 <body>
+	
+	<!-- (공통) 헤더부분 -->
+	<%@ include file="/resources/header/topview.jsp"%>
 					
 	<div class="container" align="center">
 	<input type="hidden" id="rnum" name=rnum value="${board.rnum }"> 

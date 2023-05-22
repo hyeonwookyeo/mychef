@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
+<%@ include file="/resources/header/header.jsp"%>
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>레시피글 입력</title>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script
@@ -213,6 +215,10 @@ input[type=file] {
 
 </head>
 <body>
+	<!-- (공통) 헤더부분 -->
+	<%@ include file="/resources/header/topview.jsp"%>
+	
+	
 	<div class="container" align="center">
 		<h2 class="text-primary">레시피 글 쓰기</h2>
 		<form enctype="multipart/form-data">
