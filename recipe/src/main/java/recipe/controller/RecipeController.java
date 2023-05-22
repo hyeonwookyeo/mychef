@@ -3,10 +3,13 @@ package recipe.controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.logging.SimpleFormatter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -111,6 +114,8 @@ public class RecipeController {
 			throws Exception {
 
 		System.out.println("insert 진입");
+		SimpleDateFormat sf = new SimpleDateFormat("YYYY_MM_dd_");
+		Date dt = new Date();
 
 		// 조리사진 내용
 		String[] contentList = request.getParameterValues("content1");
@@ -134,7 +139,7 @@ public class RecipeController {
 		if (thumbFileName != "") {
 			String extension = thumbFileName.substring(thumbFileName.lastIndexOf("."), thumbFileName.length());
 			UUID uuid = UUID.randomUUID();
-			thumbNewFileName = uuid.toString() + extension;
+			thumbNewFileName = sf.format(dt) + uuid.toString() + extension;
 
 			// 전달확인
 			System.out.println("thumbFileName=" + thumbFileName); // filename="Koala.jpg"
@@ -179,7 +184,7 @@ public class RecipeController {
 			String extension = multiFileName.substring(multiFileName.lastIndexOf("."), multiFileName.length());
 			UUID uuid = UUID.randomUUID();
 
-			String multiNewFileName = uuid.toString() + extension;
+			String multiNewFileName = sf.format(dt) + uuid.toString() + extension;
 
 			System.out.println("multiFileName : " + multiFileName);
 			System.out.println("multiNewFileName : " + multiNewFileName);

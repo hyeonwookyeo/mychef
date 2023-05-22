@@ -18,44 +18,44 @@ public class RecipeDaoImpl implements RecipeDao{
 	@Override
 	public int r_insert(RecipeBoard board) {
 		// TODO Auto-generated method stub
-		return sst.insert("boardns.insert", board);
+		return sst.insert("rboardns.insert", board);
 	}
 
 	@Override
 	public int getTotal(RecipeBoard board) {
 		// TODO Auto-generated method stub
-		return sst.selectOne("boardns.getTotal", board);
+		return sst.selectOne("rboardns.getTotal", board);
 //		return sst.selectOne("boardns.getTotal");
 	}
 
 	@Override
 	public List<RecipeBoard> r_list(RecipeBoard board) {
 		// TODO Auto-generated method stub
-		return sst.selectList("boardns.list", board);
+		return sst.selectList("rboardns.list", board);
 	}
 
 	@Override
 	public void r_readcountUpdate(int rnum) {
 		// TODO Auto-generated method stub
-		sst.update("boardns.readcountUpdate", rnum);
+		sst.update("rboardns.readcountUpdate", rnum);
 	}
 
 	@Override
 	public RecipeBoard r_select(int rnum) {
 		// TODO Auto-generated method stub
-		return sst.selectOne("boardns.select", rnum);
+		return sst.selectOne("rboardns.select", rnum);
 	}
 
 	@Override
 	public int r_update(RecipeBoard board) {
 		// TODO Auto-generated method stub
-		return sst.update("boardns.update", board);
+		return sst.update("rboardns.update", board);
 	}
 
 	@Override
 	public int r_delete(int rnum) {
 		// TODO Auto-generated method stub
-		return sst.update("boardns.delete", rnum);
+		return sst.update("rboardns.delete", rnum);
 	}
 	
 	@Override

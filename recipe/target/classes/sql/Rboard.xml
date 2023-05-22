@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="rboardns">
+
+	<insert id="insert" parameterType="rboard">
+		insert into recipe values(recipe_seq.nextval, #{category},
+		'aaaa',#{thumbnail},#{subject},#{description},sysdate,#{ip},
+		0,0,#{ingre},#{capacity},#{rfile},#{content},'y'
+		)
+	</insert>
+
+	<select id="getTotal" parameterType="rboard" resultType="int">
+		select count(*) from recipe where state = 'y' and category = #{category}
+		<if test="keyword != null and search !='subcon'">
+		and ${search} like '%'||#{keyword}||'%'
+		</if>
+		<if test="keyword != null and search=='subcon'">
+		and (subject like '%'||#{keyword}||'%' or
+		content like '%'||#{keyword}||'%')
+		</if>
+		
+	</select>
+
+	<select id="list" parameterType="rboard" resultType="rboard">
+		SELECT * FROM ( SELECT ROWNUM rn, a.* FROM (
+    	SELECT * FROM recipe WHERE state = 'y' and category = #{category} 
+    	<if test="keyword != null and search!='subcon'">
+		and	${search} like '%'||#{keyword}||'%'
+		</if>
+		<if test="keyword != null and search=='subcon'">
+		and	subject like '%'||#{keyword}||'%' or
+		content like '%'||#{keyword}||'%'
+		</if>
+		ORDER BY rnum desc) a ) 
+    	WHERE rn BETWEEN #{startRow} AND #{endRow}
+	</select>
+
+	<update id="readcountUpdate" parameterType="int">
+		update recipe set readcount = readcount+1 where rnum=#{rnum}
+	</update>
+	
+	<update id="recomm_update" parameterType="int">
+		update recipe set recom = #{recom}
+	</update>
+
+	<select id="select" parameterType="int" resultType="rboard">
+		select * from recipe where rnum=#{rnum}
+	</select>
+
+	<update id="update" parameterType="rboard">
+		update recipe set category=#{category},thumbnail=#{thumbnail},subject=#{subject},
+		description=#{description},ingre=#{ingre},capacity=#{capacity},rfile=#{rfile},content=#{content}
+		where rnum=#{rnum}
+	</update>
+
+	<update id="delete" parameterType="int">
+		update recipe set state='n' where rnum=#{rnum}
+	</update>
+
+
+
+</mapper>
