@@ -26,7 +26,7 @@ public class ReplyMagaDaoImpl implements ReplyMagaDao {
 
 	@Override
 	public void delete(int magare_num) {
-
+		System.out.println("여기2");
 		session.delete("MagaReply.delete", magare_num);
 	}
 

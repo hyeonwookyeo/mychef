@@ -61,24 +61,12 @@
 		<tr>
 			<td>${maga.subject}</td>
 			<td><fmt:formatDate value="${maga.mdate}" pattern="YYYY.MM.dd HH:mm	"/> </td>
-		</tr>
-
-		<%-- <tr>
-			<th>프로필사진</th>
-			<td><c:if test="${empty maga.mfile}">&nbsp;</c:if> 
-			<c:if test="${!empty maga.mfile}">
-					<img src="./upload/${maga.mfile}" height="100" width="100" />
-			</c:if></td>
-		</tr> --%>	
+		</tr>	
 		<tr>
 			<td>관리자</td><td>조회 : ${maga.readcount}&nbsp;&nbsp;&nbsp;&nbsp;추천 : ${maga.recom}</td>
 		</tr>
-		<%-- <tr>
-			<td colspan=2><img src="./upload/${maga.mfile}" height="200px" width="200px"/><br>
-							<textarea rows=20 cols=80 >${maga.content}</textarea></td>
-		</tr> --%>
 		<tr>
-			<td><div contentEditable="true">
+			<td colspan=2><div contentEditable="true">
 			<img src="./upload/${maga.mfile}" height="200px" width="200px"/><br>
 				${maga.content }
 			</div></td>

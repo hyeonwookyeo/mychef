@@ -5,6 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>매거진 글 작성</title>
+
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="<%=request.getContextPath()%>/js/maga.js"></script>
 </head>
 <body>
 
@@ -28,11 +31,12 @@
 		</tr>
 		<tr>
 			<td>
-				<input type="file" name="magafile">
+				<input type="file" id="magafile" name="magafile">
 			</td>
 		</tr>
 	</table>
-	<input type="submit" value="등록">
+	<input type="submit" value="등록" onclick="return sub(
+			)">
 	<input type="reset" value="리셋">
 	</form>
 	

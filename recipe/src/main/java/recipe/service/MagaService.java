@@ -27,4 +27,6 @@ public interface MagaService {
 
 	public void re_cnt(int maga_num);
 
+	public void re_cnt2(int maga_num);
+
 }

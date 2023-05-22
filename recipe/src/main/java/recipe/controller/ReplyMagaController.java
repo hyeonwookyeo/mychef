@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import recipe.model.MagaBean;
@@ -26,7 +27,6 @@ public class ReplyMagaController {
 
 		model.addAttribute("slist", slist);
 		model.addAttribute("maga", maga);
-		System.out.println(slist.get(maga_num).getProfile());
 		return "maga/slist";
 	}
 
@@ -40,7 +40,11 @@ public class ReplyMagaController {
 	}
 
 	@RequestMapping("/repDelete")
-	public String delete(ReplyMagaBean rmaga, Model model) throws Exception {		
+	public String delete(ReplyMagaBean rmaga, Model model) throws Exception {	
+		System.out.println(rmaga.getRef_lev());
+		if(rmaga.getRef_lev().equals("0"))
+			ms.re_cnt2(rmaga.getMaga_num());
+		
 		rms.delete(rmaga.getMagare_num());
 		
 		return "redirect:slist?maga_num=" + rmaga.getMaga_num();
@@ -49,9 +53,6 @@ public class ReplyMagaController {
 	@RequestMapping("/repUpdate")
 	public String repUpdate(ReplyMagaBean rmaga, Model model) {
 		rms.update(rmaga);
-		System.out.println(rmaga.getMagare_num());
-		System.out.println(rmaga.getRe_content());
-		System.out.println(rmaga.getMaga_num());
 		
 		
 		return "redirect:slist?maga_num=" + rmaga.getMaga_num();

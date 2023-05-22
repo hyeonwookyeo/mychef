@@ -4,6 +4,7 @@ package recipe.controller;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -46,7 +47,7 @@ public class MagaController {
 		// 임의의 세션공유
 		String master = "master";
 		String customer = "aaaa";
-		session.setAttribute("id", master);
+		session.setAttribute("id", customer);
 
 		final int rowPerPage = 10;	// 화면에 출력할 데이터 갯수
 		if (page == null || page.equals("")) {
@@ -98,25 +99,27 @@ public class MagaController {
 	
 	// 글 작성
 	@RequestMapping("/maga_write_ok")
-	public String maga_write_ok(@RequestParam("magafile") MultipartFile mf,
+	public String maga_write_ok(@RequestParam("magafile") MultipartFile mf, Model model, 
 								HttpServletRequest request, MagaBean maga) throws Exception {
 		
 		String filename = mf.getOriginalFilename();
 		int size = (int) mf.getSize();
 		String path = request.getRealPath("upload");
-		System.out.println("path");
+		System.out.println(path);
 		String newfilename = "";
-		System.out.println("path : "+path);
+		String file[] = new String[2];
+		int result=0;
 		
 		if(filename != "") {
 			String extension = filename.substring(filename.lastIndexOf("."), filename.length());
 			UUID uuid = UUID.randomUUID();
 			newfilename = uuid.toString() + extension;	
 		}
-
-		mf.transferTo(new File(path + "/" + newfilename));
 		
-		maga.setMfile(newfilename);
+		if(size > 0) {
+			mf.transferTo(new File(path + "/" + newfilename));
+			maga.setMfile(newfilename);
+		}
 		magaService.insert(maga);
 		
 		return "redirect:/maga_list";

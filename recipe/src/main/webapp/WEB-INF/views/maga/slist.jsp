@@ -52,8 +52,8 @@
 		$('#slist').load('slist?maga_num=${maga.maga_num}');
 	}
 	// 댓글 삭제
- 	function del(maga_num,magare_num) {
-		var formData="maga_num="+maga_num+"&magare_num="+magare_num;
+ 	function del(maga_num,magare_num,ref_lev) {
+		var formData="maga_num="+maga_num+"&magare_num="+magare_num+"&ref_lev="+ref_lev;
 		$.post("repDelete",formData, function(data) {
 			alert('댓글이 삭제 되었습니다.');
 			$('#slist').html(data);
@@ -66,6 +66,7 @@
 		<table>
 			<c:forEach var="rb" items="${slist}">
 				<tr>
+					<td><img src="./upload/${rb.profile}" height="20px" width="20px"/></td>
 					<td>${rb.id}날짜</td>		<!-- ${rb.re_date} -->
 					<c:if test="${rb.ref_lev == 0}">
  						<td><input type="button" value="답글" class="edit2" id="${rb.magare_num}"></td>
@@ -73,13 +74,13 @@
  					<c:if test="${rb.id == sessionScope.id}">				
  						<td id="btn_${rb.magare_num}">
  						<input type="button" value="수정" class="edit1" id="${rb.magare_num}">
-						<input type="button" value="삭제" id="del_re"
-								onclick="del(${rb.maga_num},${rb.magare_num})"></td>
+ 						<input type="button" value="삭제" id="del_re"
+								onclick="del(${rb.maga_num},${rb.magare_num},${rb.ref_lev})"></td>
 					</c:if>
 				</tr>
 				<tr>
 					<td colspan=2 align=center id="td_${rb.magare_num}">
-						<img src="./upload/${maga.mfile}" height="100" width="100" />${rb.re_content}</td>
+						${rb.re_content}</td>
 				</tr>
 				<tr>
 					<td><div id="div_${rb.magare_num}" style="display:none">

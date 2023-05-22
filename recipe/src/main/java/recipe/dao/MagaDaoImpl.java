@@ -72,7 +72,11 @@ public class MagaDaoImpl implements MagaDao {
 
 	public void re_cnt(int maga_num) {
 		session.update("Maga.maga_re_cnt",maga_num);
-		
+	}
+
+	public void re_cnt2(int maga_num) {
+		System.out.println("여기1");
+		session.update("Maga.maga_re_cnt2",maga_num);
 	}
 
 }

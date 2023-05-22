@@ -70,8 +70,14 @@
 	</update>
 	
 	
-	<!-- 목록 댓글 업데이트 -->
+	<!-- 목록 댓글  - 업데이트 -->
 	<update id="maga_re_cnt" parameterType="int">
 		update maga set re_cnt = re_cnt + 1 where maga_num = #{maga_num}
 	</update>
+	
+	<!-- 목록 댓글  + 업데이트 -->
+	<update id="maga_re_cnt2" parameterType="int">
+		update maga set re_cnt = re_cnt - 1 where maga_num = #{maga_num}
+	</update>
+	
 </mapper>

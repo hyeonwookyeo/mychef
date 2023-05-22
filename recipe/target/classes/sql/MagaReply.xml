@@ -6,6 +6,7 @@
 
 	<select id="slist" parameterType="int" resultType="magareply">
 		select * from member, maga_re where member.id=maga_re.id and maga_num=#{maga_num} order by ref asc, magare_num asc
+		
 	</select>
 	
 	<insert id="insert" parameterType="magareply">
@@ -27,7 +28,7 @@
 	</insert>
 	
 	<delete id="delete" parameterType="int">
-		delete from maga_re where ref=#{magare_num}
+		delete from maga_re where ref=#{magare_num} or magare_num = #{magare_num}
 	</delete>
 	
 	<update id="update" parameterType="magareply">
