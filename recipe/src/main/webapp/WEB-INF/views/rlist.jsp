@@ -93,7 +93,9 @@ function update(id){
 					<div>
 					<input type="hidden" id="rre_num${reboard.rre_num }" name="rre_num" value="${reboard.rre_num }">
 					<input type="hidden" name="rnum" value="${reboard.rnum }">
-						<span><img src=""/></span>닉네임${reboard.id }<br>
+						<c:if test="${not empty reboard.profile }"><img src="./upload/${reboard.profile }" width=30 height=30/></c:if>
+						<c:if test="${empty reboard.profile }"><img src="./upload/pepe.jpg" width=30 height=30/></c:if>
+						${reboard.nickname }<br>
 						<!-- 이미지 뿌려주기 작업 -->
 						<div id="file_${reboard.rre_num }">
 						<c:forTokens items="${reboard.re_rfile }" delims="]" var="test">

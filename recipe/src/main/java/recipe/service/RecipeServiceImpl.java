@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import recipe.dao.RecipeDao;
+import recipe.model.MemberBean;
 import recipe.model.R_recomm;
 import recipe.model.RecipeBoard;
 
@@ -91,6 +92,12 @@ public class RecipeServiceImpl implements RecipeService{
 	public void r_recomm_minus(int rnum) {
 		// TODO Auto-generated method stub
 		dao.r_recomm_minus(rnum);
+	}
+
+	@Override
+	public MemberBean m_select(String id) {
+		// TODO Auto-generated method stub
+		return dao.m_select(id);
 	}
 
 

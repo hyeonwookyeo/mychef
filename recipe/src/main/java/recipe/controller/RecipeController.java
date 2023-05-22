@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import recipe.model.MemberBean;
 import recipe.model.R_recomm;
 import recipe.model.RecipeBoard;
 import recipe.service.PagingPgm;
@@ -268,11 +269,14 @@ public class RecipeController {
 		for (int i = 0; i < rfile.length; i++) {
 			map2.put(rfile[i], content[i]);
 		}
-
+		
+		MemberBean member = service.m_select(board.getId());
+		
 		model.addAttribute("recomm_state", recomm_state);
 		model.addAttribute("pageNum", pageNum);
 		model.addAttribute("rpageNum", rpageNum);
 		model.addAttribute("board", board);
+		model.addAttribute("member", member);
 		model.addAttribute("map1", map1);
 		model.addAttribute("map2", map2);
 

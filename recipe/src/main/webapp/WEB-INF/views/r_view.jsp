@@ -129,7 +129,10 @@ $(function(){
 			<img src="./t_images/${board.thumbnail}" width=500/>
 		</div>
 		<div>카테고리 ${board.category }</div>
-		<div>${board.id }닉사진 조회수 ${board.readcount }</div>
+		<div>
+		<c:if test="${not empty member.profile }"><img src="./upload/${member.profile }" width=35 height=35></c:if>
+		<c:if test="${empty member.profile }"><img src="./upload/pepe.jpg" width=35 height=35></c:if>
+		${member.nickname} 조회수 ${board.readcount }</div>
 		<div>${board.description }</div>
 
 		<table>

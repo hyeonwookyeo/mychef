@@ -2,6 +2,7 @@ package recipe.dao;
 
 import java.util.List;
 
+import recipe.model.MemberBean;
 import recipe.model.R_recomm;
 import recipe.model.RecipeBoard;
 
@@ -43,6 +44,8 @@ public interface RecipeDao {
 	
 // 추천수 감소 상태
 	void r_recomm_minus(int rnum);
+
+	MemberBean m_select(String id);
 
 
 }

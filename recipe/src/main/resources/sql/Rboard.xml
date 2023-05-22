@@ -25,7 +25,7 @@
 
 	<select id="list" parameterType="rboard" resultType="rboard">
 		SELECT * FROM ( SELECT ROWNUM rn, a.* FROM (
-    	SELECT member.id, nickname, profile, thumbnail, subject, readcount, recom, rdate, recipe.state FROM recipe, member 
+    	SELECT member.id, rnum, nickname, profile, thumbnail, subject, readcount, recom, rdate, recipe.state FROM recipe, member 
     	WHERE recipe.id=member.id
     	and recipe.state = 'y' and category = #{category} 
     	<if test="keyword != null and search!='subcon'">
@@ -60,6 +60,10 @@
 	<update id="delete" parameterType="int">
 		update recipe set state='n' where rnum=#{rnum}
 	</update>
+	
+	<select id="m_select" parameterType="String" resultType="member">
+		select * from member where id=#{id}
+	</select>
 
 
 

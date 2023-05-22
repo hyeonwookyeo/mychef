@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import recipe.model.MemberBean;
 import recipe.model.R_recomm;
 import recipe.model.RecipeBoard;
 
@@ -92,6 +93,12 @@ public class RecipeDaoImpl implements RecipeDao{
 	public void r_recomm_minus(int rnum) {
 		// TODO Auto-generated method stub
 		sst.update("r_recommns.minus", rnum);
+	}
+
+	@Override
+	public MemberBean m_select(String id) {
+		// TODO Auto-generated method stub
+		return sst.selectOne("rboardns.m_select", id);
 	}
 
 	
