@@ -76,7 +76,7 @@ public class MagaController {
 		model.addAttribute("search",maga.getSearch());
 		model.addAttribute("keyword",maga.getKeyword());
 
-		return "maga_list";
+		return "maga/maga_list";
 	}
 	
 	// 상세 페이지 출력
@@ -122,7 +122,7 @@ public class MagaController {
 		}
 		magaService.insert(maga);
 		
-		return "redirect:/maga_list";
+		return "redirect:maga/maga_list";
 	}
 	
 	// 글 삭제
@@ -142,7 +142,7 @@ public class MagaController {
 		int result = magaService.maga_del(maga_num);
 		System.out.println(result);
 		
-		return "redirect:/maga_list?page="+page;
+		return "redirect:maga/maga_list?page="+page;
 	}
 	
 	// 매거진 추천

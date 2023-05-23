@@ -68,7 +68,7 @@ public class RecipeReController {
 		model.addAttribute("rnum", rnum);
 		model.addAttribute("pp", pp);
 
-		return "rlist";
+		return "recipe/rlist";
 	}
 
 	// 댓글 등록

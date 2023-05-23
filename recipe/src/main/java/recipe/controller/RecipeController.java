@@ -47,7 +47,7 @@ public class RecipeController {
 		String id = "aaaa";
 		session.setAttribute("id", id);
 
-		return "categoryForm";
+		return "recipe/categoryForm";
 
 	}
 
@@ -96,7 +96,7 @@ public class RecipeController {
 		model.addAttribute("search", board.getSearch());
 		model.addAttribute("keyword", board.getKeyword());
 
-		return "r_list";
+		return "recipe/r_list";
 	}
 
 // 레시피 작성폼
@@ -105,7 +105,7 @@ public class RecipeController {
 
 		model.addAttribute("pageNum", pageNum);
 
-		return "r_insertForm";
+		return "recipe/r_insertForm";
 	}
 
 // 레시피 작성	
@@ -281,7 +281,7 @@ public class RecipeController {
 		model.addAttribute("map1", map1);
 		model.addAttribute("map2", map2);
 
-		return "r_view";
+		return "recipe/r_view";
 	}
 
 	// 상세페이지 - 추천
@@ -425,7 +425,7 @@ public class RecipeController {
 		model.addAttribute("map1", map1);
 		model.addAttribute("map2", map2);
 
-		return "r_updateForm";
+		return "recipe/r_updateForm";
 	}
 
 //	수정
