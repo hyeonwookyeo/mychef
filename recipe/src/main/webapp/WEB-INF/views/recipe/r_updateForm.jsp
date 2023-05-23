@@ -51,7 +51,7 @@
 		str += "<tr>";
 		str += "	<td>조리사진</td>";
 		str += "	<td><input multiple=\"multiple\" type=\"file\" name='r_file1' onchange=\"readURL(this, 'cook" + i + "');\" id=\"r_file" + i + "\">";
-		str += "		<img id=\"cook" + i + "\" src=\"images/western.jpg\" width=300 height=350 class=\"preview\"/></td>";
+		str += "		<img id=\"cook" + i + "\" src=\"images/Plus.jpg\" width=300 height=350 class=\"preview\"/></td>";
 		str += "</tr>";
 		str += "<tr>";
 		str += "	<td>내용</td>";
@@ -97,7 +97,7 @@
 			};
 			reader.readAsDataURL(input.files[0]);
 		}else {
-			document.getElementById(imgId).src = "";
+			document.getElementById(imgId).src = "images/Plus.jpg";
 		}
 	}
 		
