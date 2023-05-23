@@ -62,29 +62,33 @@
 </script>
 </head>
 <body>
-	<div align=center>
-		<table>
+	<div id="slist">
+		<table border=1 align=center>
 			<c:forEach var="rb" items="${slist}">
 				<tr>
-					<td><img src="./upload/${rb.profile}" height="20px" width="20px"/></td>
-					<td>${rb.id}날짜</td>		<!-- ${rb.re_date} -->
+					<td>
+						<c:if test="${rb.ref_lev == 1}">&nbsp;&nbsp;&nbsp;&nbsp;</c:if>
+						<img src="./upload/${rb.profile}" height="20px" width="20px"/></td>
+					<td>${rb.id} ${rb.re_date}</td>		<!-- ${rb.re_date} -->
+					
+ 						<td id="btn_${rb.magare_num}">
 					<c:if test="${rb.ref_lev == 0}">
- 						<td><input type="button" value="답글" class="edit2" id="${rb.magare_num}"></td>
+ 						<input type="button" value="답글" class="edit2" id="${rb.magare_num}">
 					</c:if>
  					<c:if test="${rb.id == sessionScope.id}">				
- 						<td id="btn_${rb.magare_num}">
  						<input type="button" value="수정" class="edit1" id="${rb.magare_num}">
- 						<input type="button" value="삭제" id="del_re"
-								onclick="del(${rb.maga_num},${rb.magare_num},${rb.ref_lev})"></td>
+ 						<input type="button" value="삭제" id="del_re" onclick="del(${rb.maga_num},${rb.magare_num},${rb.ref_lev})">
 					</c:if>
+					</td>
 				</tr>
 				<tr>
 					<td colspan=2 align=center id="td_${rb.magare_num}">
+					<c:if test="${rb.ref_lev == 1}">&nbsp;&nbsp;&nbsp;&nbsp;</c:if>
 						${rb.re_content}</td>
 				</tr>
 				<tr>
 					<td><div id="div_${rb.magare_num}" style="display:none">
-						<textarea row='3' cols='30' id="divtd_${rb.magare_num }"></textarea>
+						<textarea rows="3" cols="30" id="divtd_${rb.magare_num}"></textarea>
 						<input type="hidden" name="id" id="id" value="${sessionScope.id}">
 						<input type="button" value="확인" onclick="dapup(${rb.magare_num})">
 						<input type="button" value="취소" onclick="lst()">

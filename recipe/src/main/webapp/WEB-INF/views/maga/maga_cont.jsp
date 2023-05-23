@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ include file="/resources/header/header.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,9 +19,6 @@
 				return false;
 			}			  
 			var frmData = $('#frm').serialize();
-//			var id = session.getAttribute("id");
-//			var maga_num = $("#maga_num").val();
-//			var re_content = $("#re_content").val();
 			var ffData = {
 					"maga_num" : $("#maga_num").val(),
 					"id" : $("#id").val(),
@@ -56,6 +54,7 @@
 </script>
 
 <body>
+<%@ include file="/resources/header/topview.jsp"%>
 	<form>
 	<table border=1 align=center>
 		<tr>
@@ -67,16 +66,18 @@
 		</tr>
 		<tr>
 			<td colspan=2><div contentEditable="true">
+			<c:if test="${maga.mfile != null }">
 			<img src="./upload/${maga.mfile}" height="200px" width="200px"/><br>
+			</c:if>
 				${maga.content }
 			</div></td>
 		</tr>
 	</table>
 	</form>
 
-	<div align=right>
+	<div id="btn" align=right>
 	<input type="button" value="수정" class="input_button"
-		onclick=""/>
+		onclick="location='maga_update?maga_num=${maga.maga_num}&page=${page}'"/>
 	<input type="button" value="삭제" class="input_button"
 		onclick="maga_del_config(${maga.maga_num},${page})"/>
 	<input type="button" value="목록" class="input_button"

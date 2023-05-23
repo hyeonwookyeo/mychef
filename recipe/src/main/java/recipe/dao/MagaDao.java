@@ -27,4 +27,9 @@ public interface MagaDao {
 	public void re_cnt(int maga_num) throws Exception;
 	
 	public void re_cnt2(int maga_num) throws Exception;
+	
+	public void update(MagaBean maga) throws Exception;
+	
+	public void maga_idel(int maga_num) throws Exception;
+	
 }

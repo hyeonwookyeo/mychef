@@ -58,6 +58,17 @@
 	</select>
 	
 	
+	<!-- 매거진 수정 -->
+	<update id="maga_update" parameterType="maga">
+		update maga set subject=#{subject}, content=#{content}, mfile=#{mfile, jdbcType=VARCHAR} where maga_num=#{maga_num}
+	</update>
+	
+	<!-- 매거진 이미지 삭제 -->
+	<update id="maga_idel" parameterType="int">
+		update maga set mfile=null where maga_num=#{maga_num}
+	</update>
+	
+	
 	<!-- 매거진 삭제 -->
 	<update id="maga_del" parameterType="int">
 		update maga set state = '0' where maga_num = #{maga_num}

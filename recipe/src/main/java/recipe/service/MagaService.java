@@ -29,4 +29,8 @@ public interface MagaService {
 
 	public void re_cnt2(int maga_num);
 
+	public void maga_update(MagaBean maga);
+
+	public void maga_idel(int maga_num);
+
 }

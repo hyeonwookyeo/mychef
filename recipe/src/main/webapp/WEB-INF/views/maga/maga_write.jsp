@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file="/resources/header/header.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +11,7 @@
 <script src="<%=request.getContextPath()%>/js/maga.js"></script>
 </head>
 <body>
-
+	<%@ include file="/resources/header/topview.jsp"%>
 	<form method="post" action="<%=request.getContextPath() %>/maga_write_ok" enctype="multipart/form-data">
 	<table>
 		<tr>

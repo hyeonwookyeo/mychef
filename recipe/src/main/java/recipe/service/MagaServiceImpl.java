@@ -72,4 +72,15 @@ public class MagaServiceImpl implements MagaService {
 		
 	}
 
+	@Override
+	public void maga_update(MagaBean maga) {
+		magaDao.update(maga);
+		
+	}
+
+	@Override
+	public void maga_idel(int maga_num) {
+		magaDao.maga_idel(maga_num);
+	}
+
 }
