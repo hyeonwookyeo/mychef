@@ -35,7 +35,13 @@
 		and	subject like '%'||#{keyword}||'%' or
 		content like '%'||#{keyword}||'%'
 		</if>
-		ORDER BY rnum desc) a ) 
+		ORDER BY 
+		<choose>
+			<when test="sort == 'recom'">recom</when>
+			<when test="sort == 'rnum'">rnum</when>
+			<when test="sort == 'readcount'">readcount</when>
+		</choose>
+		desc) a ) 
     	WHERE rn BETWEEN #{startRow} AND #{endRow}
 	</select>
 

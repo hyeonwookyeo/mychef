@@ -61,8 +61,10 @@ public class RecipeController {
 		if (pageNum == null || pageNum.equals("")) {
 			pageNum = "1";
 		}
+		if (board.getSort() == null || board.getSort().equals("")) {
+			board.setSort("rnum");
+		}
 		int currentPage = Integer.parseInt(pageNum);
-		// int total = bs.getTotal();
 		int total = service.getTotal(board); // 검색
 		System.out.println("total:" + total);
 
@@ -76,9 +78,9 @@ public class RecipeController {
 		System.out.println("startRow" + startRow);
 		System.out.println("endRow" + endRow);
 		
+		board.setSort(board.getSort());
 		board.setStartRow(startRow);
 		board.setEndRow(endRow);
-		// List<Board> list = bs.list(startRow, endRow);
 		int number = total - startRow + 1;
 
 		List<RecipeBoard> list = service.r_list(board);
@@ -86,6 +88,7 @@ public class RecipeController {
 
 		System.out.println(startRow + "+" + endRow);
 
+		model.addAttribute("total", total);
 		model.addAttribute("pageNum", pageNum);
 		model.addAttribute("list", list);
 		model.addAttribute("number", number);

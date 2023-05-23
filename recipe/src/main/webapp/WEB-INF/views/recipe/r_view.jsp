@@ -5,19 +5,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- Latest compiled and minified CSS -->
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-
-<!-- Latest compiled JavaScript -->
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-<script src="http://code.jquery.com/jquery-latest.js"></script>
 <script>
 function delete_check(){
 	var text="삭제하시겠습니까?";
@@ -141,7 +131,6 @@ $(function(){
 </script>	
 </head>
 <body>
-	
 	<!-- (공통) 헤더부분 -->
 	<%@ include file="/resources/header/topview.jsp"%>
 					

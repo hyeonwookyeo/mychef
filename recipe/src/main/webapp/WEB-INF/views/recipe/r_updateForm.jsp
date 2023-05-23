@@ -1,16 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>	
+	
+<%@ include file="/resources/header/header.jsp"%>	
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>레시피 수정</title>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
+
 <script type="text/javascript">
 	var i = 2;
 
@@ -110,6 +108,9 @@ input[type=file] {
 
 </head>
 <body>
+	<!-- (공통) 헤더부분 -->
+	<%@ include file="/resources/header/topview.jsp"%>
+	
 	<div class="container" align="center">
 		<h2 class="text-primary">레시피 수정하기</h2>
 		<form enctype="multipart/form-data">

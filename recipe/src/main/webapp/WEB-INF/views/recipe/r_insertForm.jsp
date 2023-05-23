@@ -8,10 +8,6 @@
 <head>
 <meta charset="UTF-8">
 <title>레시피글 입력</title>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
 <script type="text/javascript">
 	var i = 2;			// 조리사진 추가시, img 태그당 증가 id값 (초기출력번호 1)
 	var j = 2;			// 조리사진 추가시, input 태그당 증가 id값

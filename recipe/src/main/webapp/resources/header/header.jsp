@@ -22,3 +22,5 @@
 <link rel="icon" type="resources/image/x-icon" href="assets/favicon.ico" />
 <!-- Core theme CSS (includes Bootstrap)-->
 <link href="resources/css/styles.css" rel="stylesheet" />
+
+<script src="http://code.jquery.com/jquery-latest.js"></script>

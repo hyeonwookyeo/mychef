@@ -8,14 +8,6 @@
 <head>
 <meta charset="UTF-8">
 <title>레시피게시판 목록</title>
-<!-- Latest compiled and minified CSS -->
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-
-<!-- Latest compiled JavaScript -->
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 	
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -59,8 +51,16 @@
 --%>
 <%@ include file="/resources/header/topview.jsp" %>
 
+		<h2 class="text-primary" align="center">게시판 목록</h2>
+		<div style="text-align:left; margin-left: 2em" > 총 <b>${total }</b>개의 레시피를 만나보세요~!</div>
+		<div class="btn-group">
+  			<button type="button" class="btn btn-outline-success" onClick="location.href='r_listForm?category=${category}'">최신순</button>
+  			<button type="button" class="btn btn-outline-success" onClick=
+  			"location.href='r_listForm?category=${category}&sort=readcount'">조회순</button>
+  			<button type="button" class="btn btn-outline-success" onClick=
+  			"location.href='r_listForm?category=${category}&sort=recom'">추천순</button>
+		</div>
 	<div class="container" align="center">
-		<h2 class="text-primary">게시판 목록</h2>
 		<div class="row">
 			<c:if test="${empty list}">
 				<div class="col-sm-12 text-bg-secondary">
@@ -74,7 +74,7 @@
 							<div>
 								<div class="card" style="width: 400px height: 300px">
 									<a href="r_view?rnum=${board.rnum }&pageNum=${pageNum}">
-										<img class="card-img-top" src="./t_images/${board.thumbnail }">
+										<img class="card-img-top" src="./t_images/${board.thumbnail }" width=270 height=250>
 									</a>
 									<div class="card-body">
 										<h4 class="card-title">${board.subject }</h4>

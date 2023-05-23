@@ -32,6 +32,8 @@ public class RecipeBoard {
 	// 검색
 	private String search;
 	private String keyword;
+	//
+	private String sort;
 	
 	
 	public int getRnum() {
@@ -159,6 +161,12 @@ public class RecipeBoard {
 	}
 	public void setProfile(String profile) {
 		this.profile = profile;
+	}
+	public String getSort() {
+		return sort;
+	}
+	public void setSort(String sort) {
+		this.sort = sort;
 	}
 	
 	
