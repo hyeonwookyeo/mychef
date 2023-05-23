@@ -435,6 +435,8 @@ public class RecipeController {
 	@RequestMapping("r_update")
 	public String r_update(@RequestParam("thumbnail1") MultipartFile mf1, MultipartHttpServletRequest mhr,
 			RecipeBoard board, HttpServletRequest request, Model model) throws Exception {
+		
+		RecipeBoard old = service.r_select(board.getRnum());
 
 		System.out.println("update 진입");
 
@@ -457,7 +459,17 @@ public class RecipeController {
 		String thumbpath = request.getRealPath("t_images");
 		String thumbNewFileName = "";
 
-		if (thumbFileName != "") {
+//		if (thumbFileName != "") {
+//			String extension = thumbFileName.substring(thumbFileName.lastIndexOf("."), thumbFileName.length());
+//			UUID uuid = UUID.randomUUID();
+//			thumbNewFileName = uuid.toString() + extension;
+//
+//			// 전달확인
+//			System.out.println("thumbFileName=" + thumbFileName); // filename="Koala.jpg"
+//			System.out.println("thumbFileSize=" + thumbFileSize);
+//			System.out.println("thumbPath=" + thumbpath);
+//		}
+		if (thumbFileSize > 0) {
 			String extension = thumbFileName.substring(thumbFileName.lastIndexOf("."), thumbFileName.length());
 			UUID uuid = UUID.randomUUID();
 			thumbNewFileName = uuid.toString() + extension;
@@ -466,30 +478,18 @@ public class RecipeController {
 			System.out.println("thumbFileName=" + thumbFileName); // filename="Koala.jpg"
 			System.out.println("thumbFileSize=" + thumbFileSize);
 			System.out.println("thumbPath=" + thumbpath);
+			
+			mf1.transferTo(new File(thumbpath + "/" + thumbNewFileName));
 		}
 
-		mf1.transferTo(new File(thumbpath + "/" + thumbNewFileName));
 
 		System.out.println("thumbNewFileName:" + thumbNewFileName);
-		board.setThumbnail(thumbNewFileName);
-
-		/*
-		 * // 조리사진 String filename2 = mf2.getOriginalFilename(); int filesize2 = (int)
-		 * mf2.getSize(); String newfilename2 = "";
-		 * 
-		 * // 전달확인 System.out.println("mf2=" + mf2); System.out.println("filename2=" +
-		 * filename2); // filename="Koala.jpg" System.out.println("filesize2=" +
-		 * filesize2); System.out.println("Path=" + path);
-		 * 
-		 * if(filename2!="") { String extension =
-		 * filename2.substring(filename2.lastIndexOf("."), filename2.length()); UUID
-		 * uuid = UUID.randomUUID(); newfilename2 = uuid.toString() + extension; }
-		 * 
-		 * mf2.transferTo(new File(path + "/" + newfilename2));
-		 * 
-		 * board.setRfile(newfilename2);
-		 * 
-		 */
+		
+		if(thumbFileSize > 0) {
+			board.setThumbnail(thumbNewFileName);
+		}else {
+			board.setThumbnail(old.getThumbnail());
+		}
 
 		// 멀티 업로드
 		List<MultipartFile> fileList = mhr.getFiles("r_file1");
@@ -497,32 +497,41 @@ public class RecipeController {
 		String finalFileName = "";
 
 		System.out.println("path:" + multipath);
+		
+		int multiFileSize=0;
 
-		for (MultipartFile mf : fileList) {
-			String multiFileName = mf.getOriginalFilename(); // 원본 파일 명
-			long multiFileSize = mf.getSize(); // 파일 사이즈
-
-			String extension = multiFileName.substring(multiFileName.lastIndexOf("."), multiFileName.length());
-			UUID uuid = UUID.randomUUID();
-
-			String multiNewFileName = uuid.toString() + extension;
-
-			System.out.println("multiFileName : " + multiFileName);
-			System.out.println("multiNewFileName : " + multiNewFileName);
-			System.out.println("multiFileSize : " + multiFileSize);
-
-			finalFileName += multiNewFileName + "]";
-
-			try {
-				mf.transferTo(new File(multipath + "/" + multiNewFileName));
-			} catch (Exception e) {
-
-				e.printStackTrace();
+		if(mhr != null) {
+			for (MultipartFile mf : fileList) {
+				
+				multiFileSize = (int)mf.getSize(); // 파일 사이즈
+				String multiFileName = mf.getOriginalFilename(); // 원본 파일 명
+				
+				String extension = multiFileName.substring(multiFileName.lastIndexOf("."), multiFileName.length());
+				UUID uuid = UUID.randomUUID();
+				
+				String multiNewFileName = uuid.toString() + extension;
+				
+				System.out.println("multiFileName : " + multiFileName);
+				System.out.println("multiNewFileName : " + multiNewFileName);
+				System.out.println("multiFileSize : " + multiFileSize);
+				
+				finalFileName += multiNewFileName + "]";
+				
+				try {
+					mf.transferTo(new File(multipath + "/" + multiNewFileName));
+				} catch (Exception e) {
+					
+					e.printStackTrace();
+				}
 			}
 		}
 
 		System.out.println("finalFileName:" + finalFileName);
-		board.setRfile(finalFileName);
+		if(multiFileSize > 0) {
+			board.setRfile(finalFileName);
+		}else {
+			old.setRfile(old.getRfile());
+		}
 
 		// 재료, 용량 '-' 접합자 추가해서 저장
 		String ingre = "";
