@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -260,14 +261,15 @@ public class RecipeController {
 		for (int i = 0; i < ingre.length; i++) {
 			System.out.println(ingre[i]);
 		}
-		Map<String, String> map1 = new HashMap<>();
-		Map<String, String> map2 = new HashMap<>();
+		
+		LinkedHashMap<String, String> map1 = new LinkedHashMap<>();
+		LinkedHashMap<String, String> map2 = new LinkedHashMap<>();
 
 		for (int i = 0; i < ingre.length; i++) {
 			map1.put(ingre[i], capacity[i]);
 		}
 		System.out.println("ingre값 출력: " + map1);
-		for (int i = 0; i < rfile.length; i++) {
+		for (int i = 0; i < content.length; i++) {
 			map2.put(rfile[i], content[i]);
 		}
 		
@@ -410,8 +412,8 @@ public class RecipeController {
 		String rfile[] = (board.getRfile()).split("]");
 		String content[] = (board.getContent()).split("-");
 
-		Map<String, String> map1 = new HashMap<>();
-		Map<String, String> map2 = new HashMap<>();
+		LinkedHashMap<String, String> map1 = new LinkedHashMap<>();
+		LinkedHashMap<String, String> map2 = new LinkedHashMap<>();
 
 		for (int i = 0; i < ingre.length; i++) {
 			map1.put(ingre[i], capacity[i]);

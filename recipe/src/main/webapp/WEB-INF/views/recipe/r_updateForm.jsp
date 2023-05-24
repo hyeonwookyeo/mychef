@@ -16,7 +16,12 @@
 
 	$(document).on('click', "[name='ingre_del']", function() {
 		var tr = $(this).parent().parent().parent();
+		var row_idx = parseInt($(".row_idx").text());
+		if(row_idx==1){
+			alert("재료는 한가지 이상 입력해야 합니다.");
+		}else{
 		$("#tbody_id:last > tr:last").remove();
+		}
 	});
 
 	function cook_del() {
@@ -47,11 +52,14 @@
 
 	function cook_add() {
 		var str = "";
-
+		var r_fileCnt = $("input[name='r_file1']").length + 1;
+		
+		
 		str += "<tr>";
 		str += "	<td>조리사진</td>";
-		str += "	<td><input multiple=\"multiple\" type=\"file\" name='r_file1' onchange=\"readURL(this, 'cook" + i + "');\" id=\"r_file" + i + "\">";
-		str += "		<img id=\"cook" + i + "\" src=\"images/Plus.jpg\" width=300 height=350 class=\"preview\"/></td>";
+		str += "	<td>" + r_fileCnt +"</td>";
+		str += "	<td><input multiple=\"multiple\" type=\"file\" name='r_file1' onchange=\"readURL(this, 'cook" + r_fileCnt + "');\" id=\"r_file" + r_fileCnt + "\">";
+		str += "		<img id=\"cook" + r_fileCnt + "\" src=\"images/Plus.jpg\" width=300 height=350 class=\"preview\"/></td>";
 		str += "</tr>";
 		str += "<tr>";
 		str += "	<td>내용</td>";
@@ -59,7 +67,6 @@
 		str += "</tr>";
 
 		$("#tbody_id2:last").append(str);
-		i++;
 	}
 
 	$(document).on('click', '.preview', function(e) {
@@ -75,11 +82,87 @@
 
 	$(function() {
 		$('#sub').click(function() {
+			
+// 유효성 검사
+			
+			// 썸네일 유효성검사 변수
+			var t_imgFile = $('#thumbnail1').val();
+			var fileForm = /(.*?)\.(jpg|jpeg|png|gif|bmp|pdf)$/;		// 정규표현식
+			var maxSize = 100 * 1024 * 1024;							// 파일 최대크기
+			var t_fileSize;												// 실제 업로드할 파일 크기
+			
+			// 조리사진 유효성검사 변수
+			var r_fileCnt = $("input[name='r_file1']").length;
+			var r_imgFile;		
+			var r_fileSize;
+		
+			
+			
+			// subject
+			if($.trim($("#subject").val())==""){
+				alert("제목을 입력해야합니다.");
+				$("#subject").focus();
+				return false;
+			}
+			
+			
+			// category
+			if(($("#category").val())==""){
+				alert("레시피 분류를 선택해야합니다.");
+				$("#category").focus();
+				return false;
+			}
+			
+			
+			if(t_imgFile != "") {
+				t_fileSize = document.getElementById("thumbnail1").files[0].size;
+			    
+			    if(!t_imgFile.match(fileForm)) {
+			    	alert("이미지 파일만 업로드 가능합니다.");
+			        return false;
+			    } else if(t_fileSize > maxSize) {
+			    	alert("파일 사이즈는 5MB까지 가능합니다.");
+			        return false;
+			    }
+			}
+			
+			
+			// description
+			if(($("#description").val())==""){
+				alert("레시피에 대한 간략한 설명을 작성해주세요.");
+				$("#description").focus();
+				return false;
+			}
+			
+			// ingre
+			if(($("#ingre").val())==""){
+				alert("재료를 최소 한개 이상 입력해주세요.");
+				$("#ingre").focus();
+				return false;
+			}
+			
+			// capacity
+			if(($("#capacity").val())==""){
+				alert("용량을 입력해주세요.");
+				$("#capacity").focus();
+				return false;
+			}
+			
+			
+			// content1
+			if(($("#content1").val())==""){
+				alert("조리과정 설명을 입력해주세요.");
+				$("#content1").focus();
+				return false;
+			}
+			
 			$('form').serialize();
 			$('form').attr('method', 'POST');
 			$('form').attr('action', 'r_update');
 			$('form').submit();
 		});
+		
+		
 		$("#cancel").click(function(){
 			if(confirm("수정을 취소하고 글로 돌아가시겠습니까?")){
 				history.go(-1);
@@ -117,11 +200,12 @@ input[type=file] {
 			<table border=1>
 				<tr>
 					<td>제목</td>
-					<td><input type="text" name="subject" value="${board.subject }"></td>
+					<td><input type="text" id="subject" name="subject" value="${board.subject }"></td>
 				</tr>
 				<tr>
 					<td>분류</td>
 					<td><select id="category" name="category">
+							<option value="">선택</option>
 							<option value="korean"<c:if test="${board.category == 'korean'}">selected</c:if>>한식</option>
 							<option value="chinese"<c:if test="${board.category == 'chinese'}">selected</c:if>>중식</option>
 							<option value="japanese"<c:if test="${board.category == 'japanese'}">selected</c:if>>일식</option>
@@ -136,7 +220,7 @@ input[type=file] {
 				</tr>
 				<tr>
 					<td>간략한 설명</td>
-					<td><input type="text" name="description" value="${board.description }"></td>
+					<td><input type="text" id="description" name="description" value="${board.description }"></td>
 				</tr>
 			</table>
 			<br>
@@ -190,12 +274,13 @@ input[type=file] {
 			<c:set var="j" value="${j+1}"/>
 			<tr>
 				<td>조리사진</td>
+				<td>${j }</td>
 				<td><input multiple type="file" name='r_file1' id="r_file${j }"
 						onchange="readURL(this,'cook${j}');">
 				<img src="./r_images/${item2.key }" id="cook${j }" width=300 height=250 class="preview"/>
 				</td>
 			</tr>
-			
+
  			<tr>
 				<td>내용</td>
 				<td><textarea rows="5" cols="30" name='content1'>${item2.value }</textarea></td>

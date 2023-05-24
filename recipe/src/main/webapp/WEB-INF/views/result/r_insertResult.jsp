@@ -12,14 +12,14 @@
 
 <c:if test="${result == 1}">
 	<script>
-		alert("DB 입력 완료.");
+		alert("레시피 글 작성 완료.");
 		location.href="r_listForm?category=${category}";
 	</script>
 </c:if>
 
 <c:if test="${result != 1}">
 	<script>
-		alert("DB 테스트 실패");
+		alert("레시피 글 작성 실패");
 		history.go(-1);
 	</script>
 </c:if>
