@@ -159,6 +159,7 @@ $(function(){
 				<tr>
 					<td><img src="./r_images/${item2.key }" width=300 /> ${item2.value }</td>
 				</tr>
+				console.log("${item2.key}")
 			</c:forEach>
 
 
