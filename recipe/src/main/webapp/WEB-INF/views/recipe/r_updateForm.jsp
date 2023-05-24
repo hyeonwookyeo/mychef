@@ -197,6 +197,7 @@ input[type=file] {
 		<h2 class="text-primary">레시피 수정하기</h2>
 		<form enctype="multipart/form-data">
 		<input type="hidden" name="rnum" value=${board.rnum }>
+		
 			<table border=1>
 				<tr>
 					<td>제목</td>

@@ -68,8 +68,8 @@
 		str += "		<img id=\"cook" + i + "\" src=\"images/Plus.jpg\" width=300 height=250 class=\"preview\"/></td>";
 		str += "</tr>";
 		str += "<tr>";
-		str += "	<td>조리과정 내용</td>";
-		str += "	<td><textarea rows=\"5\" cols=\"30\" id='content1' name='content1'></textarea></td>";
+		str += "	<td>조리과정 설명</td>";
+		str += "	<td><textarea rows=\"5\" cols=\"30\" id='content" + i + "' name='content1'></textarea></td>";
 		str += "</tr>";
 
 		$("#tbody_id2:last").append(str);
@@ -161,10 +161,14 @@
 				return false;
 			}
 			
-			// r_file1
+			// r_file1 - content1
 			for(var i=1; i<1+r_fileCnt; i++){
 				if($("#r_file"+i).val()==""){
 					alert("조리사진을 추가 해주세요.");
+					return false;
+				}else if($("#content"+i).val()==""){
+					alert("조리과정 설명을 입력해주세요.");
+					$("#content"+i).focus();
 					return false;
 				}else{
 				r_fileSize = document.getElementById("r_file"+i).files[0].size;
@@ -179,12 +183,6 @@
 				}
 			}
 			
-			// content1
-			if(($("#content1").val())==""){
-				alert("조리과정 설명을 입력해주세요.");
-				$("#content1").focus();
-				return false;
-			}
 			
 			$('form').serialize();
 			$('form').attr('method', 'POST');

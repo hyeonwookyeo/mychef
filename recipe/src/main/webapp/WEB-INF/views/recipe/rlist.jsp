@@ -68,7 +68,7 @@ function update(id){
 		
 		var re_content = $("#content_"+id).val();
 		var nnn = $("[name='nnn'"+id+"]").val();
-		alert("re_content는 "+re_content)
+		alert("re_content는 "+re_content);
 	}
 }
 

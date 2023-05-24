@@ -418,7 +418,7 @@ public class RecipeController {
 		for (int i = 0; i < ingre.length; i++) {
 			map1.put(ingre[i], capacity[i]);
 		}
-		for (int i = 0; i < rfile.length; i++) {
+		for (int i = 0; i < content.length; i++) {
 			map2.put(rfile[i], content[i]);
 		}
 
@@ -505,7 +505,7 @@ public class RecipeController {
 
 		System.out.println("path:" + multipath);
 		
-		if(fileList.size() > 0 && !fileList.get(0).getOriginalFilename().equals("")) {
+//		if(fileList.size() > 0 && !fileList.get(0).getOriginalFilename().equals("")) {
 		for (MultipartFile mf : fileList) {
 			String multiFileName = mf.getOriginalFilename(); // 원본 파일 명
 			long multiFileSize = mf.getSize(); // 파일 사이즈
@@ -531,9 +531,9 @@ public class RecipeController {
 		
 		System.out.println("finalFileName:" + finalFileName);
 		board.setRfile(finalFileName);
-		}else {
-			board.setRfile(image.getRfile());
-		}
+//		}else {
+//			board.setRfile(image.getRfile());
+//		}
 
 
 		// 재료, 용량 '-' 접합자 추가해서 저장
