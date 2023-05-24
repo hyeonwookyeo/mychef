@@ -46,4 +46,15 @@ public class BoardServiceImpl implements BoardService {
 
 	}
 
+	@Override
+	public void board_up(BoardDTO b) {
+		BoardDAO.board_up(b);
+	}
+
+	@Override
+	public void board_idel(int comm_num) {
+		BoardDAO.board_idel(comm_num);
+		
+	}
+
 }

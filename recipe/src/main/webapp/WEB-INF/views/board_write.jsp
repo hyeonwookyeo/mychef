@@ -8,7 +8,8 @@
 </head>
 <body>
 
-	<form method="post" action="<%=request.getContextPath() %>/maga_write_ok" enctype="multipart/form-data">
+	
+	<form method="post" action="<%=request.getContextPath() %>/board_write_ok"  enctype="multipart/form-data">
 	<table>
 		<tr>
 			<td>작성자 : </td>
@@ -28,12 +29,12 @@
 		</tr>
 		<tr>
 			<td>
-				<input type="file" name="magafile">
+				<input type="file" id="commfile2" name="commfile2">
 			</td>
 		</tr>
 	</table>
-	<input type="submit" value="등록">
-	<input type="reset" value="리셋">
+	<input type="submit" value="등록"/>
+	<input type="reset" value="리셋"/> <!-- class="input_button" onclick="$('#board_name').focus();" --> 
 	</form>
 	
 

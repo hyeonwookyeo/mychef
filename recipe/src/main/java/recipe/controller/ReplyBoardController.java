@@ -23,9 +23,9 @@ public class ReplyBoardController {
 	private BoardService bs;
 
 	@RequestMapping("/slist")
-	public String slist(int maga_num, Model model) throws Exception {
-		BoardDTO board = bs.board_cont(maga_num);
-		List<ReplyBoardDTO> slist = rbs.slist(maga_num);
+	public String slist(int comm_num, Model model) throws Exception {
+		BoardDTO board = bs.board_cont(comm_num);
+		List<ReplyBoardDTO> slist = rbs.slist(comm_num);
 
 		model.addAttribute("slist", slist);
 		model.addAttribute("board", board);
@@ -40,9 +40,9 @@ public class ReplyBoardController {
 	}
 
 	@RequestMapping("/repDelete")
-	public String delete(ReplyBoardDTO reboard, Model model) throws Exception {		
+	public String delete(ReplyBoardDTO reboard, Model model) throws Exception {	
 		rbs.delete(reboard.getCommre_num());
-		
+		System.out.println("commre_num : "+reboard.getCommre_num());
 		return "redirect:slist?comm_num=" + reboard.getComm_num();
 	}
 	

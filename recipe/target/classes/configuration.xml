@@ -7,9 +7,9 @@
 <!--  예시
 	<typeAlias alias="board" type="board1.model.Board" /> 
 -->
-	<typeAlias alias="Maga" type="recipe.model.MagaBean" />
-	<typeAlias alias="MagaRecom" type="recipe.model.MagaRecomBean" />
-	<typeAlias alias="MagaReply" type="recipe.model.ReplyMagaBean"/>
+	<typeAlias alias="board" type="recipe.model.BoardDTO" />
+	<typeAlias alias="boardreply" type="recipe.model.ReplyBoardDTO" />
+	
 	
 	</typeAliases>
 	

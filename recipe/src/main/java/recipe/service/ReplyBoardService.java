@@ -8,7 +8,7 @@ import recipe.model.ReplyBoardDTO;
 
 public interface ReplyBoardService {
 
-	public List<ReplyBoardDTO> slist(int commre_num) throws Exception;
+	public List<ReplyBoardDTO> slist(int comm_num) throws Exception;
 
 	public void insert(ReplyBoardDTO reboard) throws Exception;
 

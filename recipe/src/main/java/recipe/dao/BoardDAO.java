@@ -18,5 +18,9 @@ public interface BoardDAO {
 	
 	public int board_del(int comm_num) throws Exception;
 
+	public void board_up(BoardDTO b) throws Exception;
+	
+	public void board_idel(int comm_num) throws Exception;
+	
 	
 }

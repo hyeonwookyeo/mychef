@@ -21,13 +21,13 @@
 				comm_re_seq.nextval,
 			</if>
 			<if test="ref_lev != 0">
-				#{magare_num},
+				#{commre_num},
 			</if>
 				0,#{ref_lev})	
 	</insert>
 	
 	<delete id="delete" parameterType="int">
-		delete from comm_re where ref=#{commre_num}
+		delete from comm_re where ref=#{commre_num} or commre_num =#{commre_num}
 	</delete>
 	
 	<update id="update" parameterType="boardreply">

@@ -10,7 +10,7 @@
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript">
 	$(function() {
-		$('#slist').load('slist?maga_num=${maga.maga_num}');
+		$('#slist').load('slist?comm_num=${board.comm_num}');
 		$('#repInsert').click(function() {
 			if (!frm.re_content.value) {
 				alert('댓글 입력 후에 클릭하시오');
@@ -22,7 +22,7 @@
 //			var maga_num = $("#maga_num").val();
 //			var re_content = $("#re_content").val();
 			var ffData = {
-					"maga_num" : $("#maga_num").val(),
+					"comm_num" : $("#comm_num").val(),
 					"id" : $("#id").val(),
 					"re_content" : $("#re_content").val(),
 					"ref_lev" : $("#ref_lev").val()
@@ -43,24 +43,33 @@
 
 <script>
 	
-	function maga_del_config(maga_num,page){
+	function board_del_config(comm_num,page){
 	 	var result = confirm("정말로 삭제 하시겠습니까?");
 	 	if(result){
-	 		location.href="maga_del_ok?maga_num="+maga_num+"&page="+page;	
+	 		location.href="board_del_ok?comm_num="+comm_num+"&page="+page;	
 	 	}
 	}
 	
-	function recom(maga_num,page){
-		location.href="maga_recom?maga_num="+maga_num+"&page="+page;
+	
+</script>
+<script>
+	
+	function board_up_config(comm_num,page){
+	 	var result = confirm("정말로 수정 하시겠습니까?");
+	 	if(result){
+	 		location.href="board_up_form?comm_num="+comm_num+"&page="+page;	
+	 	}
 	}
+	
+	
 </script>
 
 <body>
 	<form>
 	<table border=1 align=center>
 		<tr>
-			<td>${maga.subject}</td>
-			<td><fmt:formatDate value="${maga.mdate}" pattern="YYYY.MM.dd HH:mm	"/> </td>
+			<td>${board.subject}</td>
+			<td><fmt:formatDate value="${board.cdate}" pattern="YYYY.MM.dd HH:mm	"/> </td>
 		</tr>
 
 		<%-- <tr>
@@ -71,7 +80,8 @@
 			</c:if></td>
 		</tr> --%>	
 		<tr>
-			<td>관리자</td><td>조회 : ${maga.readcount}&nbsp;&nbsp;&nbsp;&nbsp;추천 : ${maga.recom}</td>
+			<td>아이디 :${board.id }</td>
+			<td>조회 : ${board.readcount}&nbsp;&nbsp;&nbsp;&nbsp;</td>
 		</tr>
 		<%-- <tr>
 			<td colspan=2><img src="./upload/${maga.mfile}" height="200px" width="200px"/><br>
@@ -79,8 +89,8 @@
 		</tr> --%>
 		<tr>
 			<td><div contentEditable="true">
-			<img src="./upload/${maga.mfile}" height="200px" width="200px"/><br>
-				${maga.content }
+			<img src="./upload/${board.commfile}" height="200px" width="200px"/><br>
+				${board.content }
 			</div></td>
 		</tr>
 	</table>
@@ -88,23 +98,19 @@
 
 	<div align=right>
 	<input type="button" value="수정" class="input_button"
-		onclick=""/>
+		onclick="board_up_config(${board.comm_num},${page})"/>
 	<input type="button" value="삭제" class="input_button"
-		onclick="maga_del_config(${maga.maga_num},${page})"/>
+		onclick="board_del_config(${board.comm_num},${page})"/>
 	<input type="button" value="목록" class="input_button"
-		onclick="location='maga_list?page=${page}'" /><br>
+		onclick="location='board_list?page=${page}'" /><br>
 	</div>
 		
-	<div align=center>
-	<input type="button" value="추천" class="recom_button"
-		onclick="recom(${maga.maga_num},${page})"/>
-		추천수 : ${maga.recom}
-	</div><br>
+
 		
 	<form name="frm" id="frm" align="center">
 		<input type="hidden" name="id" id="id" value="${sessionScope.id}">
 		<input type="hidden" name="ref_lev" id="ref_lev" value="0">
-		<input type="hidden" name="maga_num" id="maga_num" value="${maga.maga_num}"> 댓글 :
+		<input type="hidden" name="comm_num" id="comm_num" value="${board.comm_num}"> 댓글 :
 		<textarea rows="3" cols="50" name="re_content" id="re_content"></textarea>
 		<input type="button" value="확인" id="repInsert">
 	</form>

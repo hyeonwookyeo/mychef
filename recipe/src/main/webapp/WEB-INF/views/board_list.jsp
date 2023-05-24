@@ -70,16 +70,14 @@
 
 	<!-- 검색창 -->
 	<form action="board_list" align=center>
-		<input type="hidden" name="pageNum" value="1"> <select
-			name="search">
-			<option value="subject"
-				<c:if test="${search=='subject'}">selected="selected" </c:if>>제목</option>
-			<option value="content"
-				<c:if test="${search=='content'}">selected="selected" </c:if>>내용</option>
-			<option value="subcon"
-				<c:if test="${search=='subcon'}">selected="selected" </c:if>>제목+내용</option>
-		</select> <input type="text" name="keyword"> <input type="submit"
-			value="확인">
+		<input type="hidden" name="pageNum" value="1"> 
+		<select	name="search">
+			<option value="subject"	<c:if test="${search=='subject'}">selected="selected" </c:if>>제목</option>
+			<option value="content"	<c:if test="${search=='content'}">selected="selected" </c:if>>내용</option>
+			<option value="subcon" <c:if test="${search=='subcon'}">selected="selected" </c:if>>제목+내용</option>
+		</select> 
+		<input type="text" name="keyword"> 
+		<input type="submit" value="확인">
 	</form>
 	
 	
@@ -87,21 +85,21 @@
 
 	
 	<div id="bbslist_paging">			
-
+		<c:if test="${not empty keyword }">
 			<c:if test="${page <=1 }">
 				[이전]&nbsp;
 			</c:if>
 			
 			<c:if test="${page > 1 }">
-				<a href="board_list.do?page=${page-1}">[이전]</a>&nbsp;
+				<a href="board_list?page=${page-1}&search=${search}&keyword=${keyword}">[이전]</a>&nbsp;
 			</c:if>			
 
-			<c:forEach var="a" begin="${startpage}" end="${endpage}">
+			<c:forEach var="a" begin="${startPage}" end="${endPage}">
 				<c:if test="${a == page }">
 					[${a}]
 				</c:if>
 				<c:if test="${a != page }">
-					<a href="board_list.do?page=${a}">[${a}]</a>&nbsp;
+					<a href="board_list?page=${a}&search=${search}&keyword=${keyword}">[${a}]</a>&nbsp;
 				</c:if>
 			</c:forEach>			
 			
@@ -109,10 +107,35 @@
 				[다음] 
 			</c:if>
 			<c:if test="${page < maxpage }">
-				<a href="board_list.do?page=${page+1}">[다음]</a>
+				<a href="board_list?page=${page+1}&search=${search}&keyword=${keyword}">[다음]</a>
 			</c:if>			
-			
+		</c:if>
 
+	<c:if test="${empty keyword }">
+			<c:if test="${page <=1 }">
+				[이전]&nbsp;
+			</c:if>
+			
+			<c:if test="${page > 1 }">
+				<a href="board_list?page=${page-1}">[이전]</a>&nbsp;
+			</c:if>			
+
+			<c:forEach var="a" begin="${startPage}" end="${endPage}">
+				<c:if test="${a == page }">
+					[${a}]
+				</c:if>
+				<c:if test="${a != page }">
+					<a href="board_list?page=${a}">[${a}]</a>&nbsp;
+				</c:if>
+			</c:forEach>			
+			
+			<c:if test="${page >= maxpage }">
+				[다음] 
+			</c:if>
+			<c:if test="${page < maxpage }">
+				<a href="board_list?page=${page+1}">[다음]</a>
+			</c:if>			
+		</c:if>
 		</div>
 			<div id="bbslist_w">
 			<input type="button" value="글쓰기" class="input_button"

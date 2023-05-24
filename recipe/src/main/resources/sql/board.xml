@@ -5,46 +5,48 @@
 <mapper namespace="boardns">
 
 
-	<!-- 매거진 총 게시물 수 -->
+	<!--  총 게시물 수 -->
 	<select id="board_count" parameterType="board" resultType="int">
 		select count(*) from comm 
-		<!-- <where>
-			<if test="keyword != null and search != 'subcon'">
-				${search} like '%'||#{keyword}||'%'
+		<where>
+			<if test="keyword != null and search != 'subcon' ">
+				${search} like '%'||#{keyword}||'%' and state = 'n' 
 			</if>
 			<if test="keyword != null and search == 'subcon'">
-				subject like '%'||#{keyword}||'%' or
-				content like '%'||#{keyword}||'%'
+				(subject like '%'||#{keyword}||'%' or
+				content like '%'||#{keyword}||'%' )  and state = 'n' 
 			</if>
-			and state = '1'
-		</where> -->
+			<!-- and state = '1' -->
+		</where>
 		<!-- where state = '1' -->
 	</select>	
 	
 	
-	<!-- 매거진 목록 -->
+	<!-- 게시판 목록 -->
 	<select id="board_list" parameterType="board" resultType="board">
-		select * from (select rownum rnum, board.* from(
-			select * from comm order by comm_num desc ) board) 
-			where rnum between #{startpage} and #{endpage}
-		<!-- <where>
-			<if test="keyword != null and search != 'subcon'">
-				${search} like '%'||#{keyword}||'%'
-			</if>
-			<if test="keyword != null and search == 'subcon'">
-				subject like '%'||#{keyword}||'%' or
-				content like '%'||#{keyword}||'%'
-			</if>
-			and state = '1'
-		</where> -->
+		select * from (select rownum rnum, board.* from (
+			select * from comm 
 			
+		<where>
+			<if test="keyword != null and search != 'subcon'">
+				${search} like '%'||#{keyword}||'%' and state = 'n' 
+			</if>
+			<if test="keyword != null and search == 'subcon' ">
+				(subject like '%'||#{keyword}||'%' or
+				content like '%'||#{keyword}||'%' )  and state = 'n' 
+			</if>
+		<!-- 	and state = '1' -->
+		</where>
+		
+			order by comm_num desc ) board) 
+			where rnum between #{startRow} and #{endRow}
 		
 	</select>
 	
 	
-	<!-- 매거진 입력 -->
+	<!-- 게시판 입력 -->
 	<insert id="board_insert" parameterType="board">
-		insert into comm values(comm_seq.nextval,#{id},#{subject},'0',#{content},#{comfile, jdbcType=VARCHAR},sysdate,'1')
+		insert into comm values(comm_seq.nextval,'aaaa',#{subject},0,#{content},#{commfile, jdbcType=VARCHAR},sysdate,'n')
 	</insert>
 	
 	<!-- 조회수 -->
@@ -53,15 +55,25 @@
 	</update>
 	
 	
-	<!-- 매거진 확인 -->
-	<select id="maga_cont" parameterType="int" resultType="board">
+	<!-- 게시판 확인 -->
+	<select id="board_cont" parameterType="int" resultType="board">
 		select * from comm where comm_num = #{comm_num}
 	</select>
 	
 	
+	<!-- 게시글 수정 -->
+	<update id="board_up" parameterType="board">
+		update comm set subject=#{subject}, content=#{content}, commfile= #{commfile, jdbcType=VARCHAR},cdate=sysdate where comm_num = #{comm_num}
+	</update>
+	
+		<!-- 매거진 이미지 삭제 -->
+	<update id="board_idel" parameterType="int">
+		update comm set commfile=null where comm_num=#{comm_num}
+	</update>
+	
 	<!-- 매거진 삭제 -->
-	<update id="maga_del" parameterType="int">
-		update comm set state = '0' where comm_num = #{comm_num}
+	<update id="board_del" parameterType="int">
+		update comm set state = 'y',subject='삭제된 게시글입니다', content='삭제된 게시글입니다' where comm_num = #{comm_num}
 	</update>
 	
 	

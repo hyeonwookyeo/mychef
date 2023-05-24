@@ -52,15 +52,4 @@ public class BoardDAOImpl implements BoardDAO {
 		
 	}
 
-
-	public void board_up(BoardDTO b) {
-		session.update("boardns.board_up", b);
-	}
-
-
-	public void board_idel(int comm_num) {
-		session.update("boardns.board_idel", comm_num);
-		
-	}
-
 }

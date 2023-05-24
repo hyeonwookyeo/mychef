@@ -15,9 +15,15 @@ public interface BoardService {
 	
 	public void readcount(int comm_num) throws Exception;
 	
-	public BoardDTO board_cont(int maga_num) throws Exception;
+	public BoardDTO board_cont(int comm_num) throws Exception;
 	
-	public int board_del(int maga_num) throws Exception;
+	public int board_del(int comm_num) throws Exception;
+
+	public void board_up(BoardDTO b);
+
+	public void board_idel(int comm_num);
+
+	
 	
 	/*
 	 * public void maga_recom(int maga_num) throws Exception;

@@ -17,21 +17,10 @@ public class BoardDTO {
 	private String keyword;
 
 	// 페이지
-	private int startpage;
-	private int endpage;
+	private int startRow;
+	private int endRow;
 	
-	public int getStartpage() {
-		return startpage;
-	}
-	public void setStartpage(int startpage) {
-		this.startpage = startpage;
-	}
-	public int getEndpage() {
-		return endpage;
-	}
-	public void setEndpage(int endpage) {
-		this.endpage = endpage;
-	}
+	
 	public int getComm_num() {
 		return comm_num;
 	}
@@ -91,6 +80,18 @@ public class BoardDTO {
 	}
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
+	}
+	public int getStartRow() {
+		return startRow;
+	}
+	public int getEndRow() {
+		return endRow;
+	}
+	public void setStartRow(int startRow) {
+		this.startRow = startRow;
+	}
+	public void setEndRow(int endRow) {
+		this.endRow = endRow;
 	}
 
 

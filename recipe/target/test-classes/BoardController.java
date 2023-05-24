@@ -12,7 +12,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -153,79 +152,10 @@ public class BoardController {
 		int result = BoardService.board_del(comm_num);
 		System.out.println(result);
 		
-		return "redirect:/board_list?page="+page;
-	}
-	// 글 수정
-	@RequestMapping("board_up_form")
-	public String boardupdateform(int comm_num, String page, Model model) throws Exception {
-		
-		BoardDTO board = BoardService.board_cont(comm_num);		// 상세 정보 구하기
-		model.addAttribute("board", board);
-		model.addAttribute("page", page);
-		
-		
-		return "board_edit";
+		return "redirect:/maga_list?page="+page;
 	}
 	
-	@RequestMapping("board_up_ok")
-	public String board_up_ok(@RequestParam("commfile") MultipartFile mf,
-							  @ModelAttribute BoardDTO b,HttpServletRequest request, 
-							  int comm_num, 
-							  String page,Model model) throws Exception {
-		
-		System.out.println("수정");
-		
-		BoardDTO commfile = BoardService.board_cont(b.getComm_num());
-		/*
-		 * BoardDTO board = BoardService.board_cont(comm_num);
-		 */		
-		if (mf.isEmpty()) {
-			String cfile = commfile.getCommfile();
-			b.setCommfile(cfile);
-
-		} else {
-			String path = request.getRealPath("upload");
-			String fname = commfile.getCommfile();
-			File file = new File(path + "/" + fname);
-			file.delete(); // 첨부파일 삭제
-
-			String filename = mf.getOriginalFilename();
-			int size = (int) mf.getSize();
-			String newfilename = "";
-
-			if (filename != "") {
-				String extension = filename.substring(filename.lastIndexOf("."), filename.length());
-				UUID uuid = UUID.randomUUID();
-				newfilename = uuid.toString() + extension;
-			}
-
-			if (size > 0) {
-				mf.transferTo(new File(path + "/" + newfilename));
-				b.setCommfile(newfilename);
-			}
-		}
-		
-		
-		BoardService.board_up(b);
-		
-		
-		return "redirect:/board_cont?comm_num=" + b.getComm_num()
-		+ "&page=" + page + "&state=cont";
-	}
 	
-	@RequestMapping("/idelete")
-	public String idelete(Model model, int comm_num) throws Exception {
-		System.out.println("hi");
-		System.out.println(comm_num);
-
-		BoardService.board_idel(comm_num);
-		BoardService.board_cont(comm_num);
-
-		model.addAttribute(comm_num);
-
-		return "board_edit";
-	}
-
-
+	
 
 }
