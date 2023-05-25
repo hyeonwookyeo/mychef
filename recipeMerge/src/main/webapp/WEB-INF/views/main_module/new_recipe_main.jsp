@@ -95,23 +95,22 @@ var multipleCardCarousel = document.querySelector(
     <div class="carousel-inner">
         <div class="carousel-item active">
             <div class="card">
-                <div class="img-wrapper"><img src="..." class="d-block w-100" alt="..."> </div>
+                <div class="img-wrapper"><img src="./images/logo.png" class="d-block w-100" alt="모임"> </div>
                 <div class="card-body">
-                    <h5 class="card-title">Card title 1</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's content.</p>
+                    <h5 class="card-title">첫번쨰</h5>
+                    <p class="card-text">내용 블라블라</p>
                     <a href="#" class="btn btn-primary">Go somewhere</a>
                 </div>
             </div>
         </div>
-        <c:forEach var="newlist" items="${new_rlist }">
+        <c:forEach var="list" items="${boardlist }">
         <div class="carousel-item">
             <div class="card">
-                <div class="img-wrapper"><img src="./t_images/${newlist.thumbnail }" class="d-block w-100" alt="안나옴"> </div>
+                <div class="img-wrapper"><img src="./t_images/${list.thumbnail }" class="d-block w-100" alt="안나옴"> </div>
                 <div class="card-body">
-                    <h5 class="card-title">${newlist.subject }</h5>
-                    <p class="card-text">${newlist.description }</p>
-                    <a href="r_view?rnum=${newlist.rnum }" class="btn btn-primary">열람</a>
+                    <h5 class="card-title">${list.subject }</h5>
+                    <p class="card-text">${list.description }</p>
+                    <a href="r_view?rnum=${list.rnum }" class="btn btn-primary">열람</a>
                 </div>
             </div>
         </div>

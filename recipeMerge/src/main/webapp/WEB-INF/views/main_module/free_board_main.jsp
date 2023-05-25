@@ -13,9 +13,6 @@
 </head>
 <body>
 	<!-- 매거진 리스트 -->
-	<h2>매거진 목록</h2>
-	글 개수 : ${listcount}
-
 	<table border=1 align=center>
 		<tr>
 			<td>게시글 번호</td>
@@ -33,31 +30,24 @@
 		</c:if>
 
 		<c:if test="${not empty boardlist}">
-			<c:set var="num" value="${listcount-(page-1)*10}" />
+			<c:set var="num" value="${num }" />
 			<!-- 반복문 시작 -->
 			<c:forEach var="b" items="${boardlist}">
 				<tr>
-					<td>
-						<!-- 번호 출력부분 --> <c:out value="${num}" /> <c:set var="num"
-							value="${num-1}" />
-					</td>
-
-					<td>
-						<!-- 제목 출력 부분 --> <a
-						href="free_board_cont?comm_num=${b.comm_num}&page=${page}&state=cont">
-							${b.subject}</a>
-					</td>
+					<td><c:out value="${num}" /> <c:set var="num" value="${num-1}" /></td>
+					<td><a href="free_board_cont?comm_num=${b.comm_num}&page=1&state=cont">
+						${b.subject}</a></td>
 					<td>${b.id}</td>
-
-					<td><c:set var="today"
-							value="<%=new Timestamp(System.currentTimeMillis())%>" /> <c:set
-							var="today" value="${fn:substring(today, 0, 10) }" /> <c:set
-							var="dbtoday" value="${fn:substring(b.cdate, 0, 10) }" /> <c:if
-							test="${today == dbtoday}">
-							<fmt:formatDate value="${b.cdate}" pattern="HH:mm" />
-						</c:if> <c:if test="${today != dbtoday}">
-							<fmt:formatDate value="${b.cdate}" pattern="yyyy.MM.dd" />
-						</c:if></td>
+					<td>
+						<c:set var="today" value="<%=new Timestamp(System.currentTimeMillis())%>" /> 
+						<c:set var="today" value="${fn:substring(today, 0, 10) }" /> 
+						<c:set var="dbtoday" value="${fn:substring(b.cdate, 0, 10) }" /> 
+							<c:if test="${today == dbtoday}">
+								<fmt:formatDate value="${b.cdate}" pattern="HH:mm" />
+							</c:if>
+						 	<c:if test="${today != dbtoday}">
+								<fmt:formatDate value="${b.cdate}" pattern="yyyy.MM.dd" />
+							</c:if></td>
 					<td>${b.readcount}</td>
 				</tr>
 			</c:forEach>

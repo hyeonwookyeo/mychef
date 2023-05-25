@@ -8,12 +8,6 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-<!-- Latest compiled and minified CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-<!-- Latest compiled JavaScript -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-
 </head>
 <body>
 
@@ -26,9 +20,6 @@
   	<c:forEach var="i" begin="1" end="${fn:length(rlist) }">
     <button type="button" data-bs-target="#demo" data-bs-slide-to="${i }"></button>
   	</c:forEach>
-    <!-- <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
-    <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
-    <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button> -->
   </div>
 
   <!-- The slideshow/carousel -->

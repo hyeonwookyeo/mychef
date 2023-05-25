@@ -1,13 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file = "../include/set.jsp" %>
+  
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시글 수정</title>
+<title>자유게시판 글 수정</title>
 </head>
 <body>
 
+	<!-- (공통) 헤더부분 -->
+	<%@ include file="../include/header.jsp"%>
 	
 	<form method="post" action="<%=request.getContextPath() %>/board_up_ok"  enctype="multipart/form-data">
 	 <input type="hidden" name="comm_num" value="${board.comm_num}" />

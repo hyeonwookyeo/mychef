@@ -3,19 +3,22 @@
 <%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ include file = "../include/set.jsp" %>
+
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>매거진 목록</title>
+<title>자유게시판 목록</title>
 </head>
 <body>
+
+	<!-- (공통) 헤더부분 -->
+	<%@ include file="../include/header.jsp"%>
+
 	<!-- 매거진 리스트 -->
-	<h2>매거진 목록</h2>
+	<h2 align="center">자유게시판 목록</h2>
 	글 개수 : ${listcount}
 
 	<table border=1 align=center>
@@ -139,7 +142,7 @@
 		</div>
 			<div id="bbslist_w">
 			<input type="button" value="글쓰기" class="input_button"
-				onclick="location='board_write.do?page=${page}'">
+				onclick="location='free_board_write?page=${page}'">
 		</div>
 
 </body>

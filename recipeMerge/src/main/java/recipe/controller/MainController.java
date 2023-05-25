@@ -21,9 +21,9 @@ public class MainController {
 	private MainService service;
 	private FreeBoardService BoardService;
 	
-	@RequestMapping("testMain")
+	@RequestMapping("main")
 	public String testMain() {
-		return "testMain";
+		return "main";
 	}
 // 추천순 회전목마	
 	@RequestMapping("main_carousel")
@@ -39,7 +39,7 @@ public class MainController {
 		return "main_module/carousel_main";
 	}
 	
-// 추천순 회전목마	
+// 자유게시판	
 	@RequestMapping("main_free_board")
 	public String main_free_board(Model model) throws Exception {
 			
@@ -49,11 +49,12 @@ public class MainController {
 		fboard.setStartRow(1);
 		fboard.setEndRow(10);
 		
-		List<BoardDTO> free_list = BoardService.getBoardList(fboard);
+		List<BoardDTO> boardlist = BoardService.getBoardList(fboard);
 		
-		System.out.println("free_list는 " + free_list);
+		System.out.println("boardlist는 " + boardlist);
 			
-		model.addAttribute("free_list", free_list);
+		model.addAttribute("num", 1);
+		model.addAttribute("boardlist", boardlist);
 			
 		return "main_module/free_board_main";
 	}	
@@ -65,10 +66,10 @@ public class MainController {
 			
 		System.out.println("main_new_recipe 진입");
 			
-		List<RecipeBoard> new_rlist = service.new_rlist();
-		System.out.println(new_rlist);
+		List<RecipeBoard> boardlist = service.new_rlist();
+		System.out.println("boardlist는 " + boardlist);
 			
-		model.addAttribute("new_rlist", new_rlist);
+		model.addAttribute("boardlist", boardlist);
 			
 		return "main_module/new_recipe_main";
 		}	

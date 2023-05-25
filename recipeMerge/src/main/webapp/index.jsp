@@ -9,24 +9,13 @@
 </head>
 <body>
 
-
-	<script>
-//		 location.href="main";
-		//location.href="boardform";
-		// location.href="n_boardlist";
-//	 location.href="m_loginForm";
-		//location.href="upload";
-//		location.href="a_list";
-		location.href="testMain";
-	</script>
-
-
-
+<script>
+		location.href="main";
+</script>
 	<!-- 관리자 페이지 로그인  -->
   	<%--   <%
 		response.sendRedirect("a_loginform");
 	%>    --%>
-
 </body>
 </html>
 

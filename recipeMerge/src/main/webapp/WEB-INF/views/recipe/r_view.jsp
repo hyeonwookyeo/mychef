@@ -131,7 +131,7 @@ $(function(){
 </script>	
 </head>
 <body>
-	<!-- (공통) 헤더부분 -->
+ 	<!-- (공통) 헤더부분 -->
 	<%@ include file="../include/header.jsp"%>
 					
 	<div class="container" align="center">

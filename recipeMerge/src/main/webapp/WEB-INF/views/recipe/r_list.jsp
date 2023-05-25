@@ -108,8 +108,8 @@
 					<li><a href="r_listForm?category=${category }&pageNum=${pp.startPage - 1}">이전</a></li>
 				</c:if>
 				<c:forEach var="i" begin="${pp.startPage}" end="${pp.endPage}">
-					<li <c:if test="${pp.currentPage==i}">class="active"</c:if>><a
-						href="r_listForm?category=${category }&pageNum=${i}">${i}</a></li>
+					<c:if test="${pp.currentPage==i}"></c:if>
+					<a href="r_listForm?category=${category }&pageNum=${i}">${i}</a>
 				</c:forEach>
 				<c:if test="${pp.endPage < pp.totalPage}">
 					<li><a href="r_listForm?category=${category }&pageNum=${pp.endPage + 1}">다음</a></li>

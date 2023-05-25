@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file = "../include/set.jsp" %>
-
+ 
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,6 +11,12 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
+<style>
+	.custom{
+		background-color : #cf25d8;
+	}
+</style>
+
 <script type="text/javascript">
 	var i = 2;			// 조리사진 추가시, img 태그당 증가 id값 (초기출력번호 1)
 	var j = 2;			// 조리사진 추가시, input 태그당 증가 id값
@@ -216,7 +222,7 @@ input[type=file] {
 	<%@ include file="../include/header.jsp"%>
 	
 	
-	<div class="container" align="center">
+	<div align="center">
 		<h2 class="text-primary">레시피 글 쓰기</h2>
 		<form enctype="multipart/form-data">
 			<%--
@@ -268,8 +274,8 @@ input[type=file] {
 						<td style='text-align:center;'><input type="text" id='ingre' name='ingre'></td>
 						<td style='text-align:center;'><input type="text" id='capacity' name='capacity'></td>
 						<td style='text-align:center;'>
-							<div class="btn-group">
-							<button type='button' class='btn btn-primary btn-sm' name='ingre_del'>삭제</button>
+							<div>
+							<button type='button' name='ingre_del'>삭제</button>
 							</div>
 						</td>
 					</tr>

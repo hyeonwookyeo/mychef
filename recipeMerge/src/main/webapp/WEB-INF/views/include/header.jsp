@@ -4,7 +4,7 @@
 <c:set var="path" value="${pageContext.request.contextPath}" />
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="utf-8" />
 <style>
@@ -47,8 +47,10 @@
 	<!-- Responsive navbar-->
 	<nav class="navbar navbar-expand-lg navbar-light navbar-custom">
 		<div class="container px-5">
+		<a href="main">
 		<img src="images/logo.png" class="logo">
-			<a class="navbar-brand my-text" href="testMain" > &nbsp;NEXT LE시피</a>
+		</a>
+			<a class="navbar-brand my-text" href="main" > &nbsp;NEXT LE시피</a>
 			<button class="navbar-toggler" type="button"
 				data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
 				aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -82,14 +84,24 @@
 					
 					
 					<c:if test="${empty sessionScope.id && empty sessionScope.admin_id }">
-							<a href="${pageContext.request.contextPath}/m_joinForm"
-								class="text-black my-text text-decoration-none">회원가입</a> |
-        					<a href="${pageContext.request.contextPath}/m_loginForm"
+							 
+								<a href="${pageContext.request.contextPath}/n_boardlist"
+							class="text-white text-decoration-none font-weight-light">공지사항</a> |
+						<a href="list"
+					class="text-white text-decoration-none font-weight-light">자유게시판</a> |
+						<a href="categoryForm"
+						class="text-white text-decoration-none font-weight-light">레시피</a> |
+						<a href="maga"
+						class="text-white text-decoration-none font-weight-light">매거진</a> |
+						<a href="${pageContext.request.contextPath}/m_loginForm"
 								class="text-black my-text text-decoration-none">로그인</a> |
+						<a href="${pageContext.request.contextPath}/m_joinForm"
+								class="text-black my-text text-decoration-none">회원가입</a> 
+        					
     				</c:if></li>
     				
 					<!-- 로그인 세션이 있는 경우  : 회원 로그인한 경우 -->
-					<c:if test="${!empty sessionScope.id}">
+					<c:if test="${!empty sessionScope.id && empty sessionScope.admin_id}">
 						<%-- <img src="${pageContext.request.contextPath}/images/person-hearts.svg"
 							width=15px>  ${sessionScope.id }님 환영합니다 &nbsp; | --%>
 							<%-- <img src="${pageContext.request.contextPath}/images/person-hearts.svg" width="15px" 
@@ -97,9 +109,9 @@
                            <span style="color: white;">${sessionScope.id}님 환영합니다&nbsp;|</span> --%>
 							
 							<a href="${pageContext.request.contextPath}/n_boardlist"
-							class="text-white text-decoration-none font-weight-light">공지사항</a> ||
-						<a href="${pageContext.request.contextPath}/board_list"
-					class="text-white text-decoration-none font-weight-light">이벤트</a> |
+							class="text-white text-decoration-none font-weight-light">공지사항</a> |
+						<a href="list"
+					class="text-white text-decoration-none font-weight-light">자유게시판</a> |
 						<a href="categoryForm"
 						class="text-white text-decoration-none font-weight-light">레시피</a> |
 						<a href="maga"
@@ -116,17 +128,19 @@
 					<%-- 	<img src="${pageContext.request.contextPath}/images/person-hearts.svg"
 							width=15px>  ${sessionScope.admin_id }님 환영합니다 &nbsp;  --%>
 						<a href="${pageContext.request.contextPath}/n_boardlist"
-							class="text-white text-decoration-none font-weight-light">공지사항</a> ||
-						<a href="${pageContext.request.contextPath}/board_list"							
-							class="text-white text-decoration-none font-weight-light">이벤트</a> |
+							class="text-white text-decoration-none font-weight-light">공지사항</a> |
+						<a href="list"
+					class="text-white text-decoration-none font-weight-light">자유게시판</a> |
+					<a href="categoryForm"
+						class="text-white text-decoration-none font-weight-light">레시피</a> |
+						<a href="maga"
+						class="text-white text-decoration-none font-weight-light">매거진</a> |
 						<a href="${pageContext.request.contextPath}/a_main"
 							class="text-white text-decoration-none font-weight-light">관리자페이지</a> |
 						<a href="${pageContext.request.contextPath}/a_Logout"							
 							class="text-white text-decoration-none font-weight-light">관리자로그아웃</a> |
 					</c:if>
 					
-				</ul>
-
 				</ul>
 			</div>
 		</div>
