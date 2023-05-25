@@ -12,8 +12,9 @@
 	$(function() {
 		$('.edit1').click(function() {
 			var id = $(this).attr('id');	// magare_num
-			var txt = $('#td_'+id).text();
-			$('#td_'+id).html("<textarea row='3' cols='30' id='tt_"+id+"'>"+txt+"</textarea>");
+			var txt = $.trim($('#td_'+id).text());
+			$('#td_'+id).html("<textarea rows='3' cols='30' id='tt_"+id+"'>"+txt+"</textarea>");
+			$('#tt_'+id).focus();	
 			$('#btn_'+id).html(
 				"<input type='button' value='확인' onclick='up("+id+")'>"+
 				"<input type='button' value='취소' onclick='lst()'>");
@@ -22,12 +23,18 @@
 		$('.edit2').click(function() {
 			var id = $(this).attr('id');	// magare_num
 			$('#div_'+id).attr("style","display=block");
+			$('#divtd_'+id).focus();
 		});
 		
 	});
 	
 	// 답글 삽입
 	function dapup(re_num){
+		if($('#divtd_'+re_num).val().trim() == ""){
+			alert("답글을 입력해 주세요.");
+			$('#divtd_'+re_num).focus();
+			return false;
+		}
 		var re_content = $('#divtd_'+re_num).val();
 		var id = $("#id").val();
 		var formData = "maga_num=${maga.maga_num}&id="+id+"&re_content="+re_content+"&magare_num="+re_num+"&ref="+re_num+"&ref_lev=1"
@@ -38,6 +45,11 @@
 
 	// 수정 -> 확인
 	function up(id){
+		if($('#tt_'+id).val().trim() == ""){
+			alert("수정할 문구를 입력해주세요.");
+			$('#tt_'+id).focus();
+			return false;
+		}
 		var re_content = $('#tt_'+id).val();
 		var formData = "magare_num="+id+"&re_content="+re_content+"&maga_num=${maga.maga_num}";
 /* 		"magare_num="+id+"&re_content="+re_content+"&maga_num=${maga.maga_num}&ref_lev=0"; */	
@@ -62,12 +74,12 @@
 </script>
 </head>
 <body>
-	<div id="slist">
-		<table border=1 align=center>
+	<div id="slist" align=center>
+		<table border=1>
 			<c:forEach var="rb" items="${slist}">
 				<tr>
 					<td>
-						<c:if test="${rb.ref_lev == 1}">&nbsp;&nbsp;&nbsp;&nbsp;</c:if>
+						<c:if test="${rb.ref_lev == 1}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</c:if>
 						<img src="./upload/${rb.profile}" height="20px" width="20px"/></td>
 					<td>${rb.id} ${rb.re_date}</td>		<!-- ${rb.re_date} -->
 					
@@ -83,7 +95,7 @@
 				</tr>
 				<tr>
 					<td colspan=2 align=center id="td_${rb.magare_num}">
-					<c:if test="${rb.ref_lev == 1}">&nbsp;&nbsp;&nbsp;&nbsp;</c:if>
+					<c:if test="${rb.ref_lev == 1}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</c:if>
 						${rb.re_content}</td>
 				</tr>
 				<tr>
