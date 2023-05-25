@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Maga">
+
+
+	<!-- 매거진 총 게시물 수 -->
+	<select id="maga_count" parameterType="maga" resultType="int">
+		select count(*) from maga
+		<where>
+			<if test="keyword != null and search != 'subcon'">
+				${search} like '%'||#{keyword}||'%'
+			</if>
+			<if test="keyword != null and search == 'subcon'">
+				subject like '%'||#{keyword}||'%' or
+				content like
+				'%'||#{keyword}||'%'
+			</if>
+			and state = '1'
+		</where>
+		<!-- where state = '1' -->
+	</select>
+
+
+	<!-- 매거진 목록 -->
+	<select id="maga_list" parameterType="maga" resultType="maga">
+		select * from (select rownum rnum, ma.* from(
+		select * from maga
+		<where>
+			<if test="keyword != null and search != 'subcon'">
+				${search} like '%'||#{keyword}||'%'
+			</if>
+			<if test="keyword != null and search == 'subcon'">
+				subject like '%'||#{keyword}||'%' or
+				content like
+				'%'||#{keyword}||'%'
+			</if>
+			and state = '1'
+		</where>
+		order by maga_num desc ) ma)
+		where rnum between #{startRow} and
+		#{endRow}
+	</select>
+
+
+	<!-- 매거진 입력 -->
+	<insert id="maga_insert" parameterType="maga">
+		insert into maga
+		values(maga_seq.nextval,#{subject},'0','0',#{content},#{mfile,
+		jdbcType=VARCHAR},sysdate,'1',0)
+	</insert>
+
+	<!-- 조회수 -->
+	<update id="maga_readcount" parameterType="int">
+		update maga set
+		readcount = readcount + 1 where maga_num = #{maga_num}
+	</update>
+
+
+	<!-- 매거진 확인 -->
+	<select id="maga_cont" parameterType="int" resultType="maga">
+		select *
+		from maga where maga_num = #{maga_num}
+	</select>
+
+	<!-- 매거진 수정 -->
+
+
+	<update parameterType="maga" id="maga_update">update maga set
+		subject=#{subject}, content=#{content}, mfile=#{mfile,
+		jdbcType=VARCHAR} where maga_num=#{maga_num} </update>
+
+	<!-- 매거진 이미지 삭제 -->
+
+
+	<update parameterType="int" id="maga_idel">update maga set mfile=null where
+		maga_num=#{maga_num} </update>
+
+
+	<!-- 매거진 삭제 -->
+	<update id="maga_del" parameterType="int">
+		update maga set state = '0'
+		where maga_num = #{maga_num}
+	</update>
+
+
+	<!-- 추천 늘리기 -->
+	<update id="maga_recom" parameterType="int">
+		update maga set recom =
+		recom + 1 where maga_num = #{maga_num}
+	</update>
+
+
+	<!-- 목록 댓글 - 업데이트 -->
+	<update id="maga_re_cnt" parameterType="int">
+		update maga set re_cnt =
+		re_cnt + 1 where maga_num = #{maga_num}
+	</update>
+
+	<!-- 목록 댓글 + 업데이트 -->
+	<update id="maga_re_cnt2" parameterType="int">
+		update maga set re_cnt =
+		re_cnt - 1 where maga_num = #{maga_num}
+	</update>
+
+</mapper>

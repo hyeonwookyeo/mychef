@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+	<!-- DTO클래스 경로에 대한 별칭 지정 -->
+<!--  예시
+		<typeAlias alias="board" type="board1.model.Board" /> 
+-->
+		<typeAlias alias="test" type="recipe.model.Test" />
+		<typeAlias alias="admin" type="recipe.model.Admin" />	
+		<typeAlias  alias="notice" type="recipe.model.Board"/>
+		<typeAlias  alias="member" type="recipe.model.MemberBean"/>
+		<typeAlias alias="board" type="recipe.model.BoardBean" />
+			<typeAlias alias="jjim" type="recipe.model.Recipe_Jjim" />
+				<typeAlias alias="rboard" type="recipe.model.RecipeBoard" />
+	<typeAlias alias="reboard" type="recipe.model.RecipeReBoard" />
+	<typeAlias alias="recomm" type="recipe.model.R_recomm"/>
+	<typeAlias alias="Maga" type="recipe.model.MagaBean" />
+	<typeAlias alias="MagaRecom" type="recipe.model.MagaRecomBean" />
+	<typeAlias alias="MagaReply" type="recipe.model.ReplyMagaBean"/>
+	<typeAlias alias="fboard" type="recipe.model.BoardDTO"/>
+	<typeAlias alias="fboardreply" type="recipe.model.ReplyBoardDTO"/>
+	
+	
+	<typeAlias alias="test" type="recipe.model.Test" />
+	<typeAlias alias="r_zzim" type="recipe.model.R_zzim"/>
+	<typeAlias alias="member" type="recipe.model.MemberBean"/>
+	
+	
+	</typeAliases>
+	
+
+	<!-- 
+	<mappers>
+		<mapper resource="Board.xml" />
+		<mapper resource="ReplyBoard.xml" />
+	</mappers> 
+	-->
+</configuration>

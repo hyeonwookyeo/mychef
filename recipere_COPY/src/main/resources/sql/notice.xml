@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+ <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="boardns">
+
+<!-- 글작성 -->
+<insert id="insert" parameterType="notice">
+	INSERT INTO ANNOUNCE (ann_Num, readCount, content, aFile, aDate, state, subject)
+	VALUES (ANNOUNCE_seq.nextval, 0, #{content}, #{aFile, jdbcType=VARCHAR}, sysdate, 0, #{subject})
+</insert>
+
+<!-- 글갯수  -->
+<select id="count" resultType="int">
+  select count(*) from ANNOUNCE
+</select>
+
+<!-- 글목록  -->
+<select id="list" parameterType="int" resultType="notice">
+
+  select * from (select rownum rnum, board.* from (
+  select * from ANNOUNCE order by ann_Num desc) board )
+  where rnum &gt;= ((#{page}-1) * 10 + 1) and rnum &lt;= (#{page} * 10)
+
+</select>
+
+<!-- 조회수 증가  -->
+<update id="hit" parameterType="int">
+  update ANNOUNCE set readcount=readcount+1 where ann_Num = #{ann_Num}
+</update>
+
+<!-- 상세정보 구하기  -->
+<select id="content" parameterType="int" resultType="notice">
+  select * from ANNOUNCE where ann_Num = #{ann_Num}
+</select>
+
+<!-- 글수정  -->
+<update id="update" parameterType="notice">
+   update ANNOUNCE set content=#{content}, adate=sysdate, subject=#{subject}
+   where ann_Num = #{ann_Num}  
+</update>
+
+
+<!-- 글삭제  -->
+
+<delete id="delete" parameterType="notice">
+  delete from ANNOUNCE where ann_Num = #{ann_Num}
+</delete>
+
+ 
+
+ 
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

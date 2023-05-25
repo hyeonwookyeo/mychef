@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="MagaReply">
+
+	<select id="slist" parameterType="int" resultType="magareply">
+		select * from member, maga_re where member.id=maga_re.id and maga_num=#{maga_num} order by ref asc, magare_num asc
+		
+	</select>
+	
+	<insert id="insert" parameterType="magareply">
+	
+		<!-- <selectKey keyProperty="magare_num" order="BEFORE" resultType="int">
+			<if test="ref_lef == '0'">
+				select nvl(max(magare_num),0) + 1 from maga_re
+			</if>
+		</selectKey> -->
+			
+			insert into maga_re values (maga_re_seq.nextval,#{maga_num},#{id},#{re_content},sysdate,'y',
+			<if test="ref_lev == 0">
+				maga_re_seq.nextval,
+			</if>
+			<if test="ref_lev != 0">
+				#{magare_num},
+			</if>
+				0,#{ref_lev})	
+	</insert>
+	
+	<delete id="delete" parameterType="int">
+		delete from maga_re where ref=#{magare_num} or magare_num = #{magare_num}
+	</delete>
+	
+	<update id="update" parameterType="magareply">
+		update maga_re set re_content=#{re_content}, re_date=sysdate where magare_num=#{magare_num}
+	</update>
+</mapper>

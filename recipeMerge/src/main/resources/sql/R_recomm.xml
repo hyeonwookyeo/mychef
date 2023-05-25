@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 추천테이블 -->
+<mapper namespace="r_recommns">
+	
+	<!-- 추천아이디 검색 -->
+	<select id="select" parameterType="recomm" resultType="int">
+		select count(*) from R_recomm where id=#{id} and rnum=#{rnum}
+	</select>
+	
+	<!-- 추천 갯수 -->
+	<select id="count" parameterType="recomm" resultType="int">
+		select count(*) from R_recomm where rnum=#{rnum}
+	</select>
+	
+	<!-- 추천 증가 -->
+	<insert id="insert" parameterType="recomm">
+		insert into R_recomm values(#{rnum}, #{id})
+	</insert>
+	
+	<!-- 목록/추천수 증가 -->
+	<update id="plus" parameterType="int">
+		update recipe set recom = recom+1 where rnum=#{rnum}
+	</update>
+	
+	<!-- 추천 감소 -->
+	<delete id="delete" parameterType="recomm">
+		delete from R_recomm where id=#{id} and rnum=#{rnum}
+	</delete>
+	
+	<!-- 목록/추천수 감소 -->
+	<update id="minus" parameterType="int">
+		update recipe set recom = recom-1 where rnum=#{rnum}
+	</update>
+</mapper>

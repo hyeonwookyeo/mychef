@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mainns">
+
+<select id="select_recom" resultType="rboard">
+<![CDATA[	
+	select * from (select * from recipe where state = 'y' and readcount > 4 order by readcount desc) 
+	where rownum <= 5	
+]]>
+</select>
+
+<select id="select_maga" resultType="Maga">
+<![CDATA[	
+	select * from (select * from maga where readcount > 10 order by readcount desc) 
+	where rownum <= 3	
+]]>
+</select>
+
+<select id="select_new" resultType="rboard">
+<![CDATA[	
+	select * from (select * from recipe where state = 'y' order by rdate asc) where rownum <= 12
+]]>	
+</select>
+
+</mapper>
