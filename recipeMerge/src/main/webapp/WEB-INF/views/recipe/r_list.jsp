@@ -17,7 +17,7 @@
 <link rel="icon" type="resources/image/x-icon" href="assets/favicon.ico" />
 <!-- Core theme CSS (includes Bootstrap)-->
 <link href="resources/css/styles.css" rel="stylesheet" />
-
+<link href="css/custom.css" rel="stylesheet">
 </head>
 <body>
 
@@ -103,19 +103,34 @@
 				</c:if>
 			</c:if>
 			
+			<nav aria-label="Page navigation example">
+  			<ul class="pagination">
 			<c:if test="${empty keyword}">
 				<c:if test="${pp.startPage > pp.pagePerBlk }">
-					<li><a href="r_listForm?category=${category }&pageNum=${pp.startPage - 1}">이전</a></li>
+					<li class="page-item"><a class="page-link" href="r_listForm?category=${category }&pageNum=${pp.startPage - 1}">이전</a></li>
 				</c:if>
+				
+				<li class="page-item">
 				<c:forEach var="i" begin="${pp.startPage}" end="${pp.endPage}">
-					<c:if test="${pp.currentPage==i}"></c:if>
-					<a href="r_listForm?category=${category }&pageNum=${i}">${i}</a>
+					<c:if test="${pp.currentPage==i}">
+					<li class="page-item active" aria-current="page">
+					<a class="page-link" href="r_listForm?category=${category }&pageNum=${i}">${i}</a>
+					</li>
+					<c:if test="${pp.currentPage!=i}">
+					<li class="page-item active" aria-current="page">
+					${i}
+					</li>
+					</c:if>
+					
+					</c:if>
 				</c:forEach>
+				</li>
 				<c:if test="${pp.endPage < pp.totalPage}">
-					<li><a href="r_listForm?category=${category }&pageNum=${pp.endPage + 1}">다음</a></li>
+					<li class="page-item"><a class="page-link" href="r_listForm?category=${category }&pageNum=${pp.endPage + 1}">다음</a></li>
 				</c:if>
 			</c:if>
-		</ul>
+			</ul>
+			</nav>
 
 		<c:if test="${!empty id }">
 			<div align="center">

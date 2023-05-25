@@ -250,6 +250,9 @@ public class RecipeController {
 		if (rpageNum == null || rpageNum.equals("")) {
 			rpageNum = "1";
 		}
+		if (pageNum == null || pageNum.equals("")) {
+			pageNum = "1";
+		}
 
 		service.r_readcountUpdate(rnum);
 		int recomm_state = service.r_recomm_count(recomm);

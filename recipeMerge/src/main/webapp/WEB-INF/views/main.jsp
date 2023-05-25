@@ -62,18 +62,15 @@
 				<p>
 					요리가 어려우세요? 알고보면 쉬운 요리도 많아요. 하고 싶은 요리를 찾아 따라해보세요! <br>실력이 쑥쑥!
 				</p>
-				<a class="btn btn-primary" href="#free_board">최신 게시판</a> <a
-					class="btn btn-primary" href="#magazine">매거진</a>
+				<a class="btn btn-primary" href="#free_board">최신 게시판</a> 
+				<a class="btn btn-primary" href="#new_recipe">최신 레시피</a>
+				<a class="btn btn-primary" href="#magazine">매거진</a>
 				<!--   <a class="btn btn-primary btn-lg px-4 me-sm-3" href="#features">인기 레시피</a> -->
 			</div>
 		</div>
 	</div>
-
-
-	<!-- Features section-->
-	<section class="py-5"></section>
+	
 	<!-- body -->
-
 	<section class="py-5">
 		<div class="container px-5 my-5">
 			<div class="row gx-5">

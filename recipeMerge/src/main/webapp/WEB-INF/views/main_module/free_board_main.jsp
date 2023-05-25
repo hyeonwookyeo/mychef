@@ -12,14 +12,15 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<!-- 매거진 리스트 -->
-	<table border=1 align=center>
+	<!-- 게시판 리스트 -->
+	<h2>자유게시판 최신글</h2><br>
+	<table class="table" align=center>
 		<tr>
-			<td>게시글 번호</td>
-			<td>게시글 제목</td>
-			<td>작성자</td>
-			<td>작성일</td>
-			<td>조회수</td>
+			<th>게시글 번호</th>
+			<th>게시글 제목</th>
+			<th>작성자</th>
+			<th>작성일</th>
+			<th>조회수</th>
 		</tr>
 
 		<!-- 리스트 출력 -->

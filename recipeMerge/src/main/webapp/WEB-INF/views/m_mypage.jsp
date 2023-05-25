@@ -9,6 +9,7 @@
 <%@ page session="true"%>
 <!-- 현재 페이지를 세션에 추가해줌 -->
 
+<%@ include file="./include/header.jsp"%>
 
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">

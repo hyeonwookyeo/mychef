@@ -18,7 +18,7 @@
         <th>비밀번호</th>
         <th>이름</th>
         <th>이메일</th>
-        <th>가입일</th>
+    <!--     <th>가입일</th> -->
         <th>회원상태</th>
     </tr>
     <c:forEach items="${memberlist}" var="m">   
@@ -28,9 +28,9 @@
             <td>${m.pwd}</td>
             <td>${m.name}</td>
             <td>${m.mailid}</td>
-            <td>
+       <%--   <td>
             	<fmt:formatDate value="${m.joindate}" pattern="yyyy-MM-dd HH:mm:ss"/>
-            </td>
+            </td>  --%>
             <td>
             	<c:if test="${m.state == 1}">
             		일반회원

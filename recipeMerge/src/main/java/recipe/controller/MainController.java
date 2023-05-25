@@ -19,6 +19,7 @@ public class MainController {
 	
 	@Autowired
 	private MainService service;
+	@Autowired
 	private FreeBoardService BoardService;
 	
 	@RequestMapping("main")
@@ -48,6 +49,8 @@ public class MainController {
 		BoardDTO fboard = new BoardDTO();
 		fboard.setStartRow(1);
 		fboard.setEndRow(10);
+		
+		
 		
 		List<BoardDTO> boardlist = BoardService.getBoardList(fboard);
 		

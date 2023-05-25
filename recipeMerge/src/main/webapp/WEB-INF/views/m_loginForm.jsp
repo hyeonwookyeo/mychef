@@ -251,15 +251,18 @@ a:hover {
 		src="https://raw.githubusercontent.com/sefyudem/Responsive-Login-Form/master/img/wave.png">
 	<div class="container">
 		<div class="img">
+			<a href="main">
 			<img
 				src="images/logo.png"
 				alt="이미지" />
-
+			</a>
 		</div>
 
 		<div class="login-content">
 			<form method="post" action="m_loginOk" onsubmit="return check()">
-				<h2 class="title">NEXT LE시피</h2>
+				<a href="main">
+				<h2 class="title" align="center">NEXT LE시피</h2>
+				</a>
 				<div class="input-div one">
 					<div class="i">
 						<i class="fas fa-user"></i>
