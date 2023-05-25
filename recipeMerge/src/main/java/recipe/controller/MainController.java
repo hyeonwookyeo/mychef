@@ -51,7 +51,6 @@ public class MainController {
 		fboard.setEndRow(10);
 		
 		
-		
 		List<BoardDTO> boardlist = BoardService.getBoardList(fboard);
 		
 		System.out.println("boardlist는 " + boardlist);

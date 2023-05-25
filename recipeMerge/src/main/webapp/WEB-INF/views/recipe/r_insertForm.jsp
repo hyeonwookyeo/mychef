@@ -11,11 +11,6 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
-<style>
-	.custom{
-		background-color : #cf25d8;
-	}
-</style>
 
 <script type="text/javascript">
 	var i = 2;			// 조리사진 추가시, img 태그당 증가 id값 (초기출력번호 1)
@@ -216,6 +211,9 @@ input[type=file] {
 }
 </style>
 
+<!-- <link href="css/custom.css" rel="stylesheet"> -->
+
+
 </head>
 <body>
 	<!-- (공통) 헤더부분 -->
@@ -227,34 +225,37 @@ input[type=file] {
 		<form enctype="multipart/form-data">
 			<%--
 			<input type="hidden" name="pageNum" value="${pageNum}"> --%>
-			<table border=1>
-				<tr>
-					<td>제목</td>
-					<td><input type="text" id="subject" name="subject"></td>
-				</tr>
-				<tr>
-					<td>분류</td>
-					<td><select id="category" name="category">
+			<div class="container">
+					<div class="row">
+					<div class="col">제목</div>
+					<div class="col"><input type="text" id="subject" name="subject"></div>
+					<div class="col">분류</div>
+					<div class="col">
+					<select id="category" name="category">
 							<option value="">선택</option>
 							<option value="korean">한식</option>
 							<option value="chinese">중식</option>
 							<option value="japanese">일식</option>
 							<option value="western">양식</option>
-					</select></td>
-				</tr>
-				<tr>
-					<td>대표사진</td>
-					<td><input type="file" id="thumbnail1" name="thumbnail1"
+					</select>
+					</div>
+					</div>
+					
+					<div>
+					<div style="display: inline-block">대표사진</div>
+					<input type="file" id="thumbnail1" name="thumbnail1"
 						onchange="readURL(this,'cookmain');">
-						<img id="cookmain" src="images/Plus.jpg" width=300 height=350 class="preview"/></td>
-				</tr>
-				<tr>
-					<td>간략한 설명</td>
-					<td><input type="text" id="description" name="description"></td>
-				</tr>
-			</table>
+					<div style="display: inline-block"><img id="cookmain" src="images/Plus.jpg" width=300 height=350 class="preview"/></div>
+					</div>
+					
+					<div>
+					<div>간략한 설명</div>
+					<div><input type="text" id="description" name="description"></div>
+					</div>
+			</div>
 			<br>
 			<br>
+			
 
 			<table border=1>
 				<thead>

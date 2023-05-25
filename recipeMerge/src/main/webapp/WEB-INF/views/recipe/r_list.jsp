@@ -13,18 +13,24 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <meta name="description" content="" />
 <meta name="author" content="" />
-<!-- Favicon-->
-<link rel="icon" type="resources/image/x-icon" href="assets/favicon.ico" />
-<!-- Core theme CSS (includes Bootstrap)-->
-<link href="resources/css/styles.css" rel="stylesheet" />
-<link href="css/custom.css" rel="stylesheet">
+<style>
+div.btn-group {
+  position: relative;
+  left: 1200px;
+}
+
+div.card {width:100%; height:100%; overflow:hidden;}
+.card-img-top {width:80%; height:150; padding:7; overflow:hidden;}
+
+</style>
 </head>
 <body>
 
 <%@ include file="../include/header.jsp"%>
 
 
-		<h2 class="text-primary" align="center">게시판 목록</h2>
+		<h2 class="text-primary" align="center">레시피 목록</h2>
+		<div>
 		<div style="text-align:left; margin-left: 2em" > 총 <b>${total }</b>개의 레시피를 만나보세요~!</div>
 		<div class="btn-group">
   			<button type="button" class="btn btn-outline-success" onClick="location.href='r_listForm?category=${category}'">최신순</button>
@@ -33,7 +39,11 @@
   			<button type="button" class="btn btn-outline-success" onClick=
   			"location.href='r_listForm?category=${category}&sort=recom'">추천순</button>
 		</div>
+		</div>
+		<p></p>
+		
 	<div class="container" align="center">
+	
 		<div class="row">
 			<c:if test="${empty list}">
 				<div class="col-sm-12 text-bg-secondary">
@@ -45,9 +55,9 @@
 					<c:if test="${board.state != 'n' }">
 						<div class="col-sm-3">
 							<div>
-								<div class="card" style="width: 400px height: 300px">
+								<div class="card">
 									<a href="r_view?rnum=${board.rnum }&pageNum=${pageNum}">
-										<img class="card-img-top" src="./t_images/${board.thumbnail }" width=270 height=250>
+										<img class="card-img-top" src="./t_images/${board.thumbnail }">
 									</a>
 									<div class="card-body">
 										<h4 class="card-title">${board.subject }</h4>
@@ -103,34 +113,19 @@
 				</c:if>
 			</c:if>
 			
-			<nav aria-label="Page navigation example">
-  			<ul class="pagination">
 			<c:if test="${empty keyword}">
 				<c:if test="${pp.startPage > pp.pagePerBlk }">
-					<li class="page-item"><a class="page-link" href="r_listForm?category=${category }&pageNum=${pp.startPage - 1}">이전</a></li>
+					<li><a href="r_listForm?category=${category }&pageNum=${pp.startPage - 1}">이전</a></li>
 				</c:if>
-				
-				<li class="page-item">
 				<c:forEach var="i" begin="${pp.startPage}" end="${pp.endPage}">
-					<c:if test="${pp.currentPage==i}">
-					<li class="page-item active" aria-current="page">
-					<a class="page-link" href="r_listForm?category=${category }&pageNum=${i}">${i}</a>
-					</li>
-					<c:if test="${pp.currentPage!=i}">
-					<li class="page-item active" aria-current="page">
-					${i}
-					</li>
-					</c:if>
-					
-					</c:if>
+					<c:if test="${pp.currentPage==i}"></c:if>
+					<a href="r_listForm?category=${category }&pageNum=${i}">${i}</a>
 				</c:forEach>
-				</li>
 				<c:if test="${pp.endPage < pp.totalPage}">
-					<li class="page-item"><a class="page-link" href="r_listForm?category=${category }&pageNum=${pp.endPage + 1}">다음</a></li>
+					<li><a href="r_listForm?category=${category }&pageNum=${pp.endPage + 1}">다음</a></li>
 				</c:if>
 			</c:if>
-			</ul>
-			</nav>
+		</ul>
 
 		<c:if test="${!empty id }">
 			<div align="center">

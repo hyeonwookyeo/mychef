@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square-round.css" rel="stylesheet">
 
 <script>
 function delete_check(){
@@ -129,6 +130,10 @@ $(function(){
 	});
 });
 </script>	
+
+<style>
+td {font-family: 'NanumSquareRoundExtraBold';}
+</style>
 </head>
 <body>
  	<!-- (공통) 헤더부분 -->
@@ -148,21 +153,25 @@ $(function(){
 		<c:if test="${empty member.profile }"><img src="./upload/pepe.jpg" width=35 height=35></c:if>
 		${member.nickname} 조회수 ${board.readcount }</div>
 		<div>${board.description }</div>
+		<br><br>
 
-		<table>
+		<table align="center">
 			<c:forEach var="item1" items="${map1 }">
 				<tr>
-					<td>${item1.key } ${item1.value }</td>
+					<td>${item1.key }</td><td> ${item1.value }</td>
 				</tr>
 			</c:forEach>
+		</table>
+		<br><br>
+		<table class="table">
 			<c:forEach var="item2" items="${map2 }">
 				<tr>
-					<td><img src="./r_images/${item2.key }" width=300 /> ${item2.value }</td>
+					<td><img src="./r_images/${item2.key }" width=300 /></td><td> ${item2.value }</td>
 				</tr>
 			</c:forEach>
-
-
 		</table>
+
+
 
 		<div>
 		<image id="r_recomm_img" src="images/good.png" width="50" height="50"></image>
