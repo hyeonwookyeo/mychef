@@ -8,6 +8,7 @@
 
 <title>게시글 수정</title>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="<%=request.getContextPath()%>/js/maga.js"></script>
 <script type="text/javascript">
 	$(function() {
 		$('#imgdel').click(function() {
@@ -15,7 +16,7 @@
 			if (result){		  
 				var ffData = {
 					"comm_num" : ${board.comm_num},
-				};
+				}
 			$.ajax({
 				type : 'post',
 				url : 'idelete',
@@ -30,6 +31,7 @@
 			}
 		});
 	});
+	
 </script>
 </head>
 <body>
@@ -42,7 +44,7 @@
 	<table>
 		<tr>
 			<td>작성자 : 
-			    관리자
+			   ${board.id }
      		</td>
 		</tr>
 		<tr>
@@ -59,7 +61,7 @@
 		</tr>
 		<tr>
 			<td>
-				<input type="file" id="commfile" name="commfile" >
+				<input type="file" id="commfile2" name="commfile2" >
 				
 			</td>
 		</tr>

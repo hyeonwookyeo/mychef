@@ -47,8 +47,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public void board_up(BoardDTO b) {
-		BoardDAO.board_up(b);
+	public void board_up(BoardDTO board) {
+		BoardDAO.board_up(board);
 	}
 
 	@Override

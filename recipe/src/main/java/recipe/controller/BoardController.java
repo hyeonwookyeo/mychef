@@ -167,21 +167,21 @@ public class BoardController {
 		return "board_edit";
 	}
 	
-	@RequestMapping("board_up_ok")
-	public String board_up_ok(@RequestParam("commfile") MultipartFile mf,
-							  @ModelAttribute BoardDTO b,HttpServletRequest request, 
+	@RequestMapping("/board_up_ok")
+	public String board_up_ok(@RequestParam("commfile2") MultipartFile mf,
+							  @ModelAttribute BoardDTO board,HttpServletRequest request, 
 							  int comm_num, 
 							  String page,Model model) throws Exception {
 		
 		System.out.println("수정");
 		
-		BoardDTO commfile = BoardService.board_cont(b.getComm_num());
-		/*
-		 * BoardDTO board = BoardService.board_cont(comm_num);
-		 */		
+		BoardDTO commfile = BoardService.board_cont(board.getComm_num());
+		/* model.addAttribute("commfile",commfile); */
+		/* BoardDTO board = BoardService.board_cont(comm_num); */
+		 	
 		if (mf.isEmpty()) {
 			String cfile = commfile.getCommfile();
-			b.setCommfile(cfile);
+			board.setCommfile(cfile);
 
 		} else {
 			String path = request.getRealPath("upload");
@@ -201,16 +201,16 @@ public class BoardController {
 
 			if (size > 0) {
 				mf.transferTo(new File(path + "/" + newfilename));
-				b.setCommfile(newfilename);
+				board.setCommfile(newfilename);
 			}
 		}
 		
 		
-		BoardService.board_up(b);
+		BoardService.board_up(board);
 		
 		
-		return "redirect:/board_cont?comm_num=" + b.getComm_num()
-		+ "&page=" + page + "&state=cont";
+		return "redirect:/board_cont?comm_num=" + board.getComm_num()
+		+ "&page=" + page + "&state=''";
 	}
 	
 	@RequestMapping("/idelete")

@@ -53,8 +53,8 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 
 
-	public void board_up(BoardDTO b) {
-		session.update("boardns.board_up", b);
+	public void board_up(BoardDTO board) {
+		session.update("boardns.board_up", board);
 	}
 
 

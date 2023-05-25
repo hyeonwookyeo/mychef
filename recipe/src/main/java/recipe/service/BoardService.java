@@ -19,7 +19,7 @@ public interface BoardService {
 	
 	public int board_del(int comm_num) throws Exception;
 
-	public void board_up(BoardDTO b);
+	public void board_up(BoardDTO board);
 
 	public void board_idel(int comm_num);
 
