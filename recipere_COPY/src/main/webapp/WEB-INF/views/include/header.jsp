@@ -15,7 +15,7 @@
 <!-- Favicon-->
 <link rel="icon" type="resources/image/x-icon" href="assets/favicon.ico" />
 <!-- Core theme CSS (includes Bootstrap)-->
-<link href="resources/css/styles.css" rel="stylesheet" />
+
 </head>
 
 
@@ -73,8 +73,8 @@
 							
 							<a href="${pageContext.request.contextPath}/n_boardlist"
 							class="text-white text-decoration-none font-weight-light">공지사항</a> ||
-						<a href="${pageContext.request.contextPath}/board_list"
-					class="text-white text-decoration-none font-weight-light">이벤트</a> |
+						<a href="list"							
+							class="text-white text-decoration-none font-weight-light">자유게시판</a> |
 						<a href="categoryForm"
 						class="text-white text-decoration-none font-weight-light">레시피</a> |
 						<a href="maga"
@@ -92,8 +92,8 @@
 							width=15px>  ${sessionScope.admin_id }님 환영합니다 &nbsp;  --%>
 						<a href="${pageContext.request.contextPath}/n_boardlist"
 							class="text-white text-decoration-none font-weight-light">공지사항</a> ||
-						<a href="${pageContext.request.contextPath}/board_list"							
-							class="text-white text-decoration-none font-weight-light">이벤트</a> |
+						<a href="list"							
+							class="text-white text-decoration-none font-weight-light">자유게시판</a> |
 						<a href="${pageContext.request.contextPath}/a_main"
 							class="text-white text-decoration-none font-weight-light">관리자페이지</a> |
 						<a href="${pageContext.request.contextPath}/a_Logout"							

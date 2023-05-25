@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="fboardreply">
+
+	<select id="slist" parameterType="int" resultType="fboardreply">
+		select * from comm_re where comm_num=#{comm_num} order by ref asc, commre_num asc
+	</select>
+	
+	<insert id="insert" parameterType="fboardreply">
+	
+		<!-- <selectKey keyProperty="magare_num" order="BEFORE" resultType="int">
+			<if test="ref_lef == '0'">
+				select nvl(max(magare_num),0) + 1 from maga_re
+			</if>
+		</selectKey> -->
+			
+			insert into comm_re values (comm_re_seq.nextval,#{comm_num},#{id},#{re_content},sysdate,'y',
+			<if test="ref_lev == 0">
+				comm_re_seq.nextval,
+			</if>
+			<if test="ref_lev != 0">
+				#{commre_num},
+			</if>
+				0,#{ref_lev})	
+	</insert>
+	
+	<delete id="delete" parameterType="int">
+		delete from comm_re where ref=#{commre_num} or commre_num =#{commre_num}
+	</delete>
+	
+	<update id="update" parameterType="fboardreply">
+		update comm_re set re_content=#{re_content}, re_date=sysdate where commre_num=#{commre_num}
+	</update>
+</mapper>

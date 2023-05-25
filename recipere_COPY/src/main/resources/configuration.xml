@@ -19,6 +19,8 @@
 	<typeAlias alias="Maga" type="recipe.model.MagaBean" />
 	<typeAlias alias="MagaRecom" type="recipe.model.MagaRecomBean" />
 	<typeAlias alias="MagaReply" type="recipe.model.ReplyMagaBean"/>
+	<typeAlias alias="fboard" type="recipe.model.BoardDTO"/>
+	<typeAlias alias="fboardreply" type="recipe.model.ReplyBoardDTO"/>
 	
 	
 	<typeAlias alias="test" type="recipe.model.Test" />

@@ -8,11 +8,6 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-<!-- Latest compiled and minified CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-<!-- Latest compiled JavaScript -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </head>
 <body>
@@ -37,9 +32,8 @@
    <div class="carousel-item active">
       <a><img src="./images/western.jpg" alt="고양이" class="img_thumbnail"></a>
       <div class="carousel-caption">
-     	 <h4>${rboard.subject }</h4>`
-    	<p>${rboard.description }</p>
-      </div>
+    <h4>많고 다양한 레시피를 NEXT LE시피에서 경험하세요!</h4>
+  	  </div>
   	</div>
   
   	<c:forEach var="rboard" items="${rlist }">
