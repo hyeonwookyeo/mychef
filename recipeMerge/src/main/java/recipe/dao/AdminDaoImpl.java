@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import recipe.model.Admin;
+import recipe.model.MemberBean;
 
 @Repository
 public class AdminDaoImpl implements AdminDao {
@@ -20,6 +21,12 @@ public class AdminDaoImpl implements AdminDao {
 	@Override
 	public Admin getAdmin(Admin admin) {
 		return sst.selectOne("adminns.select", admin);
+	}
+
+	@Override
+	public int change_member(MemberBean member) {
+		// TODO Auto-generated method stub
+		return sst.update("adminns.update_member", member);
 	}
 	
 	

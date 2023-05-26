@@ -87,10 +87,9 @@ $(document).ready(function() {
 					<div class="bg-white py-2 collapse-inner rounded">
 
 						<h6 class="collapse-header">게시판</h6>
-						<a class="collapse-item" href="m_editForm">회원정보수정</a> 
-						<a class="collapse-item" href="m_editForm">이벤트</a> 
-						<a class="collapse-item" href="m_delForm">회원탈퇴</a> 
-						<a class="collapse-item" href="m_jjimlist">찜리스트</a>
+						<button type="button" class="collapse-item button-class" id="M_edit">회원정보수정</button>
+						<button type="button" class="collapse-item button-class" id="M_remove">회원탈퇴</button>
+						<button type="button" class="collapse-item button-class" id="M_jjim">찜리스트</button>
 
 						<div class="collapse-divider"></div>
 						<h6 class="collapse-header">로그아웃</h6>

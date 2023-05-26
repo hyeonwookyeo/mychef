@@ -47,14 +47,14 @@
 
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 
+<link href="css/mypage.css" rel="stylesheet">
+<link href="css/all-style.css" rel="stylesheet">
+
 
 <!-- 메인화면 첫화면에 공지사항 리스트 띄움  -->
 
-<script>
-	$(function() {
-		$("#mypage").load("m_editForm");
-	});
-</script>
+
+
 
 </head>
 
@@ -75,62 +75,32 @@ if(id != null) { //세션에 id 값이 있다 ▶ 로그인 상태를 유지하�
 
 	<!-- Page Wrapper -->
 	<div id="wrapper">
-		<!-- Sidebar -->
-		<ul
-			class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
-			id="accordionSidebar">
+	
 
-			<!-- Sidebar - Brand -->
-			<a
-				class="sidebar-brand d-flex align-items-center justify-content-center"
-				href="index.html">
-				<div class="sidebar-brand-icon rotate-n-15">
-					<i class="fas fa-laugh-wink"></i>
-				</div>
-				<div class="sidebar-brand-text mx-3">
-					회원 마이페이지 <sup></sup>
-				</div>
-			</a>
+<%@ include file="./include/m_side.jsp"%>
 
-
-			<!-- 사이드 바 -->
-			<!-- Divider -->
-			<hr class="sidebar-divider">
-
-			<!-- Nav Item - Pages Collapse Menu -->
-			<li class="nav-item"><a class="nav-link collapsed" href="#"
-				data-toggle="collapse" data-target="#collapsePages"
-				aria-expanded="true" aria-controls="collapsePages"> <i
-					class="fas fa-fw fa-folder"></i> <span>카테고리</span></a>
-
-				<div id="collapsePages" class="collapse"
-					aria-labelledby="headingPages" data-parent="#accordionSidebar">
-					<div class="bg-white py-2 collapse-inner rounded">
-
-						<h6 class="collapse-header">게시판</h6>
-						<a class="collapse-item" href="m_editForm">회원정보수정</a> 
-						<a class="collapse-item" href="m_delForm">회원탈퇴</a> 
-						<a class="collapse-item" href="m_jjimlist">찜리스트</a>
-
-						<div class="collapse-divider"></div>
-						<h6 class="collapse-header">로그아웃</h6>
-						<a class="collapse-item" href="m_logOut">Logout</a>
-					</div>
-				</div></li>
-
-			<!-- Divider -->
-			<hr class="sidebar-divider d-none d-md-block">
-
-			<!-- Sidebar Toggler (Sidebar) -->
-			<div class="text-center d-none d-md-inline">
-				<button class="rounded-circle border-0" id="sidebarToggle"></button>
-			</div>
-
-		</ul>
-		<!--  사이드바 끝 -->
-
-
-
+<script>
+	$(function() {
+		$("#mypage").load("m_editForm");
+		
+		 $("#M_jjim").click(function(){
+			 
+			$("#mypage").load("m_jjimlist");
+		
+		 });
+		 $("#M_edit").click(function(){
+			 
+			$("#mypage").load("m_editForm");
+		
+		 });	
+		 $("#M_remove").click(function(){
+			 
+				$("#mypage").load("m_delForm");
+			
+			 });	
+		
+	});
+</script>
 
 		<!-- 내용 월페이퍼 -->
 		<div id="content-wrapper" class="d-flex flex-column">

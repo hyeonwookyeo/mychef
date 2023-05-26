@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import recipe.dao.AdminDao;
 import recipe.model.Admin;
+import recipe.model.MemberBean;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -20,6 +21,12 @@ public class AdminServiceImpl implements AdminService {
 	// 정보 구해오기
 	public Admin getAdmin(Admin admin) {
 		return ad.getAdmin(admin);
+	}
+
+	@Override
+	public int change_member(MemberBean member) {
+		// TODO Auto-generated method stub
+		return ad.change_member(member);
 	}
 	
 }

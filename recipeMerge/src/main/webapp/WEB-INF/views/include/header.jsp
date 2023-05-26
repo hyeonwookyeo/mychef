@@ -85,13 +85,13 @@
 					<c:if test="${empty sessionScope.id && empty sessionScope.admin_id }">
 							 
 								<a href="${pageContext.request.contextPath}/n_boardlist"
-							class="text-white text-decoration-none font-weight-light">공지사항</a> |
+							class="text-black my-text text-decoration-none">공지사항</a> |
 						<a href="list"
-					class="text-white text-decoration-none font-weight-light">자유게시판</a> |
+					class="text-black my-text text-decoration-none">자유게시판</a> |
 						<a href="categoryForm"
-						class="text-white text-decoration-none font-weight-light">레시피</a> |
+						class="text-black my-text text-decoration-none">레시피</a> |
 						<a href="maga"
-						class="text-white text-decoration-none font-weight-light">매거진</a> |
+						class="text-black my-text text-decoration-none">매거진</a> |
 						<a href="${pageContext.request.contextPath}/m_loginForm"
 								class="text-black my-text text-decoration-none">로그인</a> |
 						<a href="${pageContext.request.contextPath}/m_joinForm"
@@ -108,17 +108,17 @@
                            <span style="color: white;">${sessionScope.id}님 환영합니다&nbsp;|</span> --%>
 							
 							<a href="${pageContext.request.contextPath}/n_boardlist"
-							class="text-white text-decoration-none font-weight-light">공지사항</a> |
+							class="text-black my-text text-decoration-none">공지사항</a> |
 						<a href="list"
-					class="text-white text-decoration-none font-weight-light">자유게시판</a> |
+					class="text-black my-text text-decoration-none">자유게시판</a> |
 						<a href="categoryForm"
-						class="text-white text-decoration-none font-weight-light">레시피</a> |
+						class="text-black my-text text-decoration-none">레시피</a> |
 						<a href="maga"
-						class="text-white text-decoration-none font-weight-light">매거진</a> |
+						class="text-black my-text text-decoration-none">매거진</a> |
 						<a href="${pageContext.request.contextPath}/m_mypage"
-						class="text-white text-decoration-none font-weight-light">마이페이지</a> |
+						class="text-black my-text text-decoration-none">마이페이지</a> |
 						<a href="${pageContext.request.contextPath}/m_logOut" 
-    						class="text-white text-decoration-none font-weight-light">로그아웃</a> 
+    						class="text-black my-text text-decoration-none">로그아웃</a> 
 					</c:if>	
 					
 				
@@ -127,17 +127,17 @@
 					<%-- 	<img src="${pageContext.request.contextPath}/images/person-hearts.svg"
 							width=15px>  ${sessionScope.admin_id }님 환영합니다 &nbsp;  --%>
 						<a href="${pageContext.request.contextPath}/n_boardlist"
-							class="text-white text-decoration-none font-weight-light">공지사항</a> |
+							class="text-black my-text text-decoration-none">공지사항</a> |
 						<a href="list"
-					class="text-white text-decoration-none font-weight-light">자유게시판</a> |
+					class="text-black my-text text-decoration-none">자유게시판</a> |
 					<a href="categoryForm"
-						class="text-white text-decoration-none font-weight-light">레시피</a> |
+						class="text-black my-text text-decoration-none">레시피</a> |
 						<a href="maga"
-						class="text-white text-decoration-none font-weight-light">매거진</a> |
+						class="text-black my-text text-decoration-none">매거진</a> |
 						<a href="${pageContext.request.contextPath}/a_main"
-							class="text-white text-decoration-none font-weight-light">관리자페이지</a> |
+							class="text-black my-text text-decoration-none">관리자페이지</a> |
 						<a href="${pageContext.request.contextPath}/a_Logout"							
-							class="text-white text-decoration-none font-weight-light">관리자로그아웃</a> |
+							class="text-black my-text text-decoration-none">관리자로그아웃</a> |
 					</c:if>
 					
 				</ul>

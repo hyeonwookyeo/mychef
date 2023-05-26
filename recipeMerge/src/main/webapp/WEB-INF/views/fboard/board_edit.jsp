@@ -17,7 +17,7 @@
 	 <input type="hidden" name="comm_num" value="${board.comm_num}" />
  	 <input type="hidden" name="page" value="${page}" />
   
-	<table>
+	<table class=table>
 		<tr>
 			<td>작성자 : 
 			    관리자
@@ -42,8 +42,8 @@
 			</td>
 		</tr>
 	</table>
-	<input type="submit" value="등록"/>
-	<input type="reset" value="리셋"/> <!-- class="input_button" onclick="$('#board_name').focus();" --> 
+	<input type="submit" value="등록" style="background-color: aquamarine;"/>
+	<input type="reset" value="리셋" style="background-color: aquamarine;"/> <!-- class="input_button" onclick="$('#board_name').focus();" --> 
 	</form>
 	
 

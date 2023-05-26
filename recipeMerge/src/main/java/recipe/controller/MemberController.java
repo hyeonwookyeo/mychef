@@ -1,6 +1,7 @@
 package recipe.controller;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 import java.util.UUID;
@@ -20,7 +21,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import recipe.model.MemberBean;
+import recipe.model.R_zzim;
+import recipe.model.RecipeBoard;
 import recipe.service.MemberServiceImpl;
+import recipe.service.RecipeService;
 
 @Controller
 public class MemberController {
@@ -28,6 +32,9 @@ public class MemberController {
 	
 	@Autowired
 	private MemberServiceImpl service;
+	@Autowired
+	private RecipeService rservice;
+	
 	
 	// ID 중복검사
 	@RequestMapping (value = "/m_idCheck", method = RequestMethod.POST)
@@ -175,7 +182,7 @@ public class MemberController {
 				model.addAttribute("name", name);
 				model.addAttribute("profile", profile);
 
-				return "testMain";
+				return "main";
 				
 			} else {									// 비번이 다를때
 				result = 2;
@@ -413,57 +420,27 @@ public class MemberController {
 				return "m_logOut";
 			}	
 			
-			/* 관리자용 회원 목록 */
-			@GetMapping("/memberlist")
-			public String listGET(HttpSession session, Model model,
-			        @RequestParam(defaultValue = "1") int page,
-			        @RequestParam(defaultValue = "10") int limit) throws Exception {
-
-			    // 1. 관리자 세션 제어
-			    String id = (String) session.getAttribute("admin_id");
-			    if (id == null || id.equals("")) {
-			        System.out.println("C: 관리자 아닌 접근 ID - " + id);
-			        return "redirect:/testMain";
-			    }
-			    
-			    // 2. 페이징 처리를 위한 변수 계산
-			    int startRow = (page - 1) * limit + 1;
-			    int endRow = page * limit;
-
-			    // 3. 전체 멤버 수 계산
-			    int totalCount = service.getMemberCount();
-			    System.out.println("totalCount:"+ totalCount);
-			    
-			    // 4. 회원 목록 가져오기
-			    MemberBean member = new MemberBean();
-			    member.setStartRow(startRow);
-			    member.setEndRow(endRow);
-			    
-			    List<MemberBean> memberList = service.getMemberList(member);
-			    System.out.println("memberList:"+ memberList);
-			    
-			    // 5. 페이지 수 계산
-			    int pageCount = totalCount / limit + ((totalCount % limit == 0) ? 0 : 1);
-
-			    // 6. 시작 페이지와 끝 페이지 계산
-			    int startPage = ((page - 1) / 10) * 10 + 1;
-			    int endPage = startPage + 9;
-			    if (endPage > pageCount) {
-			        endPage = pageCount;
-			    }
-
-			    // 7. 정보 저장 및 뷰로 전달
-			    model.addAttribute("memberlist", memberList);
-			    model.addAttribute("page", page);
-			    model.addAttribute("limit", limit);
-			    model.addAttribute("totalCount", totalCount);
-			    model.addAttribute("pageCount", pageCount);
-			    model.addAttribute("startPage", startPage);
-			    model.addAttribute("endPage", endPage);
-
-			    // 8. 페이지 이동
-			    return "memberlist";
-			}
+// 찜목록 출력
+	@RequestMapping("m_jjimlist")
+	public String m_jjimlist(HttpSession session, Model model) {
+		
+		String id = (String) session.getAttribute("id");
+		
+		List<R_zzim> mlist = rservice.r_zzim_search(id);
+		
+		System.out.println("mlist는 "+mlist);
+		
+		List<RecipeBoard> list = new ArrayList<RecipeBoard>();
+		for(int i=0; i< mlist.size(); i++) {
+			RecipeBoard  rb = rservice.r_select(mlist.get(i).getRnum());
+			list.add(rb);		
+		}
+		System.out.println("list는 "+list);
+		
+		model.addAttribute("list", list);
+		
+		return "jjim_list";
+	}
 
 
 			

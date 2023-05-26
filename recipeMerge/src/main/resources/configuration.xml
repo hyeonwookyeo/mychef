@@ -7,12 +7,10 @@
 <!--  예시
 		<typeAlias alias="board" type="board1.model.Board" /> 
 -->
-		<typeAlias alias="test" type="recipe.model.Test" />
 		<typeAlias alias="admin" type="recipe.model.Admin" />	
 		<typeAlias  alias="notice" type="recipe.model.Board"/>
 		<typeAlias  alias="member" type="recipe.model.MemberBean"/>
 		<typeAlias alias="board" type="recipe.model.BoardBean" />
-			<typeAlias alias="jjim" type="recipe.model.Recipe_Jjim" />
 				<typeAlias alias="rboard" type="recipe.model.RecipeBoard" />
 	<typeAlias alias="reboard" type="recipe.model.RecipeReBoard" />
 	<typeAlias alias="recomm" type="recipe.model.R_recomm"/>
@@ -21,9 +19,6 @@
 	<typeAlias alias="MagaReply" type="recipe.model.ReplyMagaBean"/>
 	<typeAlias alias="fboard" type="recipe.model.BoardDTO"/>
 	<typeAlias alias="fboardreply" type="recipe.model.ReplyBoardDTO"/>
-	
-	
-	<typeAlias alias="test" type="recipe.model.Test" />
 	<typeAlias alias="r_zzim" type="recipe.model.R_zzim"/>
 	<typeAlias alias="member" type="recipe.model.MemberBean"/>
 	

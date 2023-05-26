@@ -6,3 +6,8 @@
 <c:set var="path" value="${pageContext.request.contextPath }" />
 
 <script src="http://code.jquery.com/jquery-latest.js"></script>
+
+<!-- 부트스트랩5 추가 -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>

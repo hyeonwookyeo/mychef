@@ -23,6 +23,9 @@ div.card {width:100%; height:100%; overflow:hidden;}
 .card-img-top {width:80%; height:150; padding:7; overflow:hidden;}
 
 </style>
+
+<link href="css/r_custom.css" rel="stylesheet">
+
 </head>
 <body>
 
@@ -92,44 +95,75 @@ div.card {width:100%; height:100%; overflow:hidden;}
 				<option value="content"
 					<c:if test="${search=='content'}">selected="selected" </c:if>>내용</option>
 					<!-- id 닉네임으로 변경할 것!!!!!!!!!!!! -->
-				<option value="id" 
-					<c:if test="${search=='id'}">selected="selected" </c:if>>아이디</option>
+				<option value="nickname" 
+					<c:if test="${search=='nickname'}">selected="selected" </c:if>>닉네임</option>
 				<option value="subcon"
 					<c:if test="${search=='subcon'}">selected="selected" </c:if>>제목+내용</option>
 			</select> <input type="text" name="keyword"> <input type="submit" value="확인">
 		</form>
-		<ul>
-			<c:if test="${not empty keyword}">
-				<c:if test="${pp.startPage > pp.pagePerBlk }">
-					<li><a href="r_listForm?category=${category }&pageNum=${pp.startPage - 1}&search=${search}&keyword=${keyword}">이전</a></li>
+			
+				<c:if test="${not empty keyword}">
+			<nav aria-label="Page navigation example">
+			<ul class="pagination justify-content-center">
+					<c:if test="${pp.startPage > pp.pagePerBlk }">
+						<li class="page-item"><a class="page-link" href="r_listForm?category=${category }&pageNum=${pp.startPage - 1}&search=${search}&keyword=${keyword}">이전</a></li>
+					</c:if>
 					
-				</c:if>
-				<c:forEach var="i" begin="${pp.startPage}" end="${pp.endPage}">
-					<li <c:if test="${pp.currentPage==i}">class="active"</c:if>>
-					<a href="r_listForm?category=${category }&pageNum=${i}&search=${search}&keyword=${keyword}">${i}</a></li>					
-				</c:forEach>
-				<c:if test="${pp.endPage < pp.totalPage}">
-					<li><a href="r_listForm?category=${category }&pageNum=${pp.endPage + 1}&search=${search}&keyword=${keyword}">다음</a></li>
-				</c:if>
+					<c:forEach var="i" begin="${pp.startPage}" end="${pp.endPage}">
+						<c:if test="${pp.currentPage==i}">
+						<li class="page-item active" aria-current="page">
+							<a class="page-link" href="r_listForm?category=${category }&pageNum=${i}&search=${search}&keyword=${keyword}">${i}</a>
+						</li>
+						</c:if>
+						
+						<c:if test="${pp.currentPage!=i}">
+						<li class="page-item">
+						<a class="page-link" href="r_listForm?category=${category }&pageNum=${i}&search=${search}&keyword=${keyword}">${i}</a>					
+						</li>
+						</c:if>
+						
+					</c:forEach>
+					
+					<c:if test="${pp.endPage < pp.totalPage}">
+						<li><a href="r_listForm?category=${category }&pageNum=${pp.endPage + 1}&search=${search}&keyword=${keyword}">다음</a></li>
+					</c:if>
+			</ul>
+			</nav>
 			</c:if>
 			
-			<c:if test="${empty keyword}">
-				<c:if test="${pp.startPage > pp.pagePerBlk }">
-					<li><a href="r_listForm?category=${category }&pageNum=${pp.startPage - 1}">이전</a></li>
+				<c:if test="${empty keyword}">
+			<nav aria-label="Page navigation example">
+			<ul class="pagination justify-content-center">
+					<c:if test="${pp.startPage > pp.pagePerBlk }">
+						<li class="page-item"><a class="page-link" href="r_listForm?category=${category }&pageNum=${pp.startPage - 1}">이전</a></li>
+					</c:if>
+					
+					
+					<c:forEach var="i" begin="${pp.startPage}" end="${pp.endPage}">
+						<c:if test="${pp.currentPage==i}">
+						<li class="page-item active" aria-current="page">
+							<a class="page-link" href="#">${i}</a>
+						</li>
+						</c:if>
+						
+						<c:if test="${pp.currentPage!=i}">
+						<li class="page-item">
+							<a class="page-link" href="r_listForm?category=${category }&pageNum=${i}">${i}</a>
+						</li>
+						</c:if>
+					</c:forEach>
+					
+					<c:if test="${pp.endPage < pp.totalPage}">
+						<li class="page-item"><a class="page-link" href="r_listForm?category=${category }&pageNum=${pp.endPage + 1}">다음</a></li>
+					</c:if>
+				
+			</ul>
+			</nav>
 				</c:if>
-				<c:forEach var="i" begin="${pp.startPage}" end="${pp.endPage}">
-					<c:if test="${pp.currentPage==i}"></c:if>
-					<a href="r_listForm?category=${category }&pageNum=${i}">${i}</a>
-				</c:forEach>
-				<c:if test="${pp.endPage < pp.totalPage}">
-					<li><a href="r_listForm?category=${category }&pageNum=${pp.endPage + 1}">다음</a></li>
-				</c:if>
-			</c:if>
-		</ul>
-
+		
 		<c:if test="${!empty id }">
 			<div align="center">
-				<a href="r_insertForm" class="btn btn-info">글 입력</a>
+				<a href="r_insertForm" class="btn btn-primary">글 입력</a>
 			</div>
 		</c:if>
 

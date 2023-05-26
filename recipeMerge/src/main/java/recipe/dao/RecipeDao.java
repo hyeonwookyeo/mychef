@@ -56,6 +56,8 @@ public interface RecipeDao {
 
 // 찜 취소
 	int r_zzim_remove(R_zzim zzim);
+// 찜 번호검색
+	List<R_zzim> r_zzim_search(String id);
 
 
 }

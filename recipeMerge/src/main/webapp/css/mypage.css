@@ -1,0 +1,21 @@
+@charset "UTF-8";
+
+.img-box{
+	border: 1px solid gold; 
+	padding: 10px; 
+	height: 150px;	
+}
+
+.jjim-img{
+	width:100%; 
+	height: auto;
+}
+
+.jjim-table{
+	width:500; 
+	height: auto;
+}
+.button-class{
+	all: unset;
+}
+

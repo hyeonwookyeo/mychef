@@ -3,9 +3,16 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
-<c:if test="${result==1}">
+<c:if test="${result==-1}">
 	<script>
 		alert("비밀번호가 일치하지 않습니다.");
 		history.go(-1);
+	</script>
+</c:if>
+
+<c:if test="${result==1}">
+	<script>
+		alert("회원 탈퇴 성공.");
+		location.href="main";
 	</script>
 </c:if>

@@ -120,6 +120,12 @@ public class RecipeDaoImpl implements RecipeDao{
 		return sst.delete("r_zzim.delete", zzim);
 	}
 
+	@Override
+	public List<R_zzim> r_zzim_search(String id) {
+		// TODO Auto-generated method stub
+		return sst.selectList("r_zzim.mlist", id);
+	}
+
 
 	
 	

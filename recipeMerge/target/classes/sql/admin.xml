@@ -9,5 +9,9 @@
 	<select id="select" parameterType="admin" resultType="admin">
 		select * from admin where admin_id=#{admin_id} and admin_pwd=#{admin_pwd}
 	</select>
+	
+	<update id="update_member" parameterType="member">
+		update member set nickname=#{nickname} where id=#{id}
+	</update>
 
 </mapper>

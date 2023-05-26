@@ -1,0 +1,38 @@
+@charset "UTF-8";
+
+/* 폰트  */
+@font-face {
+    font-family: 'Dovemayo_gothic';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.1/Dovemayo_gothic.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* 테이블 스타일 */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #ddd;
+}
+
+/* 테이블 헤더 스타일 */
+.table > tbody > tr th{ 
+  background-color: #C6C6C6;
+  color: #fff;
+  font-family: 'Dovemayo_gothic', sans-serif;
+}
+
+/* 테이블 헤더 셀 스타일 */
+.table  tbody tr th {
+  text-align : center;
+  border: 1px solid #ddd;
+}
+
+/* 테이블 내용 셀 스타일 */
+.table td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  font-family: 'Dovemayo_gothic', sans-serif;
+  font-size: 20px;
+}
+

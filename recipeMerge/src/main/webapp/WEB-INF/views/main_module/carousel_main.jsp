@@ -71,7 +71,9 @@ var multipleCardCarousel = document.querySelector(
   
   	<c:forEach var="rboard" items="${rlist }">
  	 <div class="carousel-item">
+ 	 <a href="r_view?rnum=${rboard.rnum }">
       <img src="./t_images/${rboard.thumbnail }" alt="추천 음식" class="img_thumbnail">
+      </a>
       <div class="carousel-caption">
      	 <h4>${rboard.subject }</h4>`
     	<p>${rboard.description }</p>

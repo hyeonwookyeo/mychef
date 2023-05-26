@@ -17,4 +17,8 @@
 		delete from recipe_jjim where id=#{id} and rnum=#{rnum}
 	</delete>
 	
+	<select id="mlist"  parameterType="String" resultType="r_zzim">
+		select * from Recipe_Jjim where id=#{id}
+	</select>
+	
 </mapper>

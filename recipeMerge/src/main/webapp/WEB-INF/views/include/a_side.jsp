@@ -12,8 +12,6 @@
 <meta charset="UTF-8">
 <title>게시판 목록</title>
 
-<style> </style>
-
 <script>
 
 $(document).ready(function() {
@@ -50,6 +48,8 @@ $(document).ready(function() {
 
     <!-- Custom styles for this page -->
     <link href="resources/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    
+    <link href="" rel="stylesheet">
     
 
 
@@ -91,20 +91,10 @@ $(document).ready(function() {
 					aria-labelledby="headingPages" data-parent="#accordionSidebar">
 					<div class="bg-white py-2 collapse-inner rounded">
 					
-<!-- 		//				<h6 class="collapse-header" href="board_list">게시판</h6> -->
-						<!-- <h6 class="collapse-header"></h6> -->
-						<a class="collapse-item" href="n_boardlist">공지사항</a>
-						<c:if test="${sessionScope.memberLevel == 'admin'}">
-   							 <a href="n_boardform?admin_id=${sessionScope.admin_id}">글작성</a><br>
-						</c:if>
-							
-						<a class="collapse-item" href="board_list">이벤트</a> 
-						<a class="collapse-item" href="memberlist">회원관리</a>		
-						<!-- 	
-						<div class="collapse-divider"></div> -->
-						<h6 class="collapse-header">로그아웃</h6>
+						<button type="button" class="collapse-item button-class" id="A_nboard">공지사항</button>
+						<button type="button" class="collapse-item button-class" id="A_magazine">매거진</button>
+						<button type="button" class="collapse-item button-class" id="A_member_manage">회원관리</button>
 						<a class="collapse-item" href="a_Logout">Logout</a>
-						<a class="collapse-item" href="testMain">메인</a>
 					</div>
 				</div></li>
 

@@ -22,6 +22,7 @@ public class RecipeBoard {
 	private String rfile;
 	private String content;
 	private String state;
+	
 	private String nickname;
 	private String profile;
 	

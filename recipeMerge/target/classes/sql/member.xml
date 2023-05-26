@@ -46,9 +46,9 @@
     
     
      <!-- 회원삭제 -->
-    <update id="member_del" parameterType="member">
-      update member set delcontent=#{delcontent}, state=2,  joindate=sysdate where id=#{id}
-    </update>
+    <update id="member_delete" parameterType="member">
+   	 update member set delcontent=#{delcontent}, state=2, deldate=sysdate where id=#{id}  
+	</update>
     
     <!-- 전체 회원수 -->
     <select id="getcount" resultType="int">
@@ -58,10 +58,8 @@
     <!-- 전체 회원목록 -->
     <select id="memberlist" parameterType="member" resultType="member">
 		select * from ( select rownum rnum, member.* from 
-		 (select * from member order by id asc ) member )
+		 (select * from member order by joindate asc ) member )
 		where  rnum  between #{startRow} and #{endRow}		 
 	</select>
-    
-    
     
 </mapper>
