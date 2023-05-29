@@ -1,0 +1,113 @@
+@charset "UTF-8";
+
+.pagination{
+	justify-content : center;
+}
+
+.bgcolor{
+	background-color: #f8f9fa;
+}
+
+.outbox{
+	position: relative;
+	width:800px;					/* 수평방향 크기 */
+ 	border: 1px solid #ccc;			/* 선굵기 */
+ 	border-radius: 10px;			/* 바깥선 굴곡 */
+ 	outline: 1px solid #ccc;		/* 바깥선 노출 */
+ 	margin: 0 auto;				/* 화면 가운데 위치 */
+ 	padding: 20px;					/* 안쪽여백 */
+ 	background-color: white;
+}
+
+.innerbox{
+	width:800px;					/* 수평방향 크기 */
+ 	border: 1px solid #ccc;			/* 선굵기 */
+ 	border-radius: 10px;			/* 바깥선 굴곡 */
+ 	outline: 1px solid #ccc;		/* 바깥선 노출 */
+ 	margin: 10px auto;
+ 	padding: 20px;
+}
+
+.row {
+  	display: flex;
+  	padding: 20px;					/* 안쪽여백 */
+}
+
+.box{
+	display: flex;
+	justify-content: center;		/* 요소 가운데 배치 */
+	align-items: center;
+	text-align: center;				/* text 가운데 정렬 */
+	outline: 1px solid #ccc;
+}
+
+.insert{
+	width:100%;
+	border-radius:10px;
+}
+
+.middle{
+	margin: auto;
+}
+
+.sub{
+	position: absolute;
+  	left: 50%;
+  	bottom: 10px;
+  	transform: translateX(-50%);
+}
+
+
+.imgcontainer{
+	margin: auto;
+	justify-content: center;		/* 요소 가운데 배치 */
+	align-items: center;
+	text-align: center;				/* text 가운데 정렬 */
+	outline: 1px solid #ccc;
+}
+
+
+/* all-style 내용 */
+/* 폰트  */
+@font-face {
+    font-family: 'Dovemayo_gothic';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.1/Dovemayo_gothic.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body{
+	font-family: 'Dovemayo_gothic';
+}
+
+/* 테이블 스타일 */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #ddd;
+}
+
+/* 테이블 헤더 스타일 */
+.table > tbody > tr th{ 
+  background-color: #C6C6C6;
+  color: #fff;
+  font-family: 'Dovemayo_gothic', sans-serif;
+}
+
+div{
+  	font-family: 'Dovemayo_gothic', sans-serif;
+}
+
+/* 테이블 헤더 셀 스타일 */
+.table  tbody tr th {
+  text-align : center;
+  border: 1px solid #ddd;
+}
+
+/* 테이블 내용 셀 스타일 */
+.table td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  font-family: 'Dovemayo_gothic', sans-serif;
+  font-size: 20px;
+}

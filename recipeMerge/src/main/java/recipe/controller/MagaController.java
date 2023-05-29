@@ -10,6 +10,7 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.hibernate.validator.internal.util.privilegedactions.GetAnnotationParameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -43,9 +44,8 @@ public class MagaController {
 	public String maga_list(HttpServletRequest request, HttpSession session, String page, MagaBean maga, Model model)
 			throws Exception {
 		// 임의의 세션공유
-		String master = "master";
-		String customer = "aaaa";
-		session.setAttribute("id", customer);
+		String id = (String)session.getAttribute("id");
+		System.out.println(id);
 
 		final int rowPerPage = 10; // 화면에 출력할 데이터 갯수
 		if (page == null || page.equals("")) {

@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <title>회원가입폼</title>
 
+
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script src="./js/member.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
@@ -22,21 +23,109 @@
 	}
 </script>
 	
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background-color: #E2E2E2;
+}
 
+.joinwrap {
+  position: absolute;
+  top: 65%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.joinmenu {
+  text-align: center;
+  margin-top: 20px;
+}
+
+#join_t {
+  width: 100%;
+  margin-top: 20px;
+  border-collapse: collapse;
+}
+
+#join_t th,
+#join_t td {
+  padding: 8px;
+}
+
+#join_t th {
+  text-align: right;
+  width: 130px;
+  font-weight: bold;
+}
+
+.input_box {
+  width: 100px;
+  height: 25px;
+  border: 1px solid #ccc;
+  padding: 3px;
+  border-radius: 3px;
+}
+
+.input_longbox {
+  width: 200px;
+  height: 25px;
+  border: 1px solid #ccc;
+  padding: 3px;
+  border-radius: 3px;
+}
+
+
+.input_button {
+  width: 150px;
+  height: 30px;
+  background-color: #428bca;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+
+
+.input_button:hover {
+  background-color: #3071a9;
+}
+
+.submit_button {
+  width: 480px;
+  height: 80px;
+  background-color: #428bca;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-weight: bold;
+  transform: translateX(1%);
+}
+
+
+
+.submit_button:hover {
+  background-color: #3071a9;
+}
+#error_message {
+  color: red;
+  margin-top: 5px;
+}
+</style>
 </head>
 			
 
 <body>
 
-<%@ include file="./include/header.jsp"%>
-
-	<div id="join_wrap">
+	<div class="joinwrap" >
 	
-		<!-- <h2 class="join_title">회원가입</h2> -->
 		<form name="f" method="post" action="m_joinOk"
 			onsubmit="return check()" enctype="multipart/form-data">
-
-
 
 			<table id="join_t">
 			
@@ -46,6 +135,7 @@
 					<input type="button" value="아이디 중복체크" class="input_button" onclick="id_check()" />
 					<div id="idcheck"></div></td>
 				</tr>
+				
 				
 				<tr>
 					<th>회원닉네임</th>
@@ -63,7 +153,7 @@
 				</tr>
 				
 				<tr>
-					<th>회원 비밀번호 확인</th>
+					<th>비밀번호 확인</th>
 					<td><input type="password" name="pwd2" id="pwd2" size="14"
 						class="input_box" /></td>
 				</tr>
@@ -84,20 +174,20 @@
 					<th>우편번호</th>
 					<td><input name="zip" id="join_zip" size="5" class="input_box"
 						readonly onclick="post_search()" /> 
-						<input type="button" value="우편번호 검색" class="input_box" onclick="openDaumPostcode()" />
+						<input type="button" value="우편번호 검색" class="input_button" onclick="openDaumPostcode()" />
 					</td>
 				</tr>
 
 				<tr>
 					<th>주소</th>
 					<td><input name="addr1" id="join_addr1" size="50"
-						class="input_box" readonly onclick="post_search()" /></td>
+						class="input_longbox" readonly onclick="post_search()" /></td>
 				</tr>
 
 				<tr>
 					<th>나머지 주소</th>
 					<td><input name="addr2" id="addr2" size="40"
-						class="input_box" /></td>
+						class="input_longbox" /></td>
 				</tr>
 
 				<tr>
@@ -135,9 +225,10 @@
 			</table>
 
 			<div id="join_menu">
-			 <input type="submit" value="회원가입" class="input_button" />
-			 <input type="reset" value="가입취소" class="input_button" 
-			 	onclick="$('#id').focus();"/>		 
+			<br>
+			 <input type="submit" value="회원가입" class="submit_button" />
+			 <!-- <input type="reset" value="가입취소" class="input_button" 
+			 	onclick="$('#id').focus();"/>	 -->	 
 			</div>
 		</form>
 	</div>

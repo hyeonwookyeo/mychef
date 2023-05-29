@@ -220,7 +220,7 @@ public class MemberController {
 		}
 		
 
-	// 비번찾기 완료 
+		// 비번찾기 완료 
 		@RequestMapping(value = "/m_pwdfindokForm", method = RequestMethod.POST)
 		public String pwd_find_ok(@ModelAttribute MemberBean mem, Model model)
 				throws Exception {
@@ -249,7 +249,7 @@ public class MemberController {
 				// 보내는 사람 EMail, 제목, 내용
 				String fromEmail = "ymj2677@naver.com";
 				String fromName = "관리자";
-				String subject = "비밀번호 찾기";
+				String subject = "NEXT LE시피 비밀번호 찾기";
 
 				// 받는 사람 E-Mail 주소
 				String mail = member.getMailid()+"@"+member.getDomain();
@@ -268,8 +268,8 @@ public class MemberController {
 					email.addTo(mail, charSet);
 					email.setFrom(fromEmail, fromName, charSet);
 					email.setSubject(subject);
-					email.setHtmlMsg("<p align = 'center'>비밀번호 찾기</p><br>" + "<div align='center'> 비밀번호 : "
-							+ member.getPwd() /*보낼 내용*/+ "</div>");
+					email.setHtmlMsg("<p align = 'center'>NEXT LE시피 비밀번호 찾기</p><br>" + "<div align='center'> 임시비밀번호 : "
+							+ member.getPwd() /*보낼 내용*/+ "<br>로그인 후 꼭 비밀번호를 변경해주세요!"+"</div>");
 					email.send();
 				} catch (Exception e) {
 					e.printStackTrace();

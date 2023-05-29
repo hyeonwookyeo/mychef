@@ -90,25 +90,9 @@
 	</section>
 
 	<!-- Footer-->
+	<%@ include file="./include/footer.jsp"%>
 
-	<footer class="py-5 bg-dark">
-		<div class="container px-4 px-lg-5">
-			<ul class="nav justify-content-end">
-				<li class="nav-item"><a class="nav-link text-white"
-					href="a_loginform">관리자 로그인</a></li>
-			</ul>
-			<p class="m-0 text-center text-white">Copyright &copy; Your
-				Website 2023</p>
-		</div>
-	</footer>
-
-
-	<!--  
-        <footer class="py-5 bg-dark">
-            <div class="container px-4 px-lg-5"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2023</p></div>
-           
-        </footer> -->
-
+	
 	<!-- Bootstrap core JS-->
 	<script
 		src="resources/https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>

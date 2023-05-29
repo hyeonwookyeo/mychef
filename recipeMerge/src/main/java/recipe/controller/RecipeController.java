@@ -44,10 +44,6 @@ public class RecipeController {
 	public String category(Model model, HttpServletRequest request) {
 
 		// 임시 세션값 설정
-		HttpSession session = request.getSession();
-		String id = "aaaa";
-		session.setAttribute("id", id);
-
 		return "recipe/categoryForm";
 
 	}

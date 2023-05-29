@@ -24,14 +24,13 @@ div.card {width:100%; height:100%; overflow:hidden;}
 
 </style>
 
-<link href="css/r_custom.css" rel="stylesheet">
 
 </head>
 <body>
 
 <%@ include file="../include/header.jsp"%>
 
-
+<div class="table">
 		<h2 class="text-primary" align="center">레시피 목록</h2>
 		<div>
 		<div style="text-align:left; margin-left: 2em" > 총 <b>${total }</b>개의 레시피를 만나보세요~!</div>
@@ -163,10 +162,11 @@ div.card {width:100%; height:100%; overflow:hidden;}
 		
 		<c:if test="${!empty id }">
 			<div align="center">
-				<a href="r_insertForm" class="btn btn-primary">글 입력</a>
+				<a href="r_insertForm">글 입력</a>
 			</div>
 		</c:if>
 
+	</div>
 	</div>
 	
 	
@@ -175,5 +175,8 @@ div.card {width:100%; height:100%; overflow:hidden;}
 		src="resources/https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 	<!-- Core theme JS-->
 	<script src="resources/js/scripts.js"></script>
+	
+		<!-- Footer-->
+	<%@ include file="../include/footer.jsp"%>
 </body>
 </html>

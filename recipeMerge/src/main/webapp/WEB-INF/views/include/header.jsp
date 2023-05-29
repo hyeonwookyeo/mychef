@@ -101,11 +101,9 @@
     				
 					<!-- 로그인 세션이 있는 경우  : 회원 로그인한 경우 -->
 					<c:if test="${!empty sessionScope.id && empty sessionScope.admin_id}">
-						<%-- <img src="${pageContext.request.contextPath}/images/person-hearts.svg"
-							width=15px>  ${sessionScope.id }님 환영합니다 &nbsp; | --%>
-							<%-- <img src="${pageContext.request.contextPath}/images/person-hearts.svg" width="15px" 
-							style="color: white;">
-                           <span style="color: white;">${sessionScope.id}님 환영합니다&nbsp;|</span> --%>
+<!-- 							 <img src=./upload/${sessionScope.id}" width="15px" 
+							style="color: white;"> -->
+                           <span style="color: white;" class="text-black my-text text-decoration-none">${sessionScope.id}님 환영합니다&nbsp;&nbsp;&nbsp;</span>
 							
 							<a href="${pageContext.request.contextPath}/n_boardlist"
 							class="text-black my-text text-decoration-none">공지사항</a> |

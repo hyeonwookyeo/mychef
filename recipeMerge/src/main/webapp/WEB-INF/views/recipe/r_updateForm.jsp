@@ -312,5 +312,8 @@ input[type=file] {
 
 		</form>
 	</div>
+	
+		<!-- Footer-->
+	<%@ include file="../include/footer.jsp"%>
 </body>
 </html>

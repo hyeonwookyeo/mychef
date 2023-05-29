@@ -47,7 +47,7 @@
 		$("[id^='change_']").click(function(){
 			var page = $(this).attr('id').split("_").reverse()[0];
 			$("#adminmain").load("memberlist");
-		}
+		});
 	});
 </script>
 

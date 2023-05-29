@@ -20,7 +20,7 @@
 <body>
 
 <div class="container p-5 my-5 border">
-	<table class="jjim-table">
+	<table class="table">
 		<c:if test="${empty list }">
 		<tr>
 			<td>아직 찜한 레시피가 없습니다.</td>

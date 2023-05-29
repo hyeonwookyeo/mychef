@@ -18,7 +18,6 @@
 	$(document).ready(function(){
 		$("button[id^='manage_']").click(function(){
 			var id = $(this).attr('id').split("_").reverse()[0];
-			alert("id는"+id);
 			window.open('manage_member?id='+id, 
 						"_blank", 
 						"top=20, left=30, width=450, height=400, resizable=no");
@@ -92,7 +91,7 @@
 	<ul class="pagination justify-content-center">
 	
 	<c:if test="${page > startPage }">
-		<li class="page-item"><button type="button" href="memberlist?page=${page-1 }" class="page-link golist_${i }">이전</button></li>
+		<li class="page-item"><a href="memberlist?page=${page-1 }" class="page-link golist_${i }">이전</a></li>
 	</c:if>
 	
 	<c:forEach var="i" begin="${startPage}" end="${endPage}">

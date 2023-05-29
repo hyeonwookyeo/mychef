@@ -7,9 +7,16 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square-round.css" rel="stylesheet">
 
 <script>
+function update_check(){
+	var text = "수정하시겠습니까?";
+	if(confirm(text)){
+		location.href = "r_updateForm?pageNum=${pageNum }&rnum=${board.rnum }";
+	}
+	
+}
+
 function delete_check(){
 	var text="삭제하시겠습니까?";
 	if(confirm(text)){
@@ -30,22 +37,11 @@ function delete_check(){
 	}
 }
 
-/* function re_comm(id, rnum){
-	var id = $("#id").val();
-	if(sessionScop.id=""){
-		alert("로그인이 필요합니다.");
-	}else{
-		var comfrm = "id="+id+"&rnum="+rnum;
-		$.post("r_recomm",comfrm, function(data) {
-			$('#r_recomm').html(data);
-		});
-	}
-} */
 
 </script>
 <script>
 $(document).ready(function() {
-    $('#listRe').load('r_listRe?rnum=${board.rnum}');
+    $('#listRe').load('r_listRe?rnum=${board.rnum}&rpageNum=${rpageNum}');
     
     $('#r_recomm_img').click(function(){
     	var id = $("#id").val();
@@ -132,17 +128,30 @@ $(function(){
 </script>	
 
 <style>
-td {font-family: 'NanumSquareRoundExtraBold';}
+@font-face {
+    font-family: 'Dovemayo_gothic';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.1/Dovemayo_gothic.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body{
+	font-family: 'Dovemayo_gothic';
+}
+
 </style>
+
 </head>
+
 <body>
  	<!-- (공통) 헤더부분 -->
 	<%@ include file="../include/header.jsp"%>
+	<div class="bgcolor">
+	<div class="outbox">
 					
-	<div class="container" align="center">
 	<input type="hidden" id="rnum" name=rnum value="${board.rnum }"> 
 	<input type="hidden" id="id" name=id value="${id}"> 
-	
+	<div class="container innerbox" align="center">
 		<h1>${board.subject }</h1>
 		<div>
 			<img src="./t_images/${board.thumbnail}" width=500/>
@@ -153,15 +162,20 @@ td {font-family: 'NanumSquareRoundExtraBold';}
 		<c:if test="${empty member.profile }"><img src="./upload/pepe.jpg" width=35 height=35></c:if>
 		${member.nickname} 조회수 ${board.readcount }</div>
 		<div>${board.description }</div>
-		<br><br>
+		</div>
 
-		<table align="center">
+
+<div class="container innerbox">
+		<table class="table" align="center">
 			<c:forEach var="item1" items="${map1 }">
+			<c:set var="i" value="${i+1}"/>
 				<tr>
-					<td>${item1.key }</td><td> ${item1.value }</td>
+					<td>${i }</td><td>${item1.key }</td><td> ${item1.value }</td>
 				</tr>
 			</c:forEach>
 		</table>
+		</div>
+		<div class="container innerbox">
 		<br><br>
 		<table class="table">
 			<c:forEach var="item2" items="${map2 }">
@@ -170,10 +184,11 @@ td {font-family: 'NanumSquareRoundExtraBold';}
 				</tr>
 			</c:forEach>
 		</table>
+		</div>
 
 
 
-		<div>
+		<div align="center">
 		<image id="r_recomm_img" src="images/good.png" width="50" height="50"></image>
 		<img id="r_zzim_img" src="images/zzim.jpg" width="50" height="50"/>
 		<div id="r_recomm">추천수 : ${recomm_state }</div>
@@ -183,13 +198,13 @@ td {font-family: 'NanumSquareRoundExtraBold';}
 		</div><br>
 
 
-		<c:if test="${!empty id and id == board.id}">
+		<c:if test="${!empty id and id == board.id}">	
 			<div align="center">
-				<a href="r_updateForm?pageNum=${pageNum }&rnum=${board.rnum }">글 수정</a>
-				<button type="button" onClick="delete_check()">글 삭제</button>
+			<button type="button" onclick="update_check()">글 수정</button>
+			<button type="button" onClick="delete_check()">글 삭제</button>
 			</div>
 		</c:if>
-		<div><a href="r_listForm?&pageNum=${pageNum }&category=${board.category}">목록</a></div>
+		<div align="center"><a href="r_listForm?&pageNum=${pageNum }&category=${board.category}">목록</a></div>
 
 
 		<c:if test="${!empty id}">
@@ -207,6 +222,10 @@ td {font-family: 'NanumSquareRoundExtraBold';}
 		</c:if>
 			<div id="listRe"></div>
 	</div>
+	
+	</div>
 
+	<!-- Footer-->
+	<%@ include file="../include/footer.jsp"%>
 </body>
 </html>

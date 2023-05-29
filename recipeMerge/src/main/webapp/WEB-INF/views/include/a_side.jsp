@@ -95,6 +95,7 @@ $(document).ready(function() {
 						<button type="button" class="collapse-item button-class" id="A_magazine">매거진</button>
 						<button type="button" class="collapse-item button-class" id="A_member_manage">회원관리</button>
 						<a class="collapse-item" href="a_Logout">Logout</a>
+						<a class="collapse-item" href="main">main</a>
 					</div>
 				</div></li>
 

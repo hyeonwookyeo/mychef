@@ -43,11 +43,11 @@
 		}
 		var str = "";
 
-		str += "<tr>";
-		str += "	<td style='text-align:center;' class=\"row_idx\">" + row_idx + "</td>";
-		str += "	<td style='text-align:center;'><input type=\"text\" id='ingre' name='ingre'></td>";
-		str += "	<td style='text-align:center;'><input type=\"text\" id='capacity' name='capacity'></td>";
-		str += "	<td style='text-align:center;'>";
+		str += "<tr style='border: 1px solid black;'>";
+		str += "	<td style='border: 1px solid black; text-align:center;' class=\"row_idx\">" + row_idx + "</td>";
+		str += "	<td style='border: 1px solid black; text-align:center;'><input type=\"text\" id='ingre' name='ingre'></td>";
+		str += "	<td style='border: 1px solid black; text-align:center;'><input type=\"text\" id='capacity' name='capacity'></td>";
+		str += "	<td style='border: 1px solid black; text-align:center;'>";
 		str += "		<div class=\"btn-group\">";
 		str += "			<button type='button' class='btn btn-primary btn-sm' name='ingre_del'>삭제</button>";
 		str += "		</div>";
@@ -62,14 +62,14 @@
 	function cook_add() {
 		var str = "";
 
-		str += "<tr>";
-		str += "	<td>조리과정 사진</td>";
+		str += "<tr style='border: 1px solid black;'>";
+		str += "	<td style='border: 1px solid black;'>조리과정 사진</td>";
 		str += "	<td><input multiple=\"multiple\" type=\"file\" name='r_file1' onchange=\"readURL(this, 'cook" + i + "');\" id=\"r_file" + i + "\">";
 		str += "		<img id=\"cook" + i + "\" src=\"images/Plus.jpg\" width=300 height=250 class=\"preview\"/></td>";
 		str += "</tr>";
-		str += "<tr>";
-		str += "	<td>조리과정 설명</td>";
-		str += "	<td><textarea rows=\"5\" cols=\"30\" id='content" + i + "' name='content1'></textarea></td>";
+		str += "<tr style='border: 1px solid black;'>";
+		str += "	<td style='border: 1px solid black;'>조리과정 설명</td>";
+		str += "	<td style='border: 1px solid black;'><textarea rows=\"5\" cols=\"30\" id='content" + i + "' name='content1'></textarea></td>";
 		str += "</tr>";
 
 		$("#tbody_id2:last").append(str);
@@ -211,26 +211,26 @@ input[type=file] {
 }
 </style>
 
-<!-- <link href="css/custom.css" rel="stylesheet"> -->
+<!-- <link href="css/r_custom.css" rel="stylesheet"> -->
 
 
 </head>
 <body>
+<div class="bgcolor">
+
 	<!-- (공통) 헤더부분 -->
 	<%@ include file="../include/header.jsp"%>
+	<br><br>
 	
-	
-	<div align="center">
-		<h2 class="text-primary">레시피 글 쓰기</h2>
+	<div class="outbox">
+		<h2 class="text-primary" align="center">레시피 글 쓰기</h2><br>
 		<form enctype="multipart/form-data">
-			<%--
-			<input type="hidden" name="pageNum" value="${pageNum}"> --%>
-			<div class="container">
+			<div class="container innerbox">
 					<div class="row">
-					<div class="col">제목</div>
-					<div class="col"><input type="text" id="subject" name="subject"></div>
-					<div class="col">분류</div>
-					<div class="col">
+					<div class="col-1 box">제목</div>
+					<div class="col-8 box"><input type="text" class="insert" id="subject" name="subject"></div>
+					<div class="col-1 box text-end">분류</div>
+					<div class="col-2 box">
 					<select id="category" name="category">
 							<option value="">선택</option>
 							<option value="korean">한식</option>
@@ -241,42 +241,46 @@ input[type=file] {
 					</div>
 					</div>
 					
-					<div>
-					<div style="display: inline-block">대표사진</div>
-					<input type="file" id="thumbnail1" name="thumbnail1"
-						onchange="readURL(this,'cookmain');">
-					<div style="display: inline-block"><img id="cookmain" src="images/Plus.jpg" width=300 height=350 class="preview"/></div>
+					<div class="row">
+					<h6 align="center">대표사진</h6>
+					
+					<input type="file" id="thumbnail1" name="thumbnail1" onchange="readURL(this,'cookmain');">
+					<div class="imgcontainer" style="display: inline-block; width: 300px; height:300px">
+						<img id="cookmain" src="images/Plus.jpg" class="preview" style="width:100%; height:100%;"/>
+					</div>
 					</div>
 					
-					<div>
-					<div>간략한 설명</div>
-					<div><input type="text" id="description" name="description"></div>
+					
+					<div class="row">
+					<div class="col-3 box">간략한 설명</div>
+					<div class="col-9 box">
+					<input type="text" class="insert" id="description" name="description">
+					</div>
 					</div>
 			</div>
 			<br>
-			<br>
 			
-
-			<table border=1>
+			<div class="container innerbox">
+			<table border=1">
 				<thead>
 					<tr>
 						<th
-							style="width: 20%; text-align: center; vertical-align: middle;">No</th>
+							style="border: 1px solid black; width: 20%; text-align: center; vertical-align: middle;">재료수</th>
 						<th
-							style="width: 20%; text-align: center; vertical-align: middle;">재료</th>
+							style="border: 1px solid black; width: 20%; text-align: center; vertical-align: middle;">재료</th>
 						<th
-							style="width: 20%; text-align: center; vertical-align: middle;">용량</th>
+							style="border: 1px solid black; width: 20%; text-align: center; vertical-align: middle;">용량</th>
 						<th
-							style="width: 20%; text-align: center; vertical-align: middle;">추가/삭제</th>
+							style="border: 1px solid black; width: 20%; text-align: center; vertical-align: middle;">추가/삭제</th>
 					</tr>
 					<tr>
 						<%int row_idx = 1; %>
-						<td style='text-align:center;' class="row_idx"><%=row_idx %></td>
-						<td style='text-align:center;'><input type="text" id='ingre' name='ingre'></td>
-						<td style='text-align:center;'><input type="text" id='capacity' name='capacity'></td>
-						<td style='text-align:center;'>
+						<td style='border: 1px solid black; text-align:center;' class="row_idx"><%=row_idx %></td>
+						<td style='border: 1px solid black; text-align:center;'><input type="text" id='ingre' name='ingre'></td>
+						<td style='border: 1px solid black; text-align:center;'><input type="text" id='capacity' name='capacity'></td>
+						<td style='border: 1px solid black; text-align:center;'>
 							<div>
-							<button type='button' name='ingre_del'>삭제</button>
+							<button type='button' name='ingre_del' class='btn btn-primary btn-sm'>삭제</button>
 							</div>
 						</td>
 					</tr>
@@ -296,43 +300,65 @@ input[type=file] {
 					</td>
 				</tr>
 			</table>
+		
+			</div>
 			<br>
 			<br>
-
+			
+			<div class="container innerbox" style="display: flex;">
+			<div class="middle">
 			<table border=1>
-				<tr>
-					<td>조리과정 사진</td>
-					<td><input type="file" multiple="multiple" id="r_file1" name="r_file1"
+				<tr style='border: 1px solid black;'>
+					<td style='border: 1px solid black;'>조리과정 사진</td>
+					<td style='border: 1px solid black;'>
+					<input type="file" multiple="multiple" id="r_file1" name="r_file1"
 						onchange="readURL(this,'cook1');">
-						<img id="cook1" src="images/Plus.jpg" width=300 height=250 class="preview"/></td>
+					<img id="cook1" src="images/Plus.jpg" width=300 height=250 class="preview"/></td>
 				</tr>
 				
-				<tr>
-					<td>조리과정 설명</td>
-					<td><textarea rows="5" cols="30" id="content1" name="content1"></textarea></td>
+				<tr style='border: 1px solid black;'>
+					<td style='border: 1px solid black;'>조리과정 설명</td>
+					<td style='border: 1px solid black;'>
+					<textarea rows="5" cols="30" id="content1" name="content1"></textarea>
+					</td>
 				</tr>
 				<tbody id="tbody_id2"></tbody>
 			</table>
 			<br>
-
-			<table>
+			
+			<table border=1>
 				<tr>
-					<td>
-						<button type="button" class="btn btn-default btn-sm"
+					<td style='border: 1px solid black;'>
+						<button type="button" class='btn btn-primary btn-sm'
 							onClick='cook_add();'>
 							<strong>조리과정 추가</strong>
 						</button>
-						<button type="button" class="btn btn-default btn-sm"
+					</td>
+					
+					<td style='border: 1px solid black;'>
+						<button type="button" class='btn btn-primary btn-sm'
 							onClick='cook_del();'>
 							<strong>조리과정 삭제</strong>
 						</button>
 					</td>
 				</tr>
 			</table>
+			
+			</div>
+			</div>
+			
 			<br>
-			<br> <input type="button" value="글 작성" id="sub">
-
+			<br> 
+			
+			<div class="sub">
+			<input type="button" value="글 작성" id="sub" class="btn btn-info">
+			</div>
+			
 		</form>
 	</div>
+</div>
+
+	<!-- Footer-->
+	<%@ include file="../include/footer.jsp"%>
 </body>
 </html>
